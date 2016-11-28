@@ -17,7 +17,7 @@ namespace client
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            int roles = login(username.Text, password.Text);
+            int roles = PostLogin(username.Text, password.Text);
 
             if (roles == 1 ) //admin
             {
@@ -63,10 +63,15 @@ namespace client
             {
                 IadmClient service = new IadmClient();
 
+                string nmAngkatan = comboBoxEdit1.SelectedItem.ToString();
+                string nmJurusan = comboBoxEdit2.SelectedItem.ToString();
+                var angkatan = service.GetAngkatan().FirstOrDefault(q => q.TahunAngkatan == nmAngkatan);
+                var jurusan = service.GetJurusan().FirstOrDefault(q => q.NamaJurusan == nmJurusan);
+
                 praktikan data = new praktikan()
                 {
-                    AngkatanID = comboBoxEdit1.SelectedIndex + 1,
-                    JurusanID = comboBoxEdit2.SelectedIndex + 1
+                    KodeAngkatan = angkatan.KodeAngkatan,
+                    KodeJurusan = jurusan.KodeJurusan
                 };
                 gridControl1.DataSource = service.GetPraktikan(data).Select(x => new { x.Foto, x.NRP, x.Nama }).ToList();
                 gridView1.RowHeight = 60;

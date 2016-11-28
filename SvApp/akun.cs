@@ -16,6 +16,6 @@ namespace SvApp
         public string Password { get; set; }
 
         [DataMember]
-        public int RolesID { get; set; }
+        public int PeranId { get; set; }
     }
 }

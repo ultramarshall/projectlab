@@ -16,10 +16,10 @@ namespace SvApp
         public string Nama { get; set; }
 
         [DataMember]
-        public int AngkatanID { get; set; }
+        public string KodeJurusan { get; set; }
 
         [DataMember]
-        public int JurusanID { get; set; }
+        public string KodeAngkatan { get; set; }
 
         [DataMember]
         public Byte[] Foto { get; set; }

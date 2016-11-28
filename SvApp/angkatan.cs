@@ -10,9 +10,9 @@ namespace SvApp
     public class angkatan
     {
         [DataMember]
-        public int AngkatanID { get; set; }
+        public string KodeAngkatan { get; set; }
 
         [DataMember]
-        public string Angkatan { get; set; }
+        public string TahunAngkatan { get; set; }
     }
 }

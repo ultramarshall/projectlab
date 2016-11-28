@@ -26,7 +26,7 @@ namespace SvApp
         {
             connStringBuilder = new SqlConnectionStringBuilder()
             {
-                DataSource = "DESKTOP-1172569",
+                DataSource = "DESKTOP-0SI1HN9",
                 InitialCatalog = "LabKomputerDB",
                 Encrypt = true,
                 TrustServerCertificate = true,
@@ -78,7 +78,7 @@ namespace SvApp
             try
             {
                 List<jurusan> jurusan = new List<jurusan>();
-                comm.CommandText = "SELECT Jurusan " +
+                comm.CommandText = "SELECT * " +
                                    "FROM TJurusan ";
                 comm.CommandType = CommandType.Text;
                 conn.Open();
@@ -88,7 +88,8 @@ namespace SvApp
                 {
                     jurusan list = new jurusan()
                     {
-                        Jurusan = Convert.ToString(reader[0]).TrimEnd()
+                        KodeJurusan = Convert.ToString(reader[0]).TrimEnd(),
+                        NamaJurusan = Convert.ToString(reader[1]).TrimEnd()
                     };
                     jurusan.Add(list);
                 }
@@ -112,8 +113,8 @@ namespace SvApp
             try
             {
                 List<angkatan> angkatan = new List<angkatan>();
-                comm.CommandText = "SELECT Angkatan " +
-                                   "FROM TAngkatan ";
+                comm.CommandText = "SELECT * " +
+                                   "FROM TTahunAngkatan ";
                 comm.CommandType = CommandType.Text;
                 conn.Open();
 
@@ -122,7 +123,8 @@ namespace SvApp
                 {
                     angkatan list = new angkatan()
                     {
-                        Angkatan = Convert.ToString(reader[0]).TrimEnd()
+                        KodeAngkatan = Convert.ToString(reader[0]).TrimEnd(),
+                        TahunAngkatan = Convert.ToString(reader[1]).TrimEnd()
                     };
                     angkatan.Add(list);
                 }
@@ -148,9 +150,9 @@ namespace SvApp
                 List<praktikan> users = new List<praktikan>();
                 comm.CommandText = "SELECT * " +
                                    "FROM TPraktikan " +
-                                   "WHERE JurusanID=@JurusanID AND AngkatanID=@AngkatanID";
-                comm.Parameters.AddWithValue("JurusanID", data.JurusanID);
-                comm.Parameters.AddWithValue("AngkatanID", data.AngkatanID);
+                                   "WHERE KodeJurusan=@JurusanID AND KodeAngkatan=@AngkatanID";
+                comm.Parameters.AddWithValue("KodeJurusan", data.KodeJurusan);
+                comm.Parameters.AddWithValue("KodeAngkatan", data.KodeAngkatan);
                 comm.CommandType = CommandType.Text;
                 conn.Open();
 
@@ -159,12 +161,12 @@ namespace SvApp
                 {
                     praktikan user = new praktikan()
                     {
-                        NRP = Convert.ToString(reader[0]),
-                        Nama = Convert.ToString(reader[1]),
-                        JurusanID = Convert.ToInt32(reader[2]),
-                        AngkatanID = Convert.ToInt32(reader[3]),
+                        NRP = Convert.ToString(reader[0]).TrimEnd(),
+                        Nama = Convert.ToString(reader[1]).TrimEnd(),
+                        KodeJurusan = Convert.ToString(reader[2]).TrimEnd(),
+                        KodeAngkatan = Convert.ToString(reader[3]).TrimEnd(),
                         Foto = File.ReadAllBytes(Convert.ToString(reader[4])),
-                        Notes = Convert.ToString(reader[5]),
+                        Notes = Convert.ToString(reader[5]).TrimEnd()
                     };
                     users.Add(user);
                 }

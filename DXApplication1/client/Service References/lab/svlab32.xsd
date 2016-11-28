@@ -3,7 +3,7 @@
   <xs:complexType name="akun">
     <xs:sequence>
       <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="RolesID" type="xs:int" />
+      <xs:element minOccurs="0" name="PeranId" type="xs:int" />
       <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
@@ -16,8 +16,8 @@
   <xs:element name="ArrayOfjurusan" nillable="true" type="tns:ArrayOfjurusan" />
   <xs:complexType name="jurusan">
     <xs:sequence>
-      <xs:element minOccurs="0" name="Jurusan" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="JurusanID" type="xs:int" />
+      <xs:element minOccurs="0" name="KodeJurusan" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NamaJurusan" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="jurusan" nillable="true" type="tns:jurusan" />
@@ -29,16 +29,16 @@
   <xs:element name="ArrayOfangkatan" nillable="true" type="tns:ArrayOfangkatan" />
   <xs:complexType name="angkatan">
     <xs:sequence>
-      <xs:element minOccurs="0" name="Angkatan" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="AngkatanID" type="xs:int" />
+      <xs:element minOccurs="0" name="KodeAngkatan" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TahunAngkatan" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="angkatan" nillable="true" type="tns:angkatan" />
   <xs:complexType name="praktikan">
     <xs:sequence>
-      <xs:element minOccurs="0" name="AngkatanID" type="xs:int" />
       <xs:element minOccurs="0" name="Foto" nillable="true" type="xs:base64Binary" />
-      <xs:element minOccurs="0" name="JurusanID" type="xs:int" />
+      <xs:element minOccurs="0" name="KodeAngkatan" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="KodeJurusan" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="NRP" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Nama" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Notes" nillable="true" type="xs:string" />

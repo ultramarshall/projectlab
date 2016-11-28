@@ -10,9 +10,9 @@ namespace SvApp
     public class jurusan
     {
         [DataMember]
-        public int JurusanID { get; set; }
+        public string KodeJurusan { get; set; }
 
         [DataMember]
-        public string Jurusan { get; set; }
+        public string NamaJurusan { get; set; }
     }
 }

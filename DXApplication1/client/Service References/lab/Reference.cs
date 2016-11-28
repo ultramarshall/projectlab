@@ -26,7 +26,7 @@ namespace client.lab {
         private string PasswordField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int RolesIDField;
+        private int PeranIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string UsernameField;
@@ -55,14 +55,14 @@ namespace client.lab {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int RolesID {
+        public int PeranId {
             get {
-                return this.RolesIDField;
+                return this.PeranIdField;
             }
             set {
-                if ((this.RolesIDField.Equals(value) != true)) {
-                    this.RolesIDField = value;
-                    this.RaisePropertyChanged("RolesID");
+                if ((this.PeranIdField.Equals(value) != true)) {
+                    this.PeranIdField = value;
+                    this.RaisePropertyChanged("PeranId");
                 }
             }
         }
@@ -100,10 +100,10 @@ namespace client.lab {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string JurusanField;
+        private string KodeJurusanField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int JurusanIDField;
+        private string NamaJurusanField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -116,27 +116,27 @@ namespace client.lab {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Jurusan {
+        public string KodeJurusan {
             get {
-                return this.JurusanField;
+                return this.KodeJurusanField;
             }
             set {
-                if ((object.ReferenceEquals(this.JurusanField, value) != true)) {
-                    this.JurusanField = value;
-                    this.RaisePropertyChanged("Jurusan");
+                if ((object.ReferenceEquals(this.KodeJurusanField, value) != true)) {
+                    this.KodeJurusanField = value;
+                    this.RaisePropertyChanged("KodeJurusan");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int JurusanID {
+        public string NamaJurusan {
             get {
-                return this.JurusanIDField;
+                return this.NamaJurusanField;
             }
             set {
-                if ((this.JurusanIDField.Equals(value) != true)) {
-                    this.JurusanIDField = value;
-                    this.RaisePropertyChanged("JurusanID");
+                if ((object.ReferenceEquals(this.NamaJurusanField, value) != true)) {
+                    this.NamaJurusanField = value;
+                    this.RaisePropertyChanged("NamaJurusan");
                 }
             }
         }
@@ -161,10 +161,10 @@ namespace client.lab {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string AngkatanField;
+        private string KodeAngkatanField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int AngkatanIDField;
+        private string TahunAngkatanField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -177,27 +177,27 @@ namespace client.lab {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Angkatan {
+        public string KodeAngkatan {
             get {
-                return this.AngkatanField;
+                return this.KodeAngkatanField;
             }
             set {
-                if ((object.ReferenceEquals(this.AngkatanField, value) != true)) {
-                    this.AngkatanField = value;
-                    this.RaisePropertyChanged("Angkatan");
+                if ((object.ReferenceEquals(this.KodeAngkatanField, value) != true)) {
+                    this.KodeAngkatanField = value;
+                    this.RaisePropertyChanged("KodeAngkatan");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int AngkatanID {
+        public string TahunAngkatan {
             get {
-                return this.AngkatanIDField;
+                return this.TahunAngkatanField;
             }
             set {
-                if ((this.AngkatanIDField.Equals(value) != true)) {
-                    this.AngkatanIDField = value;
-                    this.RaisePropertyChanged("AngkatanID");
+                if ((object.ReferenceEquals(this.TahunAngkatanField, value) != true)) {
+                    this.TahunAngkatanField = value;
+                    this.RaisePropertyChanged("TahunAngkatan");
                 }
             }
         }
@@ -222,13 +222,13 @@ namespace client.lab {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int AngkatanIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private byte[] FotoField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int JurusanIDField;
+        private string KodeAngkatanField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string KodeJurusanField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NRPField;
@@ -250,19 +250,6 @@ namespace client.lab {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int AngkatanID {
-            get {
-                return this.AngkatanIDField;
-            }
-            set {
-                if ((this.AngkatanIDField.Equals(value) != true)) {
-                    this.AngkatanIDField = value;
-                    this.RaisePropertyChanged("AngkatanID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public byte[] Foto {
             get {
                 return this.FotoField;
@@ -276,14 +263,27 @@ namespace client.lab {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int JurusanID {
+        public string KodeAngkatan {
             get {
-                return this.JurusanIDField;
+                return this.KodeAngkatanField;
             }
             set {
-                if ((this.JurusanIDField.Equals(value) != true)) {
-                    this.JurusanIDField = value;
-                    this.RaisePropertyChanged("JurusanID");
+                if ((object.ReferenceEquals(this.KodeAngkatanField, value) != true)) {
+                    this.KodeAngkatanField = value;
+                    this.RaisePropertyChanged("KodeAngkatan");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string KodeJurusan {
+            get {
+                return this.KodeJurusanField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.KodeJurusanField, value) != true)) {
+                    this.KodeJurusanField = value;
+                    this.RaisePropertyChanged("KodeJurusan");
                 }
             }
         }

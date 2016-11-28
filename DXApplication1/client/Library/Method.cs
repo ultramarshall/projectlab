@@ -10,7 +10,8 @@ namespace client.Library
 {
     public static class Method
     {
-        public static int login(string username, string password)
+        public static List<jurusan> ListJurusan = new List<jurusan>();
+        public static int PostLogin(string username, string password)
         {
             try
             {
@@ -26,7 +27,7 @@ namespace client.Library
                 service.Close();
                 return roles;
             } 
-            catch (Exception)
+            catch (Exception error)
             {
                 throw;
             }
@@ -41,16 +42,16 @@ namespace client.Library
                 var jurusan = service.GetJurusan();
                 for (int i = 0; i < jurusan.Count(); i++) // Add Jurusan
                 {
-                    ComboBoxEdit.Properties.Items.Add(jurusan[i].Jurusan);
+                    ComboBoxEdit.Properties.Items.Add(jurusan[i].NamaJurusan);
                 }
             }
             if (JurusanOrAngkatan == "Angkatan")
             {
                 ComboBoxEdit.Properties.Items.Clear();
-                var jurusan = service.GetAngkatan();
-                for (int i = 0; i < jurusan.Count(); i++) // Add Angkatan
+                var angkatan = service.GetAngkatan();
+                for (int i = 0; i < angkatan.Count(); i++) // Add Angkatan
                 {
-                    ComboBoxEdit.Properties.Items.Add(jurusan[i].Angkatan);
+                    ComboBoxEdit.Properties.Items.Add(angkatan[i].TahunAngkatan);
                 }
             }
             service.Close();
