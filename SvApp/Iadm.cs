@@ -10,7 +10,7 @@ namespace SvApp
     public interface Iadm
     {
         [OperationContract]
-        int GetLogin(akun data);
+        string GetLogin(akun data);
 
         [OperationContract]
         List<jurusan> GetJurusan();
@@ -20,5 +20,8 @@ namespace SvApp
 
         [OperationContract]
         List<praktikan> GetPraktikan(praktikan data);
+
+        [OperationContract]
+        int InsertMultiplePraktikan(List<praktikan> data);
     }
 }

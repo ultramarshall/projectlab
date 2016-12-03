@@ -10,9 +10,9 @@
   </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
-      <xsd:import schemaLocation="http://desktop-0si1hn9/labservice/svlab.svc?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://desktop-0si1hn9/labservice/svlab.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://desktop-0si1hn9/labservice/svlab.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/SvApp" />
+      <xsd:import schemaLocation="http://desktop-1172569/labservice/svlab.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://desktop-1172569/labservice/svlab.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://desktop-1172569/labservice/svlab.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/SvApp" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="Iadm_GetLogin_InputMessage">
@@ -39,6 +39,12 @@
   <wsdl:message name="Iadm_GetPraktikan_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetPraktikanResponse" />
   </wsdl:message>
+  <wsdl:message name="Iadm_InsertMultiplePraktikan_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertMultiplePraktikan" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_InsertMultiplePraktikan_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertMultiplePraktikanResponse" />
+  </wsdl:message>
   <wsdl:portType name="Iadm">
     <wsdl:operation name="GetLogin">
       <wsdl:input wsaw:Action="http://tempuri.org/Iadm/GetLogin" message="tns:Iadm_GetLogin_InputMessage" />
@@ -55,6 +61,10 @@
     <wsdl:operation name="GetPraktikan">
       <wsdl:input wsaw:Action="http://tempuri.org/Iadm/GetPraktikan" message="tns:Iadm_GetPraktikan_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/Iadm/GetPraktikanResponse" message="tns:Iadm_GetPraktikan_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertMultiplePraktikan">
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/InsertMultiplePraktikan" message="tns:Iadm_InsertMultiplePraktikan_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/InsertMultiplePraktikanResponse" message="tns:Iadm_InsertMultiplePraktikan_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSHttpBinding_Iadm" type="tns:Iadm">
@@ -89,6 +99,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetPraktikan">
       <soap12:operation soapAction="http://tempuri.org/Iadm/GetPraktikan" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertMultiplePraktikan">
+      <soap12:operation soapAction="http://tempuri.org/Iadm/InsertMultiplePraktikan" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

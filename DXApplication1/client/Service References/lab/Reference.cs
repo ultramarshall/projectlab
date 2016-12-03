@@ -26,7 +26,7 @@ namespace client.lab {
         private string PasswordField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int PeranIdField;
+        private string PeranIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string UsernameField;
@@ -55,12 +55,12 @@ namespace client.lab {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int PeranId {
+        public string PeranId {
             get {
                 return this.PeranIdField;
             }
             set {
-                if ((this.PeranIdField.Equals(value) != true)) {
+                if ((object.ReferenceEquals(this.PeranIdField, value) != true)) {
                     this.PeranIdField = value;
                     this.RaisePropertyChanged("PeranId");
                 }
@@ -342,7 +342,7 @@ namespace client.lab {
     public interface Iadm {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/GetLogin", ReplyAction="http://tempuri.org/Iadm/GetLoginResponse")]
-        int GetLogin(client.lab.akun data);
+        string GetLogin(client.lab.akun data);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/GetJurusan", ReplyAction="http://tempuri.org/Iadm/GetJurusanResponse")]
         client.lab.jurusan[] GetJurusan();
@@ -352,6 +352,9 @@ namespace client.lab {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/GetPraktikan", ReplyAction="http://tempuri.org/Iadm/GetPraktikanResponse")]
         client.lab.praktikan[] GetPraktikan(client.lab.praktikan data);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/InsertMultiplePraktikan", ReplyAction="http://tempuri.org/Iadm/InsertMultiplePraktikanResponse")]
+        int InsertMultiplePraktikan(client.lab.praktikan[] data);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -381,7 +384,7 @@ namespace client.lab {
                 base(binding, remoteAddress) {
         }
         
-        public int GetLogin(client.lab.akun data) {
+        public string GetLogin(client.lab.akun data) {
             return base.Channel.GetLogin(data);
         }
         
@@ -395,6 +398,10 @@ namespace client.lab {
         
         public client.lab.praktikan[] GetPraktikan(client.lab.praktikan data) {
             return base.Channel.GetPraktikan(data);
+        }
+        
+        public int InsertMultiplePraktikan(client.lab.praktikan[] data) {
+            return base.Channel.InsertMultiplePraktikan(data);
         }
     }
 }

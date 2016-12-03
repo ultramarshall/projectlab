@@ -21,11 +21,11 @@
     <MetadataSource Address="http://localhost/labservice/svlab.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="svlab3.xsd" MetadataType="Schema" ID="f41a6674-8d83-4184-958a-ccfaef54718d" SourceId="1" SourceUrl="http://desktop-0si1hn9/labservice/svlab.svc?xsd=xsd0" />
-    <MetadataFile FileName="SrvcApp1.wsdl" MetadataType="Wsdl" ID="796e873d-5cad-4622-adaf-637dc1c06aee" SourceId="1" SourceUrl="http://desktop-0si1hn9/labservice/svlab.svc?wsdl" />
-    <MetadataFile FileName="svlab1.disco" MetadataType="Disco" ID="c4f1ff0e-60f4-4bdd-96a9-6fa382eae0e6" SourceId="1" SourceUrl="http://desktop-0si1hn9/labservice/svlab.svc?disco" />
-    <MetadataFile FileName="svlab31.xsd" MetadataType="Schema" ID="eae21cbc-b5ea-4959-9dae-61e541ba6e09" SourceId="1" SourceUrl="http://desktop-0si1hn9/labservice/svlab.svc?xsd=xsd1" />
-    <MetadataFile FileName="svlab32.xsd" MetadataType="Schema" ID="3919ab72-6564-421f-84c0-105474e4dd2b" SourceId="1" SourceUrl="http://desktop-0si1hn9/labservice/svlab.svc?xsd=xsd2" />
+    <MetadataFile FileName="svlab.xsd" MetadataType="Schema" ID="4c963b6a-8dae-48f4-b376-8dc8a9f488ab" SourceId="1" SourceUrl="http://desktop-1172569/labservice/svlab.svc?xsd=xsd0" />
+    <MetadataFile FileName="SrvcApp.wsdl" MetadataType="Wsdl" ID="d8dcfe1c-4d51-4ab4-84b8-7909c458b08d" SourceId="1" SourceUrl="http://desktop-1172569/labservice/svlab.svc?wsdl" />
+    <MetadataFile FileName="svlab1.xsd" MetadataType="Schema" ID="5e9bf008-ddb6-4923-b5ce-8ca2f9f2ff10" SourceId="1" SourceUrl="http://desktop-1172569/labservice/svlab.svc?xsd=xsd1" />
+    <MetadataFile FileName="svlab.disco" MetadataType="Disco" ID="205be343-edef-4b4f-8389-d303def606cf" SourceId="1" SourceUrl="http://desktop-1172569/labservice/svlab.svc?disco" />
+    <MetadataFile FileName="svlab2.xsd" MetadataType="Schema" ID="1fcfb35e-2d82-47ed-b39a-a12877a315e1" SourceId="1" SourceUrl="http://desktop-1172569/labservice/svlab.svc?xsd=xsd2" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
