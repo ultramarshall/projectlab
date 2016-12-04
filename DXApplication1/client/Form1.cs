@@ -22,8 +22,7 @@ namespace client
             layoutControl1.AllowCustomizationMenu = false;
             layoutControl2.AllowCustomizationMenu = false;
             layoutControl3.AllowCustomizationMenu = false;
-            layoutControl4.AllowCustomizationMenu = false;
-            layoutControl5.AllowCustomizationMenu = false;
+            layoutControl4.AllowCustomizationMenu = false;layoutControl5.AllowCustomizationMenu = false;
             layoutControl6.AllowCustomizationMenu = false;
             layoutControl7.AllowCustomizationMenu = false;
             //layoutControl8.AllowCustomizationMenu = false;
@@ -31,30 +30,37 @@ namespace client
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
-            string roles = PostLogin(username.Text, password.Text);
+            try
+            {
+                string roles = PostLogin(username.Text, password.Text);
 
-            if (roles == "Admin") //admin
-            {
-                Interface.SelectedPage = InterfaceAdmin;
-                ComboBoxEditAdd("Angkatan", comboBoxEdit1);
-                ComboBoxEditAdd("Jurusan", comboBoxEdit2);
+                if (roles == "Admin") //admin
+                {
+                    Interface.SelectedPage = InterfaceAdmin;
+                    ComboBoxEditAdd("Angkatan", comboBoxEdit1);
+                    ComboBoxEditAdd("Jurusan", comboBoxEdit2);
+                }
+                else if (roles == "Koordinator") //kordinator
+                {
+
+                }
+                else if (roles == "Asisten") //aslab
+                {
+
+                }
+                else if (roles == "Mahasiswa") //mahasiswa
+                {
+                    Jadwal.SelectedPage = Jadwal_Tersedia; //melihat jadwal tersedia
+                }
+                else //  tidak terdaftar
+                {
+                    XtraMessageBox.Show("username atau password salah");
+                }
             }
-            else if (roles == "Koordinator") //kordinator
+            catch (Exception err)
             {
 
-            }
-            else if (roles == "Asisten") //aslab
-            {
-
-            }
-            else if (roles == "Mahasiswa") //mahasiswa
-            {
-                Jadwal.SelectedPage = Jadwal_Tersedia; //melihat jadwal tersedia
-            }
-            else //  tidak terdaftar
-            {
-                XtraMessageBox.Show("username atau password salah");
-            }
+                XtraMessageBox.Show(err.ToString());}
 
         }
 
@@ -101,6 +107,16 @@ namespace client
         private void jadwal_umum(object sender, EventArgs e)
         {
             a_.SelectedPage = a_jadwal_umum;
+        }
+
+        private void jadwal_staff_asisten(object sender, EventArgs e)
+        {
+            a_.SelectedPage = a_jadwal_staff_asisten;
+        }
+
+        private void jadwal_praktikan(object sender, EventArgs e)
+        {
+            a_.SelectedPage = a_jadwal_praktikan;
         }
     }
 }

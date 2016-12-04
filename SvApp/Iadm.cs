@@ -23,5 +23,8 @@ namespace SvApp
 
         [OperationContract]
         int InsertMultiplePraktikan(List<praktikan> data);
+
+        [OperationContract]
+        List<jadwal_umum> ViewJadwalUmum(List<jadwal_umum> data);
     }
 }

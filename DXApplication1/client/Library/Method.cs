@@ -29,7 +29,7 @@ namespace client.Library
                 service.Close();
                 return roles;
             } 
-            catch (Exception error)
+            catch (Exception)
             {
                 throw;
             }

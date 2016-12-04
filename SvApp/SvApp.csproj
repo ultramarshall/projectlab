@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="angkatan.cs" />
+    <Compile Include="jadwal_umum.cs" />
     <Compile Include="jurusan.cs" />
     <Compile Include="praktikan.cs" />
     <Compile Include="SrvcApp.cs" />

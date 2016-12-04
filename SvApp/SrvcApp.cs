@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data;
 using System.IO;
-using DevExpress.XtraEditors;
 
 namespace SvApp
 {
@@ -37,10 +36,9 @@ namespace SvApp
         {
             connStringBuilder = new SqlConnectionStringBuilder()
             {
-               // DataSource = "DESKTOP-0SI1HN9",
-                DataSource = "DESKTOP-1172569",
-                InitialCatalog = "labdb",
-                Encrypt = true,
+                DataSource = "DESKTOP-0SI1HN9\\SQLSERVER",
+                //DataSource = "DESKTOP-1172569",
+                InitialCatalog = "labdb",Encrypt = true,
                 TrustServerCertificate = true,
                 ConnectTimeout = 30,
                 AsynchronousProcessing = true,
@@ -260,6 +258,11 @@ namespace SvApp
             }
         }
 
+        public List<jadwal_umum> ViewJadwalUmum(List<jadwal_umum> data)
+        {
+            List<jadwal_umum> jadwal_umum = new List<jadwal_umum>();
+            return jadwal_umum;
+        }
 
 
 
