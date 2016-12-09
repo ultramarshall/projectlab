@@ -1,38 +1,24 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
 using static client.Library.convertFromTo;
+using static client.Library.border;
 using System.Linq;
 using System.Data;
 using DevExpress.XtraEditors;
 using client.lab;
-using System.Collections.Generic;
-using System.IO;
 
 namespace client
 {
-    public partial class Form2 : DevExpress.XtraEditors.XtraForm
+    public partial class Form2 : XtraForm
     {
-        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
-        private static extern IntPtr CreateRoundRectRgn
-        (
-            int nLeftRect, // x-coordinate of upper-left corner
-            int nTopRect, // y-coordinate of upper-left corner
-            int nRightRect, // x-coordinate of lower-right corner
-            int nBottomRect, // y-coordinate of lower-right corner
-            int nWidthEllipse, // height of ellipse
-            int nHeightEllipse // width of ellipse
-         );
 
         public Form2()
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.None;
-            Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 5, 5));
-
+            Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 15, 15));
         }
-
         private void simpleButton2_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -51,7 +37,6 @@ namespace client
                 }
             }
         }
-
         private void listBoxControl1_SelectedValueChanged(object sender, EventArgs e)
         {
             try
@@ -80,8 +65,6 @@ namespace client
                 return;
             }
         }
-
-        
         private void simpleButton3_Click(object sender, EventArgs e)
         {
             string sheet = listBoxControl1.SelectedItem.ToString().Replace("'", string.Empty);

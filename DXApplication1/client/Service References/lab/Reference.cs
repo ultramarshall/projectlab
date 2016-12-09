@@ -337,6 +337,609 @@ namespace client.lab {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="jadwal_umum", Namespace="http://schemas.datacontract.org/2004/07/SvApp")]
+    [System.SerializableAttribute()]
+    public partial class jadwal_umum : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private client.lab.Shift fk_jadwalUmum_ShiftField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private client.lab.kelas fk_jadwalUmum_kelasField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private client.lab.matkul fk_jadwalUmum_matakuliahField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private client.lab.periode fk_jadwalUmum_periodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string hariField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int id_kelasField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int id_periodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string id_shiftField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string kode_mkField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public client.lab.Shift fk_jadwalUmum_Shift {
+            get {
+                return this.fk_jadwalUmum_ShiftField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.fk_jadwalUmum_ShiftField, value) != true)) {
+                    this.fk_jadwalUmum_ShiftField = value;
+                    this.RaisePropertyChanged("fk_jadwalUmum_Shift");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public client.lab.kelas fk_jadwalUmum_kelas {
+            get {
+                return this.fk_jadwalUmum_kelasField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.fk_jadwalUmum_kelasField, value) != true)) {
+                    this.fk_jadwalUmum_kelasField = value;
+                    this.RaisePropertyChanged("fk_jadwalUmum_kelas");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public client.lab.matkul fk_jadwalUmum_matakuliah {
+            get {
+                return this.fk_jadwalUmum_matakuliahField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.fk_jadwalUmum_matakuliahField, value) != true)) {
+                    this.fk_jadwalUmum_matakuliahField = value;
+                    this.RaisePropertyChanged("fk_jadwalUmum_matakuliah");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public client.lab.periode fk_jadwalUmum_periode {
+            get {
+                return this.fk_jadwalUmum_periodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.fk_jadwalUmum_periodeField, value) != true)) {
+                    this.fk_jadwalUmum_periodeField = value;
+                    this.RaisePropertyChanged("fk_jadwalUmum_periode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string hari {
+            get {
+                return this.hariField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.hariField, value) != true)) {
+                    this.hariField = value;
+                    this.RaisePropertyChanged("hari");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id_kelas {
+            get {
+                return this.id_kelasField;
+            }
+            set {
+                if ((this.id_kelasField.Equals(value) != true)) {
+                    this.id_kelasField = value;
+                    this.RaisePropertyChanged("id_kelas");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id_periode {
+            get {
+                return this.id_periodeField;
+            }
+            set {
+                if ((this.id_periodeField.Equals(value) != true)) {
+                    this.id_periodeField = value;
+                    this.RaisePropertyChanged("id_periode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string id_shift {
+            get {
+                return this.id_shiftField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.id_shiftField, value) != true)) {
+                    this.id_shiftField = value;
+                    this.RaisePropertyChanged("id_shift");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string kode_mk {
+            get {
+                return this.kode_mkField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.kode_mkField, value) != true)) {
+                    this.kode_mkField = value;
+                    this.RaisePropertyChanged("kode_mk");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Shift", Namespace="http://schemas.datacontract.org/2004/07/SvApp")]
+    [System.SerializableAttribute()]
+    public partial class Shift : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string id_shiftField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string waktuField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string id_shift {
+            get {
+                return this.id_shiftField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.id_shiftField, value) != true)) {
+                    this.id_shiftField = value;
+                    this.RaisePropertyChanged("id_shift");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string waktu {
+            get {
+                return this.waktuField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.waktuField, value) != true)) {
+                    this.waktuField = value;
+                    this.RaisePropertyChanged("waktu");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="kelas", Namespace="http://schemas.datacontract.org/2004/07/SvApp")]
+    [System.SerializableAttribute()]
+    public partial class kelas : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string KelasField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int id_kelasField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Kelas {
+            get {
+                return this.KelasField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.KelasField, value) != true)) {
+                    this.KelasField = value;
+                    this.RaisePropertyChanged("Kelas");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id_kelas {
+            get {
+                return this.id_kelasField;
+            }
+            set {
+                if ((this.id_kelasField.Equals(value) != true)) {
+                    this.id_kelasField = value;
+                    this.RaisePropertyChanged("id_kelas");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="matkul", Namespace="http://schemas.datacontract.org/2004/07/SvApp")]
+    [System.SerializableAttribute()]
+    public partial class matkul : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string kode_mkField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string mata_kuliahField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string kode_mk {
+            get {
+                return this.kode_mkField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.kode_mkField, value) != true)) {
+                    this.kode_mkField = value;
+                    this.RaisePropertyChanged("kode_mk");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string mata_kuliah {
+            get {
+                return this.mata_kuliahField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.mata_kuliahField, value) != true)) {
+                    this.mata_kuliahField = value;
+                    this.RaisePropertyChanged("mata_kuliah");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="periode", Namespace="http://schemas.datacontract.org/2004/07/SvApp")]
+    [System.SerializableAttribute()]
+    public partial class periode : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime akhirSemesterField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime awalSemesterField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int id_periodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string semesterField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime akhirSemester {
+            get {
+                return this.akhirSemesterField;
+            }
+            set {
+                if ((this.akhirSemesterField.Equals(value) != true)) {
+                    this.akhirSemesterField = value;
+                    this.RaisePropertyChanged("akhirSemester");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime awalSemester {
+            get {
+                return this.awalSemesterField;
+            }
+            set {
+                if ((this.awalSemesterField.Equals(value) != true)) {
+                    this.awalSemesterField = value;
+                    this.RaisePropertyChanged("awalSemester");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id_periode {
+            get {
+                return this.id_periodeField;
+            }
+            set {
+                if ((this.id_periodeField.Equals(value) != true)) {
+                    this.id_periodeField = value;
+                    this.RaisePropertyChanged("id_periode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string semester {
+            get {
+                return this.semesterField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.semesterField, value) != true)) {
+                    this.semesterField = value;
+                    this.RaisePropertyChanged("semester");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Staff", Namespace="http://schemas.datacontract.org/2004/07/SvApp")]
+    [System.SerializableAttribute()]
+    public partial class Staff : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string id_staffField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string id_staff {
+            get {
+                return this.id_staffField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.id_staffField, value) != true)) {
+                    this.id_staffField = value;
+                    this.RaisePropertyChanged("id_staff");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="jadwalStaff", Namespace="http://schemas.datacontract.org/2004/07/SvApp")]
+    [System.SerializableAttribute()]
+    public partial class jadwalStaff : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string hariField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string kelasField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string mata_kuliahField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string shiftField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string waktuField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string hari {
+            get {
+                return this.hariField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.hariField, value) != true)) {
+                    this.hariField = value;
+                    this.RaisePropertyChanged("hari");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string kelas {
+            get {
+                return this.kelasField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.kelasField, value) != true)) {
+                    this.kelasField = value;
+                    this.RaisePropertyChanged("kelas");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string mata_kuliah {
+            get {
+                return this.mata_kuliahField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.mata_kuliahField, value) != true)) {
+                    this.mata_kuliahField = value;
+                    this.RaisePropertyChanged("mata_kuliah");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string shift {
+            get {
+                return this.shiftField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.shiftField, value) != true)) {
+                    this.shiftField = value;
+                    this.RaisePropertyChanged("shift");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string waktu {
+            get {
+                return this.waktuField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.waktuField, value) != true)) {
+                    this.waktuField = value;
+                    this.RaisePropertyChanged("waktu");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="lab.Iadm")]
     public interface Iadm {
@@ -355,6 +958,36 @@ namespace client.lab {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/InsertMultiplePraktikan", ReplyAction="http://tempuri.org/Iadm/InsertMultiplePraktikanResponse")]
         int InsertMultiplePraktikan(client.lab.praktikan[] data);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/ViewJadwalUmum", ReplyAction="http://tempuri.org/Iadm/ViewJadwalUmumResponse")]
+        client.lab.jadwal_umum[] ViewJadwalUmum(client.lab.jadwal_umum data);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/GetMatKul", ReplyAction="http://tempuri.org/Iadm/GetMatKulResponse")]
+        client.lab.matkul[] GetMatKul();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/GetKelas", ReplyAction="http://tempuri.org/Iadm/GetKelasResponse")]
+        client.lab.kelas[] GetKelas();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/GetShift", ReplyAction="http://tempuri.org/Iadm/GetShiftResponse")]
+        client.lab.Shift[] GetShift();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/InsertJadwal", ReplyAction="http://tempuri.org/Iadm/InsertJadwalResponse")]
+        int InsertJadwal(client.lab.jadwal_umum[] data);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/DeleteJadwal", ReplyAction="http://tempuri.org/Iadm/DeleteJadwalResponse")]
+        int DeleteJadwal(client.lab.jadwal_umum data);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/GetStaffID", ReplyAction="http://tempuri.org/Iadm/GetStaffIDResponse")]
+        client.lab.Staff[] GetStaffID(string data);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/GetStaffJadwal", ReplyAction="http://tempuri.org/Iadm/GetStaffJadwalResponse")]
+        client.lab.jadwalStaff[] GetStaffJadwal(string data);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/addPeriode", ReplyAction="http://tempuri.org/Iadm/addPeriodeResponse")]
+        int addPeriode(client.lab.periode data);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/viewPeriode", ReplyAction="http://tempuri.org/Iadm/viewPeriodeResponse")]
+        client.lab.periode[] viewPeriode();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -402,6 +1035,46 @@ namespace client.lab {
         
         public int InsertMultiplePraktikan(client.lab.praktikan[] data) {
             return base.Channel.InsertMultiplePraktikan(data);
+        }
+        
+        public client.lab.jadwal_umum[] ViewJadwalUmum(client.lab.jadwal_umum data) {
+            return base.Channel.ViewJadwalUmum(data);
+        }
+        
+        public client.lab.matkul[] GetMatKul() {
+            return base.Channel.GetMatKul();
+        }
+        
+        public client.lab.kelas[] GetKelas() {
+            return base.Channel.GetKelas();
+        }
+        
+        public client.lab.Shift[] GetShift() {
+            return base.Channel.GetShift();
+        }
+        
+        public int InsertJadwal(client.lab.jadwal_umum[] data) {
+            return base.Channel.InsertJadwal(data);
+        }
+        
+        public int DeleteJadwal(client.lab.jadwal_umum data) {
+            return base.Channel.DeleteJadwal(data);
+        }
+        
+        public client.lab.Staff[] GetStaffID(string data) {
+            return base.Channel.GetStaffID(data);
+        }
+        
+        public client.lab.jadwalStaff[] GetStaffJadwal(string data) {
+            return base.Channel.GetStaffJadwal(data);
+        }
+        
+        public int addPeriode(client.lab.periode data) {
+            return base.Channel.addPeriode(data);
+        }
+        
+        public client.lab.periode[] viewPeriode() {
+            return base.Channel.viewPeriode();
         }
     }
 }

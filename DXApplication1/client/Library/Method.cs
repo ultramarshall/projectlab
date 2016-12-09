@@ -35,27 +35,46 @@ namespace client.Library
             }
         }
 
-        public static void ComboBoxEditAdd(string JurusanOrAngkatan ,ComboBoxEdit ComboBoxEdit)
+        public static void ComboBoxEditAdd(string option ,ComboBoxEdit comboBoxEdit)
         {
             IadmClient service = new IadmClient();
-            if(JurusanOrAngkatan == "Jurusan")
+            comboBoxEdit.Properties.Items.Clear();
+            if (option == "Jurusan")
             {
-                ComboBoxEdit.Properties.Items.Clear();
                 var jurusan = service.GetJurusan();
                 for (int i = 0; i < jurusan.Count(); i++) // Add Jurusan
                 {
-                    ComboBoxEdit.Properties.Items.Add(jurusan[i].NamaJurusan);
+                    comboBoxEdit.Properties.Items.Add(jurusan[i].NamaJurusan);
                 }
             }
-            if (JurusanOrAngkatan == "Angkatan")
+            if (option == "Angkatan")
             {
-                ComboBoxEdit.Properties.Items.Clear();
                 var angkatan = service.GetAngkatan();
                 for (int i = 0; i < angkatan.Count(); i++) // Add Angkatan
                 {
-                    ComboBoxEdit.Properties.Items.Add(angkatan[i].TahunAngkatan);
+                    comboBoxEdit.Properties.Items.Add(angkatan[i].TahunAngkatan);
                 }
             }
+            if (option == "Periode")
+            {
+                var _periode = service.viewPeriode().Select(z => new { start = z.awalSemester.ToString("yyyy"), finish = z.akhirSemester.ToString("yyyy") }).Distinct().ToList();
+                for (int i = 0; i < _periode.Count(); i++)
+                {
+                    comboBoxEdit.Properties.Items.Add(string.Format("{0:yyyy}/{1:yyyy}",
+                                                           _periode[i].start,
+                                                           _periode[i].finish));
+                }
+            }
+            if (option == "Semester")
+            {
+                var _semester = service.viewPeriode().Select(z => z.semester).Distinct().ToList();
+
+                for (int i = 0; i < _semester.Count(); i++)
+                {
+                    comboBoxEdit.Properties.Items.Add(_semester[i]);
+                }
+            }
+            comboBoxEdit.SelectedIndex = 0;
             service.Close();
         }
 
@@ -64,7 +83,8 @@ namespace client.Library
             try
             {
                 IadmClient service = new IadmClient();
-                
+                ComboBoxEdit1.SelectedIndex = 0;
+                ComboBoxEdit2.SelectedIndex = 0;
                 string nmAngkatan = ComboBoxEdit1.SelectedItem.ToString();
                 string nmJurusan = ComboBoxEdit2.SelectedItem.ToString();
                 var angkatan = service.GetAngkatan().FirstOrDefault(q => q.TahunAngkatan == nmAngkatan);
@@ -90,16 +110,18 @@ namespace client.Library
                 {
                     Gridview.Columns[i].AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
                 }
-                
                     
                 service.Close();
             }
-            catch(Exception err)
+            catch(Exception)
             {
-                XtraMessageBox.Show(err.ToString());
-                XtraMessageBox.Show("data pencarian tidak lengkap");
+                //XtraMessageBox.Show(err.ToString());
+                //XtraMessageBox.Show("data pencarian tidak lengkap");
+                throw;
             }
 
         }
+
+       
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data;
 using System.IO;
+using System.Globalization;
 
 namespace SvApp
 {
@@ -36,8 +37,8 @@ namespace SvApp
         {
             connStringBuilder = new SqlConnectionStringBuilder()
             {
-                DataSource = "DESKTOP-0SI1HN9\\SQLSERVER",
-                //DataSource = "DESKTOP-1172569",
+                //DataSource = "DESKTOP-0SI1HN9\\SQLSERVER",
+                DataSource = "DESKTOP-1172569",
                 InitialCatalog = "labdb",Encrypt = true,
                 TrustServerCertificate = true,
                 ConnectTimeout = 30,
@@ -118,6 +119,41 @@ namespace SvApp
             }
         }
 
+        public List<matkul> GetMatKul()
+        {
+            try
+            {
+                List<matkul> jurusan = new List<matkul>();
+                comm.CommandText = "SELECT * " +
+                                   "FROM mata_kuliah ";
+                comm.CommandType = CommandType.Text;
+                conn.Open();
+
+                SqlDataReader reader = comm.ExecuteReader();
+                while (reader.Read())
+                {
+                    matkul list = new matkul()
+                    {
+                        kode_mk = Convert.ToString(reader[0]).TrimEnd(),
+                        mata_kuliah = Convert.ToString(reader[1]).TrimEnd()
+                    };
+                    jurusan.Add(list);
+                }
+                return jurusan;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+        }
+
         public List<angkatan> GetAngkatan()
         {
             try
@@ -139,6 +175,76 @@ namespace SvApp
                     angkatan.Add(list);
                 }
                 return angkatan;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        public List<kelas> GetKelas()
+        {
+            try
+            {
+                List<kelas> _kelas = new List<kelas>();
+                comm.CommandText = "SELECT * " +
+                                   "FROM kelas ";
+                comm.CommandType = CommandType.Text;
+                conn.Open();
+
+                SqlDataReader reader = comm.ExecuteReader();
+                while (reader.Read())
+                {
+                    kelas list = new kelas()
+                    {
+                        id_kelas = Convert.ToInt32(reader[0]),
+                        Kelas = Convert.ToString(reader[1]).TrimEnd()
+                    };
+                    _kelas.Add(list);
+                }
+                return _kelas;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        public List<Shift> GetShift()
+        {
+            try
+            {
+                List<Shift>_Shift = new List<Shift>();
+                comm.CommandText = "SELECT * " +
+                                   "FROM shift ";
+                comm.CommandType = CommandType.Text;
+                conn.Open();
+
+                SqlDataReader reader = comm.ExecuteReader();
+                while (reader.Read())
+                {
+                    Shift list = new Shift()
+                    {
+                        id_shift = Convert.ToString(reader[0]).TrimEnd(),
+                        waktu = Convert.ToString(reader[1]).TrimEnd()
+                    };
+                    _Shift.Add(list);
+                }
+                return _Shift;
             }
             catch (Exception)
             {
@@ -258,13 +364,278 @@ namespace SvApp
             }
         }
 
-        public List<jadwal_umum> ViewJadwalUmum(List<jadwal_umum> data)
+        public List<jadwal_umum> ViewJadwalUmum(jadwal_umum data)
         {
-            List<jadwal_umum> jadwal_umum = new List<jadwal_umum>();
-            return jadwal_umum;
+            try  
+            {
+                List<jadwal_umum> jadwal_umum = new List<jadwal_umum>();
+                comm.CommandText = @"SELECT jadwal_umum.hari, shift.id_shift, shift.waktu, mata_kuliah.mata_kuliah, kelas.kelas " +
+                                    "FROM jadwal_umum " +
+                                    "INNER JOIN periode ON jadwal_umum.id_periode = periode.id_periode " +
+                                    "INNER JOIN mata_kuliah ON jadwal_umum.kode_mk = mata_kuliah.kode_mk " +
+                                    "INNER JOIN kelas ON jadwal_umum.id_kelas = kelas.id_kelas " +
+                                    "INNER JOIN shift ON jadwal_umum.id_shift = shift.id_shift " +
+                                    "WHERE CONVERT(nchar(35), periode.awalSemester, 100) LIKE '%'+@awalSemester+'%' AND " +
+                                            "CONVERT(nchar(35), periode.akhirSemester, 100) LIKE '%'+@akhirSemester+'%' AND " +
+                                            "periode.semester = @semester";
+                comm.Parameters.AddWithValue("awalSemester", data.fk_jadwalUmum_periode.awalSemester.ToString("yyyy"));
+                comm.Parameters.AddWithValue("akhirSemester", data.fk_jadwalUmum_periode.akhirSemester.ToString("yyyy"));
+                comm.Parameters.AddWithValue("semester", data.fk_jadwalUmum_periode.semester);
+                comm.CommandType = CommandType.Text;
+                conn.Open();
+
+                SqlDataReader reader = comm.ExecuteReader();
+                while (reader.Read())
+                {
+                    jadwal_umum list = new jadwal_umum()
+                    {
+                        hari = Convert.ToString(reader[0]).TrimEnd(),
+                        fk_jadwalUmum_Shift = new Shift()
+                                            {
+                                                id_shift = reader[1].ToString().TrimEnd(),
+                                                waktu = reader[2].ToString().TrimEnd()
+                                            },
+                        fk_jadwalUmum_matakuliah = new matkul()
+                                            {
+                                                mata_kuliah = reader[3].ToString().TrimEnd(),
+                                            },
+                        fk_jadwalUmum_kelas = new kelas()
+                                            {
+                                                Kelas = reader[4].ToString().TrimEnd(),
+                                            }
+                    };
+                    jadwal_umum.Add(list);
+                }
+                return jadwal_umum;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+
         }
 
+        public int InsertJadwal(List<jadwal_umum> data)
+        {
+            try
+            {
+                string[] hari = new string[data.Count];
+                int[] id_kelas = new int[data.Count];
+                int[] id_periode = new int[data.Count];
+                string[] id_shift = new string[data.Count];
+                string[] kode_mk = new string[data.Count];
+                for (int i = 0; i < data.Count; i++)
+                {
+                    hari[i] = data[i].hari;
+                    id_kelas[i] = data[i].id_kelas;
+                    id_periode[i] = data[i].id_periode;
+                    id_shift[i] = data[i].id_shift;
+                    kode_mk[i] = data[i].kode_mk;
+                }
+                string[] values = new string[data.Count];
+                for (int i = 0; i < hari.Length; i++)
+                {
+                    values[i] = String.Format("('{0}', {1}, {2}, '{3}', '{4}')",
+                                                hari[i], id_kelas[i], id_periode[i], id_shift[i], kode_mk[i]);
+                }
+                string query = string.Format("INSERT INTO jadwal_umum (hari, id_kelas, id_periode, id_shift, kode_mk) VALUES {0}", String.Join(",", values));
+                comm.CommandText = query;
+                comm.CommandType = CommandType.Text;
+                conn.Open();
+                
+                return comm.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+        }
 
+        public int DeleteJadwal(jadwal_umum data)
+        {
+            try
+            {
+                comm.CommandText = @"DELETE jadwal_umum FROM jadwal_umum " +
+                                    "INNER JOIN periode ON jadwal_umum.id_periode = periode.id_periode " +
+                                    "WHERE CONVERT(nchar(35), periode.awalSemester, 100) LIKE '%'+ @awalSemester +'%' AND " +
+                                          "CONVERT(nchar(35), periode.akhirSemester, 100) LIKE '%'+ @akhirSemester +'%' AND " +
+                                          "periode.semester = @semester";
+                comm.Parameters.AddWithValue("semester", data.fk_jadwalUmum_periode.semester);
+                comm.Parameters.AddWithValue("awalSemester", data.fk_jadwalUmum_periode.awalSemester.ToString("yyyy"));
+                comm.Parameters.AddWithValue("akhirSemester", data.fk_jadwalUmum_periode.akhirSemester.ToString("yyyy"));
+                comm.CommandType = CommandType.Text;
+                conn.Open();
+                return comm.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+        }
+       
+        public List<Staff> GetStaffID(string data)
+        {
+            try
+            {
+                List<Staff> _Staff = new List<Staff>();
+                comm.CommandText = "SELECT id_staff " +
+                                    "FROM staff " +
+                                    "WHERE id_staff LIKE '%"+data+"%' AND id_staff NOT LIKE '%ADM%'";
+                comm.CommandType = CommandType.Text;
+                conn.Open();
 
+                SqlDataReader reader = comm.ExecuteReader();
+                while (reader.Read())
+                {
+                    Staff list = new Staff()
+                    {
+                        id_staff = Convert.ToString(reader[0]).TrimEnd(),
+                    };
+                    _Staff.Add(list);
+                }
+                return _Staff;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        public List<jadwalStaff> GetStaffJadwal(string data)
+        {
+            try
+            {
+                List<jadwalStaff> Jadwal_Staff = new List<jadwalStaff>();
+                comm.CommandText = "SELECT jadwal_umum.hari, mata_kuliah.mata_kuliah, kelas.kelas, shift.id_shift, shift.waktu " +
+                                    "FROM jadwal_staff " +
+                                    "INNER JOIN jadwal_umum ON jadwal_staff.id_jadwal_umum = jadwal_umum.id_jadwal_umum " +
+                                    "INNER JOIN mata_kuliah ON jadwal_umum.kode_mk = mata_kuliah.kode_mk " +
+                                    "INNER JOIN shift ON jadwal_umum.id_shift = shift.id_shift " +
+                                    "INNER JOIN kelas ON jadwal_umum.id_kelas = kelas.id_kelas " +
+                                    "WHERE jadwal_staff.id_staff = @id_staff";
+                comm.Parameters.AddWithValue("id_staff", data);
+                comm.CommandType = CommandType.Text;
+                conn.Open();
+
+                SqlDataReader reader = comm.ExecuteReader();
+                while (reader.Read())
+                {
+                    jadwalStaff list = new jadwalStaff()
+                    {
+                        hari = Convert.ToString(reader[0]).TrimEnd(),
+                        mata_kuliah = Convert.ToString(reader[1]).TrimEnd(),
+                        kelas = Convert.ToString(reader[2]).TrimEnd(),
+                        shift = Convert.ToString(reader[3]).TrimEnd(),
+                        waktu = Convert.ToString(reader[4]).TrimEnd(),
+                    };
+                    Jadwal_Staff.Add(list);
+                }
+                return Jadwal_Staff;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        public int addPeriode(periode data)
+        {
+            try
+            {
+                comm.CommandText = "INSERT INTO periode (semester,awalSemester,akhirSemester) " +
+                                   "VALUES (@semester, @awalSemester, @akhirSemester)";
+                comm.Parameters.AddWithValue("semester", data.semester);
+                comm.Parameters.AddWithValue("awalSemester", data.awalSemester);
+                comm.Parameters.AddWithValue("akhirSemester", data.akhirSemester);
+                comm.CommandType = CommandType.Text;
+                conn.Open();
+
+                return comm.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        public List<periode> viewPeriode()
+        {
+            try
+            {
+                List<periode> periode = new List<periode>();
+                comm.CommandText = "SELECT semester, awalSemester, akhirSemester, id_periode " +
+                                   "FROM periode";
+
+                comm.CommandType = CommandType.Text;
+                conn.Open();
+
+                SqlDataReader reader = comm.ExecuteReader();
+                while (reader.Read())
+                {
+                    periode list = new periode()
+                    {
+                        semester = Convert.ToString(reader[0]).TrimEnd(),
+                        awalSemester = Convert.ToDateTime(reader[1]),
+                        akhirSemester = Convert.ToDateTime(reader[2]),
+                        id_periode = Convert.ToInt32(reader[3])
+                    };
+                    periode.Add(list);
+                }
+                return periode;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+        }
     }
 }

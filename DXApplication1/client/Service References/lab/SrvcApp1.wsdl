@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="SrvcApp" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="WSHttpBinding_Iadm_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsoma:OptimizedMimeSerialization xmlns:wsoma="http://schemas.xmlsoap.org/ws/2004/09/policy/optimizedmimeserialization" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://desktop-1172569/labservice/svlab.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://desktop-1172569/labservice/svlab.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://desktop-1172569/labservice/svlab.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/SvApp" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="Iadm_GetLogin_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLogin" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_GetLogin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_GetJurusan_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetJurusan" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_GetJurusan_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetJurusanResponse" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_GetAngkatan_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAngkatan" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_GetAngkatan_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAngkatanResponse" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_GetPraktikan_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPraktikan" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_GetPraktikan_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPraktikanResponse" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_InsertMultiplePraktikan_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertMultiplePraktikan" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_InsertMultiplePraktikan_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertMultiplePraktikanResponse" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_ViewJadwalUmum_InputMessage">
+    <wsdl:part name="parameters" element="tns:ViewJadwalUmum" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_ViewJadwalUmum_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ViewJadwalUmumResponse" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_GetMatKul_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMatKul" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_GetMatKul_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMatKulResponse" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_GetKelas_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetKelas" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_GetKelas_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetKelasResponse" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_GetShift_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetShift" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_GetShift_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetShiftResponse" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_InsertJadwal_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertJadwal" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_InsertJadwal_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertJadwalResponse" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_DeleteJadwal_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteJadwal" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_DeleteJadwal_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteJadwalResponse" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_GetStaffID_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStaffID" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_GetStaffID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStaffIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_GetStaffJadwal_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStaffJadwal" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_GetStaffJadwal_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStaffJadwalResponse" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_addPeriode_InputMessage">
+    <wsdl:part name="parameters" element="tns:addPeriode" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_addPeriode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:addPeriodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_viewPeriode_InputMessage">
+    <wsdl:part name="parameters" element="tns:viewPeriode" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_viewPeriode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:viewPeriodeResponse" />
+  </wsdl:message>
+  <wsdl:portType name="Iadm">
+    <wsdl:operation name="GetLogin">
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/GetLogin" message="tns:Iadm_GetLogin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/GetLoginResponse" message="tns:Iadm_GetLogin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetJurusan">
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/GetJurusan" message="tns:Iadm_GetJurusan_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/GetJurusanResponse" message="tns:Iadm_GetJurusan_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAngkatan">
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/GetAngkatan" message="tns:Iadm_GetAngkatan_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/GetAngkatanResponse" message="tns:Iadm_GetAngkatan_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPraktikan">
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/GetPraktikan" message="tns:Iadm_GetPraktikan_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/GetPraktikanResponse" message="tns:Iadm_GetPraktikan_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertMultiplePraktikan">
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/InsertMultiplePraktikan" message="tns:Iadm_InsertMultiplePraktikan_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/InsertMultiplePraktikanResponse" message="tns:Iadm_InsertMultiplePraktikan_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ViewJadwalUmum">
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/ViewJadwalUmum" message="tns:Iadm_ViewJadwalUmum_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/ViewJadwalUmumResponse" message="tns:Iadm_ViewJadwalUmum_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMatKul">
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/GetMatKul" message="tns:Iadm_GetMatKul_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/GetMatKulResponse" message="tns:Iadm_GetMatKul_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetKelas">
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/GetKelas" message="tns:Iadm_GetKelas_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/GetKelasResponse" message="tns:Iadm_GetKelas_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetShift">
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/GetShift" message="tns:Iadm_GetShift_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/GetShiftResponse" message="tns:Iadm_GetShift_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertJadwal">
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/InsertJadwal" message="tns:Iadm_InsertJadwal_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/InsertJadwalResponse" message="tns:Iadm_InsertJadwal_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteJadwal">
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/DeleteJadwal" message="tns:Iadm_DeleteJadwal_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/DeleteJadwalResponse" message="tns:Iadm_DeleteJadwal_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStaffID">
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/GetStaffID" message="tns:Iadm_GetStaffID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/GetStaffIDResponse" message="tns:Iadm_GetStaffID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStaffJadwal">
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/GetStaffJadwal" message="tns:Iadm_GetStaffJadwal_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/GetStaffJadwalResponse" message="tns:Iadm_GetStaffJadwal_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="addPeriode">
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/addPeriode" message="tns:Iadm_addPeriode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/addPeriodeResponse" message="tns:Iadm_addPeriode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="viewPeriode">
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/viewPeriode" message="tns:Iadm_viewPeriode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/viewPeriodeResponse" message="tns:Iadm_viewPeriode_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSHttpBinding_Iadm" type="tns:Iadm">
+    <wsp:PolicyReference URI="#WSHttpBinding_Iadm_policy" />
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetLogin">
+      <soap12:operation soapAction="http://tempuri.org/Iadm/GetLogin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetJurusan">
+      <soap12:operation soapAction="http://tempuri.org/Iadm/GetJurusan" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAngkatan">
+      <soap12:operation soapAction="http://tempuri.org/Iadm/GetAngkatan" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPraktikan">
+      <soap12:operation soapAction="http://tempuri.org/Iadm/GetPraktikan" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertMultiplePraktikan">
+      <soap12:operation soapAction="http://tempuri.org/Iadm/InsertMultiplePraktikan" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ViewJadwalUmum">
+      <soap12:operation soapAction="http://tempuri.org/Iadm/ViewJadwalUmum" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMatKul">
+      <soap12:operation soapAction="http://tempuri.org/Iadm/GetMatKul" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetKelas">
+      <soap12:operation soapAction="http://tempuri.org/Iadm/GetKelas" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetShift">
+      <soap12:operation soapAction="http://tempuri.org/Iadm/GetShift" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertJadwal">
+      <soap12:operation soapAction="http://tempuri.org/Iadm/InsertJadwal" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteJadwal">
+      <soap12:operation soapAction="http://tempuri.org/Iadm/DeleteJadwal" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStaffID">
+      <soap12:operation soapAction="http://tempuri.org/Iadm/GetStaffID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStaffJadwal">
+      <soap12:operation soapAction="http://tempuri.org/Iadm/GetStaffJadwal" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addPeriode">
+      <soap12:operation soapAction="http://tempuri.org/Iadm/addPeriode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="viewPeriode">
+      <soap12:operation soapAction="http://tempuri.org/Iadm/viewPeriode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SrvcApp">
+    <wsdl:port name="WSHttpBinding_Iadm" binding="tns:WSHttpBinding_Iadm">
+      <soap12:address location="http://localhost/labservice/svlab.svc" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>http://localhost/labservice/svlab.svc</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
