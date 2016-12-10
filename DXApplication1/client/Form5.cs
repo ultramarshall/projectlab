@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
-using System.Linq;
-using System.Windows.Forms;
 using DevExpress.XtraEditors;
-
+using static client.Library.border;
 namespace client
 {
     public partial class Form5 : DevExpress.XtraEditors.XtraForm
@@ -15,6 +9,7 @@ namespace client
         public Form5()
         {
             InitializeComponent();
+            Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 15, 15));
         }
 
         private void simpleButton1_Click(object sender, EventArgs e)

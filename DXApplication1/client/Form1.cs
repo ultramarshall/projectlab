@@ -5,6 +5,7 @@ using client.lab;
 using DevExpress.XtraEditors;
 using static client.Library.Method;
 using static client.Library.border;
+using System.Windows.Forms;
 
 namespace client
 {
@@ -48,13 +49,13 @@ namespace client
                 }
                 else if (roles == "Koordinator") //kordinator
                 {
-
+                    Interface.SelectedPage = InterfaceKoordinator;
                 }
                 else if (roles == "Asisten") //aslab
                 {
-
+                    Interface.SelectedPage = InterfaceStaff;
                 }
-                else if (roles == "Mahasiswa") //mahasiswa
+                else if (roles == "Praktikan") //mahasiswa
                 {
                     Jadwal.SelectedPage = Jadwal_Tersedia; //melihat jadwal tersedia
                 }
@@ -281,14 +282,9 @@ namespace client
             frm.ShowDialog();
         }
 
-        private void hyperlinkLabelControl1_Click(object sender, EventArgs e)
+        private void logoutStaff(object sender, EventArgs e)
         {
-            XtraMessageBox.Show("ready hyperlink");
-        }
-
-        private void navBarControl2_Click(object sender, EventArgs e)
-        {
-
+            Interface.SelectedPage = InterfaceLogin;
         }
     }
 }

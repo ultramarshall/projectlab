@@ -58,8 +58,8 @@ namespace SvApp
                 comm.CommandText = "SELECT status "+
                                    "FROM users "+
                                    "WHERE username = @username AND password = @password";
-                comm.Parameters.AddWithValue("username", data.Username);
-                comm.Parameters.AddWithValue("password", data.Password);
+                comm.Parameters.AddWithValue("username", data.Username.TrimEnd());
+                comm.Parameters.AddWithValue("password", data.Password.TrimEnd());
                 comm.CommandType = CommandType.Text;
 
                 conn.Open();
@@ -67,7 +67,7 @@ namespace SvApp
                 SqlDataReader reader = comm.ExecuteReader();
                 while (reader.Read())
                 {
-                    role = Convert.ToString(reader[0]);
+                    role = Convert.ToString(reader[0]).TrimEnd();
                 }
                 return role;
             }
