@@ -28,7 +28,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "host", "host\", "{309B7228-
 		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "client", "DXApplication1\client\client.csproj", "{416CF45E-1A0C-469D-9B6C-AB4A2D04D6D9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "client", "client\client.csproj", "{416CF45E-1A0C-469D-9B6C-AB4A2D04D6D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
