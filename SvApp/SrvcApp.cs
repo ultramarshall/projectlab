@@ -37,8 +37,8 @@ namespace SvApp
         {
             connStringBuilder = new SqlConnectionStringBuilder()
             {
-                //DataSource = "DESKTOP-0SI1HN9\\SQLSERVER",
-                DataSource = "DESKTOP-1172569",
+                DataSource = "DESKTOP-0SI1HN9\\SQLSERVER",
+                //DataSource = "DESKTOP-1172569",
                 InitialCatalog = "labdb",Encrypt = true,
                 TrustServerCertificate = true,
                 ConnectTimeout = 30,
@@ -494,27 +494,28 @@ namespace SvApp
             }
         }
        
-        public List<Staff> GetStaffID(string data)
+        public Staff GetStaffID(Staff data)
         {
             try
             {
-                List<Staff> _Staff = new List<Staff>();
-                comm.CommandText = "SELECT id_staff " +
+                comm.CommandText = "SELECT id_staff, nama, foto, no_hp, alamat " +
                                     "FROM staff " +
-                                    "WHERE id_staff LIKE '%"+data+"%' AND id_staff NOT LIKE '%ADM%'";
+                                    "WHERE id_staff = @id_staff AND id_staff NOT LIKE '%ADM%'";
+                comm.Parameters.AddWithValue("id_staff", data.id_staff);
                 comm.CommandType = CommandType.Text;
                 conn.Open();
-
+                Staff profileStaff = new Staff();
                 SqlDataReader reader = comm.ExecuteReader();
                 while (reader.Read())
                 {
-                    Staff list = new Staff()
-                    {
-                        id_staff = Convert.ToString(reader[0]).TrimEnd(),
-                    };
-                    _Staff.Add(list);
+                    profileStaff.id_staff = Convert.ToString(reader[0]).TrimEnd();
+                    profileStaff.nama = Convert.ToString(reader[1]).TrimEnd();
+                    profileStaff.foto = File.ReadAllBytes(reader[2].ToString().TrimEnd());
+                    profileStaff.no_hp = Convert.ToString(reader[3]).TrimEnd();
+                    profileStaff.alamat = Convert.ToString(reader[4]).TrimEnd();
                 }
-                return _Staff;
+                return profileStaff;
+
             }
             catch (Exception)
             {

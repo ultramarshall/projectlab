@@ -796,7 +796,19 @@ namespace client.lab {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string alamatField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private byte[] fotoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string id_staffField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string namaField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string no_hpField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -809,6 +821,32 @@ namespace client.lab {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string alamat {
+            get {
+                return this.alamatField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.alamatField, value) != true)) {
+                    this.alamatField = value;
+                    this.RaisePropertyChanged("alamat");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] foto {
+            get {
+                return this.fotoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.fotoField, value) != true)) {
+                    this.fotoField = value;
+                    this.RaisePropertyChanged("foto");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string id_staff {
             get {
                 return this.id_staffField;
@@ -817,6 +855,32 @@ namespace client.lab {
                 if ((object.ReferenceEquals(this.id_staffField, value) != true)) {
                     this.id_staffField = value;
                     this.RaisePropertyChanged("id_staff");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string nama {
+            get {
+                return this.namaField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.namaField, value) != true)) {
+                    this.namaField = value;
+                    this.RaisePropertyChanged("nama");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string no_hp {
+            get {
+                return this.no_hpField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.no_hpField, value) != true)) {
+                    this.no_hpField = value;
+                    this.RaisePropertyChanged("no_hp");
                 }
             }
         }
@@ -978,7 +1042,7 @@ namespace client.lab {
         int DeleteJadwal(client.lab.jadwal_umum data);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/GetStaffID", ReplyAction="http://tempuri.org/Iadm/GetStaffIDResponse")]
-        client.lab.Staff[] GetStaffID(string data);
+        client.lab.Staff GetStaffID(client.lab.Staff data);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/GetStaffJadwal", ReplyAction="http://tempuri.org/Iadm/GetStaffJadwalResponse")]
         client.lab.jadwalStaff[] GetStaffJadwal(string data);
@@ -1061,7 +1125,7 @@ namespace client.lab {
             return base.Channel.DeleteJadwal(data);
         }
         
-        public client.lab.Staff[] GetStaffID(string data) {
+        public client.lab.Staff GetStaffID(client.lab.Staff data) {
             return base.Channel.GetStaffID(data);
         }
         

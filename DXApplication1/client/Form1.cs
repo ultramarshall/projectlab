@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using client.lab;
 using DevExpress.XtraEditors;
@@ -11,6 +13,8 @@ namespace client
 {
     public partial class Form1 : XtraForm
     {
+        List<Staff> data_staff = new List<Staff>();
+
 
         public Form1()
         {
@@ -54,8 +58,26 @@ namespace client
                 else if (roles == "Asisten") //aslab
                 {
                     Interface.SelectedPage = InterfaceStaff;
-                }
-                else if (roles == "Praktikan") //mahasiswa
+
+
+                    IadmClient service = new IadmClient();
+                    
+                    Staff data = new Staff() //kirim id_staff 
+                    {
+                        id_staff = username.Text
+                    };
+
+
+                    data_staff.Add(service.GetStaffID(data));
+                    simpleLabelItem11.Text = data_staff[0].id_staff;
+                    simpleLabelItem12.Text = data_staff[0].nama;
+                    simpleLabelItem13.Text = data_staff[0].no_hp;simpleLabelItem14.Text = data_staff[0].alamat;
+                    MemoryStream foto = new MemoryStream(data_staff[0].foto);
+                    pictureEdit2.Image = Image.FromStream(foto);
+
+                    gridControl6.DataSource = service.GetStaffJadwal(data_staff[0].id_staff);
+                    service.Close();
+                }else if (roles == "Praktikan") //mahasiswa
                 {
                     Jadwal.SelectedPage = Jadwal_Tersedia; //melihat jadwal tersedia
                 }
@@ -88,7 +110,6 @@ namespace client
         {
             try
             {
-                //CariPraktikan(comboBoxEdit1, comboBoxEdit2, gridControl1, gridView1);
                 IadmClient service = new IadmClient();
                 
                 string nmAngkatan = comboBoxEdit1.SelectedItem.ToString();
@@ -168,19 +189,6 @@ namespace client
             //gridControl3.DataSource = service.ViewJadwalUmum(jadwal).Select(x => new { x.hari, x.id_shift, x.waktu, x.mata_kuliah, x.kelas }).ToList();
         }
 
-        private void jadwal_staff_asisten(object sender, EventArgs e)
-        {
-            listBoxControl2.Items.Clear();
-            a_.SelectedPage = a_jadwal_staff_asisten;
-            IadmClient service = new IadmClient();
-            var id_staff = service.GetStaffID(searchControl1.Text.ToString());
-            for(int i = 0; i < id_staff.Count(); i++)
-            {
-                listBoxControl2.Items.Add(id_staff[i].id_staff);
-            }
-            service.Close();
-        }
-
         private void jadwal_praktikan(object sender, EventArgs e)
         {
             a_.SelectedPage = a_jadwal_praktikan;
@@ -251,18 +259,6 @@ namespace client
             lihat_jadwal(sender, e);
         }
 
-        private void jadwal_staff_search_txtbox(object sender, DevExpress.XtraEditors.Controls.ChangingEventArgs e)
-        {
-            listBoxControl2.Items.Clear();
-            IadmClient service = new IadmClient();
-            var id_staff = service.GetStaffID(searchControl1.Text.ToString());
-            for (int i = 0; i < id_staff.Count(); i++)
-            {
-                listBoxControl2.Items.Add(id_staff[i].id_staff);
-            }
-            service.Close();
-        }
-
         private void listBoxControl2_SelectedValueChanged(object sender, EventArgs e)
         {
             try
@@ -282,9 +278,28 @@ namespace client
             frm.ShowDialog();
         }
 
-        private void logoutStaff(object sender, EventArgs e)
+        private void StaffLofout_ButtonClick(object sender, EventArgs e)
         {
             Interface.SelectedPage = InterfaceLogin;
+            data_staff.Clear();
+        }
+
+        private void ViewJadwalProfile(object sender, EventArgs e)
+        {
+            viewStaff.SelectedPage = viewStaffAccount;
+            try
+            {
+                IadmClient service = new IadmClient();
+                gridControl6.DataSource = service.GetStaffJadwal(data_staff[0].id_staff);
+            }
+            catch (Exception)
+            {
+                return;
+            }}
+
+        private void cekAbsensi_ButtonClick(object sender, EventArgs e)
+        {
+            viewStaff.SelectedPage = viewStaffJadwal;
         }
     }
 }

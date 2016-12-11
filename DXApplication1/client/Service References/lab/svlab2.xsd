@@ -119,15 +119,13 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfShift" nillable="true" type="tns:ArrayOfShift" />
-  <xs:complexType name="ArrayOfStaff">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Staff" nillable="true" type="tns:Staff" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfStaff" nillable="true" type="tns:ArrayOfStaff" />
   <xs:complexType name="Staff">
     <xs:sequence>
+      <xs:element minOccurs="0" name="alamat" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="foto" nillable="true" type="xs:base64Binary" />
       <xs:element minOccurs="0" name="id_staff" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="nama" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="no_hp" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Staff" nillable="true" type="tns:Staff" />

@@ -10,6 +10,18 @@ namespace SvApp
     public class Staff
     {
         [DataMember]
-        public string id_staff { get; set; } 
+        public string id_staff { get; set; }
+
+        [DataMember]
+        public string nama { get; set; }
+
+        [DataMember]
+        public byte[] foto { get; set; }
+
+        [DataMember]
+        public string no_hp { get; set; }
+
+        [DataMember]
+        public string alamat { get; set; }
     }
 }

@@ -30,11 +30,6 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "host", "host\", "{309B7228-
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "client", "DXApplication1\client\client.csproj", "{416CF45E-1A0C-469D-9B6C-AB4A2D04D6D9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "database", "database", "{C51AA22F-3FCA-4460-8944-720D96C5BC2A}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\labdb = ..\..\labdb
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

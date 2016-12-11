@@ -43,7 +43,7 @@ namespace SvApp
         int DeleteJadwal(jadwal_umum data);
 
         [OperationContract]
-        List<Staff> GetStaffID(string data);
+        Staff GetStaffID(Staff data);
 
         [OperationContract]
         List<jadwalStaff> GetStaffJadwal(string data);
