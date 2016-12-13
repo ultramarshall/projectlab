@@ -4,9 +4,9 @@ using DevExpress.XtraEditors;
 using static client.Library.border;
 namespace client
 {
-    public partial class Form5 : DevExpress.XtraEditors.XtraForm
+    public partial class frmExitApp : DevExpress.XtraEditors.XtraForm
     {
-        public Form5()
+        public frmExitApp()
         {
             InitializeComponent();
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 15, 15));

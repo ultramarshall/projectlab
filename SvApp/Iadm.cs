@@ -13,6 +13,15 @@ namespace SvApp
         string GetLogin(akun data);
 
         [OperationContract]
+        List<jadwalPraktikan> getTimeLogin(jadwalPraktikan data);
+
+        [OperationContract]
+        List<matkul> getPraktikanPraktikum(jadwalPraktikan data);
+
+        [OperationContract]
+        praktikan getProfilePraktikan(praktikan data);
+
+        [OperationContract]
         List<jurusan> GetJurusan();
 
         [OperationContract]

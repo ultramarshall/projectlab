@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://desktop-0si1hn9/labservice/svlab.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/SvApp" />
+  <xs:import schemaLocation="http://desktop-1172569/labservice/svlab.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/SvApp" />
   <xs:element name="GetLogin">
     <xs:complexType>
       <xs:sequence>
@@ -15,6 +15,48 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="getTimeLogin">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q2:jadwalPraktikan" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getTimeLoginResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="getTimeLoginResult" nillable="true" type="q3:ArrayOfjadwalPraktikan" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getPraktikanPraktikum">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q4:jadwalPraktikan" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getPraktikanPraktikumResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="getPraktikanPraktikumResult" nillable="true" type="q5:ArrayOfmatkul" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getProfilePraktikan">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q6:praktikan" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getProfilePraktikanResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="getProfilePraktikanResult" nillable="true" type="q7:praktikan" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetJurusan">
     <xs:complexType>
       <xs:sequence />
@@ -23,7 +65,7 @@
   <xs:element name="GetJurusanResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="GetJurusanResult" nillable="true" type="q2:ArrayOfjurusan" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="GetJurusanResult" nillable="true" type="q8:ArrayOfjurusan" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -35,28 +77,28 @@
   <xs:element name="GetAngkatanResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="GetAngkatanResult" nillable="true" type="q3:ArrayOfangkatan" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="GetAngkatanResult" nillable="true" type="q9:ArrayOfangkatan" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetPraktikan">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q4:praktikan" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q10:praktikan" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetPraktikanResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="GetPraktikanResult" nillable="true" type="q5:ArrayOfpraktikan" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="GetPraktikanResult" nillable="true" type="q11:ArrayOfpraktikan" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="InsertMultiplePraktikan">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q6:ArrayOfpraktikan" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q12:ArrayOfpraktikan" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -70,14 +112,14 @@
   <xs:element name="ViewJadwalUmum">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q7:jadwal_umum" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q13:jadwal_umum" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ViewJadwalUmumResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="ViewJadwalUmumResult" nillable="true" type="q8:ArrayOfjadwal_umum" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="ViewJadwalUmumResult" nillable="true" type="q14:ArrayOfjadwal_umum" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -89,7 +131,7 @@
   <xs:element name="GetMatKulResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="GetMatKulResult" nillable="true" type="q9:ArrayOfmatkul" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="GetMatKulResult" nillable="true" type="q15:ArrayOfmatkul" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -101,7 +143,7 @@
   <xs:element name="GetKelasResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="GetKelasResult" nillable="true" type="q10:ArrayOfkelas" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="GetKelasResult" nillable="true" type="q16:ArrayOfkelas" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -113,14 +155,14 @@
   <xs:element name="GetShiftResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="GetShiftResult" nillable="true" type="q11:ArrayOfShift" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="GetShiftResult" nillable="true" type="q17:ArrayOfShift" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="InsertJadwal">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q12:ArrayOfjadwal_umum" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q18:ArrayOfjadwal_umum" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -134,7 +176,7 @@
   <xs:element name="DeleteJadwal">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q13:jadwal_umum" />
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q19:jadwal_umum" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -148,14 +190,14 @@
   <xs:element name="GetStaffID">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q14:Staff" />
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q20:Staff" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetStaffIDResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="GetStaffIDResult" nillable="true" type="q15:Staff" />
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="GetStaffIDResult" nillable="true" type="q21:Staff" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -169,14 +211,14 @@
   <xs:element name="GetStaffJadwalResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="GetStaffJadwalResult" nillable="true" type="q16:ArrayOfjadwalStaff" />
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="GetStaffJadwalResult" nillable="true" type="q22:ArrayOfjadwalStaff" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="addPeriode">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q17:periode" />
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q23:periode" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -195,7 +237,7 @@
   <xs:element name="viewPeriodeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="viewPeriodeResult" nillable="true" type="q18:ArrayOfperiode" />
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="viewPeriodeResult" nillable="true" type="q24:ArrayOfperiode" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

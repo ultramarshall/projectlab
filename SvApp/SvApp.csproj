@@ -45,6 +45,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="angkatan.cs" />
+    <Compile Include="BCrypt.cs" />
+    <Compile Include="jadwalPraktikan.cs" />
     <Compile Include="jadwalStaff.cs" />
     <Compile Include="jadwal_umum.cs" />
     <Compile Include="jurusan.cs" />

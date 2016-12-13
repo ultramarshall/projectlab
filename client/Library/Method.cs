@@ -7,6 +7,7 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Card;
+using System.Text.RegularExpressions;
 
 namespace client.Library
 {
@@ -92,10 +93,10 @@ namespace client.Library
 
                 praktikan data = new praktikan()
                 {
-                    KodeAngkatan = angkatan.KodeAngkatan,
-                    KodeJurusan = jurusan.KodeJurusan
+                    angkatan= new angkatan() { KodeAngkatan = angkatan.KodeAngkatan },
+                    jurusan = new jurusan() { KodeJurusan = jurusan.KodeJurusan }
                 };
-                gridcontrol.DataSource = service.GetPraktikan(data).Select(x => new { x.Foto, x.NRP, x.Nama, x.KodeAngkatan, x.KodeJurusan}).ToList();
+                gridcontrol.DataSource = service.GetPraktikan(data).Select(x => new { x.Foto, x.NRP, x.Nama, KodeAngkatan = x.angkatan.KodeAngkatan, KodeJurusan = x.jurusan.KodeJurusan}).ToList();
                 Gridview.RowHeight = 60;
                 Gridview.Columns["Foto"].Width = 70;
                 Gridview.Columns["NRP"].Width = 150;
@@ -122,6 +123,42 @@ namespace client.Library
 
         }
 
-       
+        public static bool Like(this string toSearch, string toFind)
+        {
+            return new Regex(@"\A" + new Regex(@"\.|\$|\^|\{|\[|\(|\||\)|\*|\+|\?|\\").Replace(toFind, ch => @"\" + ch).Replace('_', '.').Replace("%", ".*") + @"\z", RegexOptions.Singleline).IsMatch(toSearch);
+        }
+        public static bool Timer(string timeNow, string jam)
+        {
+            bool a = false;
+            try
+            {
+                bool result = false;
+                int y = timeNow.Length;
+                int x = jam.Length;
+
+                for (int i = 0; i < jam.Length; i++)
+                {
+                    if (y < x)
+                    {
+                        x = x - 1;
+                    }
+
+                    result = timeNow.Substring(i, x).Like(jam);
+
+                    if (result == true)
+                    {
+                        a = true;
+                        continue;
+                    };
+                }
+            }
+            catch(Exception)
+            {
+                throw;
+            }
+            
+
+            return a;
+        }
     }
 }

@@ -92,18 +92,21 @@ namespace client.lab {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="jurusan", Namespace="http://schemas.datacontract.org/2004/07/SvApp")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="jadwalPraktikan", Namespace="http://schemas.datacontract.org/2004/07/SvApp")]
     [System.SerializableAttribute()]
-    public partial class jurusan : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class jadwalPraktikan : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string KodeJurusanField;
+        private int id_jadwal_praktikanField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string NamaJurusanField;
+        private client.lab.jadwal_umum id_jadwal_umumField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string nrpField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -116,213 +119,40 @@ namespace client.lab {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string KodeJurusan {
+        public int id_jadwal_praktikan {
             get {
-                return this.KodeJurusanField;
+                return this.id_jadwal_praktikanField;
             }
             set {
-                if ((object.ReferenceEquals(this.KodeJurusanField, value) != true)) {
-                    this.KodeJurusanField = value;
-                    this.RaisePropertyChanged("KodeJurusan");
+                if ((this.id_jadwal_praktikanField.Equals(value) != true)) {
+                    this.id_jadwal_praktikanField = value;
+                    this.RaisePropertyChanged("id_jadwal_praktikan");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string NamaJurusan {
+        public client.lab.jadwal_umum id_jadwal_umum {
             get {
-                return this.NamaJurusanField;
+                return this.id_jadwal_umumField;
             }
             set {
-                if ((object.ReferenceEquals(this.NamaJurusanField, value) != true)) {
-                    this.NamaJurusanField = value;
-                    this.RaisePropertyChanged("NamaJurusan");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="angkatan", Namespace="http://schemas.datacontract.org/2004/07/SvApp")]
-    [System.SerializableAttribute()]
-    public partial class angkatan : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string KodeAngkatanField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string TahunAngkatanField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string KodeAngkatan {
-            get {
-                return this.KodeAngkatanField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.KodeAngkatanField, value) != true)) {
-                    this.KodeAngkatanField = value;
-                    this.RaisePropertyChanged("KodeAngkatan");
+                if ((object.ReferenceEquals(this.id_jadwal_umumField, value) != true)) {
+                    this.id_jadwal_umumField = value;
+                    this.RaisePropertyChanged("id_jadwal_umum");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string TahunAngkatan {
+        public string nrp {
             get {
-                return this.TahunAngkatanField;
+                return this.nrpField;
             }
             set {
-                if ((object.ReferenceEquals(this.TahunAngkatanField, value) != true)) {
-                    this.TahunAngkatanField = value;
-                    this.RaisePropertyChanged("TahunAngkatan");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="praktikan", Namespace="http://schemas.datacontract.org/2004/07/SvApp")]
-    [System.SerializableAttribute()]
-    public partial class praktikan : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private byte[] FotoField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string KodeAngkatanField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string KodeJurusanField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string NRPField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string NamaField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string NotesField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public byte[] Foto {
-            get {
-                return this.FotoField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.FotoField, value) != true)) {
-                    this.FotoField = value;
-                    this.RaisePropertyChanged("Foto");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string KodeAngkatan {
-            get {
-                return this.KodeAngkatanField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.KodeAngkatanField, value) != true)) {
-                    this.KodeAngkatanField = value;
-                    this.RaisePropertyChanged("KodeAngkatan");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string KodeJurusan {
-            get {
-                return this.KodeJurusanField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.KodeJurusanField, value) != true)) {
-                    this.KodeJurusanField = value;
-                    this.RaisePropertyChanged("KodeJurusan");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string NRP {
-            get {
-                return this.NRPField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.NRPField, value) != true)) {
-                    this.NRPField = value;
-                    this.RaisePropertyChanged("NRP");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Nama {
-            get {
-                return this.NamaField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.NamaField, value) != true)) {
-                    this.NamaField = value;
-                    this.RaisePropertyChanged("Nama");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Notes {
-            get {
-                return this.NotesField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.NotesField, value) != true)) {
-                    this.NotesField = value;
-                    this.RaisePropertyChanged("Notes");
+                if ((object.ReferenceEquals(this.nrpField, value) != true)) {
+                    this.nrpField = value;
+                    this.RaisePropertyChanged("nrp");
                 }
             }
         }
@@ -788,6 +618,253 @@ namespace client.lab {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="praktikan", Namespace="http://schemas.datacontract.org/2004/07/SvApp")]
+    [System.SerializableAttribute()]
+    public partial class praktikan : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private byte[] FotoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NRPField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NamaField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NotesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private client.lab.angkatan angkatanField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private client.lab.jurusan jurusanField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] Foto {
+            get {
+                return this.FotoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FotoField, value) != true)) {
+                    this.FotoField = value;
+                    this.RaisePropertyChanged("Foto");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NRP {
+            get {
+                return this.NRPField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NRPField, value) != true)) {
+                    this.NRPField = value;
+                    this.RaisePropertyChanged("NRP");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Nama {
+            get {
+                return this.NamaField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NamaField, value) != true)) {
+                    this.NamaField = value;
+                    this.RaisePropertyChanged("Nama");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Notes {
+            get {
+                return this.NotesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NotesField, value) != true)) {
+                    this.NotesField = value;
+                    this.RaisePropertyChanged("Notes");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public client.lab.angkatan angkatan {
+            get {
+                return this.angkatanField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.angkatanField, value) != true)) {
+                    this.angkatanField = value;
+                    this.RaisePropertyChanged("angkatan");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public client.lab.jurusan jurusan {
+            get {
+                return this.jurusanField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.jurusanField, value) != true)) {
+                    this.jurusanField = value;
+                    this.RaisePropertyChanged("jurusan");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="angkatan", Namespace="http://schemas.datacontract.org/2004/07/SvApp")]
+    [System.SerializableAttribute()]
+    public partial class angkatan : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string KodeAngkatanField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TahunAngkatanField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string KodeAngkatan {
+            get {
+                return this.KodeAngkatanField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.KodeAngkatanField, value) != true)) {
+                    this.KodeAngkatanField = value;
+                    this.RaisePropertyChanged("KodeAngkatan");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string TahunAngkatan {
+            get {
+                return this.TahunAngkatanField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TahunAngkatanField, value) != true)) {
+                    this.TahunAngkatanField = value;
+                    this.RaisePropertyChanged("TahunAngkatan");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="jurusan", Namespace="http://schemas.datacontract.org/2004/07/SvApp")]
+    [System.SerializableAttribute()]
+    public partial class jurusan : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string KodeJurusanField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NamaJurusanField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string KodeJurusan {
+            get {
+                return this.KodeJurusanField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.KodeJurusanField, value) != true)) {
+                    this.KodeJurusanField = value;
+                    this.RaisePropertyChanged("KodeJurusan");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NamaJurusan {
+            get {
+                return this.NamaJurusanField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NamaJurusanField, value) != true)) {
+                    this.NamaJurusanField = value;
+                    this.RaisePropertyChanged("NamaJurusan");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Staff", Namespace="http://schemas.datacontract.org/2004/07/SvApp")]
     [System.SerializableAttribute()]
     public partial class Staff : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -1011,6 +1088,15 @@ namespace client.lab {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/GetLogin", ReplyAction="http://tempuri.org/Iadm/GetLoginResponse")]
         string GetLogin(client.lab.akun data);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/getTimeLogin", ReplyAction="http://tempuri.org/Iadm/getTimeLoginResponse")]
+        client.lab.jadwalPraktikan[] getTimeLogin(client.lab.jadwalPraktikan data);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/getPraktikanPraktikum", ReplyAction="http://tempuri.org/Iadm/getPraktikanPraktikumResponse")]
+        client.lab.matkul[] getPraktikanPraktikum(client.lab.jadwalPraktikan data);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/getProfilePraktikan", ReplyAction="http://tempuri.org/Iadm/getProfilePraktikanResponse")]
+        client.lab.praktikan getProfilePraktikan(client.lab.praktikan data);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/GetJurusan", ReplyAction="http://tempuri.org/Iadm/GetJurusanResponse")]
         client.lab.jurusan[] GetJurusan();
         
@@ -1083,6 +1169,18 @@ namespace client.lab {
         
         public string GetLogin(client.lab.akun data) {
             return base.Channel.GetLogin(data);
+        }
+        
+        public client.lab.jadwalPraktikan[] getTimeLogin(client.lab.jadwalPraktikan data) {
+            return base.Channel.getTimeLogin(data);
+        }
+        
+        public client.lab.matkul[] getPraktikanPraktikum(client.lab.jadwalPraktikan data) {
+            return base.Channel.getPraktikanPraktikum(data);
+        }
+        
+        public client.lab.praktikan getProfilePraktikan(client.lab.praktikan data) {
+            return base.Channel.getProfilePraktikan(data);
         }
         
         public client.lab.jurusan[] GetJurusan() {

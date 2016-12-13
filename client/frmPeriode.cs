@@ -8,9 +8,9 @@ using System.Linq;
 
 namespace client
 {
-    public partial class Form4 : DevExpress.XtraEditors.XtraForm
+    public partial class frmPeriode : DevExpress.XtraEditors.XtraForm
     {
-        public Form4()
+        public frmPeriode()
         {
             InitializeComponent();
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 15, 15));
@@ -32,7 +32,7 @@ namespace client
                                                                                x.awalSemester.ToString("yyyy"), 
                                                                                x.akhirSemester.ToString("yyyy")),
                                                                 awalSemester = x.awalSemester.ToString("dd MMMM yyyy", new CultureInfo("id-ID")),
-                                                                akhirSemester = x.akhirSemester.ToString("dd MMMM yyyy", new CultureInfo("id-ID"))
+                                                                akhirSemester = x.akhirSemester.ToString("dd MMMM yyyy", new CultureInfo("id-ID")),
                                                             }).ToList();
 
             service.Close();

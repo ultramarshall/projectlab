@@ -8,15 +8,18 @@ using DevExpress.XtraEditors;
 using static client.Library.Method;
 using static client.Library.border;
 using System.Windows.Forms;
+using System.Data;
+using System.Globalization;
 
 namespace client
 {
-    public partial class Form1 : XtraForm
+    public partial class frmMain : XtraForm
     {
         List<Staff> data_staff = new List<Staff>();
+        List<praktikan> data_praktikan = new List<praktikan>();
+        DateTime waktu;
 
-
-        public Form1()
+        public frmMain()
         {
             InitializeComponent();
             disablelayoutcontrolmenu();
@@ -41,50 +44,110 @@ namespace client
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
+            listBoxControl1.Items.Clear();
             try
             {
+                IadmClient service = new IadmClient();
                 string roles = PostLogin(username.Text, password.Text);
 
-                if (roles == "Admin") //admin
+                var culture = new CultureInfo("id-ID");// waktu format indonesia
+                var day = culture.DateTimeFormat.GetDayName(DateTime.Today.DayOfWeek); //menampilkan hari ini/ ex: Senin, Selasa, Rabu, Kamis, Jumat, Sabtu
+
+                jadwalPraktikan nrp = new jadwalPraktikan() { nrp = username.Text };
+                var at = service.getTimeLogin(nrp).Select(x => new { hari = x.id_jadwal_umum.hari, waktu = x.id_jadwal_umum.fk_jadwalUmum_Shift.waktu }).ToList();
+
+                var now = DateTime.Now;
+                 
+                var TimeNow = now.ToString("dd/MM/yyyy hh:mm:ss");
+                int year = int.Parse(TimeNow.Substring(6, 4));
+                int month = int.Parse(TimeNow.Substring(3, 2));
+                int days = int.Parse(TimeNow.Substring(0, 2));
+
+
+                if (roles == "Praktikan")
+                {
+                    if(at.Count > 0) // punya jadwal
+                    {
+                        for (int i = 0; i < at.Count; i++)
+                        {
+                            if (at[i].hari == day) // cek hari per baris
+                            {
+                                int mJam = int.Parse(at[i].waktu.Substring(0, 2));
+                                int mMenit = int.Parse(at[i].waktu.Substring(3, 2));
+                                int sJam = int.Parse(at[i].waktu.Substring(8, 2));
+                                int sMenit = int.Parse(at[i].waktu.Substring(11, 2));
+                                DateTime mulai = new DateTime(year, month, days, mJam, mMenit, 0);
+                                DateTime selesai = new DateTime(year, month, days, sJam, sMenit, 0);
+                                if ((now >= mulai) && (now <= selesai)) 
+                                {
+
+                                    jadwalPraktikan data = new jadwalPraktikan()
+                                    {
+                                        nrp = username.Text,
+                                        id_jadwal_umum = new jadwal_umum()
+                                        {
+                                            fk_jadwalUmum_Shift = new Shift()
+                                            {
+                                                waktu = mulai.ToString("HH:mm") + " - " + selesai.ToString("HH:mm")
+                                            }
+                                        }
+                                    };
+                                    var x=service.getPraktikanPraktikum(data);
+                                    listBoxControl1.Items.Add(x[0].mata_kuliah);
+                                    Jadwal.SelectedPage = Jadwal_Tersedia;
+                                    break; //end loop if true
+                                }
+                            }
+                        }
+                    }
+                    else // ga punya jadwal
+                    {
+                        XtraMessageBox.Show("belum memiliki jadwal, hubungi admin pak wasro");
+                    }
+                }
+                else if (roles == "Admin")
                 {
                     Interface.SelectedPage = InterfaceAdmin;
-                    
-                    
                 }
-                else if (roles == "Koordinator") //kordinator
+                else //username ga ada
                 {
-                    Interface.SelectedPage = InterfaceKoordinator;
+                    XtraMessageBox.Show("username tidak terdaftar");
                 }
-                else if (roles == "Asisten") //aslab
-                {
-                    Interface.SelectedPage = InterfaceStaff;
 
 
-                    IadmClient service = new IadmClient();
-                    
-                    Staff data = new Staff() //kirim id_staff 
-                    {
-                        id_staff = username.Text
-                    };
-
-
-                    data_staff.Add(service.GetStaffID(data));
-                    simpleLabelItem11.Text = data_staff[0].id_staff;
-                    simpleLabelItem12.Text = data_staff[0].nama;
-                    simpleLabelItem13.Text = data_staff[0].no_hp;simpleLabelItem14.Text = data_staff[0].alamat;
-                    MemoryStream foto = new MemoryStream(data_staff[0].foto);
-                    pictureEdit2.Image = Image.FromStream(foto);
-
-                    gridControl6.DataSource = service.GetStaffJadwal(data_staff[0].id_staff);
-                    service.Close();
-                }else if (roles == "Praktikan") //mahasiswa
-                {
-                    Jadwal.SelectedPage = Jadwal_Tersedia; //melihat jadwal tersedia
-                }
-                else //  tidak terdaftar
-                {
-                    XtraMessageBox.Show("username atau password salah");
-                }
+                //if (roles == "Admin") //admin
+                //{
+                //    Interface.SelectedPage = InterfaceAdmin;
+                //}
+                //else if (roles == "Koordinator") //kordinator
+                //{
+                //    Interface.SelectedPage = InterfaceKoordinator;
+                //}
+                //else if (roles == "Asisten") //aslab
+                //{
+                //    Interface.SelectedPage = InterfaceStaff;
+                //    IadmClient service = new IadmClient();
+                //    Staff data = new Staff() //kirim id_staff 
+                //    {
+                //        id_staff = username.Text
+                //    };
+                //    data_staff.Add(service.GetStaffID(data));
+                //    simpleLabelItem11.Text = data_staff[0].id_staff;
+                //    simpleLabelItem12.Text = data_staff[0].nama;
+                //    simpleLabelItem13.Text = data_staff[0].no_hp;
+                //    simpleLabelItem14.Text = data_staff[0].alamat;
+                //    MemoryStream foto = new MemoryStream(data_staff[0].foto);
+                //    pictureEdit2.Image = Image.FromStream(foto);
+                //    gridControl6.DataSource = service.GetStaffJadwal(data_staff[0].id_staff);
+                //}
+                //else if (roles == "Praktikan") //mahasiswa
+                //{
+                //    Jadwal.SelectedPage = Jadwal_Tersedia; //melihat jadwal tersedia
+                //}
+                //else //  tidak terdaftar
+                //{
+                //    XtraMessageBox.Show("username atau password salah");
+                //}
             }
             catch (Exception err)
             {
@@ -97,7 +160,18 @@ namespace client
         private void MulaiButton_Click(object sender, EventArgs e)
         {
             Jadwal.SelectedPage = Jadwal_Blank;
-            Login_Button.Enabled = true;
+
+            IadmClient service = new IadmClient();
+
+            praktikan data = new praktikan() { NRP = username.Text };
+            data_praktikan.Add(service.getProfilePraktikan(data));
+            simpleLabelItem22.Text = data_praktikan[0].NRP.ToString();
+            simpleLabelItem19.Text = data_praktikan[0].Nama.ToString();
+            simpleLabelItem20.Text = data_praktikan[0].jurusan.NamaJurusan.ToString();
+            simpleLabelItem21.Text = data_praktikan[0].angkatan.TahunAngkatan.ToString();
+            MemoryStream img = new MemoryStream(data_praktikan[0].Foto);
+            pictureEdit3.Image = Image.FromStream(img);
+            Interface.SelectedPage = InterfacePraktikan; 
         }
 
         private void staff(object sender, EventArgs e)
@@ -116,27 +190,24 @@ namespace client
                 string nmJurusan = comboBoxEdit2.SelectedItem.ToString();
                 var angkatan = service.GetAngkatan().FirstOrDefault(q => q.TahunAngkatan == nmAngkatan);
                 var jurusan = service.GetJurusan().FirstOrDefault(q => q.NamaJurusan == nmJurusan);
-                
+                XtraMessageBox.Show(jurusan.KodeJurusan);
                 praktikan data = new praktikan()
                 {
-                    KodeAngkatan = angkatan.KodeAngkatan,
-                    KodeJurusan = jurusan.KodeJurusan
+                    angkatan = new angkatan() { KodeAngkatan = angkatan.KodeAngkatan },
+                    jurusan = new jurusan() { KodeJurusan = jurusan.KodeJurusan }
                 };
-                gridControl1.DataSource = service.GetPraktikan(data).Select(x => new { x.Foto, x.NRP, x.Nama, x.KodeAngkatan, x.KodeJurusan }).ToList();
+                gridControl1.DataSource = service.GetPraktikan(data).Select(x => new { x.Foto, x.NRP, x.Nama }).ToList();
                 gridView1.RowHeight = 60;
                 gridView1.Columns["Foto"].Width = 70;
                 gridView1.Columns["NRP"].Width = 150;
-
-                gridView1.Columns["NRP"].Caption = "NO MAHASISWA";
-                gridView1.Columns["Foto"].Caption = "FOTO";
-                gridView1.Columns["Nama"].Caption = "NAMA";
-                gridView1.Columns["KodeAngkatan"].Caption = "ANGKATAN";
-                gridView1.Columns["KodeJurusan"].Caption = "JURUSAN";
-
-                for (int i = 0; i < gridView1.Columns.Count; i++)
-                {
-                    gridView1.Columns[i].AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
-                }
+                 //gridView1.Columns["NRP"].Caption = "NO MAHASISWA";
+                //gridView1.Columns["Foto"].Caption = "FOTO";
+                //gridView1.Columns["Nama"].Caption = "NAMA";
+                
+                //for (int i = 0; i < gridView1.Columns.Count; i++)
+                //{
+                //    gridView1.Columns[i].AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+                //}
 
                 service.Close();
             } catch (Exception err)
@@ -167,7 +238,7 @@ namespace client
 
         private void import_excel(object sender, EventArgs e)
         {
-            Form2 frm = new Form2();
+            frmImportExcel frm = new frmImportExcel();
             frm.ShowDialog();
         }
 
@@ -236,7 +307,7 @@ namespace client
 
         private void simpleButton6_Click(object sender, EventArgs e)
         {
-            Form3 frm = new Form3();
+            frmTambahJadwalUmum frm = new frmTambahJadwalUmum();
             frm.ShowDialog();
         }
 
@@ -259,22 +330,9 @@ namespace client
             lihat_jadwal(sender, e);
         }
 
-        private void listBoxControl2_SelectedValueChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                var id_staff = listBoxControl2.SelectedValue.ToString();
-                IadmClient service = new IadmClient();
-                gridControl4.DataSource = service.GetStaffJadwal(id_staff);
-            } catch (Exception)
-            {
-                return;
-            }
-        }
-
         private void accordionControlElement6_Click(object sender, EventArgs e)
         {
-            Form4 frm = new Form4();
+            frmPeriode frm = new frmPeriode();
             frm.ShowDialog();
         }
 
@@ -300,6 +358,11 @@ namespace client
         private void cekAbsensi_ButtonClick(object sender, EventArgs e)
         {
             viewStaff.SelectedPage = viewStaffJadwal;
+        }
+
+        private void accordionControlElement21_Click(object sender, EventArgs e)
+        {
+            Interface.SelectedPage = InterfaceLogin;
         }
     }
 }

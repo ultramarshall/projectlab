@@ -8,49 +8,14 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="akun" nillable="true" type="tns:akun" />
-  <xs:complexType name="ArrayOfjurusan">
+  <xs:complexType name="jadwalPraktikan">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="jurusan" nillable="true" type="tns:jurusan" />
+      <xs:element minOccurs="0" name="id_jadwal_praktikan" type="xs:int" />
+      <xs:element minOccurs="0" name="id_jadwal_umum" nillable="true" type="tns:jadwal_umum" />
+      <xs:element minOccurs="0" name="nrp" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfjurusan" nillable="true" type="tns:ArrayOfjurusan" />
-  <xs:complexType name="jurusan">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="KodeJurusan" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="NamaJurusan" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="jurusan" nillable="true" type="tns:jurusan" />
-  <xs:complexType name="ArrayOfangkatan">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="angkatan" nillable="true" type="tns:angkatan" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfangkatan" nillable="true" type="tns:ArrayOfangkatan" />
-  <xs:complexType name="angkatan">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="KodeAngkatan" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="TahunAngkatan" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="angkatan" nillable="true" type="tns:angkatan" />
-  <xs:complexType name="praktikan">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Foto" nillable="true" type="xs:base64Binary" />
-      <xs:element minOccurs="0" name="KodeAngkatan" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="KodeJurusan" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="NRP" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Nama" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Notes" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="praktikan" nillable="true" type="tns:praktikan" />
-  <xs:complexType name="ArrayOfpraktikan">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="praktikan" nillable="true" type="tns:praktikan" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfpraktikan" nillable="true" type="tns:ArrayOfpraktikan" />
+  <xs:element name="jadwalPraktikan" nillable="true" type="tns:jadwalPraktikan" />
   <xs:complexType name="jadwal_umum">
     <xs:sequence>
       <xs:element minOccurs="0" name="fk_jadwalUmum_Shift" nillable="true" type="tns:Shift" />
@@ -95,18 +60,67 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="periode" nillable="true" type="tns:periode" />
-  <xs:complexType name="ArrayOfjadwal_umum">
+  <xs:complexType name="ArrayOfjadwalPraktikan">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="jadwal_umum" nillable="true" type="tns:jadwal_umum" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="jadwalPraktikan" nillable="true" type="tns:jadwalPraktikan" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfjadwal_umum" nillable="true" type="tns:ArrayOfjadwal_umum" />
+  <xs:element name="ArrayOfjadwalPraktikan" nillable="true" type="tns:ArrayOfjadwalPraktikan" />
   <xs:complexType name="ArrayOfmatkul">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="matkul" nillable="true" type="tns:matkul" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfmatkul" nillable="true" type="tns:ArrayOfmatkul" />
+  <xs:complexType name="praktikan">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Foto" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="NRP" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Nama" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Notes" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="angkatan" nillable="true" type="tns:angkatan" />
+      <xs:element minOccurs="0" name="jurusan" nillable="true" type="tns:jurusan" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="praktikan" nillable="true" type="tns:praktikan" />
+  <xs:complexType name="angkatan">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="KodeAngkatan" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TahunAngkatan" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="angkatan" nillable="true" type="tns:angkatan" />
+  <xs:complexType name="jurusan">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="KodeJurusan" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NamaJurusan" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="jurusan" nillable="true" type="tns:jurusan" />
+  <xs:complexType name="ArrayOfjurusan">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="jurusan" nillable="true" type="tns:jurusan" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfjurusan" nillable="true" type="tns:ArrayOfjurusan" />
+  <xs:complexType name="ArrayOfangkatan">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="angkatan" nillable="true" type="tns:angkatan" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfangkatan" nillable="true" type="tns:ArrayOfangkatan" />
+  <xs:complexType name="ArrayOfpraktikan">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="praktikan" nillable="true" type="tns:praktikan" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfpraktikan" nillable="true" type="tns:ArrayOfpraktikan" />
+  <xs:complexType name="ArrayOfjadwal_umum">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="jadwal_umum" nillable="true" type="tns:jadwal_umum" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfjadwal_umum" nillable="true" type="tns:ArrayOfjadwal_umum" />
   <xs:complexType name="ArrayOfkelas">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="kelas" nillable="true" type="tns:kelas" />

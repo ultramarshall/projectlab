@@ -35,5 +35,6 @@ namespace SvApp
 
         [DataMember]
         public periode fk_jadwalUmum_periode { get; set; }
+
     }
 }

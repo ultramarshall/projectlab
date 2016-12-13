@@ -37,8 +37,8 @@ namespace SvApp
         {
             connStringBuilder = new SqlConnectionStringBuilder()
             {
-                DataSource = "DESKTOP-0SI1HN9\\SQLSERVER",
-                //DataSource = "DESKTOP-1172569",
+                //DataSource = "DESKTOP-0SI1HN9\\SQLSERVER",
+                DataSource = "DESKTOP-1172569",
                 InitialCatalog = "labdb",Encrypt = true,
                 TrustServerCertificate = true,
                 ConnectTimeout = 30,
@@ -70,6 +70,130 @@ namespace SvApp
                     role = Convert.ToString(reader[0]).TrimEnd();
                 }
                 return role;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        public List<jadwalPraktikan> getTimeLogin(jadwalPraktikan data)
+        {
+            try
+            {
+                List<jadwalPraktikan> result = new List<jadwalPraktikan>();
+                comm.CommandText = "SELECT jadwal_umum.hari, shift.waktu " +
+                                   "FROM jadwal_umum INNER JOIN " +
+                                        "shift ON jadwal_umum.id_shift = shift.id_shift INNER JOIN " +
+                                        "jadwal_praktikan ON jadwal_umum.id_jadwal_umum = jadwal_praktikan.id_jadwal_umum " +
+                                   "WHERE jadwal_praktikan.nrp = @nrp";
+                comm.Parameters.AddWithValue("nrp", data.nrp);
+                comm.CommandType = CommandType.Text;
+                conn.Open();
+                Console.WriteLine(data.nrp);
+                SqlDataReader reader = comm.ExecuteReader();
+                while (reader.Read())
+                {
+                    jadwalPraktikan list = new jadwalPraktikan()
+                    {
+                        id_jadwal_umum = new jadwal_umum()
+                        {
+                            hari = reader[0].ToString().TrimEnd(),
+                            fk_jadwalUmum_Shift = new Shift()
+                            {
+                                waktu = reader[1].ToString().TrimEnd()
+                            }
+                        }
+                    };
+                    result.Add(list);
+                }
+                return result;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        public List<matkul> getPraktikanPraktikum(jadwalPraktikan data)
+        {
+            try
+            {
+                comm.CommandText = "SELECT mata_kuliah.mata_kuliah " +
+                                    "FROM jadwal_praktikan INNER JOIN " +
+                                        "jadwal_umum ON jadwal_praktikan.id_jadwal_umum = jadwal_umum.id_jadwal_umum INNER JOIN " +
+                                        "mata_kuliah ON jadwal_umum.kode_mk = mata_kuliah.kode_mk INNER JOIN " +
+                                        "shift ON jadwal_umum.id_shift = shift.id_shift " +
+                                    "WHERE jadwal_praktikan.nrp = @nrp AND shift.waktu = @waktu";
+                comm.Parameters.AddWithValue("nrp", data.nrp);
+                comm.Parameters.AddWithValue("waktu", data.id_jadwal_umum.fk_jadwalUmum_Shift.waktu);
+                comm.CommandType = CommandType.Text;
+                conn.Open();
+                Console.WriteLine(data.nrp);
+                SqlDataReader reader = comm.ExecuteReader();
+                List<matkul> result = new List<matkul>();
+                while (reader.Read())
+                {
+                    matkul res = new matkul()
+                    {
+                        mata_kuliah = reader[0].ToString().TrimEnd()
+                    };
+                    result.Add(res);
+
+                }
+                return result;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        public praktikan getProfilePraktikan(praktikan data)
+        {
+            try
+            {
+                comm.CommandText = "SELECT praktikan.nrp, praktikan.nama, praktikan.foto, jurusan.nama_jurusan, angkatan.tahun_angkatan " +
+                                    "FROM praktikan INNER JOIN " +
+                                         "jurusan ON praktikan.kode_jurusan = jurusan.kode_jurusan INNER JOIN " +
+                                         "angkatan ON praktikan.kode_angkatan = angkatan.kode_angkatan " +
+                                    "WHERE praktikan.nrp = @nrp";
+                comm.Parameters.AddWithValue("nrp", data.NRP);
+                comm.CommandType = CommandType.Text;
+                conn.Open();
+                praktikan Profile = new praktikan();
+                SqlDataReader reader = comm.ExecuteReader();
+                while (reader.Read())
+                {
+                    Profile.NRP = Convert.ToString(reader[0]).TrimEnd();
+                    Profile.Nama = Convert.ToString(reader[1]).TrimEnd();
+                    Profile.Foto = File.ReadAllBytes(reader[2].ToString().TrimEnd());
+                    Profile.jurusan = new jurusan() { NamaJurusan = Convert.ToString(reader[3]).TrimEnd() };
+                    Profile.angkatan = new angkatan() { TahunAngkatan = Convert.ToString(reader[4]).TrimEnd() };
+                }
+                return Profile;
+
             }
             catch (Exception)
             {
@@ -272,9 +396,9 @@ namespace SvApp
                                     "FROM angkatan " +
                                     "INNER JOIN praktikan ON angkatan.kode_angkatan = praktikan.kode_angkatan " +
                                     "INNER JOIN jurusan ON praktikan.kode_jurusan = jurusan.kode_jurusan " +
-                                    "WHERE praktikan.kode_angkatan = @kode_angkatan AND praktikan.kode_jurusan =@kode_jurusan";
-                comm.Parameters.AddWithValue("kode_jurusan", data.KodeJurusan);
-                comm.Parameters.AddWithValue("kode_angkatan", data.KodeAngkatan);
+                                    "WHERE praktikan.kode_angkatan = @kode_angkatan AND praktikan.kode_jurusan = @kode_jurusan";
+                comm.Parameters.AddWithValue("kode_angkatan", data.angkatan.KodeAngkatan);
+                comm.Parameters.AddWithValue("kode_jurusan", data.jurusan.KodeJurusan);
                 comm.CommandType = CommandType.Text;
                 conn.Open();
                 
@@ -286,8 +410,8 @@ namespace SvApp
                         NRP = Convert.ToString(reader[0]).TrimEnd(),
                         Nama = Convert.ToString(reader[1]).TrimEnd(),
                         Foto = File.ReadAllBytes(Convert.ToString(reader[2])),
-                        KodeAngkatan = Convert.ToString(reader[3]).TrimEnd(),
-                        KodeJurusan = Convert.ToString(reader[4]).TrimEnd()
+                        angkatan = new angkatan() { TahunAngkatan =Convert.ToString(reader[3]).TrimEnd() },
+                        jurusan = new jurusan() { NamaJurusan = Convert.ToString(reader[4]).TrimEnd() }
                     };
                     users.Add(user);
                 }
@@ -335,7 +459,7 @@ namespace SvApp
                 for (int x = 0; x < data.Count; x++)
                 {
                     Akun[x] = String.Format("('{0}', '{1}', 'Praktikan')", data[x].NRP, data[x].NRP);
-                    Praktikan[x] = string.Format("('{0}', '{1}', '{2}', '{3}', '{4}')", data[x].NRP, data[x].Nama, data[x].KodeJurusan, data[x].KodeAngkatan, String.Format("{0}{1}\\{2}{3}",dir, data[x].NRP, data[x].Nama, format));
+                    Praktikan[x] = string.Format("('{0}', '{1}', '{2}', '{3}', '{4}')", data[x].NRP, data[x].Nama, data[x].jurusan.KodeJurusan, data[x].angkatan.KodeAngkatan, String.Format("{0}{1}\\{2}{3}",dir, data[x].NRP, data[x].Nama, format));
                 }
                 string _Akun = String.Join(",", Akun);
                 string _Praktikan = String.Join(",", Praktikan);

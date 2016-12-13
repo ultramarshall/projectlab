@@ -11,9 +11,9 @@ using static client.Library.border;
 using static client.Library.Method;
 namespace client
 {
-    public partial class Form3 : XtraForm
+    public partial class frmTambahJadwalUmum : XtraForm
     {
-        public Form3()
+        public frmTambahJadwalUmum()
         {
             InitializeComponent();
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 15, 15));

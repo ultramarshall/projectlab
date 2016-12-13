@@ -10,10 +10,10 @@ using client.lab;
 
 namespace client
 {
-    public partial class Form2 : XtraForm
+    public partial class frmImportExcel : XtraForm
     {
 
-        public Form2()
+        public frmImportExcel()
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.None;
@@ -80,8 +80,8 @@ namespace client
                 {
                     NRP = data.Rows[i][0].ToString(),
                     Nama = data.Rows[i][1].ToString(),
-                    KodeJurusan = String.Concat(nrpmhs[0], nrpmhs[1], nrpmhs[2]),
-                    KodeAngkatan = String.Concat(nrpmhs[3], nrpmhs[4]),
+                    jurusan = new jurusan() { KodeJurusan = String.Concat(nrpmhs[0], nrpmhs[1], nrpmhs[2]) },
+                    angkatan = new angkatan() { KodeAngkatan = String.Concat(nrpmhs[3], nrpmhs[4]) },
                     Foto = imageToByteArray(pictureEdit1.Image)
                 };
                 praktikan[i] = biodata;

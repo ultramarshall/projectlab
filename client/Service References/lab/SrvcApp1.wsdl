@@ -10,9 +10,9 @@
   </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
-      <xsd:import schemaLocation="http://desktop-0si1hn9/labservice/svlab.svc?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://desktop-0si1hn9/labservice/svlab.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://desktop-0si1hn9/labservice/svlab.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/SvApp" />
+      <xsd:import schemaLocation="http://desktop-1172569/labservice/svlab.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://desktop-1172569/labservice/svlab.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://desktop-1172569/labservice/svlab.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/SvApp" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="Iadm_GetLogin_InputMessage">
@@ -20,6 +20,24 @@
   </wsdl:message>
   <wsdl:message name="Iadm_GetLogin_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_getTimeLogin_InputMessage">
+    <wsdl:part name="parameters" element="tns:getTimeLogin" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_getTimeLogin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getTimeLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_getPraktikanPraktikum_InputMessage">
+    <wsdl:part name="parameters" element="tns:getPraktikanPraktikum" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_getPraktikanPraktikum_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getPraktikanPraktikumResponse" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_getProfilePraktikan_InputMessage">
+    <wsdl:part name="parameters" element="tns:getProfilePraktikan" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_getProfilePraktikan_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getProfilePraktikanResponse" />
   </wsdl:message>
   <wsdl:message name="Iadm_GetJurusan_InputMessage">
     <wsdl:part name="parameters" element="tns:GetJurusan" />
@@ -110,6 +128,18 @@
       <wsdl:input wsaw:Action="http://tempuri.org/Iadm/GetLogin" message="tns:Iadm_GetLogin_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/Iadm/GetLoginResponse" message="tns:Iadm_GetLogin_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="getTimeLogin">
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/getTimeLogin" message="tns:Iadm_getTimeLogin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/getTimeLoginResponse" message="tns:Iadm_getTimeLogin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getPraktikanPraktikum">
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/getPraktikanPraktikum" message="tns:Iadm_getPraktikanPraktikum_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/getPraktikanPraktikumResponse" message="tns:Iadm_getPraktikanPraktikum_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getProfilePraktikan">
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/getProfilePraktikan" message="tns:Iadm_getProfilePraktikan_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/getProfilePraktikanResponse" message="tns:Iadm_getProfilePraktikan_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetJurusan">
       <wsdl:input wsaw:Action="http://tempuri.org/Iadm/GetJurusan" message="tns:Iadm_GetJurusan_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/Iadm/GetJurusanResponse" message="tns:Iadm_GetJurusan_OutputMessage" />
@@ -172,6 +202,33 @@
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="GetLogin">
       <soap12:operation soapAction="http://tempuri.org/Iadm/GetLogin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTimeLogin">
+      <soap12:operation soapAction="http://tempuri.org/Iadm/getTimeLogin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPraktikanPraktikum">
+      <soap12:operation soapAction="http://tempuri.org/Iadm/getPraktikanPraktikum" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getProfilePraktikan">
+      <soap12:operation soapAction="http://tempuri.org/Iadm/getProfilePraktikan" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
