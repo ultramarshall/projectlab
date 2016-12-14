@@ -16,7 +16,7 @@ namespace SvApp
         List<jadwalPraktikan> getTimeLogin(jadwalPraktikan data);
 
         [OperationContract]
-        List<matkul> getPraktikanPraktikum(jadwalPraktikan data);
+        matkul getPraktikanPraktikum(jadwalPraktikan data);
 
         [OperationContract]
         praktikan getProfilePraktikan(praktikan data);

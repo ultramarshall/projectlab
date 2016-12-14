@@ -1092,7 +1092,7 @@ namespace client.lab {
         client.lab.jadwalPraktikan[] getTimeLogin(client.lab.jadwalPraktikan data);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/getPraktikanPraktikum", ReplyAction="http://tempuri.org/Iadm/getPraktikanPraktikumResponse")]
-        client.lab.matkul[] getPraktikanPraktikum(client.lab.jadwalPraktikan data);
+        client.lab.matkul getPraktikanPraktikum(client.lab.jadwalPraktikan data);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/getProfilePraktikan", ReplyAction="http://tempuri.org/Iadm/getProfilePraktikanResponse")]
         client.lab.praktikan getProfilePraktikan(client.lab.praktikan data);
@@ -1175,7 +1175,7 @@ namespace client.lab {
             return base.Channel.getTimeLogin(data);
         }
         
-        public client.lab.matkul[] getPraktikanPraktikum(client.lab.jadwalPraktikan data) {
+        public client.lab.matkul getPraktikanPraktikum(client.lab.jadwalPraktikan data) {
             return base.Channel.getPraktikanPraktikum(data);
         }
         

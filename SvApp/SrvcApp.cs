@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.IO;
 using System.Globalization;
+using System.Windows.Forms;
 
 namespace SvApp
 {
@@ -38,7 +39,7 @@ namespace SvApp
             connStringBuilder = new SqlConnectionStringBuilder()
             {
                 //DataSource = "DESKTOP-0SI1HN9\\SQLSERVER",
-                DataSource = "DESKTOP-3RKCN07",
+                //DataSource = "DESKTOP-3RKCN07",
                 InitialCatalog = "labdb",Encrypt = true,
                 TrustServerCertificate = true,
                 ConnectTimeout = 30,
@@ -129,11 +130,11 @@ namespace SvApp
             }
         }
 
-        public List<matkul> getPraktikanPraktikum(jadwalPraktikan data)
+        public matkul getPraktikanPraktikum(jadwalPraktikan data)
         {
             try
             {
-                comm.CommandText = "SELECT mata_kuliah.mata_kuliah " +
+                comm.CommandText = @"SELECT mata_kuliah.mata_kuliah " +
                                     "FROM jadwal_praktikan INNER JOIN " +
                                         "jadwal_umum ON jadwal_praktikan.id_jadwal_umum = jadwal_umum.id_jadwal_umum INNER JOIN " +
                                         "mata_kuliah ON jadwal_umum.kode_mk = mata_kuliah.kode_mk INNER JOIN " +
@@ -141,21 +142,18 @@ namespace SvApp
                                     "WHERE jadwal_praktikan.nrp = @nrp AND shift.waktu = @waktu";
                 comm.Parameters.AddWithValue("nrp", data.nrp);
                 comm.Parameters.AddWithValue("waktu", data.id_jadwal_umum.fk_jadwalUmum_Shift.waktu);
+
+
                 comm.CommandType = CommandType.Text;
                 conn.Open();
-                Console.WriteLine(data.nrp);
+                
                 SqlDataReader reader = comm.ExecuteReader();
-                List<matkul> result = new List<matkul>();
+                matkul mk = new matkul();
                 while (reader.Read())
                 {
-                    matkul res = new matkul()
-                    {
-                        mata_kuliah = reader[0].ToString().TrimEnd()
-                    };
-                    result.Add(res);
-
+                    mk.mata_kuliah = reader[0].ToString().TrimEnd();
                 }
-                return result;
+                return mk;
             }
             catch (Exception)
             {

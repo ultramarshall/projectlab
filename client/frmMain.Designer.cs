@@ -227,6 +227,8 @@
             this.accordionControlElement18 = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.InterfaceKoordinator = new DevExpress.XtraBars.Navigation.NavigationPage();
             this.InterfacePraktikan = new DevExpress.XtraBars.Navigation.NavigationPage();
+            this.P_ = new DevExpress.XtraBars.Navigation.NavigationFrame();
+            this.InterfaceInfo = new DevExpress.XtraBars.Navigation.NavigationPage();
             this.layoutControl12 = new DevExpress.XtraLayout.LayoutControl();
             this.simpleButton11 = new DevExpress.XtraEditors.SimpleButton();
             this.gridControl7 = new DevExpress.XtraGrid.GridControl();
@@ -248,6 +250,7 @@
             this.layoutControlItem39 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem40 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem31 = new DevExpress.XtraLayout.EmptySpaceItem();
+            this.InterfaceModul = new DevExpress.XtraBars.Navigation.NavigationPage();
             this.accordionControl3 = new DevExpress.XtraBars.Navigation.AccordionControl();
             this.accordionControlElement16 = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.accordionControlElement19 = new DevExpress.XtraBars.Navigation.AccordionControlElement();
@@ -438,6 +441,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.accordionControl2)).BeginInit();
             this.InterfacePraktikan.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.P_)).BeginInit();
+            this.P_.SuspendLayout();
+            this.InterfaceInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl12)).BeginInit();
             this.layoutControl12.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl7)).BeginInit();
@@ -479,7 +485,7 @@
             this.InterfaceStaff,
             this.InterfaceKoordinator,
             this.InterfacePraktikan});
-            this.Interface.SelectedPage = this.InterfacePraktikan;
+            this.Interface.SelectedPage = this.InterfaceLogin;
             this.Interface.Size = new System.Drawing.Size(794, 505);
             this.Interface.TabIndex = 0;
             this.Interface.TransitionAnimationProperties.FrameCount = 300;
@@ -641,7 +647,7 @@
             // 
             // password
             // 
-            this.password.EditValue = "115120044AS";
+            this.password.EditValue = "115120001";
             this.password.Location = new System.Drawing.Point(63, 36);
             this.password.Name = "password";
             this.password.Properties.UseSystemPasswordChar = true;
@@ -651,7 +657,7 @@
             // 
             // username
             // 
-            this.username.EditValue = "115120044AS";
+            this.username.EditValue = "115120001";
             this.username.Location = new System.Drawing.Point(63, 12);
             this.username.Name = "username";
             this.username.Size = new System.Drawing.Size(165, 20);
@@ -2545,10 +2551,32 @@
             // InterfacePraktikan
             // 
             this.InterfacePraktikan.Caption = "InterfacePraktikan";
-            this.InterfacePraktikan.Controls.Add(this.layoutControl12);
+            this.InterfacePraktikan.Controls.Add(this.P_);
             this.InterfacePraktikan.Controls.Add(this.accordionControl3);
             this.InterfacePraktikan.Name = "InterfacePraktikan";
             this.InterfacePraktikan.Size = new System.Drawing.Size(794, 505);
+            // 
+            // P_
+            // 
+            this.P_.Controls.Add(this.InterfaceInfo);
+            this.P_.Controls.Add(this.InterfaceModul);
+            this.P_.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.P_.Location = new System.Drawing.Point(180, 0);
+            this.P_.Name = "P_";
+            this.P_.Pages.AddRange(new DevExpress.XtraBars.Navigation.NavigationPageBase[] {
+            this.InterfaceInfo,
+            this.InterfaceModul});
+            this.P_.SelectedPage = this.InterfaceModul;
+            this.P_.Size = new System.Drawing.Size(614, 505);
+            this.P_.TabIndex = 7;
+            this.P_.Text = "navigationFrame1";
+            // 
+            // InterfaceInfo
+            // 
+            this.InterfaceInfo.Caption = "InterfaceInfo";
+            this.InterfaceInfo.Controls.Add(this.layoutControl12);
+            this.InterfaceInfo.Name = "InterfaceInfo";
+            this.InterfaceInfo.Size = new System.Drawing.Size(614, 505);
             // 
             // layoutControl12
             // 
@@ -2556,12 +2584,12 @@
             this.layoutControl12.Controls.Add(this.gridControl7);
             this.layoutControl12.Controls.Add(this.pictureEdit3);
             this.layoutControl12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.layoutControl12.Location = new System.Drawing.Point(180, 0);
+            this.layoutControl12.Location = new System.Drawing.Point(0, 0);
             this.layoutControl12.Name = "layoutControl12";
             this.layoutControl12.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(752, 244, 250, 350);
             this.layoutControl12.Root = this.layoutControlGroup15;
             this.layoutControl12.Size = new System.Drawing.Size(614, 505);
-            this.layoutControl12.TabIndex = 6;
+            this.layoutControl12.TabIndex = 7;
             this.layoutControl12.Text = "layoutControl12";
             // 
             // simpleButton11
@@ -2781,6 +2809,12 @@
             this.emptySpaceItem31.Size = new System.Drawing.Size(424, 26);
             this.emptySpaceItem31.TextSize = new System.Drawing.Size(0, 0);
             // 
+            // InterfaceModul
+            // 
+            this.InterfaceModul.Caption = "InterfaceModul";
+            this.InterfaceModul.Name = "InterfaceModul";
+            this.InterfaceModul.Size = new System.Drawing.Size(614, 505);
+            // 
             // accordionControl3
             // 
             this.accordionControl3.Dock = System.Windows.Forms.DockStyle.Left;
@@ -2807,12 +2841,14 @@
             this.accordionControlElement19.Name = "accordionControlElement19";
             this.accordionControlElement19.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
             this.accordionControlElement19.Text = "informasi akun";
+            this.accordionControlElement19.Click += new System.EventHandler(this.accordionControlElement19_Click);
             // 
             // accordionControlElement20
             // 
             this.accordionControlElement20.Name = "accordionControlElement20";
             this.accordionControlElement20.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
             this.accordionControlElement20.Text = "Modul";
+            this.accordionControlElement20.Click += new System.EventHandler(this.accordionControlElement20_Click);
             // 
             // accordionControlElement21
             // 
@@ -3032,6 +3068,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.accordionControl2)).EndInit();
             this.InterfacePraktikan.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.P_)).EndInit();
+            this.P_.ResumeLayout(false);
+            this.InterfaceInfo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl12)).EndInit();
             this.layoutControl12.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl7)).EndInit();
@@ -3262,6 +3301,13 @@
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem30;
         private System.Windows.Forms.Timer timer1;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
+        private DevExpress.XtraBars.Navigation.AccordionControl accordionControl3;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement accordionControlElement16;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement accordionControlElement19;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement accordionControlElement20;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement accordionControlElement21;
+        private DevExpress.XtraBars.Navigation.NavigationFrame P_;
+        private DevExpress.XtraBars.Navigation.NavigationPage InterfaceInfo;
         private DevExpress.XtraLayout.LayoutControl layoutControl12;
         private DevExpress.XtraEditors.SimpleButton simpleButton11;
         private DevExpress.XtraGrid.GridControl gridControl7;
@@ -3283,11 +3329,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem39;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem40;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem31;
-        private DevExpress.XtraBars.Navigation.AccordionControl accordionControl3;
-        private DevExpress.XtraBars.Navigation.AccordionControlElement accordionControlElement16;
-        private DevExpress.XtraBars.Navigation.AccordionControlElement accordionControlElement19;
-        private DevExpress.XtraBars.Navigation.AccordionControlElement accordionControlElement20;
-        private DevExpress.XtraBars.Navigation.AccordionControlElement accordionControlElement21;
+        private DevExpress.XtraBars.Navigation.NavigationPage InterfaceModul;
     }
 }
 

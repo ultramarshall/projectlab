@@ -223,14 +223,14 @@
     <None Include="Service References\lab\client.lab.Staff.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\lab\SrvcApp1.wsdl" />
-    <None Include="Service References\lab\svlab3.xsd">
+    <None Include="Service References\lab\SrvcApp.wsdl" />
+    <None Include="Service References\lab\svlab.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\lab\svlab31.xsd">
+    <None Include="Service References\lab\svlab1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\lab\svlab32.xsd">
+    <None Include="Service References\lab\svlab2.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
@@ -244,7 +244,13 @@
     <None Include="Resources\Screenshot_6.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\oy0v8Y.jpg" />
+  </ItemGroup>
+  <ItemGroup>
     <WCFMetadataStorage Include="Service References\lab\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\lab\svlab.disco" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\lab\configuration91.svcinfo" />
@@ -257,12 +263,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\oy0v8Y.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\lab\svlab1.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

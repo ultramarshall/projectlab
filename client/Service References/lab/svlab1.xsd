@@ -66,12 +66,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfjadwalPraktikan" nillable="true" type="tns:ArrayOfjadwalPraktikan" />
-  <xs:complexType name="ArrayOfmatkul">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="matkul" nillable="true" type="tns:matkul" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfmatkul" nillable="true" type="tns:ArrayOfmatkul" />
   <xs:complexType name="praktikan">
     <xs:sequence>
       <xs:element minOccurs="0" name="Foto" nillable="true" type="xs:base64Binary" />
@@ -121,6 +115,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfjadwal_umum" nillable="true" type="tns:ArrayOfjadwal_umum" />
+  <xs:complexType name="ArrayOfmatkul">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="matkul" nillable="true" type="tns:matkul" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfmatkul" nillable="true" type="tns:ArrayOfmatkul" />
   <xs:complexType name="ArrayOfkelas">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="kelas" nillable="true" type="tns:kelas" />

@@ -13,7 +13,7 @@ namespace client
 {
     public partial class Form6 : DevExpress.XtraEditors.XtraForm
     {
-        bool times = false;
+       
         DateTime waktu = new DateTime();
         public Form6()
         {

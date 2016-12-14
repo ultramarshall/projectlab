@@ -149,7 +149,7 @@ namespace client
                 try
                 {
                     service.InsertJadwal(jadd);
-                } catch(Exception error)
+                } catch(Exception)
                 {
                     //XtraMessageBox.Show(error.ToString());
                     XtraMessageBox.Show("Tidak ada jadwal yg ditambahkan");

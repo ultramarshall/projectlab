@@ -17,7 +17,7 @@ namespace client
     {
         List<Staff> data_staff = new List<Staff>();
         List<praktikan> data_praktikan = new List<praktikan>();
-        DateTime waktu;
+        
 
         public frmMain()
         {
@@ -68,36 +68,51 @@ namespace client
                 {
                     if(at.Count > 0) // punya jadwal
                     {
-                        for (int i = 0; i < at.Count; i++)
+                        try
                         {
-                            if (at[i].hari == day) // cek hari per baris
+                            var h = at.SingleOrDefault(q => q.hari == day);
+                            if (h.hari == day)
                             {
-                                int mJam = int.Parse(at[i].waktu.Substring(0, 2));
-                                int mMenit = int.Parse(at[i].waktu.Substring(3, 2));
-                                int sJam = int.Parse(at[i].waktu.Substring(8, 2));
-                                int sMenit = int.Parse(at[i].waktu.Substring(11, 2));
-                                DateTime mulai = new DateTime(year, month, days, mJam, mMenit, 0);
-                                DateTime selesai = new DateTime(year, month, days, sJam, sMenit, 0);
-                                if ((now >= mulai) && (now <= selesai)) 
+                                string v = string.Empty;
+                                bool result_waktu = false;
+                                DateTime m = new DateTime();
+                                DateTime s = new DateTime();
+                                for (int i = 0; i < at.Count; i++)
                                 {
+                                    int mJam = int.Parse(at[i].waktu.Substring(0, 2));
+                                    int mMenit = int.Parse(at[i].waktu.Substring(3, 2));
+                                    int sJam = int.Parse(at[i].waktu.Substring(8, 2));
+                                    int sMenit = int.Parse(at[i].waktu.Substring(11, 2));
 
+                                    DateTime mulai = new DateTime(year, month, days, mJam, mMenit, 0);
+                                    DateTime selesai = new DateTime(year, month, days, sJam, sMenit, 0);
+                                    if ( ((now >= mulai)&&(now<=selesai)) && at[i].hari == day )
+                                    {
+                                        result_waktu = true;
+                                        v = at[i].waktu;
+                                        break;
+                                    }
+                                }
+                                if (result_waktu == true)
+                                {
                                     jadwalPraktikan data = new jadwalPraktikan()
                                     {
                                         nrp = username.Text,
-                                        id_jadwal_umum = new jadwal_umum()
-                                        {
-                                            fk_jadwalUmum_Shift = new Shift()
-                                            {
-                                                waktu = mulai.ToString("HH:mm") + " - " + selesai.ToString("HH:mm")
-                                            }
-                                        }
+                                        id_jadwal_umum = new jadwal_umum() { fk_jadwalUmum_Shift = new Shift() { waktu = v } }
                                     };
-                                    var x=service.getPraktikanPraktikum(data);
-                                    listBoxControl1.Items.Add(x[0].mata_kuliah);
+                                    var c = service.getPraktikanPraktikum(data);
+                                    listBoxControl1.Items.Add(c.mata_kuliah);
                                     Jadwal.SelectedPage = Jadwal_Tersedia;
-                                    break; //end loop if true
+                                }
+                                else
+                                {
+                                    XtraMessageBox.Show("bukan shift praktikum anda");
                                 }
                             }
+                        }
+                        catch (Exception)
+                        {
+                            XtraMessageBox.Show("tidak ada jadwal hari ini");
                         }
                     }
                     else // ga punya jadwal
@@ -105,49 +120,36 @@ namespace client
                         XtraMessageBox.Show("belum memiliki jadwal, hubungi admin pak wasro");
                     }
                 }
+                else if (roles == "Asisten") //aslab
+                {
+                    Interface.SelectedPage = InterfaceStaff;
+                    IadmClient service = new IadmClient();
+                    Staff data = new Staff() //kirim id_staff 
+                    {
+                        id_staff = username.Text
+                    };
+                    data_staff.Add(service.GetStaffID(data));
+                    simpleLabelItem11.Text = data_staff[0].id_staff;
+                    simpleLabelItem12.Text = data_staff[0].nama;
+                    simpleLabelItem13.Text = data_staff[0].no_hp;
+                    simpleLabelItem14.Text = data_staff[0].alamat;
+                    MemoryStream foto = new MemoryStream(data_staff[0].foto);
+                    pictureEdit2.Image = Image.FromStream(foto);
+                    gridControl6.DataSource = service.GetStaffJadwal(data_staff[0].id_staff);
+                }
                 else if (roles == "Admin")
                 {
                     Interface.SelectedPage = InterfaceAdmin;
+                }
+                else if (roles == "Koordinator") //kordinator
+                {
+                    Interface.SelectedPage = InterfaceKoordinator;
                 }
                 else //username ga ada
                 {
                     XtraMessageBox.Show("username tidak terdaftar");
                 }
 
-
-                //if (roles == "Admin") //admin
-                //{
-                //    Interface.SelectedPage = InterfaceAdmin;
-                //}
-                //else if (roles == "Koordinator") //kordinator
-                //{
-                //    Interface.SelectedPage = InterfaceKoordinator;
-                //}
-                //else if (roles == "Asisten") //aslab
-                //{
-                //    Interface.SelectedPage = InterfaceStaff;
-                //    IadmClient service = new IadmClient();
-                //    Staff data = new Staff() //kirim id_staff 
-                //    {
-                //        id_staff = username.Text
-                //    };
-                //    data_staff.Add(service.GetStaffID(data));
-                //    simpleLabelItem11.Text = data_staff[0].id_staff;
-                //    simpleLabelItem12.Text = data_staff[0].nama;
-                //    simpleLabelItem13.Text = data_staff[0].no_hp;
-                //    simpleLabelItem14.Text = data_staff[0].alamat;
-                //    MemoryStream foto = new MemoryStream(data_staff[0].foto);
-                //    pictureEdit2.Image = Image.FromStream(foto);
-                //    gridControl6.DataSource = service.GetStaffJadwal(data_staff[0].id_staff);
-                //}
-                //else if (roles == "Praktikan") //mahasiswa
-                //{
-                //    Jadwal.SelectedPage = Jadwal_Tersedia; //melihat jadwal tersedia
-                //}
-                //else //  tidak terdaftar
-                //{
-                //    XtraMessageBox.Show("username atau password salah");
-                //}
             }
             catch (Exception err)
             {
@@ -363,6 +365,16 @@ namespace client
         private void accordionControlElement21_Click(object sender, EventArgs e)
         {
             Interface.SelectedPage = InterfaceLogin;
+        }
+
+        private void accordionControlElement19_Click(object sender, EventArgs e)
+        {
+            P_.SelectedPage = InterfaceInfo;
+        }
+
+        private void accordionControlElement20_Click(object sender, EventArgs e)
+        {
+            P_.SelectedPage = InterfaceModul;
         }
     }
 }
