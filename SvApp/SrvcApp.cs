@@ -38,7 +38,7 @@ namespace SvApp
             connStringBuilder = new SqlConnectionStringBuilder()
             {
                 //DataSource = "DESKTOP-0SI1HN9\\SQLSERVER",
-                DataSource = "DESKTOP-1172569",
+                DataSource = "DESKTOP-3RKCN07",
                 InitialCatalog = "labdb",Encrypt = true,
                 TrustServerCertificate = true,
                 ConnectTimeout = 30,
