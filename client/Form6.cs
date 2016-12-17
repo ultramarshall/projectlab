@@ -8,29 +8,32 @@ using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using System.Text.RegularExpressions;
+using DevExpress.Utils;
 using static client.Library.Method;
 namespace client
 {
     public partial class Form6 : DevExpress.XtraEditors.XtraForm
     {
-       
+
         DateTime waktu = new DateTime();
+
         public Form6()
         {
             InitializeComponent();
-            timer1.Start();
+            //timer1.Start();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             waktu = DateTime.Now;
-            
+
 
             if (waktu.ToString("hh:mm:ss") == "02:26:00")
             {
                 this.Close();
             }
-            else{
+            else
+            {
                 this.Text = waktu.ToString("hh:mm:ss");
             }
 
@@ -50,7 +53,7 @@ namespace client
                 {
                     if (y < x)
                     {
-                        x =x-1;
+                        x = x - 1;
                     }
 
                     result = souceString.Substring(i, x).Like(stringLike);
@@ -59,31 +62,41 @@ namespace client
                     {
                         a = true;
                         continue;
-                    };
+                    }
+                    ;
                     Console.WriteLine(result);
                 }
-                
+
             }
-            catch (Exception) { this.labelControl1.Text = "false"; this.labelControl1.ForeColor = Color.Red; }
+            catch (Exception)
+            {
+                this.labelControl1.Text = "false";
+                this.labelControl1.ForeColor = Color.Red;
+            }
             return a;
         }
 
         private void Form6_Load(object sender, EventArgs e)
         {
-            DateTime start = new DateTime(2016, 12, 12, 11, 0, 0);
-            DateTime finish = new DateTime(2016, 12, 12, 11, 2, 0);
+            //DateTime start = new DateTime(2016, 12, 12, 11, 0, 0);
+            //DateTime finish = new DateTime(2016, 12, 12, 11, 2, 0);
+            //var now = new DateTime(2016, 12, 12, 11, 2, 0);
+            //if ((now >= start) && (now <= finish))
+            //{
+            //    XtraMessageBox.Show("true");
+            //}
+            //else
+            //{
+            //    XtraMessageBox.Show("false");
+            //}
 
-            var now = new DateTime(2016, 12, 12, 11, 2, 0);
 
-            if((now >= start) && (now <= finish))
-            {
-                XtraMessageBox.Show("true");
-            }else
-            {
-                XtraMessageBox.Show("false");
-            }
         }
+
+        private void ratingControl1_EditValueChanged(object sender, EventArgs e)
+        {
+            XtraMessageBox.Show(ratingControl1.EditValue.ToString());}
     }
 
-        }
+}
   

@@ -615,8 +615,45 @@ namespace SvApp
                 }
             }
         }
-       
-        public Staff GetStaffID(Staff data)
+        
+        public List<Staff> getStaffID()
+        {
+            try
+            {
+                List<Staff> StaffID = new List<Staff>();
+                comm.CommandText = "SELECT staff.id_staff, staff.nama " +
+                                   "FROM users INNER JOIN " +
+                                        "staff ON users.username = staff.id_staff " +
+                                   "WHERE users.status = 'Asisten'";
+                comm.CommandType = CommandType.Text;
+                conn.Open();
+
+                SqlDataReader reader = comm.ExecuteReader();
+                while (reader.Read())
+                {
+                    Staff list = new Staff()
+                    {
+                        id_staff = reader[0].ToString().TrimEnd(),
+                        nama = reader[1].ToString().TrimEnd()
+                    };
+                    StaffID.Add(list);
+                }
+                return StaffID;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        public Staff getProfileStaff(Staff data)
         {
             try
             {
@@ -671,18 +708,70 @@ namespace SvApp
                 SqlDataReader reader = comm.ExecuteReader();
                 while (reader.Read())
                 {
-                    jadwalStaff list = new jadwalStaff()
-                    {
-                        hari = Convert.ToString(reader[0]).TrimEnd(),
-                        mata_kuliah = Convert.ToString(reader[1]).TrimEnd(),
-                        kelas = Convert.ToString(reader[2]).TrimEnd(),
-                        shift = Convert.ToString(reader[3]).TrimEnd(),
-                        waktu = Convert.ToString(reader[4]).TrimEnd(),
-                    };
-                    Jadwal_Staff.Add(list);
+                    //jadwalStaff list = new jadwalStaff()
+                    //{
+                    //    hari = Convert.ToString(reader[0]).TrimEnd(),
+                    //    mata_kuliah = Convert.ToString(reader[1]).TrimEnd(),
+                    //    kelas = Convert.ToString(reader[2]).TrimEnd(),
+                    //    shift = Convert.ToString(reader[3]).TrimEnd(),
+                    //    waktu = Convert.ToString(reader[4]).TrimEnd(),
+                    //};
+                    //Jadwal_Staff.Add(list);
                 }
                 return Jadwal_Staff;
             }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        public List<jadwalStaff> jadwalUmumStaff(periode data)
+        {
+            try
+            {
+                List<jadwalStaff> jadwal = new List<jadwalStaff>();
+
+                comm.CommandText = "SELECT jadwal_umum.hari, shift.id_shift, shift.waktu, mata_kuliah.mata_kuliah, staff.nama " +
+                                    "FROM jadwal_staff INNER JOIN " +
+                                        "jadwal_umum ON jadwal_staff.id_jadwal_umum = jadwal_umum.id_jadwal_umum INNER JOIN " +
+                                        "mata_kuliah ON jadwal_umum.kode_mk = mata_kuliah.kode_mk INNER JOIN " +
+                                        "shift ON jadwal_umum.id_shift = shift.id_shift INNER JOIN " +
+                                        "periode ON jadwal_umum.id_periode = periode.id_periode INNER JOIN " +
+                                        "staff ON jadwal_staff.id_staff = staff.id_staff " +
+                                    "WHERE CONVERT(varchar, periode.awalSemester, 100) LIKE '%'+@awalSemester+'%' AND " +
+                                          "CONVERT(varchar, periode.akhirSemester, 100) LIKE '%'+@akhirSemester+'%' AND " +
+                                          "periode.semester = 'ganjil'";
+                comm.Parameters.AddWithValue("awalSemester", data.awalSemester.ToString("yyyy"));
+                comm.Parameters.AddWithValue("akhirSemester", data.akhirSemester.ToString("yyyy"));
+                comm.Parameters.AddWithValue("semester", data.semester);
+                comm.CommandType = CommandType.Text;
+                conn.Open();
+
+                SqlDataReader reader = comm.ExecuteReader();
+                while (reader.Read())
+                {
+                    jadwalStaff list = new jadwalStaff()
+                    {
+                        jadwal_umum = new jadwal_umum()
+                                            {
+                                                hari = reader[0].ToString().TrimEnd(),
+                                                fk_jadwalUmum_Shift = new Shift() {  id_shift = reader[1].ToString().TrimEnd(), waktu = reader[2].ToString().TrimEnd()},
+                                                fk_jadwalUmum_matakuliah = new matkul() { mata_kuliah = reader[3].ToString().TrimEnd() }
+                                            },
+                        staff = new Staff() { nama = reader[4].ToString().TrimEnd()}
+                    };
+                    jadwal.Add(list);
+                }
+                return jadwal;
+            } 
             catch (Exception)
             {
                 throw;
@@ -760,5 +849,9 @@ namespace SvApp
                 }
             }
         }
+
+
+
     }
 }
+

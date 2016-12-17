@@ -22,7 +22,6 @@ namespace client
             BonusSkins.Register();
             SkinManager.EnableFormSkins();
             UserLookAndFeel.Default.SetSkinStyle("DevExpress Style");
-            Application.Run(new frmMain());
-        }
+            Application.Run(new Form6());}
     }
 }

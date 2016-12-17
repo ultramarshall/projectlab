@@ -133,6 +133,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfShift" nillable="true" type="tns:ArrayOfShift" />
+  <xs:complexType name="ArrayOfStaff">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Staff" nillable="true" type="tns:Staff" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfStaff" nillable="true" type="tns:ArrayOfStaff" />
   <xs:complexType name="Staff">
     <xs:sequence>
       <xs:element minOccurs="0" name="alamat" nillable="true" type="xs:string" />
@@ -151,11 +157,9 @@
   <xs:element name="ArrayOfjadwalStaff" nillable="true" type="tns:ArrayOfjadwalStaff" />
   <xs:complexType name="jadwalStaff">
     <xs:sequence>
-      <xs:element minOccurs="0" name="hari" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="kelas" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="mata_kuliah" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="shift" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="waktu" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="id_jadwal_staff" type="xs:int" />
+      <xs:element minOccurs="0" name="jadwal_umum" nillable="true" type="tns:jadwal_umum" />
+      <xs:element minOccurs="0" name="staff" nillable="true" type="tns:Staff" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="jadwalStaff" nillable="true" type="tns:jadwalStaff" />

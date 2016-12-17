@@ -982,19 +982,13 @@ namespace client.lab {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string hariField;
+        private int id_jadwal_staffField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string kelasField;
+        private client.lab.jadwal_umum jadwal_umumField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string mata_kuliahField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string shiftField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string waktuField;
+        private client.lab.Staff staffField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -1007,66 +1001,40 @@ namespace client.lab {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string hari {
+        public int id_jadwal_staff {
             get {
-                return this.hariField;
+                return this.id_jadwal_staffField;
             }
             set {
-                if ((object.ReferenceEquals(this.hariField, value) != true)) {
-                    this.hariField = value;
-                    this.RaisePropertyChanged("hari");
+                if ((this.id_jadwal_staffField.Equals(value) != true)) {
+                    this.id_jadwal_staffField = value;
+                    this.RaisePropertyChanged("id_jadwal_staff");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string kelas {
+        public client.lab.jadwal_umum jadwal_umum {
             get {
-                return this.kelasField;
+                return this.jadwal_umumField;
             }
             set {
-                if ((object.ReferenceEquals(this.kelasField, value) != true)) {
-                    this.kelasField = value;
-                    this.RaisePropertyChanged("kelas");
+                if ((object.ReferenceEquals(this.jadwal_umumField, value) != true)) {
+                    this.jadwal_umumField = value;
+                    this.RaisePropertyChanged("jadwal_umum");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string mata_kuliah {
+        public client.lab.Staff staff {
             get {
-                return this.mata_kuliahField;
+                return this.staffField;
             }
             set {
-                if ((object.ReferenceEquals(this.mata_kuliahField, value) != true)) {
-                    this.mata_kuliahField = value;
-                    this.RaisePropertyChanged("mata_kuliah");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string shift {
-            get {
-                return this.shiftField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.shiftField, value) != true)) {
-                    this.shiftField = value;
-                    this.RaisePropertyChanged("shift");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string waktu {
-            get {
-                return this.waktuField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.waktuField, value) != true)) {
-                    this.waktuField = value;
-                    this.RaisePropertyChanged("waktu");
+                if ((object.ReferenceEquals(this.staffField, value) != true)) {
+                    this.staffField = value;
+                    this.RaisePropertyChanged("staff");
                 }
             }
         }
@@ -1127,11 +1095,17 @@ namespace client.lab {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/DeleteJadwal", ReplyAction="http://tempuri.org/Iadm/DeleteJadwalResponse")]
         int DeleteJadwal(client.lab.jadwal_umum data);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/GetStaffID", ReplyAction="http://tempuri.org/Iadm/GetStaffIDResponse")]
-        client.lab.Staff GetStaffID(client.lab.Staff data);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/getStaffID", ReplyAction="http://tempuri.org/Iadm/getStaffIDResponse")]
+        client.lab.Staff[] getStaffID();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/getProfileStaff", ReplyAction="http://tempuri.org/Iadm/getProfileStaffResponse")]
+        client.lab.Staff getProfileStaff(client.lab.Staff data);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/GetStaffJadwal", ReplyAction="http://tempuri.org/Iadm/GetStaffJadwalResponse")]
         client.lab.jadwalStaff[] GetStaffJadwal(string data);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/jadwalUmumStaff", ReplyAction="http://tempuri.org/Iadm/jadwalUmumStaffResponse")]
+        client.lab.jadwalStaff[] jadwalUmumStaff(client.lab.periode data);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/addPeriode", ReplyAction="http://tempuri.org/Iadm/addPeriodeResponse")]
         int addPeriode(client.lab.periode data);
@@ -1223,12 +1197,20 @@ namespace client.lab {
             return base.Channel.DeleteJadwal(data);
         }
         
-        public client.lab.Staff GetStaffID(client.lab.Staff data) {
-            return base.Channel.GetStaffID(data);
+        public client.lab.Staff[] getStaffID() {
+            return base.Channel.getStaffID();
+        }
+        
+        public client.lab.Staff getProfileStaff(client.lab.Staff data) {
+            return base.Channel.getProfileStaff(data);
         }
         
         public client.lab.jadwalStaff[] GetStaffJadwal(string data) {
             return base.Channel.GetStaffJadwal(data);
+        }
+        
+        public client.lab.jadwalStaff[] jadwalUmumStaff(client.lab.periode data) {
+            return base.Channel.jadwalUmumStaff(data);
         }
         
         public int addPeriode(client.lab.periode data) {

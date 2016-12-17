@@ -187,17 +187,29 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetStaffID">
+  <xs:element name="getStaffID">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getStaffIDResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q20:Staff" />
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="getStaffIDResult" nillable="true" type="q20:ArrayOfStaff" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetStaffIDResponse">
+  <xs:element name="getProfileStaff">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="GetStaffIDResult" nillable="true" type="q21:Staff" />
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q21:Staff" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getProfileStaffResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="getProfileStaffResult" nillable="true" type="q22:Staff" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -211,14 +223,28 @@
   <xs:element name="GetStaffJadwalResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="GetStaffJadwalResult" nillable="true" type="q22:ArrayOfjadwalStaff" />
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="GetStaffJadwalResult" nillable="true" type="q23:ArrayOfjadwalStaff" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="jadwalUmumStaff">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q24:periode" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="jadwalUmumStaffResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="jadwalUmumStaffResult" nillable="true" type="q25:ArrayOfjadwalStaff" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="addPeriode">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q23:periode" />
+        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q26:periode" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -237,7 +263,7 @@
   <xs:element name="viewPeriodeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="viewPeriodeResult" nillable="true" type="q24:ArrayOfperiode" />
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="viewPeriodeResult" nillable="true" type="q27:ArrayOfperiode" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

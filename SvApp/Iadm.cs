@@ -52,10 +52,16 @@ namespace SvApp
         int DeleteJadwal(jadwal_umum data);
 
         [OperationContract]
-        Staff GetStaffID(Staff data);
+        List<Staff> getStaffID();
+
+        [OperationContract]
+        Staff getProfileStaff(Staff data);
 
         [OperationContract]
         List<jadwalStaff> GetStaffJadwal(string data);
+
+        [OperationContract]
+        List<jadwalStaff> jadwalUmumStaff(periode data);
 
         [OperationContract]
         int addPeriode(periode data);

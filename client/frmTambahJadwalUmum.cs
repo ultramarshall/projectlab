@@ -82,6 +82,7 @@ namespace client
 
             gridView1.Columns["Praktikum"].ColumnEdit = cmbbxPraktikum;
             gridView1.Columns["Kelas"].ColumnEdit = cmbbxMk;
+            
         }
 
         private void batal(object sender, EventArgs e)

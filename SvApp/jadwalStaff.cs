@@ -10,18 +10,27 @@ namespace SvApp
     public class jadwalStaff
     {
         [DataMember]
-        public string hari { get; set; }
+        public int id_jadwal_staff { get; set; }
 
         [DataMember]
-        public string mata_kuliah { get; set; }
+        public Staff staff { get; set; }
 
         [DataMember]
-        public string kelas { get; set; }
+        public jadwal_umum jadwal_umum { get; set; }
 
-        [DataMember]
-        public string shift { get; set; }
+        //[DataMember]
+        //public string hari { get; set; }
 
-        [DataMember]
-        public string waktu { get; set; }
+        //[DataMember]
+        //public string mata_kuliah { get; set; }
+
+        //[DataMember]
+        //public string kelas { get; set; }
+
+        //[DataMember]
+        //public string shift { get; set; }
+
+        //[DataMember]
+        //public string waktu { get; set; }
     }
 }

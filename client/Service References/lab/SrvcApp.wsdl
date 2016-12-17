@@ -99,17 +99,29 @@
   <wsdl:message name="Iadm_DeleteJadwal_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteJadwalResponse" />
   </wsdl:message>
-  <wsdl:message name="Iadm_GetStaffID_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetStaffID" />
+  <wsdl:message name="Iadm_getStaffID_InputMessage">
+    <wsdl:part name="parameters" element="tns:getStaffID" />
   </wsdl:message>
-  <wsdl:message name="Iadm_GetStaffID_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetStaffIDResponse" />
+  <wsdl:message name="Iadm_getStaffID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getStaffIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_getProfileStaff_InputMessage">
+    <wsdl:part name="parameters" element="tns:getProfileStaff" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_getProfileStaff_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getProfileStaffResponse" />
   </wsdl:message>
   <wsdl:message name="Iadm_GetStaffJadwal_InputMessage">
     <wsdl:part name="parameters" element="tns:GetStaffJadwal" />
   </wsdl:message>
   <wsdl:message name="Iadm_GetStaffJadwal_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetStaffJadwalResponse" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_jadwalUmumStaff_InputMessage">
+    <wsdl:part name="parameters" element="tns:jadwalUmumStaff" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_jadwalUmumStaff_OutputMessage">
+    <wsdl:part name="parameters" element="tns:jadwalUmumStaffResponse" />
   </wsdl:message>
   <wsdl:message name="Iadm_addPeriode_InputMessage">
     <wsdl:part name="parameters" element="tns:addPeriode" />
@@ -180,13 +192,21 @@
       <wsdl:input wsaw:Action="http://tempuri.org/Iadm/DeleteJadwal" message="tns:Iadm_DeleteJadwal_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/Iadm/DeleteJadwalResponse" message="tns:Iadm_DeleteJadwal_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetStaffID">
-      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/GetStaffID" message="tns:Iadm_GetStaffID_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/GetStaffIDResponse" message="tns:Iadm_GetStaffID_OutputMessage" />
+    <wsdl:operation name="getStaffID">
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/getStaffID" message="tns:Iadm_getStaffID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/getStaffIDResponse" message="tns:Iadm_getStaffID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getProfileStaff">
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/getProfileStaff" message="tns:Iadm_getProfileStaff_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/getProfileStaffResponse" message="tns:Iadm_getProfileStaff_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetStaffJadwal">
       <wsdl:input wsaw:Action="http://tempuri.org/Iadm/GetStaffJadwal" message="tns:Iadm_GetStaffJadwal_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/Iadm/GetStaffJadwalResponse" message="tns:Iadm_GetStaffJadwal_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="jadwalUmumStaff">
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/jadwalUmumStaff" message="tns:Iadm_jadwalUmumStaff_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/jadwalUmumStaffResponse" message="tns:Iadm_jadwalUmumStaff_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="addPeriode">
       <wsdl:input wsaw:Action="http://tempuri.org/Iadm/addPeriode" message="tns:Iadm_addPeriode_InputMessage" />
@@ -326,8 +346,17 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetStaffID">
-      <soap12:operation soapAction="http://tempuri.org/Iadm/GetStaffID" style="document" />
+    <wsdl:operation name="getStaffID">
+      <soap12:operation soapAction="http://tempuri.org/Iadm/getStaffID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getProfileStaff">
+      <soap12:operation soapAction="http://tempuri.org/Iadm/getProfileStaff" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -337,6 +366,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetStaffJadwal">
       <soap12:operation soapAction="http://tempuri.org/Iadm/GetStaffJadwal" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="jadwalUmumStaff">
+      <soap12:operation soapAction="http://tempuri.org/Iadm/jadwalUmumStaff" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

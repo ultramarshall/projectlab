@@ -7,9 +7,14 @@ using client.lab;
 using DevExpress.XtraEditors;
 using static client.Library.Method;
 using static client.Library.border;
+using static client.Library.convertFromTo;
 using System.Windows.Forms;
 using System.Data;
 using System.Globalization;
+using DevExpress.XtraBars;
+using DevExpress.XtraEditors.Repository;
+using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraGrid.Columns;
 
 namespace client
 {
@@ -42,9 +47,14 @@ namespace client
 
         }
 
+        DateTime m = new DateTime();
+        DateTime s = new DateTime();
+        
+
         private void LoginButton_Click(object sender, EventArgs e)
         {
             listBoxControl1.Items.Clear();
+            
             try
             {
                 IadmClient service = new IadmClient();
@@ -75,8 +85,7 @@ namespace client
                             {
                                 string v = string.Empty;
                                 bool result_waktu = false;
-                                DateTime m = new DateTime();
-                                DateTime s = new DateTime();
+                                
                                 for (int i = 0; i < at.Count; i++)
                                 {
                                     int mJam = int.Parse(at[i].waktu.Substring(0, 2));
@@ -123,12 +132,11 @@ namespace client
                 else if (roles == "Asisten") //aslab
                 {
                     Interface.SelectedPage = InterfaceStaff;
-                    IadmClient service = new IadmClient();
                     Staff data = new Staff() //kirim id_staff 
                     {
                         id_staff = username.Text
                     };
-                    data_staff.Add(service.GetStaffID(data));
+                    data_staff.Add(service.getProfileStaff(data));
                     simpleLabelItem11.Text = data_staff[0].id_staff;
                     simpleLabelItem12.Text = data_staff[0].nama;
                     simpleLabelItem13.Text = data_staff[0].no_hp;
@@ -136,6 +144,7 @@ namespace client
                     MemoryStream foto = new MemoryStream(data_staff[0].foto);
                     pictureEdit2.Image = Image.FromStream(foto);
                     gridControl6.DataSource = service.GetStaffJadwal(data_staff[0].id_staff);
+                    service.Close();
                 }
                 else if (roles == "Admin")
                 {
@@ -144,6 +153,19 @@ namespace client
                 else if (roles == "Koordinator") //kordinator
                 {
                     Interface.SelectedPage = InterfaceKoordinator;
+                    Staff data = new Staff() //kirim id_staff 
+                    {
+                        id_staff = username.Text
+                    };
+                    data_staff.Add(service.getProfileStaff(data));
+                    simpleLabelItem30.Text = data_staff[0].id_staff;
+                    simpleLabelItem27.Text = data_staff[0].nama;
+                    simpleLabelItem28.Text = data_staff[0].no_hp;
+                    simpleLabelItem29.Text = data_staff[0].alamat;
+                    MemoryStream foto = new MemoryStream(data_staff[0].foto);
+                    pictureEdit4.Image = Image.FromStream(foto);
+                    //gridControl6.DataSource = service.GetStaffJadwal(data_staff[0].id_staff);
+                    service.Close();
                 }
                 else //username ga ada
                 {
@@ -369,12 +391,83 @@ namespace client
 
         private void accordionControlElement19_Click(object sender, EventArgs e)
         {
-            P_.SelectedPage = InterfaceInfo;
+            P_.SelectedPage = P_Info;
         }
 
         private void accordionControlElement20_Click(object sender, EventArgs e)
         {
-            P_.SelectedPage = InterfaceModul;
+            P_.SelectedPage = P_Modul;
+        }
+
+        private void accordionControlElement23_Click(object sender, EventArgs e)
+        {
+            K_.SelectedPage = K_Info;
+        }
+
+        private void accordionControlElement24_Click(object sender, EventArgs e)
+        {
+            K_.SelectedPage = K_Praktikum;
+            IadmClient service = new IadmClient();
+            ComboBoxEditAdd("Periode",comboBoxEdit7);
+            ComboBoxEditAdd("Semester",comboBoxEdit8);
+            int awalSemester = int.Parse(comboBoxEdit7.SelectedItem.ToString().Substring(0, 4));
+            int akhirSemester = int.Parse(comboBoxEdit7.SelectedItem.ToString().Substring(5, 4));
+            try
+            {
+
+                periode data = new periode()
+                {
+                    semester = comboBoxEdit8.SelectedItem.ToString(),
+                    awalSemester = new DateTime(awalSemester, 1, 1, 1, 1, 1),
+                    akhirSemester = new DateTime(akhirSemester, 1, 1, 1, 1, 1)
+                };
+
+                gridControl8.DataSource = ToDataTable(service.jadwalUmumStaff(data).Select(r => new
+                {
+                    hari = r.jadwal_umum.hari,
+                    shift = r.jadwal_umum.fk_jadwalUmum_Shift.id_shift,
+                    waktu = r.jadwal_umum.fk_jadwalUmum_Shift.waktu,
+                    mata_kuliah = r.jadwal_umum.fk_jadwalUmum_matakuliah.mata_kuliah,
+                    nama = r.staff.nama,
+                } ).ToList());
+                
+                RepositoryItemComboBox nama = new RepositoryItemComboBox()
+                {
+                    TextEditStyle = TextEditStyles.DisableTextEditor,
+                    AllowDropDownWhenReadOnly = DevExpress.Utils.DefaultBoolean.True,
+                };
+                
+                nama.SelectedIndexChanged += new EventHandler(ritem_SelectedIndexChanged);
+                var a = service.getStaffID().Select(n=>n.nama).ToList();
+                nama.Items.AddRange(a);
+                
+                gridControl8.RepositoryItems.Add(nama);
+                gridView8.Columns["nama"].ColumnEdit = nama;
+                gridView8.Columns["nama"].OptionsColumn.AllowEdit = true;
+                gridView8.Columns["nama"].OptionsColumn.ReadOnly = false;
+                
+
+                gridControl8.ForceInitialize();
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.ToString());
+            }
+        }
+        private void ritem_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBoxEdit editor = sender as ComboBoxEdit;
+            IadmClient service = new IadmClient();
+            var s = service.getStaffID().FirstOrDefault(id => id.nama == editor.SelectedItem.ToString());
+            XtraMessageBox.Show(s.id_staff);
+
+        }
+
+
+
+        private void accordionControlElement25_Click(object sender, EventArgs e)
+        {
+            Interface.SelectedPage = InterfaceLogin;
         }
     }
 }
