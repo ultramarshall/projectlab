@@ -229,6 +229,7 @@
             this.K_ = new DevExpress.XtraBars.Navigation.NavigationFrame();
             this.K_Praktikum = new DevExpress.XtraBars.Navigation.NavigationPage();
             this.layoutControl14 = new DevExpress.XtraLayout.LayoutControl();
+            this.simpleButton12 = new DevExpress.XtraEditors.SimpleButton();
             this.comboBoxEdit8 = new DevExpress.XtraEditors.ComboBoxEdit();
             this.comboBoxEdit7 = new DevExpress.XtraEditors.ComboBoxEdit();
             this.gridControl8 = new DevExpress.XtraGrid.GridControl();
@@ -239,6 +240,9 @@
             this.emptySpaceItem33 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlItem41 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem42 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.emptySpaceItem34 = new DevExpress.XtraLayout.EmptySpaceItem();
+            this.layoutControlItem43 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.emptySpaceItem35 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.K_Info = new DevExpress.XtraBars.Navigation.NavigationPage();
             this.layoutControl13 = new DevExpress.XtraLayout.LayoutControl();
             this.pictureEdit4 = new DevExpress.XtraEditors.PictureEdit();
@@ -294,10 +298,6 @@
             this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.navBarControl1 = new DevExpress.XtraNavBar.NavBarControl();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.emptySpaceItem34 = new DevExpress.XtraLayout.EmptySpaceItem();
-            this.simpleButton12 = new DevExpress.XtraEditors.SimpleButton();
-            this.layoutControlItem43 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.emptySpaceItem35 = new DevExpress.XtraLayout.EmptySpaceItem();
             ((System.ComponentModel.ISupportInitialize)(this.Interface)).BeginInit();
             this.Interface.SuspendLayout();
             this.InterfaceLogin.SuspendLayout();
@@ -494,6 +494,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem33)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem41)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem42)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem34)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem43)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem35)).BeginInit();
             this.K_Info.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl13)).BeginInit();
             this.layoutControl13.SuspendLayout();
@@ -539,9 +542,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem31)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.accordionControl3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem34)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem43)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem35)).BeginInit();
             this.SuspendLayout();
             // 
             // Interface
@@ -1702,7 +1702,6 @@
             // labelControl1
             // 
             this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl1.Appearance.Options.UseFont = true;
             this.labelControl1.Location = new System.Drawing.Point(22, 41);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(577, 26);
@@ -2665,6 +2664,15 @@
             this.layoutControl14.TabIndex = 0;
             this.layoutControl14.Text = "layoutControl14";
             // 
+            // simpleButton12
+            // 
+            this.simpleButton12.Location = new System.Drawing.Point(62, 98);
+            this.simpleButton12.Name = "simpleButton12";
+            this.simpleButton12.Size = new System.Drawing.Size(186, 22);
+            this.simpleButton12.StyleController = this.layoutControl14;
+            this.simpleButton12.TabIndex = 7;
+            this.simpleButton12.Text = "simpleButton12";
+            // 
             // comboBoxEdit8
             // 
             this.comboBoxEdit8.Location = new System.Drawing.Point(61, 50);
@@ -2701,6 +2709,7 @@
             this.gridView8.Name = "gridView8";
             this.gridView8.OptionsView.ShowGroupPanel = false;
             this.gridView8.OptionsView.ShowIndicator = false;
+            
             // 
             // layoutControlGroup22
             // 
@@ -2764,6 +2773,34 @@
             this.layoutControlItem42.Size = new System.Drawing.Size(240, 24);
             this.layoutControlItem42.Text = "semester";
             this.layoutControlItem42.TextSize = new System.Drawing.Size(46, 13);
+            // 
+            // emptySpaceItem34
+            // 
+            this.emptySpaceItem34.AllowHotTrack = false;
+            this.emptySpaceItem34.Location = new System.Drawing.Point(240, 38);
+            this.emptySpaceItem34.Name = "emptySpaceItem34";
+            this.emptySpaceItem34.Size = new System.Drawing.Size(365, 74);
+            this.emptySpaceItem34.TextSize = new System.Drawing.Size(0, 0);
+            // 
+            // layoutControlItem43
+            // 
+            this.layoutControlItem43.Control = this.simpleButton12;
+            this.layoutControlItem43.Location = new System.Drawing.Point(50, 86);
+            this.layoutControlItem43.MaxSize = new System.Drawing.Size(190, 26);
+            this.layoutControlItem43.MinSize = new System.Drawing.Size(190, 26);
+            this.layoutControlItem43.Name = "layoutControlItem43";
+            this.layoutControlItem43.Size = new System.Drawing.Size(190, 26);
+            this.layoutControlItem43.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem43.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem43.TextVisible = false;
+            // 
+            // emptySpaceItem35
+            // 
+            this.emptySpaceItem35.AllowHotTrack = false;
+            this.emptySpaceItem35.Location = new System.Drawing.Point(0, 86);
+            this.emptySpaceItem35.Name = "emptySpaceItem35";
+            this.emptySpaceItem35.Size = new System.Drawing.Size(50, 26);
+            this.emptySpaceItem35.TextSize = new System.Drawing.Size(0, 0);
             // 
             // K_Info
             // 
@@ -3318,43 +3355,6 @@
             this.navBarControl1.TabIndex = 5;
             this.navBarControl1.Text = "navBarControl1";
             // 
-            // emptySpaceItem34
-            // 
-            this.emptySpaceItem34.AllowHotTrack = false;
-            this.emptySpaceItem34.Location = new System.Drawing.Point(240, 38);
-            this.emptySpaceItem34.Name = "emptySpaceItem34";
-            this.emptySpaceItem34.Size = new System.Drawing.Size(365, 74);
-            this.emptySpaceItem34.TextSize = new System.Drawing.Size(0, 0);
-            // 
-            // simpleButton12
-            // 
-            this.simpleButton12.Location = new System.Drawing.Point(62, 98);
-            this.simpleButton12.Name = "simpleButton12";
-            this.simpleButton12.Size = new System.Drawing.Size(186, 22);
-            this.simpleButton12.StyleController = this.layoutControl14;
-            this.simpleButton12.TabIndex = 7;
-            this.simpleButton12.Text = "simpleButton12";
-            // 
-            // layoutControlItem43
-            // 
-            this.layoutControlItem43.Control = this.simpleButton12;
-            this.layoutControlItem43.Location = new System.Drawing.Point(50, 86);
-            this.layoutControlItem43.MaxSize = new System.Drawing.Size(190, 26);
-            this.layoutControlItem43.MinSize = new System.Drawing.Size(190, 26);
-            this.layoutControlItem43.Name = "layoutControlItem43";
-            this.layoutControlItem43.Size = new System.Drawing.Size(190, 26);
-            this.layoutControlItem43.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.layoutControlItem43.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem43.TextVisible = false;
-            // 
-            // emptySpaceItem35
-            // 
-            this.emptySpaceItem35.AllowHotTrack = false;
-            this.emptySpaceItem35.Location = new System.Drawing.Point(0, 86);
-            this.emptySpaceItem35.Name = "emptySpaceItem35";
-            this.emptySpaceItem35.Size = new System.Drawing.Size(50, 26);
-            this.emptySpaceItem35.TextSize = new System.Drawing.Size(0, 0);
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3562,6 +3562,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem33)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem41)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem42)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem34)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem43)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem35)).EndInit();
             this.K_Info.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl13)).EndInit();
             this.layoutControl13.ResumeLayout(false);
@@ -3607,9 +3610,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem31)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.accordionControl3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem34)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem43)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem35)).EndInit();
             this.ResumeLayout(false);
 
         }

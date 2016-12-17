@@ -159,36 +159,6 @@ namespace client
 
 
 
-            //if(exception == false)
-            //{
-            //    jadwal_umum[] jadd = new jadwal_umum[jadwal.Count];
-            //    for (int i = 0; i < jadwal.Count; i++)
-            //    {
-            //        jadwal_umum jadum = new jadwal_umum()
-            //        {
-            //            hari = jadwal[i].hari,
-            //            id_kelas = jadwal[i].id_kelas,
-            //            id_periode = jadwal[i].id_periode,
-            //            id_shift = jadwal[i].id_shift,
-            //            kode_mk = jadwal[i].kode_mk
-            //        };
-            //        jadd[i] = jadum;
-            //    }
-            //    try
-            //    {
-            //        service.InsertJadwal(jadd);
-            //    }
-            //    catch (Exception z)
-            //    {
-            //        XtraMessageBox.Show(z.ToString());
-            //    }
-
-            //    if (exception == false)
-            //    {
-            //        XtraMessageBox.Show("Jadwal di simpan");
-            //        this.Close();
-            //    }
-            //}
         }
     }
 }

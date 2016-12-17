@@ -427,10 +427,21 @@ namespace client
                     hari = r.jadwal_umum.hari,
                     shift = r.jadwal_umum.fk_jadwalUmum_Shift.id_shift,
                     waktu = r.jadwal_umum.fk_jadwalUmum_Shift.waktu,
-                    mata_kuliah = r.jadwal_umum.fk_jadwalUmum_matakuliah.mata_kuliah,
+                    praktikum = r.jadwal_umum.fk_jadwalUmum_matakuliah.mata_kuliah,
                     nama = r.staff.nama,
                 } ).ToList());
                 
+                /*
+                 *  seting column merge
+                 */
+                gridView8.OptionsView.AllowCellMerge = true;
+                //gridView8.Columns["shift"].OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.False;
+                //gridView8.Columns["waktu"].OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.False;
+                //gridView8.Columns["praktikum"].OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.False;
+                gridView8.Columns["nama"].OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.False;
+
+
+
                 RepositoryItemComboBox nama = new RepositoryItemComboBox()
                 {
                     TextEditStyle = TextEditStyles.DisableTextEditor,
@@ -459,10 +470,18 @@ namespace client
             ComboBoxEdit editor = sender as ComboBoxEdit;
             IadmClient service = new IadmClient();
             var s = service.getStaffID().FirstOrDefault(id => id.nama == editor.SelectedItem.ToString());
-            XtraMessageBox.Show(s.id_staff);
+            //XtraMessageBox.Show(s.id_staff);
+
+            // get value all column in selected rows
+            DataRow row = gridView8.GetDataRow(gridView8.FocusedRowHandle);
+            string hari = row[0].ToString();
+            string shift = row[1].ToString();
+            string waktu = row[2].ToString();
+            string praktikum = row[3].ToString();
+            XtraMessageBox.Show(String.Format("{0}|{1}|{2}|{3}", hari,shift,waktu,praktikum));
+
 
         }
-
 
 
         private void accordionControlElement25_Click(object sender, EventArgs e)
