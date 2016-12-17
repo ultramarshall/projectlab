@@ -165,6 +165,7 @@ namespace client
                     MemoryStream foto = new MemoryStream(data_staff[0].foto);
                     pictureEdit4.Image = Image.FromStream(foto);
                     //gridControl6.DataSource = service.GetStaffJadwal(data_staff[0].id_staff);
+                    K_Info_Click(sender,e);
                     service.Close();
                 }
                 else //username ga ada
@@ -179,9 +180,7 @@ namespace client
                 XtraMessageBox.Show(err.ToString());
             }
 
-        }
-
-        private void MulaiButton_Click(object sender, EventArgs e)
+        }private void MulaiButton_Click(object sender, EventArgs e)
         {
             Jadwal.SelectedPage = Jadwal_Blank;
 
@@ -354,7 +353,7 @@ namespace client
             lihat_jadwal(sender, e);
         }
 
-        private void accordionControlElement6_Click(object sender, EventArgs e)
+        private void Tambah_Periode_Click(object sender, EventArgs e)
         {
             frmPeriode frm = new frmPeriode();
             frm.ShowDialog();
@@ -384,27 +383,27 @@ namespace client
             viewStaff.SelectedPage = viewStaffJadwal;
         }
 
-        private void accordionControlElement21_Click(object sender, EventArgs e)
+        private void P_Logout(object sender, EventArgs e)
         {
             Interface.SelectedPage = InterfaceLogin;
         }
 
-        private void accordionControlElement19_Click(object sender, EventArgs e)
+        private void P_Info_Click(object sender, EventArgs e)
         {
             P_.SelectedPage = P_Info;
         }
 
-        private void accordionControlElement20_Click(object sender, EventArgs e)
+        private void P_Modul_Click(object sender, EventArgs e)
         {
             P_.SelectedPage = P_Modul;
         }
 
-        private void accordionControlElement23_Click(object sender, EventArgs e)
+        private void K_Info_Click(object sender, EventArgs e)
         {
             K_.SelectedPage = K_Info;
         }
 
-        private void accordionControlElement24_Click(object sender, EventArgs e)
+        private void K_Praktikum_Click(object sender, EventArgs e)
         {
             K_.SelectedPage = K_Praktikum;
             IadmClient service = new IadmClient();
@@ -465,22 +464,47 @@ namespace client
         {
             ComboBoxEdit editor = sender as ComboBoxEdit;
             IadmClient service = new IadmClient();
+
+            //get id_staff by name, to show s.id_staff
             var s = service.getStaffID().FirstOrDefault(id => id.nama == editor.SelectedItem.ToString());
-            //XtraMessageBox.Show(s.id_staff);
 
             // get value all column in selected rows
             DataRow row = gridView8.GetDataRow(gridView8.FocusedRowHandle);
-            string hari = row[0].ToString();
-            string shift = row[1].ToString();
-            string waktu = row[2].ToString();
-            string praktikum = row[3].ToString();
-            XtraMessageBox.Show(String.Format("{0}|{1}|{2}|{3}", hari,shift,waktu,praktikum));
 
+            var p = comboBoxEdit7.SelectedItem.ToString();
+            var awS = int.Parse(p.Substring(0, 4));
+            var akS = int.Parse(p.Substring(5, 4));
+            jadwalStaff data = new jadwalStaff()
+            {
+                jadwal_umum = new jadwal_umum()
+                {
+                    fk_jadwalUmum_periode = new periode()
+                    {
+                        awalSemester = new DateTime(awS,1,1,1,1,1),
+                        akhirSemester = new DateTime(akS,1,1,1,1,1),
+                        semester = comboBoxEdit8.SelectedItem.ToString()
+                    },
+                    hari = row[0].ToString(),
+                    fk_jadwalUmum_Shift = new Shift()
+                    {
+                        id_shift = row[1].ToString(),
+                        waktu = row[2].ToString()
+                    },
+                    fk_jadwalUmum_matakuliah = new matkul()
+                    {
+                        mata_kuliah = row[3].ToString()
+                    },
+                },
+                staff = new Staff()
+                {
+                    id_staff = s.id_staff
+                }
+            };
 
         }
 
 
-        private void accordionControlElement25_Click(object sender, EventArgs e)
+        private void K_Logout_Click(object sender, EventArgs e)
         {
             Interface.SelectedPage = InterfaceLogin;
         }

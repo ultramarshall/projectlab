@@ -2161,7 +2161,7 @@
             this.accordionControlElement6.Name = "accordionControlElement6";
             this.accordionControlElement6.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
             this.accordionControlElement6.Text = "tahun periode";
-            this.accordionControlElement6.Click += new System.EventHandler(this.accordionControlElement6_Click);
+            this.accordionControlElement6.Click += new System.EventHandler(this.Tambah_Periode_Click);
             // 
             // accordionControlElement7
             // 
@@ -3010,14 +3010,14 @@
             this.accordionControlElement23.Name = "accordionControlElement23";
             this.accordionControlElement23.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
             this.accordionControlElement23.Text = "informasi akun";
-            this.accordionControlElement23.Click += new System.EventHandler(this.accordionControlElement23_Click);
+            this.accordionControlElement23.Click += new System.EventHandler(this.K_Info_Click);
             // 
             // accordionControlElement24
             // 
             this.accordionControlElement24.Name = "accordionControlElement24";
             this.accordionControlElement24.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
             this.accordionControlElement24.Text = "praktikum";
-            this.accordionControlElement24.Click += new System.EventHandler(this.accordionControlElement24_Click);
+            this.accordionControlElement24.Click += new System.EventHandler(this.K_Praktikum_Click);
             // 
             // accordionControlElement25
             // 
@@ -3025,7 +3025,7 @@
             this.accordionControlElement25.Name = "accordionControlElement25";
             this.accordionControlElement25.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
             this.accordionControlElement25.Text = "Logout";
-            this.accordionControlElement25.Click += new System.EventHandler(this.accordionControlElement25_Click);
+            this.accordionControlElement25.Click += new System.EventHandler(this.K_Logout_Click);
             // 
             // InterfacePraktikan
             // 
@@ -3320,14 +3320,14 @@
             this.accordionControlElement19.Name = "accordionControlElement19";
             this.accordionControlElement19.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
             this.accordionControlElement19.Text = "informasi akun";
-            this.accordionControlElement19.Click += new System.EventHandler(this.accordionControlElement19_Click);
+            this.accordionControlElement19.Click += new System.EventHandler(this.P_Info_Click);
             // 
             // accordionControlElement20
             // 
             this.accordionControlElement20.Name = "accordionControlElement20";
             this.accordionControlElement20.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
             this.accordionControlElement20.Text = "Modul";
-            this.accordionControlElement20.Click += new System.EventHandler(this.accordionControlElement20_Click);
+            this.accordionControlElement20.Click += new System.EventHandler(this.P_Modul_Click);
             // 
             // accordionControlElement21
             // 
@@ -3335,7 +3335,7 @@
             this.accordionControlElement21.Name = "accordionControlElement21";
             this.accordionControlElement21.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
             this.accordionControlElement21.Text = "Logout";
-            this.accordionControlElement21.Click += new System.EventHandler(this.accordionControlElement21_Click);
+            this.accordionControlElement21.Click += new System.EventHandler(this.P_Logout);
             // 
             // accordionControlElement3
             // 

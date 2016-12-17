@@ -785,6 +785,11 @@ namespace SvApp
             }
         }
 
+        public int updateJadwalStaff(jadwalStaff data)
+        {
+            return comm.ExecuteNonQuery();
+        }
+
         public int addPeriode(periode data)
         {
             try

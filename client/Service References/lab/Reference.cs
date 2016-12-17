@@ -1001,7 +1001,7 @@ namespace client.lab {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int id_jadwal_staff {
+        public Staff id_jadwal_staff {
             get {
                 return this.id_jadwal_staffField;
             }
