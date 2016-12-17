@@ -433,11 +433,7 @@ namespace client
                 
                 /*
                  *  seting column merge
-                 */
-                gridView8.OptionsView.AllowCellMerge = true;
-                //gridView8.Columns["shift"].OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.False;
-                //gridView8.Columns["waktu"].OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.False;
-                //gridView8.Columns["praktikum"].OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.False;
+                 */gridView8.OptionsView.AllowCellMerge = true;
                 gridView8.Columns["nama"].OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.False;
 
 
@@ -448,7 +444,7 @@ namespace client
                     AllowDropDownWhenReadOnly = DevExpress.Utils.DefaultBoolean.True,
                 };
                 
-                nama.SelectedIndexChanged += new EventHandler(ritem_SelectedIndexChanged);
+                nama.SelectedIndexChanged += new EventHandler(nama_SelectedIndexChanged);
                 var a = service.getStaffID().Select(n=>n.nama).ToList();
                 nama.Items.AddRange(a);
                 
@@ -465,7 +461,7 @@ namespace client
                 XtraMessageBox.Show(ex.ToString());
             }
         }
-        private void ritem_SelectedIndexChanged(object sender, EventArgs e)
+        private void nama_SelectedIndexChanged(object sender, EventArgs e)
         {
             ComboBoxEdit editor = sender as ComboBoxEdit;
             IadmClient service = new IadmClient();
