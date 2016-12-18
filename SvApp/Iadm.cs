@@ -64,7 +64,7 @@ namespace SvApp
         List<jadwalStaff> jadwalUmumStaff(periode data);
 
         [OperationContract]
-        int updateJadwalStaff(jadwalStaff data);
+        int updateJadwalStaff(string id,jadwalStaff data);
 
         [OperationContract]
         int addPeriode(periode data);

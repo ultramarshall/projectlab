@@ -38,8 +38,8 @@ namespace SvApp
         {
             connStringBuilder = new SqlConnectionStringBuilder()
             {
-                DataSource = "DESKTOP-0SI1HN9\\SQLSERVER",
-                //DataSource = "DESKTOP-3RKCN07",
+                //DataSource = "DESKTOP-0SI1HN9\\SQLSERVER",
+                DataSource = "DESKTOP-3RKCN07",
                 InitialCatalog = "labdb",Encrypt = true,
                 TrustServerCertificate = true,
                 ConnectTimeout = 30,
@@ -785,9 +785,49 @@ namespace SvApp
             }
         }
 
-        public int updateJadwalStaff(jadwalStaff data)
+        public int updateJadwalStaff(string id, jadwalStaff data)
         {
-            return comm.ExecuteNonQuery();
+            try
+            {
+                comm.CommandText = "update jadwal_staff " +
+                                   "set id_staff = " + id + " " +
+                                    "from jadwal_staff INNER JOIN " +
+                                         "jadwal_umum ON jadwal_staff.id_jadwal_umum = jadwal_umum.id_jadwal_umum INNER JOIN " +
+                                         "shift ON jadwal_umum.id_shift = shift.id_shift INNER JOIN " +
+                                         "periode ON jadwal_umum.id_periode = periode.id_periode INNER JOIN " +
+                                         "mata_kuliah ON jadwal_umum.kode_mk = mata_kuliah.kode_mk " +
+                                    "where CONVERT(nchar(35), periode.awalSemester, 100) LIKE '%'+ @awalSemester +'%' and " +
+                                          "CONVERT(nchar(35), periode.akhirSemester, 100) LIKE '%'+ @akhirSemester +'%' and " +
+                                          "periode.semester = @semester and " +
+                                          "jadwal_umum.hari = @hari and " +
+                                          "shift.id_shift = @shift and " +
+                                          "shift.waktu = @waktu and " +
+                                          "mata_kuliah.mata_kuliah = @matkul and " +
+                                          "jadwal_staff.id_staff = @idStaff";
+                
+                comm.Parameters.AddWithValue("semester", data.jadwal_umum.fk_jadwalUmum_periode.semester);
+                comm.Parameters.AddWithValue("awalSemester", data.jadwal_umum.fk_jadwalUmum_periode.awalSemester.ToString("yyyy"));
+                comm.Parameters.AddWithValue("akhirSemester", data.jadwal_umum.fk_jadwalUmum_periode.akhirSemester.ToString("yyyy"));
+                comm.Parameters.AddWithValue("hari", data.jadwal_umum.hari);
+                comm.Parameters.AddWithValue("shift", data.jadwal_umum.fk_jadwalUmum_Shift.id_shift);
+                comm.Parameters.AddWithValue("waktu", data.jadwal_umum.fk_jadwalUmum_Shift.waktu);
+                comm.Parameters.AddWithValue("matkul", data.jadwal_umum.fk_jadwalUmum_matakuliah.mata_kuliah);
+                comm.Parameters.AddWithValue("idStaff", data.staff.id_staff);
+                comm.CommandType = CommandType.Text;
+                conn.Open();
+                return comm.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
         }
 
         public int addPeriode(periode data)

@@ -1001,7 +1001,7 @@ namespace client.lab {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Staff id_jadwal_staff {
+        public int id_jadwal_staff {
             get {
                 return this.id_jadwal_staffField;
             }
@@ -1107,6 +1107,9 @@ namespace client.lab {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/jadwalUmumStaff", ReplyAction="http://tempuri.org/Iadm/jadwalUmumStaffResponse")]
         client.lab.jadwalStaff[] jadwalUmumStaff(client.lab.periode data);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/updateJadwalStaff", ReplyAction="http://tempuri.org/Iadm/updateJadwalStaffResponse")]
+        int updateJadwalStaff(string id, client.lab.jadwalStaff data);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/addPeriode", ReplyAction="http://tempuri.org/Iadm/addPeriodeResponse")]
         int addPeriode(client.lab.periode data);
         
@@ -1211,6 +1214,10 @@ namespace client.lab {
         
         public client.lab.jadwalStaff[] jadwalUmumStaff(client.lab.periode data) {
             return base.Channel.jadwalUmumStaff(data);
+        }
+        
+        public int updateJadwalStaff(string id, client.lab.jadwalStaff data) {
+            return base.Channel.updateJadwalStaff(id, data);
         }
         
         public int addPeriode(client.lab.periode data) {

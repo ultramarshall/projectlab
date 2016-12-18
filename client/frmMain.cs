@@ -467,9 +467,15 @@ namespace client
 
             //get id_staff by name, to show s.id_staff
             var s = service.getStaffID().FirstOrDefault(id => id.nama == editor.SelectedItem.ToString());
+            XtraMessageBox.Show(s.id_staff);
+
 
             // get value all column in selected rows
             DataRow row = gridView8.GetDataRow(gridView8.FocusedRowHandle);
+
+            //get id_staff by name, to show s.id_staff
+            var ss = service.getStaffID().FirstOrDefault(id => id.nama == row[4].ToString());
+            XtraMessageBox.Show(ss.id_staff);
 
             var p = comboBoxEdit7.SelectedItem.ToString();
             var awS = int.Parse(p.Substring(0, 4));
@@ -500,7 +506,12 @@ namespace client
                     id_staff = s.id_staff
                 }
             };
+            XtraMessageBox.Show(data.jadwal_umum.fk_jadwalUmum_periode.awalSemester.ToString("yyyy"));
+            XtraMessageBox.Show(data.jadwal_umum.fk_jadwalUmum_periode.akhirSemester.ToString("yyyy"));
+            //gridControl8.RefreshDataSource();
 
+            service.updateJadwalStaff(s.id_staff, data);
+            service.Close();
         }
 
 

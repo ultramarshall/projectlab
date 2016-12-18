@@ -123,6 +123,12 @@
   <wsdl:message name="Iadm_jadwalUmumStaff_OutputMessage">
     <wsdl:part name="parameters" element="tns:jadwalUmumStaffResponse" />
   </wsdl:message>
+  <wsdl:message name="Iadm_updateJadwalStaff_InputMessage">
+    <wsdl:part name="parameters" element="tns:updateJadwalStaff" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_updateJadwalStaff_OutputMessage">
+    <wsdl:part name="parameters" element="tns:updateJadwalStaffResponse" />
+  </wsdl:message>
   <wsdl:message name="Iadm_addPeriode_InputMessage">
     <wsdl:part name="parameters" element="tns:addPeriode" />
   </wsdl:message>
@@ -207,6 +213,10 @@
     <wsdl:operation name="jadwalUmumStaff">
       <wsdl:input wsaw:Action="http://tempuri.org/Iadm/jadwalUmumStaff" message="tns:Iadm_jadwalUmumStaff_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/Iadm/jadwalUmumStaffResponse" message="tns:Iadm_jadwalUmumStaff_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="updateJadwalStaff">
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/updateJadwalStaff" message="tns:Iadm_updateJadwalStaff_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/updateJadwalStaffResponse" message="tns:Iadm_updateJadwalStaff_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="addPeriode">
       <wsdl:input wsaw:Action="http://tempuri.org/Iadm/addPeriode" message="tns:Iadm_addPeriode_InputMessage" />
@@ -375,6 +385,15 @@
     </wsdl:operation>
     <wsdl:operation name="jadwalUmumStaff">
       <soap12:operation soapAction="http://tempuri.org/Iadm/jadwalUmumStaff" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateJadwalStaff">
+      <soap12:operation soapAction="http://tempuri.org/Iadm/updateJadwalStaff" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
