@@ -47,9 +47,8 @@ namespace client
 
         }
 
-        DateTime m = new DateTime();
-        DateTime s = new DateTime();
         
+        jadwalPraktikan JadwalPraktikan = new jadwalPraktikan();
 
         private void LoginButton_Click(object sender, EventArgs e)
         {
@@ -62,10 +61,6 @@ namespace client
 
                 var culture = new CultureInfo("id-ID");// waktu format indonesia
                 var day = culture.DateTimeFormat.GetDayName(DateTime.Today.DayOfWeek); //menampilkan hari ini/ ex: Senin, Selasa, Rabu, Kamis, Jumat, Sabtu
-
-                jadwalPraktikan nrp = new jadwalPraktikan() { nrp = username.Text };
-                var at = service.getTimeLogin(nrp).Select(x => new { hari = x.id_jadwal_umum.hari, waktu = x.id_jadwal_umum.fk_jadwalUmum_Shift.waktu }).ToList();
-
                 var now = DateTime.Now;
                  
                 var TimeNow = now.ToString("dd/MM/yyyy hh:mm:ss");
@@ -76,58 +71,113 @@ namespace client
 
                 if (roles == "Praktikan")
                 {
-                    if(at.Count > 0) // punya jadwal
-                    {
-                        try
-                        {
-                            var h = at.SingleOrDefault(q => q.hari == day);
-                            if (h.hari == day)
-                            {
-                                string v = string.Empty;
-                                bool result_waktu = false;
-                                
-                                for (int i = 0; i < at.Count; i++)
-                                {
-                                    int mJam = int.Parse(at[i].waktu.Substring(0, 2));
-                                    int mMenit = int.Parse(at[i].waktu.Substring(3, 2));
-                                    int sJam = int.Parse(at[i].waktu.Substring(8, 2));
-                                    int sMenit = int.Parse(at[i].waktu.Substring(11, 2));
+                    /* if(at.Count > 0) // punya jadwal
+                     {
+                         try
+                         {
+                             var h = at.SingleOrDefault(q => q.hari == day);
+                             if (h.hari == day)
+                             {
+                                 string v = string.Empty;
+                                 bool result_waktu = false;
 
-                                    DateTime mulai = new DateTime(year, month, days, mJam, mMenit, 0);
-                                    DateTime selesai = new DateTime(year, month, days, sJam, sMenit, 0);
-                                    if ( ((now >= mulai)&&(now<=selesai)) && at[i].hari == day )
-                                    {
-                                        result_waktu = true;
-                                        v = at[i].waktu;
-                                        break;
-                                    }
-                                }
-                                if (result_waktu == true)
+                                 for (int i = 0; i < at.Count; i++)
+                                 {
+                                     int mJam = int.Parse(at[i].waktu.Substring(0, 2));
+                                     int mMenit = int.Parse(at[i].waktu.Substring(3, 2));
+                                     int sJam = int.Parse(at[i].waktu.Substring(8, 2));
+                                     int sMenit = int.Parse(at[i].waktu.Substring(11, 2));
+
+                                     DateTime mulai = new DateTime(year, month, days, mJam, mMenit, 0);
+                                     DateTime selesai = new DateTime(year, month, days, sJam, sMenit, 0);
+                                     if ( ((now >= mulai)&&(now<=selesai)) && at[i].hari == day )
+                                     {
+                                         result_waktu = true;
+                                         v = at[i].waktu;
+                                         break;
+                                     }
+                                 }
+                                 if (result_waktu == true)
+                                 {
+                                     jadwalPraktikan data = new jadwalPraktikan()
+                                     {
+                                         nrp = username.Text,
+                                         id_jadwal_umum = new jadwal_umum() { fk_jadwalUmum_Shift = new Shift() { waktu = v } }
+                                     };
+                                     var c = service.getPraktikanPraktikum(data);
+                                     listBoxControl1.Items.Add(c.mata_kuliah);
+                                     Jadwal.SelectedPage = Jadwal_Tersedia;
+                                 }
+                                 else
+                                 {
+                                     XtraMessageBox.Show("bukan shift praktikum anda");
+                                 }
+                             }
+                         }
+                         catch (Exception)
+                         {
+                             XtraMessageBox.Show("tidak ada jadwal hari ini");
+                         }
+                     }
+                     else // ga punya jadwal
+                     {
+                         XtraMessageBox.Show("belum memiliki jadwal, hubungi admin pak wasro");
+                     }*/
+                    
+                    try
+                    {
+                        //periode.id_periode
+                        var periode = service.viewPeriode().FirstOrDefault(
+                            x => x.awalSemester < DateTime.Now &&
+                                 x.akhirSemester > DateTime.Now
+                            );
+
+                        //shift.id_shift
+                        var shift = service.GetShift().FirstOrDefault(x => x.mulai.TimeOfDay < now.TimeOfDay &&
+                                     x.selesai.TimeOfDay > now.TimeOfDay
+                            );
+                        
+                        //jadwal[0].id_jadwal_umum.hari
+                        //jadwal[0].id_jadwal_umum.fk_jadwalUmum_matakuliah.mata_kuliah
+                        //jadwal[0].id_jadwal_umum.fk_jadwalUmum_matakuliah.id_jadwal_praktikan
+                        var jadwal = service.getPraktikanPraktikum(username.Text, shift.id_shift, periode.id_periode);
+                        JadwalPraktikan = jadwal[0];
+                        if (jadwal.Length == 1)
+                        {
+                            if (day == jadwal[0].id_jadwal_umum.hari)
+                            {
+                                var TimeStart = jadwal[0].id_jadwal_umum.fk_jadwalUmum_Shift.mulai.TimeOfDay;
+                                var TimeEnd = jadwal[0].id_jadwal_umum.fk_jadwalUmum_Shift.selesai.TimeOfDay;
+                                if (now.TimeOfDay <= TimeStart) // praktikum belum mulai
                                 {
-                                    jadwalPraktikan data = new jadwalPraktikan()
-                                    {
-                                        nrp = username.Text,
-                                        id_jadwal_umum = new jadwal_umum() { fk_jadwalUmum_Shift = new Shift() { waktu = v } }
-                                    };
-                                    var c = service.getPraktikanPraktikum(data);
-                                    listBoxControl1.Items.Add(c.mata_kuliah);
-                                    Jadwal.SelectedPage = Jadwal_Tersedia;
+                                    XtraMessageBox.Show("tidak bisa login. praktikum belum di mulai");
+                                }
+                                else if (now.TimeOfDay >= TimeEnd) // praktikum sudah lewat
+                                {
+                                    XtraMessageBox.Show("tidak bisa login. praktikum sudah selesai");
                                 }
                                 else
                                 {
-                                    XtraMessageBox.Show("bukan shift praktikum anda");
+                                    layoutControlItem6.Text = "Praktikum " +
+                                                              jadwal[0].id_jadwal_umum.fk_jadwalUmum_matakuliah
+                                                                  .mata_kuliah;
+                                    jadwalPraktikan data = new jadwalPraktikan()
+                                    {
+                                        id_jadwal_praktikan = jadwal[0].id_jadwal_praktikan
+                                    };
+                                    var PraktikumTersedia = service.GetPertemuan(data).Select(x => x.id_jenis_pertemuan);
+                                    listBoxControl1.Items.AddRange(PraktikumTersedia.ToArray());
+                                    Jadwal.SelectedPage = Jadwal_Tersedia;
                                 }
                             }
-                        }
-                        catch (Exception)
-                        {
-                            XtraMessageBox.Show("tidak ada jadwal hari ini");
-                        }
+                            else
+                            {
+                                XtraMessageBox.Show("hari ini tidak ada jadwal praktikum");}
+                        }}
+                    catch (Exception ){
+                        XtraMessageBox.Show("tidak ada praktikum saat ini");
                     }
-                    else // ga punya jadwal
-                    {
-                        XtraMessageBox.Show("belum memiliki jadwal, hubungi admin pak wasro");
-                    }
+                    
                 }
                 else if (roles == "Asisten") //aslab
                 {
@@ -137,18 +187,38 @@ namespace client
                         id_staff = username.Text
                     };
                     data_staff.Add(service.getProfileStaff(data));
+
                     simpleLabelItem11.Text = data_staff[0].id_staff;
                     simpleLabelItem12.Text = data_staff[0].nama;
                     simpleLabelItem13.Text = data_staff[0].no_hp;
                     simpleLabelItem14.Text = data_staff[0].alamat;
                     MemoryStream foto = new MemoryStream(data_staff[0].foto);
                     pictureEdit2.Image = Image.FromStream(foto);
-                    gridControl6.DataSource = service.GetStaffJadwal(data_staff[0].id_staff);
+
+                    //periode.id_periode
+                    var periode = service.viewPeriode().FirstOrDefault(
+                        x => x.awalSemester < DateTime.Now &&
+                             x.akhirSemester > DateTime.Now
+                        );
+
+                    jadwalStaff jadwal = new jadwalStaff()
+                    {
+                        staff = new Staff() {id_staff = data_staff[0].id_staff },
+                        jadwal_umum = new jadwal_umum() { id_periode = periode.id_periode }
+                    };
+                    gridControl6.DataSource = service.GetStaffJadwal(jadwal).Select(
+                        x=> new
+                        {
+                            hari = x.jadwal_umum.hari,
+                            shift = x.jadwal_umum.fk_jadwalUmum_Shift.id_shift,
+                            waktu = x.jadwal_umum.fk_jadwalUmum_Shift.mulai.TimeOfDay + " - " + x.jadwal_umum.fk_jadwalUmum_Shift.selesai.TimeOfDay,
+                            praktikum = x.jadwal_umum.fk_jadwalUmum_matakuliah.mata_kuliah,
+                            kelas = x.jadwal_umum.fk_jadwalUmum_kelas.Kelas
+                            
+                        });
                     service.Close();
-                }
-                else if (roles == "Admin")
-                {
-                    Interface.SelectedPage = InterfaceAdmin;
+                }else if (roles == "Admin")
+                {Interface.SelectedPage = InterfaceAdmin;
                 }
                 else if (roles == "Koordinator") //kordinator
                 {
@@ -180,11 +250,28 @@ namespace client
                 XtraMessageBox.Show(err.ToString());
             }
 
-        }private void MulaiButton_Click(object sender, EventArgs e)
+        }
+
+        private void MulaiButton_Click(object sender, EventArgs e)
         {
             Jadwal.SelectedPage = Jadwal_Blank;
 
             IadmClient service = new IadmClient();
+
+            var p = service.ListPertemuan().FirstOrDefault(x=> x.id_jenis_pertemuan == listBoxControl1.SelectedItem.ToString());
+
+            AbsensiPraktikan key = new AbsensiPraktikan()
+            {
+                JadwalPraktikan = new jadwalPraktikan()
+                {
+                    id_jadwal_praktikan = JadwalPraktikan.id_jadwal_praktikan
+                },
+                Pertemuan = new pertemuan()
+                {
+                    id_pertemuan = p.id_pertemuan
+                },};
+
+            service.PostAbsenPraktikan(key);
 
             praktikan data = new praktikan() { NRP = username.Text };
             data_praktikan.Add(service.getProfilePraktikan(data));
@@ -213,7 +300,6 @@ namespace client
                 string nmJurusan = comboBoxEdit2.SelectedItem.ToString();
                 var angkatan = service.GetAngkatan().FirstOrDefault(q => q.TahunAngkatan == nmAngkatan);
                 var jurusan = service.GetJurusan().FirstOrDefault(q => q.NamaJurusan == nmJurusan);
-                XtraMessageBox.Show(jurusan.KodeJurusan);
                 praktikan data = new praktikan()
                 {
                     angkatan = new angkatan() { KodeAngkatan = angkatan.KodeAngkatan },
@@ -223,15 +309,6 @@ namespace client
                 gridView1.RowHeight = 60;
                 gridView1.Columns["Foto"].Width = 70;
                 gridView1.Columns["NRP"].Width = 150;
-                 //gridView1.Columns["NRP"].Caption = "NO MAHASISWA";
-                //gridView1.Columns["Foto"].Caption = "FOTO";
-                //gridView1.Columns["Nama"].Caption = "NAMA";
-                
-                //for (int i = 0; i < gridView1.Columns.Count; i++)
-                //{
-                //    gridView1.Columns[i].AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
-                //}
-
                 service.Close();
             } catch (Exception err)
             {
@@ -305,17 +382,17 @@ namespace client
                     },
                 };
                 gridControl3.DataSource = service.ViewJadwalUmum(jadwal).Select(x => new {
-                    x.hari,
-                    x.fk_jadwalUmum_Shift.id_shift,
-                    x.fk_jadwalUmum_Shift.waktu,
-                    x.fk_jadwalUmum_matakuliah.mata_kuliah,
-                    x.fk_jadwalUmum_kelas.Kelas
+                    hari = x.hari,
+                    shift = x.fk_jadwalUmum_Shift.id_shift,
+                    waktu = x.fk_jadwalUmum_Shift.mulai.ToString("HH:mm") + " - " + x.fk_jadwalUmum_Shift.selesai.ToString("HH:mm"),
+                    praktikum =x.fk_jadwalUmum_matakuliah.mata_kuliah,
+                    kelas = x.fk_jadwalUmum_kelas.Kelas
                 }).ToList();
 
-                gridView3.Columns["id_shift"].OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.False;
+                gridView3.Columns["shift"].OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.False;
                 gridView3.Columns["waktu"].OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.False;
-                gridView3.Columns["mata_kuliah"].OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.False;
-                gridView3.Columns["Kelas"].OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.False;
+                gridView3.Columns["praktikum"].OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.False;
+                gridView3.Columns["kelas"].OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.False;
 
                 //gridView3.Columns["id_shift"].Caption = "shift";
                 //gridView3.Columns["mata_kuliah"].Caption = "praktikum";
@@ -371,8 +448,28 @@ namespace client
             try
             {
                 IadmClient service = new IadmClient();
-                gridControl6.DataSource = service.GetStaffJadwal(data_staff[0].id_staff);
-            }
+                //periode.id_periode
+                var periode = service.viewPeriode().FirstOrDefault(
+                    x => x.awalSemester < DateTime.Now &&
+                         x.akhirSemester > DateTime.Now
+                    );
+
+                jadwalStaff jadwal = new jadwalStaff()
+                {
+                    staff = new Staff() { id_staff = data_staff[0].id_staff },
+                    jadwal_umum = new jadwal_umum() { id_periode = periode.id_periode }
+                };
+                gridControl6.DataSource = service.GetStaffJadwal(jadwal).Select(
+                    x => new
+                    {
+                        hari = x.jadwal_umum.hari,
+                        shift = x.jadwal_umum.fk_jadwalUmum_Shift.id_shift,
+                        waktu = x.jadwal_umum.fk_jadwalUmum_Shift.mulai.TimeOfDay + " - " + x.jadwal_umum.fk_jadwalUmum_Shift.selesai.TimeOfDay,
+                        praktikum = x.jadwal_umum.fk_jadwalUmum_matakuliah.mata_kuliah,
+                        kelas = x.jadwal_umum.fk_jadwalUmum_kelas.Kelas
+
+                    });
+                service.Close();}
             catch (Exception)
             {
                 return;
@@ -425,7 +522,7 @@ namespace client
                 {
                     hari = r.jadwal_umum.hari,
                     shift = r.jadwal_umum.fk_jadwalUmum_Shift.id_shift,
-                    waktu = r.jadwal_umum.fk_jadwalUmum_Shift.waktu,
+                    waktu = r.jadwal_umum.fk_jadwalUmum_Shift.mulai.TimeOfDay + " - " + r.jadwal_umum.fk_jadwalUmum_Shift.selesai.TimeOfDay,
                     praktikum = r.jadwal_umum.fk_jadwalUmum_matakuliah.mata_kuliah,
                     nama = r.staff.nama,
                 } ).ToList());
@@ -467,48 +564,35 @@ namespace client
 
             //get id_staff by name, to show s.id_staff
             var s = service.getStaffID().FirstOrDefault(id => id.nama == editor.SelectedItem.ToString());
-            XtraMessageBox.Show(s.id_staff);
+            //XtraMessageBox.Show(s.id_staff);
 
+            //periode.id_periode
+            var periode = service.viewPeriode().FirstOrDefault(
+                x => x.awalSemester < DateTime.Now &&
+                     x.akhirSemester > DateTime.Now
+                );
+            //XtraMessageBox.Show(periode.id_periode.ToString());
 
             // get value all column in selected rows
             DataRow row = gridView8.GetDataRow(gridView8.FocusedRowHandle);
 
             //get id_staff by name, to show s.id_staff
             var ss = service.getStaffID().FirstOrDefault(id => id.nama == row[4].ToString());
-            XtraMessageBox.Show(ss.id_staff);
+            //XtraMessageBox.Show(ss.id_staff);
 
-            var p = comboBoxEdit7.SelectedItem.ToString();
-            var awS = int.Parse(p.Substring(0, 4));
-            var akS = int.Parse(p.Substring(5, 4));
             jadwalStaff data = new jadwalStaff()
             {
-                jadwal_umum = new jadwal_umum()
-                {
-                    fk_jadwalUmum_periode = new periode()
-                    {
-                        awalSemester = new DateTime(awS,1,1,1,1,1),
-                        akhirSemester = new DateTime(akS,1,1,1,1,1),
-                        semester = comboBoxEdit8.SelectedItem.ToString()
-                    },
-                    hari = row[0].ToString(),
-                    fk_jadwalUmum_Shift = new Shift()
-                    {
-                        id_shift = row[1].ToString(),
-                        waktu = row[2].ToString()
-                    },
-                    fk_jadwalUmum_matakuliah = new matkul()
-                    {
-                        mata_kuliah = row[3].ToString()
-                    },
-                },
                 staff = new Staff()
                 {
-                    id_staff = s.id_staff
+                    id_staff = ss.id_staff
+                },
+                jadwal_umum = new jadwal_umum()
+                {
+                    fk_jadwalUmum_Shift = new Shift() { id_shift = row[1].ToString() },
+                    fk_jadwalUmum_periode = new periode() { id_periode = periode.id_periode },
+                    fk_jadwalUmum_matakuliah = new matkul() { mata_kuliah = row[3].ToString() }
                 }
             };
-            XtraMessageBox.Show(data.jadwal_umum.fk_jadwalUmum_periode.awalSemester.ToString("yyyy"));
-            XtraMessageBox.Show(data.jadwal_umum.fk_jadwalUmum_periode.akhirSemester.ToString("yyyy"));
-            //gridControl8.RefreshDataSource();
 
             service.updateJadwalStaff(s.id_staff, data);
             service.Close();
@@ -518,6 +602,16 @@ namespace client
         private void K_Logout_Click(object sender, EventArgs e)
         {
             Interface.SelectedPage = InterfaceLogin;
+        }
+
+        private void simpleButton12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void accordionControlElement26_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

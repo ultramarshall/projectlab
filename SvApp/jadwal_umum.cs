@@ -10,6 +10,9 @@ namespace SvApp
     public class jadwal_umum
     {
         [DataMember]
+        public int id_jadwal_umum { get; set; }
+
+        [DataMember]
         public string hari { get; set; }
 
         [DataMember]

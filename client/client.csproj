@@ -214,6 +214,9 @@
     <None Include="Service References\lab\client.lab.periode.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\lab\client.lab.pertemuan.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\lab\client.lab.praktikan.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbsensiPraktikan.cs" />
     <Compile Include="angkatan.cs" />
     <Compile Include="BCrypt.cs" />
     <Compile Include="jadwalPraktikan.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="kelas.cs" />
     <Compile Include="matkul.cs" />
     <Compile Include="periode.cs" />
+    <Compile Include="pertemuan.cs" />
     <Compile Include="praktikan.cs" />
     <Compile Include="Shift.cs" />
     <Compile Include="SrvcApp.cs" />

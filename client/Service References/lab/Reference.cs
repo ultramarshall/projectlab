@@ -192,6 +192,9 @@ namespace client.lab {
         private string hariField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int id_jadwal_umumField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int id_kelasField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -279,6 +282,19 @@ namespace client.lab {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id_jadwal_umum {
+            get {
+                return this.id_jadwal_umumField;
+            }
+            set {
+                if ((this.id_jadwal_umumField.Equals(value) != true)) {
+                    this.id_jadwal_umumField = value;
+                    this.RaisePropertyChanged("id_jadwal_umum");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public int id_kelas {
             get {
                 return this.id_kelasField;
@@ -353,6 +369,12 @@ namespace client.lab {
         private string id_shiftField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime mulaiField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime selesaiField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string waktuField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -374,6 +396,32 @@ namespace client.lab {
                 if ((object.ReferenceEquals(this.id_shiftField, value) != true)) {
                     this.id_shiftField = value;
                     this.RaisePropertyChanged("id_shift");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime mulai {
+            get {
+                return this.mulaiField;
+            }
+            set {
+                if ((this.mulaiField.Equals(value) != true)) {
+                    this.mulaiField = value;
+                    this.RaisePropertyChanged("mulai");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime selesai {
+            get {
+                return this.selesaiField;
+            }
+            set {
+                if ((this.selesaiField.Equals(value) != true)) {
+                    this.selesaiField = value;
+                    this.RaisePropertyChanged("selesai");
                 }
             }
         }
@@ -1049,6 +1097,192 @@ namespace client.lab {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="pertemuan", Namespace="http://schemas.datacontract.org/2004/07/SvApp")]
+    [System.SerializableAttribute()]
+    public partial class pertemuan : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string id_jenis_pertemuanField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int id_pertemuanField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string id_jenis_pertemuan {
+            get {
+                return this.id_jenis_pertemuanField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.id_jenis_pertemuanField, value) != true)) {
+                    this.id_jenis_pertemuanField = value;
+                    this.RaisePropertyChanged("id_jenis_pertemuan");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id_pertemuan {
+            get {
+                return this.id_pertemuanField;
+            }
+            set {
+                if ((this.id_pertemuanField.Equals(value) != true)) {
+                    this.id_pertemuanField = value;
+                    this.RaisePropertyChanged("id_pertemuan");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AbsensiPraktikan", Namespace="http://schemas.datacontract.org/2004/07/SvApp")]
+    [System.SerializableAttribute()]
+    public partial class AbsensiPraktikan : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private client.lab.jadwalPraktikan JadwalPraktikanField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int NilaiField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private client.lab.pertemuan PertemuanField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int id_absensiField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private client.lab.Staff staffField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime waktu_absensiField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public client.lab.jadwalPraktikan JadwalPraktikan {
+            get {
+                return this.JadwalPraktikanField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.JadwalPraktikanField, value) != true)) {
+                    this.JadwalPraktikanField = value;
+                    this.RaisePropertyChanged("JadwalPraktikan");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Nilai {
+            get {
+                return this.NilaiField;
+            }
+            set {
+                if ((this.NilaiField.Equals(value) != true)) {
+                    this.NilaiField = value;
+                    this.RaisePropertyChanged("Nilai");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public client.lab.pertemuan Pertemuan {
+            get {
+                return this.PertemuanField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PertemuanField, value) != true)) {
+                    this.PertemuanField = value;
+                    this.RaisePropertyChanged("Pertemuan");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id_absensi {
+            get {
+                return this.id_absensiField;
+            }
+            set {
+                if ((this.id_absensiField.Equals(value) != true)) {
+                    this.id_absensiField = value;
+                    this.RaisePropertyChanged("id_absensi");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public client.lab.Staff staff {
+            get {
+                return this.staffField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.staffField, value) != true)) {
+                    this.staffField = value;
+                    this.RaisePropertyChanged("staff");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime waktu_absensi {
+            get {
+                return this.waktu_absensiField;
+            }
+            set {
+                if ((this.waktu_absensiField.Equals(value) != true)) {
+                    this.waktu_absensiField = value;
+                    this.RaisePropertyChanged("waktu_absensi");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="lab.Iadm")]
     public interface Iadm {
@@ -1060,7 +1294,7 @@ namespace client.lab {
         client.lab.jadwalPraktikan[] getTimeLogin(client.lab.jadwalPraktikan data);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/getPraktikanPraktikum", ReplyAction="http://tempuri.org/Iadm/getPraktikanPraktikumResponse")]
-        client.lab.matkul getPraktikanPraktikum(client.lab.jadwalPraktikan data);
+        client.lab.jadwalPraktikan[] getPraktikanPraktikum(string nrp, string shift, int periode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/getProfilePraktikan", ReplyAction="http://tempuri.org/Iadm/getProfilePraktikanResponse")]
         client.lab.praktikan getProfilePraktikan(client.lab.praktikan data);
@@ -1102,7 +1336,7 @@ namespace client.lab {
         client.lab.Staff getProfileStaff(client.lab.Staff data);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/GetStaffJadwal", ReplyAction="http://tempuri.org/Iadm/GetStaffJadwalResponse")]
-        client.lab.jadwalStaff[] GetStaffJadwal(string data);
+        client.lab.jadwalStaff[] GetStaffJadwal(client.lab.jadwalStaff data);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/jadwalUmumStaff", ReplyAction="http://tempuri.org/Iadm/jadwalUmumStaffResponse")]
         client.lab.jadwalStaff[] jadwalUmumStaff(client.lab.periode data);
@@ -1115,6 +1349,15 @@ namespace client.lab {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/viewPeriode", ReplyAction="http://tempuri.org/Iadm/viewPeriodeResponse")]
         client.lab.periode[] viewPeriode();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/GetPertemuan", ReplyAction="http://tempuri.org/Iadm/GetPertemuanResponse")]
+        client.lab.pertemuan[] GetPertemuan(client.lab.jadwalPraktikan data);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/ListPertemuan", ReplyAction="http://tempuri.org/Iadm/ListPertemuanResponse")]
+        client.lab.pertemuan[] ListPertemuan();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/PostAbsenPraktikan", ReplyAction="http://tempuri.org/Iadm/PostAbsenPraktikanResponse")]
+        int PostAbsenPraktikan(client.lab.AbsensiPraktikan data);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1152,8 +1395,8 @@ namespace client.lab {
             return base.Channel.getTimeLogin(data);
         }
         
-        public client.lab.matkul getPraktikanPraktikum(client.lab.jadwalPraktikan data) {
-            return base.Channel.getPraktikanPraktikum(data);
+        public client.lab.jadwalPraktikan[] getPraktikanPraktikum(string nrp, string shift, int periode) {
+            return base.Channel.getPraktikanPraktikum(nrp, shift, periode);
         }
         
         public client.lab.praktikan getProfilePraktikan(client.lab.praktikan data) {
@@ -1208,7 +1451,7 @@ namespace client.lab {
             return base.Channel.getProfileStaff(data);
         }
         
-        public client.lab.jadwalStaff[] GetStaffJadwal(string data) {
+        public client.lab.jadwalStaff[] GetStaffJadwal(client.lab.jadwalStaff data) {
             return base.Channel.GetStaffJadwal(data);
         }
         
@@ -1226,6 +1469,18 @@ namespace client.lab {
         
         public client.lab.periode[] viewPeriode() {
             return base.Channel.viewPeriode();
+        }
+        
+        public client.lab.pertemuan[] GetPertemuan(client.lab.jadwalPraktikan data) {
+            return base.Channel.GetPertemuan(data);
+        }
+        
+        public client.lab.pertemuan[] ListPertemuan() {
+            return base.Channel.ListPertemuan();
+        }
+        
+        public int PostAbsenPraktikan(client.lab.AbsensiPraktikan data) {
+            return base.Channel.PostAbsenPraktikan(data);
         }
     }
 }

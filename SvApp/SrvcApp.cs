@@ -130,30 +130,44 @@ namespace SvApp
             }
         }
 
-        public matkul getPraktikanPraktikum(jadwalPraktikan data)
+        public List<jadwalPraktikan> getPraktikanPraktikum(string nrp, string shift, int periode)
         {
             try
             {
-                comm.CommandText = @"SELECT mata_kuliah.mata_kuliah " +
-                                    "FROM jadwal_praktikan INNER JOIN " +
-                                        "jadwal_umum ON jadwal_praktikan.id_jadwal_umum = jadwal_umum.id_jadwal_umum INNER JOIN " +
+                comm.CommandText = "SELECT jadwal_umum.hari, mata_kuliah.mata_kuliah, jadwal_praktikan.id_jadwal_praktikan, shift.mulai, shift.selesai " +
+                                   "FROM jadwal_umum INNER JOIN " +
+                                        "jadwal_praktikan ON jadwal_umum.id_jadwal_umum = jadwal_praktikan.id_jadwal_umum AND jadwal_praktikan.nrp = '"+nrp+"' INNER JOIN " +
                                         "mata_kuliah ON jadwal_umum.kode_mk = mata_kuliah.kode_mk INNER JOIN " +
                                         "shift ON jadwal_umum.id_shift = shift.id_shift " +
-                                    "WHERE jadwal_praktikan.nrp = @nrp AND shift.waktu = @waktu";
-                comm.Parameters.AddWithValue("nrp", data.nrp);
-                comm.Parameters.AddWithValue("waktu", data.id_jadwal_umum.fk_jadwalUmum_Shift.waktu);
-
+                                   "WHERE jadwal_umum.id_shift = '"+shift+"' AND jadwal_umum.id_periode = '"+periode+"'";
 
                 comm.CommandType = CommandType.Text;
                 conn.Open();
                 
                 SqlDataReader reader = comm.ExecuteReader();
-                matkul mk = new matkul();
+                List<jadwalPraktikan> jadwal = new List<jadwalPraktikan>();
                 while (reader.Read())
                 {
-                    mk.mata_kuliah = reader[0].ToString().TrimEnd();
+                    jadwalPraktikan list = new jadwalPraktikan()
+                    {
+                        id_jadwal_umum = new jadwal_umum()
+                        {
+                            hari = reader[0].ToString().TrimEnd(),
+                            fk_jadwalUmum_matakuliah = new matkul()
+                            {
+                                mata_kuliah = reader[1].ToString().TrimEnd()
+                            },
+                            fk_jadwalUmum_Shift = new Shift()
+                            {
+                                mulai = Convert.ToDateTime(reader[3].ToString().TrimEnd()),
+                                selesai = Convert.ToDateTime(reader[4].ToString().TrimEnd())
+                            }
+                        },
+                        id_jadwal_praktikan = Convert.ToInt32(reader[2]),
+                    };
+                    jadwal.Add(list);
                 }
-                return mk;
+                return jadwal;
             }
             catch (Exception)
             {
@@ -351,7 +365,7 @@ namespace SvApp
             try
             {
                 List<Shift>_Shift = new List<Shift>();
-                comm.CommandText = "SELECT * " +
+                comm.CommandText = "SELECT id_shift, mulai, selesai " +
                                    "FROM shift ";
                 comm.CommandType = CommandType.Text;
                 conn.Open();
@@ -362,7 +376,9 @@ namespace SvApp
                     Shift list = new Shift()
                     {
                         id_shift = Convert.ToString(reader[0]).TrimEnd(),
-                        waktu = Convert.ToString(reader[1]).TrimEnd()
+                        //waktu = Convert.ToString(reader[1]).TrimEnd()
+                        mulai = Convert.ToDateTime(reader[1].ToString()),
+                        selesai = Convert.ToDateTime(reader[2].ToString())
                     };
                     _Shift.Add(list);
                 }
@@ -491,7 +507,7 @@ namespace SvApp
             try  
             {
                 List<jadwal_umum> jadwal_umum = new List<jadwal_umum>();
-                comm.CommandText = @"SELECT jadwal_umum.hari, shift.id_shift, shift.waktu, mata_kuliah.mata_kuliah, kelas.kelas " +
+                comm.CommandText = @"SELECT jadwal_umum.hari, shift.id_shift, shift.mulai, shift.selesai, mata_kuliah.mata_kuliah, kelas.kelas " +
                                     "FROM jadwal_umum " +
                                     "INNER JOIN periode ON jadwal_umum.id_periode = periode.id_periode " +
                                     "INNER JOIN mata_kuliah ON jadwal_umum.kode_mk = mata_kuliah.kode_mk " +
@@ -515,15 +531,17 @@ namespace SvApp
                         fk_jadwalUmum_Shift = new Shift()
                                             {
                                                 id_shift = reader[1].ToString().TrimEnd(),
-                                                waktu = reader[2].ToString().TrimEnd()
+                                                //waktu = reader[2].ToString().TrimEnd()
+                                                mulai =  Convert.ToDateTime(reader[2].ToString()),
+                                                selesai = Convert.ToDateTime(reader[3].ToString())
                                             },
                         fk_jadwalUmum_matakuliah = new matkul()
                                             {
-                                                mata_kuliah = reader[3].ToString().TrimEnd(),
+                                                mata_kuliah = reader[4].ToString().TrimEnd(),
                                             },
                         fk_jadwalUmum_kelas = new kelas()
                                             {
-                                                Kelas = reader[4].ToString().TrimEnd(),
+                                                Kelas = reader[5].ToString().TrimEnd(),
                                             }
                     };
                     jadwal_umum.Add(list);
@@ -689,34 +707,50 @@ namespace SvApp
             }
         }
 
-        public List<jadwalStaff> GetStaffJadwal(string data)
+        public List<jadwalStaff> GetStaffJadwal(jadwalStaff data)
         {
             try
             {
                 List<jadwalStaff> Jadwal_Staff = new List<jadwalStaff>();
-                comm.CommandText = "SELECT jadwal_umum.hari, mata_kuliah.mata_kuliah, kelas.kelas, shift.id_shift, shift.waktu " +
+                comm.CommandText = "SELECT jadwal_umum.hari, mata_kuliah.mata_kuliah, kelas.kelas, shift.id_shift, shift.mulai, shift.selesai " +
                                     "FROM jadwal_staff " +
                                     "INNER JOIN jadwal_umum ON jadwal_staff.id_jadwal_umum = jadwal_umum.id_jadwal_umum " +
                                     "INNER JOIN mata_kuliah ON jadwal_umum.kode_mk = mata_kuliah.kode_mk " +
                                     "INNER JOIN shift ON jadwal_umum.id_shift = shift.id_shift " +
                                     "INNER JOIN kelas ON jadwal_umum.id_kelas = kelas.id_kelas " +
-                                    "WHERE jadwal_staff.id_staff = @id_staff";
-                comm.Parameters.AddWithValue("id_staff", data);
+                                    "INNER JOIN periode ON jadwal_umum.id_periode = periode.id_periode " +
+                                    "WHERE jadwal_staff.id_staff = @id_staff AND periode.id_periode = @id_periode";
+                comm.Parameters.AddWithValue("id_staff", data.staff.id_staff);
+                comm.Parameters.AddWithValue("id_periode", data.jadwal_umum.id_periode);
                 comm.CommandType = CommandType.Text;
                 conn.Open();
 
                 SqlDataReader reader = comm.ExecuteReader();
                 while (reader.Read())
                 {
-                    //jadwalStaff list = new jadwalStaff()
-                    //{
-                    //    hari = Convert.ToString(reader[0]).TrimEnd(),
-                    //    mata_kuliah = Convert.ToString(reader[1]).TrimEnd(),
-                    //    kelas = Convert.ToString(reader[2]).TrimEnd(),
-                    //    shift = Convert.ToString(reader[3]).TrimEnd(),
-                    //    waktu = Convert.ToString(reader[4]).TrimEnd(),
-                    //};
-                    //Jadwal_Staff.Add(list);
+                    jadwalStaff list = new jadwalStaff()
+                    {
+                        jadwal_umum = new jadwal_umum()
+                        {
+                            hari = reader[0].ToString().TrimEnd(),
+                            fk_jadwalUmum_matakuliah = new matkul()
+                            {
+                                mata_kuliah = reader[1].ToString().TrimEnd()
+                            },
+                            fk_jadwalUmum_kelas = new kelas()
+                            {
+                                Kelas = reader[2].ToString().TrimEnd()
+                            },
+                            fk_jadwalUmum_Shift = new Shift()
+                            {
+                                id_shift = reader[3].ToString().TrimEnd(),
+                                mulai = Convert.ToDateTime(reader[4].ToString()),
+                                selesai = Convert.ToDateTime(reader[5].ToString())
+                            }
+                        },
+                        
+                    };
+                    Jadwal_Staff.Add(list);
                 }
                 return Jadwal_Staff;
             }
@@ -739,16 +773,21 @@ namespace SvApp
             {
                 List<jadwalStaff> jadwal = new List<jadwalStaff>();
 
-                comm.CommandText = "SELECT jadwal_umum.hari, shift.id_shift, shift.waktu, mata_kuliah.mata_kuliah, staff.nama " +
-                                    "FROM jadwal_staff INNER JOIN " +
-                                        "jadwal_umum ON jadwal_staff.id_jadwal_umum = jadwal_umum.id_jadwal_umum INNER JOIN " +
-                                        "mata_kuliah ON jadwal_umum.kode_mk = mata_kuliah.kode_mk INNER JOIN " +
-                                        "shift ON jadwal_umum.id_shift = shift.id_shift INNER JOIN " +
-                                        "periode ON jadwal_umum.id_periode = periode.id_periode INNER JOIN " +
-                                        "staff ON jadwal_staff.id_staff = staff.id_staff " +
-                                    "WHERE CONVERT(varchar, periode.awalSemester, 100) LIKE '%'+@awalSemester+'%' AND " +
-                                          "CONVERT(varchar, periode.akhirSemester, 100) LIKE '%'+@akhirSemester+'%' AND " +
-                                          "periode.semester = 'ganjil'";
+                comm.CommandText = @"SELECT jadwal_umum.hari, 
+                                            shift.id_shift, 
+                                            shift.mulai, 
+                                            shift.selesai, 
+                                            mata_kuliah.mata_kuliah, 
+                                            staff.nama
+                                     FROM   jadwal_staff INNER JOIN
+                                            jadwal_umum ON jadwal_staff.id_jadwal_umum = jadwal_umum.id_jadwal_umum INNER JOIN 
+                                            mata_kuliah ON jadwal_umum.kode_mk = mata_kuliah.kode_mk INNER JOIN 
+                                            shift ON jadwal_umum.id_shift = shift.id_shift INNER JOIN 
+                                            periode ON jadwal_umum.id_periode = periode.id_periode INNER JOIN 
+                                            staff ON jadwal_staff.id_staff = staff.id_staff 
+                                     WHERE  CONVERT(varchar, periode.awalSemester, 100) LIKE '%'+@awalSemester+'%' AND 
+                                            CONVERT(varchar, periode.akhirSemester, 100) LIKE '%'+@akhirSemester+'%' AND 
+                                            periode.semester = 'ganjil'";
                 comm.Parameters.AddWithValue("awalSemester", data.awalSemester.ToString("yyyy"));
                 comm.Parameters.AddWithValue("akhirSemester", data.akhirSemester.ToString("yyyy"));
                 comm.Parameters.AddWithValue("semester", data.semester);
@@ -763,10 +802,21 @@ namespace SvApp
                         jadwal_umum = new jadwal_umum()
                                             {
                                                 hari = reader[0].ToString().TrimEnd(),
-                                                fk_jadwalUmum_Shift = new Shift() {  id_shift = reader[1].ToString().TrimEnd(), waktu = reader[2].ToString().TrimEnd()},
-                                                fk_jadwalUmum_matakuliah = new matkul() { mata_kuliah = reader[3].ToString().TrimEnd() }
+                                                fk_jadwalUmum_Shift = new Shift()
+                                                {
+                                                    id_shift = reader[1].ToString().TrimEnd(),
+                                                    mulai = Convert.ToDateTime(reader[2].ToString()),
+                                                    selesai = Convert.ToDateTime(reader[3].ToString()),
+                                                },
+                                                fk_jadwalUmum_matakuliah = new matkul()
+                                                {
+                                                    mata_kuliah = reader[4].ToString().TrimEnd()
+                                                }
                                             },
-                        staff = new Staff() { nama = reader[4].ToString().TrimEnd()}
+                        staff = new Staff()
+                        {
+                            nama = reader[5].ToString().TrimEnd()
+                        }
                     };
                     jadwal.Add(list);
                 }
@@ -789,30 +839,20 @@ namespace SvApp
         {
             try
             {
-                comm.CommandText = "update jadwal_staff " +
-                                   "set id_staff = " + id + " " +
-                                    "from jadwal_staff INNER JOIN " +
-                                         "jadwal_umum ON jadwal_staff.id_jadwal_umum = jadwal_umum.id_jadwal_umum INNER JOIN " +
-                                         "shift ON jadwal_umum.id_shift = shift.id_shift INNER JOIN " +
-                                         "periode ON jadwal_umum.id_periode = periode.id_periode INNER JOIN " +
-                                         "mata_kuliah ON jadwal_umum.kode_mk = mata_kuliah.kode_mk " +
-                                    "where CONVERT(nchar(35), periode.awalSemester, 100) LIKE '%'+ @awalSemester +'%' and " +
-                                          "CONVERT(nchar(35), periode.akhirSemester, 100) LIKE '%'+ @akhirSemester +'%' and " +
-                                          "periode.semester = @semester and " +
-                                          "jadwal_umum.hari = @hari and " +
-                                          "shift.id_shift = @shift and " +
-                                          "shift.waktu = @waktu and " +
-                                          "mata_kuliah.mata_kuliah = @matkul and " +
-                                          "jadwal_staff.id_staff = @idStaff";
-                
-                comm.Parameters.AddWithValue("semester", data.jadwal_umum.fk_jadwalUmum_periode.semester);
-                comm.Parameters.AddWithValue("awalSemester", data.jadwal_umum.fk_jadwalUmum_periode.awalSemester.ToString("yyyy"));
-                comm.Parameters.AddWithValue("akhirSemester", data.jadwal_umum.fk_jadwalUmum_periode.akhirSemester.ToString("yyyy"));
-                comm.Parameters.AddWithValue("hari", data.jadwal_umum.hari);
-                comm.Parameters.AddWithValue("shift", data.jadwal_umum.fk_jadwalUmum_Shift.id_shift);
-                comm.Parameters.AddWithValue("waktu", data.jadwal_umum.fk_jadwalUmum_Shift.waktu);
-                comm.Parameters.AddWithValue("matkul", data.jadwal_umum.fk_jadwalUmum_matakuliah.mata_kuliah);
-                comm.Parameters.AddWithValue("idStaff", data.staff.id_staff);
+                comm.CommandText = @"UPDATE       jadwal_staff
+SET                id_staff = @replace_id_staff
+FROM            jadwal_staff INNER JOIN
+                         jadwal_umum ON jadwal_staff.id_jadwal_umum = jadwal_umum.id_jadwal_umum AND jadwal_staff.id_staff = @id_staff INNER JOIN
+                         mata_kuliah ON jadwal_umum.kode_mk = mata_kuliah.kode_mk AND mata_kuliah.mata_kuliah = @mata_kuliah INNER JOIN
+                         periode ON jadwal_umum.id_periode = periode.id_periode AND periode.id_periode = @id_periode INNER JOIN
+                         shift ON jadwal_umum.id_shift = shift.id_shift AND shift.id_shift = @id_shift";
+
+                comm.Parameters.AddWithValue("replace_id_staff", id);
+                comm.Parameters.AddWithValue("id_staff", data.staff.id_staff);
+                comm.Parameters.AddWithValue("id_periode", data.jadwal_umum.fk_jadwalUmum_periode.id_periode);
+                comm.Parameters.AddWithValue("id_shift", data.jadwal_umum.fk_jadwalUmum_Shift.id_shift);
+                comm.Parameters.AddWithValue("mata_kuliah", data.jadwal_umum.fk_jadwalUmum_matakuliah.mata_kuliah);
+
                 comm.CommandType = CommandType.Text;
                 conn.Open();
                 return comm.ExecuteNonQuery();
@@ -895,8 +935,104 @@ namespace SvApp
             }
         }
 
+        public List<pertemuan> GetPertemuan(jadwalPraktikan data)
+        {
+            try
+            {
+                List<pertemuan> pertemuan = new List<pertemuan>();
+                comm.CommandText = "SELECT id_pertemuan, id_jenis_pertemuan "+
+                                   "FROM pertemuan " +
+                                   "WHERE id_pertemuan NOT IN ( SELECT id_pertemuan " +
+                                                               "FROM absensi_praktikan " +
+                                                               "WHERE id_jadwal_praktikan = " + data.id_jadwal_praktikan + ")";
 
+                comm.CommandType = CommandType.Text;
+                conn.Open();
+                SqlDataReader reader = comm.ExecuteReader();
+                while (reader.Read())
+                {
+                    pertemuan list = new pertemuan()
+                    {
+                        id_pertemuan = Convert.ToInt32(reader[0]),
+                        id_jenis_pertemuan = reader[1].ToString().TrimEnd()
+                    };
+                    pertemuan.Add(list);
+                }
+                return pertemuan;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+        }
 
+        public int PostAbsenPraktikan(AbsensiPraktikan data)
+        {
+            try
+            {
+                comm.CommandText = "INSERT INTO absensi_praktikan (id_pertemuan, id_jadwal_praktikan) " +
+                                   "VALUES (@id_pertemuan, @id_jadwal_praktikan)";
+                comm.Parameters.AddWithValue("id_pertemuan", data.Pertemuan.id_pertemuan);
+                comm.Parameters.AddWithValue("id_jadwal_praktikan", data.JadwalPraktikan.id_jadwal_praktikan);
+                comm.CommandType = CommandType.Text;
+                conn.Open();
+
+                return comm.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        public List<pertemuan> ListPertemuan()
+        {
+            try
+            {
+                List<pertemuan> pertemuan = new List<pertemuan>();
+                comm.CommandText = "SELECT id_pertemuan, id_jenis_pertemuan " +
+                                   "FROM pertemuan";
+
+                comm.CommandType = CommandType.Text;
+                conn.Open();
+                SqlDataReader reader = comm.ExecuteReader();
+                while (reader.Read())
+                {
+                    pertemuan list = new pertemuan()
+                    {
+                        id_pertemuan = Convert.ToInt32(reader[0]),
+                        id_jenis_pertemuan = reader[1].ToString().TrimEnd()
+                    };
+                    pertemuan.Add(list);
+                }
+                return pertemuan;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+        } 
     }
 }
 

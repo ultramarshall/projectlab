@@ -1,172 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/SvApp" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/SvApp" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:complexType name="akun">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="PeranId" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="akun" nillable="true" type="tns:akun" />
-  <xs:complexType name="jadwalPraktikan">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="id_jadwal_praktikan" type="xs:int" />
-      <xs:element minOccurs="0" name="id_jadwal_umum" nillable="true" type="tns:jadwal_umum" />
-      <xs:element minOccurs="0" name="nrp" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="jadwalPraktikan" nillable="true" type="tns:jadwalPraktikan" />
-  <xs:complexType name="jadwal_umum">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="fk_jadwalUmum_Shift" nillable="true" type="tns:Shift" />
-      <xs:element minOccurs="0" name="fk_jadwalUmum_kelas" nillable="true" type="tns:kelas" />
-      <xs:element minOccurs="0" name="fk_jadwalUmum_matakuliah" nillable="true" type="tns:matkul" />
-      <xs:element minOccurs="0" name="fk_jadwalUmum_periode" nillable="true" type="tns:periode" />
-      <xs:element minOccurs="0" name="hari" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="id_kelas" type="xs:int" />
-      <xs:element minOccurs="0" name="id_periode" type="xs:int" />
-      <xs:element minOccurs="0" name="id_shift" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="kode_mk" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="jadwal_umum" nillable="true" type="tns:jadwal_umum" />
-  <xs:complexType name="Shift">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="id_shift" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="waktu" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Shift" nillable="true" type="tns:Shift" />
-  <xs:complexType name="kelas">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Kelas" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="id_kelas" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="kelas" nillable="true" type="tns:kelas" />
-  <xs:complexType name="matkul">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="kode_mk" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="mata_kuliah" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="matkul" nillable="true" type="tns:matkul" />
-  <xs:complexType name="periode">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="akhirSemester" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="awalSemester" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="id_periode" type="xs:int" />
-      <xs:element minOccurs="0" name="semester" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="periode" nillable="true" type="tns:periode" />
-  <xs:complexType name="ArrayOfjadwalPraktikan">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="jadwalPraktikan" nillable="true" type="tns:jadwalPraktikan" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfjadwalPraktikan" nillable="true" type="tns:ArrayOfjadwalPraktikan" />
-  <xs:complexType name="praktikan">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Foto" nillable="true" type="xs:base64Binary" />
-      <xs:element minOccurs="0" name="NRP" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Nama" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Notes" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="angkatan" nillable="true" type="tns:angkatan" />
-      <xs:element minOccurs="0" name="jurusan" nillable="true" type="tns:jurusan" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="praktikan" nillable="true" type="tns:praktikan" />
-  <xs:complexType name="angkatan">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="KodeAngkatan" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="TahunAngkatan" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="angkatan" nillable="true" type="tns:angkatan" />
-  <xs:complexType name="jurusan">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="KodeJurusan" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="NamaJurusan" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="jurusan" nillable="true" type="tns:jurusan" />
-  <xs:complexType name="ArrayOfjurusan">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="jurusan" nillable="true" type="tns:jurusan" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfjurusan" nillable="true" type="tns:ArrayOfjurusan" />
-  <xs:complexType name="ArrayOfangkatan">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="angkatan" nillable="true" type="tns:angkatan" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfangkatan" nillable="true" type="tns:ArrayOfangkatan" />
-  <xs:complexType name="ArrayOfpraktikan">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="praktikan" nillable="true" type="tns:praktikan" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfpraktikan" nillable="true" type="tns:ArrayOfpraktikan" />
-  <xs:complexType name="ArrayOfjadwal_umum">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="jadwal_umum" nillable="true" type="tns:jadwal_umum" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfjadwal_umum" nillable="true" type="tns:ArrayOfjadwal_umum" />
-  <xs:complexType name="ArrayOfmatkul">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="matkul" nillable="true" type="tns:matkul" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfmatkul" nillable="true" type="tns:ArrayOfmatkul" />
-  <xs:complexType name="ArrayOfkelas">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="kelas" nillable="true" type="tns:kelas" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfkelas" nillable="true" type="tns:ArrayOfkelas" />
-  <xs:complexType name="ArrayOfShift">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Shift" nillable="true" type="tns:Shift" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfShift" nillable="true" type="tns:ArrayOfShift" />
-  <xs:complexType name="ArrayOfStaff">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Staff" nillable="true" type="tns:Staff" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfStaff" nillable="true" type="tns:ArrayOfStaff" />
-  <xs:complexType name="Staff">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="alamat" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="foto" nillable="true" type="xs:base64Binary" />
-      <xs:element minOccurs="0" name="id_staff" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="nama" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="no_hp" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Staff" nillable="true" type="tns:Staff" />
-  <xs:complexType name="ArrayOfjadwalStaff">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="jadwalStaff" nillable="true" type="tns:jadwalStaff" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfjadwalStaff" nillable="true" type="tns:ArrayOfjadwalStaff" />
-  <xs:complexType name="jadwalStaff">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="id_jadwal_staff" type="xs:int" />
-      <xs:element minOccurs="0" name="jadwal_umum" nillable="true" type="tns:jadwal_umum" />
-      <xs:element minOccurs="0" name="staff" nillable="true" type="tns:Staff" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="jadwalStaff" nillable="true" type="tns:jadwalStaff" />
-  <xs:complexType name="ArrayOfperiode">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="periode" nillable="true" type="tns:periode" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfperiode" nillable="true" type="tns:ArrayOfperiode" />
+<xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="anyType" nillable="true" type="xs:anyType" />
+  <xs:element name="anyURI" nillable="true" type="xs:anyURI" />
+  <xs:element name="base64Binary" nillable="true" type="xs:base64Binary" />
+  <xs:element name="boolean" nillable="true" type="xs:boolean" />
+  <xs:element name="byte" nillable="true" type="xs:byte" />
+  <xs:element name="dateTime" nillable="true" type="xs:dateTime" />
+  <xs:element name="decimal" nillable="true" type="xs:decimal" />
+  <xs:element name="double" nillable="true" type="xs:double" />
+  <xs:element name="float" nillable="true" type="xs:float" />
+  <xs:element name="int" nillable="true" type="xs:int" />
+  <xs:element name="long" nillable="true" type="xs:long" />
+  <xs:element name="QName" nillable="true" type="xs:QName" />
+  <xs:element name="short" nillable="true" type="xs:short" />
+  <xs:element name="string" nillable="true" type="xs:string" />
+  <xs:element name="unsignedByte" nillable="true" type="xs:unsignedByte" />
+  <xs:element name="unsignedInt" nillable="true" type="xs:unsignedInt" />
+  <xs:element name="unsignedLong" nillable="true" type="xs:unsignedLong" />
+  <xs:element name="unsignedShort" nillable="true" type="xs:unsignedShort" />
+  <xs:element name="char" nillable="true" type="tns:char" />
+  <xs:simpleType name="char">
+    <xs:restriction base="xs:int" />
+  </xs:simpleType>
+  <xs:element name="duration" nillable="true" type="tns:duration" />
+  <xs:simpleType name="duration">
+    <xs:restriction base="xs:duration">
+      <xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?" />
+      <xs:minInclusive value="-P10675199DT2H48M5.4775808S" />
+      <xs:maxInclusive value="P10675199DT2H48M5.4775807S" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="guid" nillable="true" type="tns:guid" />
+  <xs:simpleType name="guid">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:attribute name="FactoryType" type="xs:QName" />
+  <xs:attribute name="Id" type="xs:ID" />
+  <xs:attribute name="Ref" type="xs:IDREF" />
 </xs:schema>

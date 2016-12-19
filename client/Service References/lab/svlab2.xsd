@@ -1,285 +1,199 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://desktop-3rkcn07/labservice/svlab.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/SvApp" />
-  <xs:element name="GetLogin">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q1:akun" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetLoginResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="GetLoginResult" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="getTimeLogin">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q2:jadwalPraktikan" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="getTimeLoginResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="getTimeLoginResult" nillable="true" type="q3:ArrayOfjadwalPraktikan" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="getPraktikanPraktikum">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q4:jadwalPraktikan" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="getPraktikanPraktikumResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="getPraktikanPraktikumResult" nillable="true" type="q5:matkul" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="getProfilePraktikan">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q6:praktikan" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="getProfilePraktikanResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="getProfilePraktikanResult" nillable="true" type="q7:praktikan" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetJurusan">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetJurusanResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="GetJurusanResult" nillable="true" type="q8:ArrayOfjurusan" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetAngkatan">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetAngkatanResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="GetAngkatanResult" nillable="true" type="q9:ArrayOfangkatan" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetPraktikan">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q10:praktikan" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetPraktikanResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="GetPraktikanResult" nillable="true" type="q11:ArrayOfpraktikan" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="InsertMultiplePraktikan">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q12:ArrayOfpraktikan" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="InsertMultiplePraktikanResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="InsertMultiplePraktikanResult" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="ViewJadwalUmum">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q13:jadwal_umum" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="ViewJadwalUmumResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="ViewJadwalUmumResult" nillable="true" type="q14:ArrayOfjadwal_umum" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetMatKul">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetMatKulResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="GetMatKulResult" nillable="true" type="q15:ArrayOfmatkul" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetKelas">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetKelasResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="GetKelasResult" nillable="true" type="q16:ArrayOfkelas" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetShift">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetShiftResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="GetShiftResult" nillable="true" type="q17:ArrayOfShift" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="InsertJadwal">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q18:ArrayOfjadwal_umum" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="InsertJadwalResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="InsertJadwalResult" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="DeleteJadwal">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q19:jadwal_umum" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="DeleteJadwalResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="DeleteJadwalResult" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="getStaffID">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="getStaffIDResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="getStaffIDResult" nillable="true" type="q20:ArrayOfStaff" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="getProfileStaff">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q21:Staff" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="getProfileStaffResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="getProfileStaffResult" nillable="true" type="q22:Staff" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetStaffJadwal">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="data" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetStaffJadwalResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="GetStaffJadwalResult" nillable="true" type="q23:ArrayOfjadwalStaff" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="jadwalUmumStaff">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q24:periode" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="jadwalUmumStaffResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="jadwalUmumStaffResult" nillable="true" type="q25:ArrayOfjadwalStaff" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="updateJadwalStaff">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
-        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q26:jadwalStaff" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="updateJadwalStaffResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="updateJadwalStaffResult" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="addPeriode">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q27:periode" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="addPeriodeResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="addPeriodeResult" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="viewPeriode">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="viewPeriodeResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="viewPeriodeResult" nillable="true" type="q28:ArrayOfperiode" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/SvApp" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/SvApp" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="akun">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PeranId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="akun" nillable="true" type="tns:akun" />
+  <xs:complexType name="jadwalPraktikan">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id_jadwal_praktikan" type="xs:int" />
+      <xs:element minOccurs="0" name="id_jadwal_umum" nillable="true" type="tns:jadwal_umum" />
+      <xs:element minOccurs="0" name="nrp" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="jadwalPraktikan" nillable="true" type="tns:jadwalPraktikan" />
+  <xs:complexType name="jadwal_umum">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="fk_jadwalUmum_Shift" nillable="true" type="tns:Shift" />
+      <xs:element minOccurs="0" name="fk_jadwalUmum_kelas" nillable="true" type="tns:kelas" />
+      <xs:element minOccurs="0" name="fk_jadwalUmum_matakuliah" nillable="true" type="tns:matkul" />
+      <xs:element minOccurs="0" name="fk_jadwalUmum_periode" nillable="true" type="tns:periode" />
+      <xs:element minOccurs="0" name="hari" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="id_jadwal_umum" type="xs:int" />
+      <xs:element minOccurs="0" name="id_kelas" type="xs:int" />
+      <xs:element minOccurs="0" name="id_periode" type="xs:int" />
+      <xs:element minOccurs="0" name="id_shift" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="kode_mk" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="jadwal_umum" nillable="true" type="tns:jadwal_umum" />
+  <xs:complexType name="Shift">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id_shift" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="mulai" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="selesai" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="waktu" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Shift" nillable="true" type="tns:Shift" />
+  <xs:complexType name="kelas">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Kelas" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="id_kelas" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="kelas" nillable="true" type="tns:kelas" />
+  <xs:complexType name="matkul">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="kode_mk" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="mata_kuliah" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="matkul" nillable="true" type="tns:matkul" />
+  <xs:complexType name="periode">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="akhirSemester" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="awalSemester" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="id_periode" type="xs:int" />
+      <xs:element minOccurs="0" name="semester" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="periode" nillable="true" type="tns:periode" />
+  <xs:complexType name="ArrayOfjadwalPraktikan">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="jadwalPraktikan" nillable="true" type="tns:jadwalPraktikan" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfjadwalPraktikan" nillable="true" type="tns:ArrayOfjadwalPraktikan" />
+  <xs:complexType name="praktikan">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Foto" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="NRP" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Nama" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Notes" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="angkatan" nillable="true" type="tns:angkatan" />
+      <xs:element minOccurs="0" name="jurusan" nillable="true" type="tns:jurusan" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="praktikan" nillable="true" type="tns:praktikan" />
+  <xs:complexType name="angkatan">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="KodeAngkatan" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TahunAngkatan" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="angkatan" nillable="true" type="tns:angkatan" />
+  <xs:complexType name="jurusan">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="KodeJurusan" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NamaJurusan" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="jurusan" nillable="true" type="tns:jurusan" />
+  <xs:complexType name="ArrayOfjurusan">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="jurusan" nillable="true" type="tns:jurusan" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfjurusan" nillable="true" type="tns:ArrayOfjurusan" />
+  <xs:complexType name="ArrayOfangkatan">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="angkatan" nillable="true" type="tns:angkatan" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfangkatan" nillable="true" type="tns:ArrayOfangkatan" />
+  <xs:complexType name="ArrayOfpraktikan">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="praktikan" nillable="true" type="tns:praktikan" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfpraktikan" nillable="true" type="tns:ArrayOfpraktikan" />
+  <xs:complexType name="ArrayOfjadwal_umum">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="jadwal_umum" nillable="true" type="tns:jadwal_umum" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfjadwal_umum" nillable="true" type="tns:ArrayOfjadwal_umum" />
+  <xs:complexType name="ArrayOfmatkul">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="matkul" nillable="true" type="tns:matkul" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfmatkul" nillable="true" type="tns:ArrayOfmatkul" />
+  <xs:complexType name="ArrayOfkelas">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="kelas" nillable="true" type="tns:kelas" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfkelas" nillable="true" type="tns:ArrayOfkelas" />
+  <xs:complexType name="ArrayOfShift">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Shift" nillable="true" type="tns:Shift" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfShift" nillable="true" type="tns:ArrayOfShift" />
+  <xs:complexType name="ArrayOfStaff">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Staff" nillable="true" type="tns:Staff" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfStaff" nillable="true" type="tns:ArrayOfStaff" />
+  <xs:complexType name="Staff">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="alamat" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="foto" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="id_staff" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="nama" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="no_hp" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Staff" nillable="true" type="tns:Staff" />
+  <xs:complexType name="jadwalStaff">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id_jadwal_staff" type="xs:int" />
+      <xs:element minOccurs="0" name="jadwal_umum" nillable="true" type="tns:jadwal_umum" />
+      <xs:element minOccurs="0" name="staff" nillable="true" type="tns:Staff" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="jadwalStaff" nillable="true" type="tns:jadwalStaff" />
+  <xs:complexType name="ArrayOfjadwalStaff">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="jadwalStaff" nillable="true" type="tns:jadwalStaff" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfjadwalStaff" nillable="true" type="tns:ArrayOfjadwalStaff" />
+  <xs:complexType name="ArrayOfperiode">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="periode" nillable="true" type="tns:periode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfperiode" nillable="true" type="tns:ArrayOfperiode" />
+  <xs:complexType name="ArrayOfpertemuan">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="pertemuan" nillable="true" type="tns:pertemuan" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfpertemuan" nillable="true" type="tns:ArrayOfpertemuan" />
+  <xs:complexType name="pertemuan">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id_jenis_pertemuan" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="id_pertemuan" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="pertemuan" nillable="true" type="tns:pertemuan" />
+  <xs:complexType name="AbsensiPraktikan">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="JadwalPraktikan" nillable="true" type="tns:jadwalPraktikan" />
+      <xs:element minOccurs="0" name="Nilai" type="xs:int" />
+      <xs:element minOccurs="0" name="Pertemuan" nillable="true" type="tns:pertemuan" />
+      <xs:element minOccurs="0" name="id_absensi" type="xs:int" />
+      <xs:element minOccurs="0" name="staff" nillable="true" type="tns:Staff" />
+      <xs:element minOccurs="0" name="waktu_absensi" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AbsensiPraktikan" nillable="true" type="tns:AbsensiPraktikan" />
 </xs:schema>

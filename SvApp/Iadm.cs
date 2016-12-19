@@ -16,7 +16,7 @@ namespace SvApp
         List<jadwalPraktikan> getTimeLogin(jadwalPraktikan data);
 
         [OperationContract]
-        matkul getPraktikanPraktikum(jadwalPraktikan data);
+        List<jadwalPraktikan> getPraktikanPraktikum(string nrp, string shift, int periode);
 
         [OperationContract]
         praktikan getProfilePraktikan(praktikan data);
@@ -58,7 +58,7 @@ namespace SvApp
         Staff getProfileStaff(Staff data);
 
         [OperationContract]
-        List<jadwalStaff> GetStaffJadwal(string data);
+        List<jadwalStaff> GetStaffJadwal(jadwalStaff data);
 
         [OperationContract]
         List<jadwalStaff> jadwalUmumStaff(periode data);
@@ -71,5 +71,14 @@ namespace SvApp
 
         [OperationContract]
         List<periode> viewPeriode();
+
+        [OperationContract]
+        List<pertemuan> GetPertemuan(jadwalPraktikan data);
+
+        [OperationContract]
+        List<pertemuan> ListPertemuan();
+
+        [OperationContract]
+        int PostAbsenPraktikan(AbsensiPraktikan data);
     }
 }
