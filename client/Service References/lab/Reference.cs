@@ -1358,6 +1358,9 @@ namespace client.lab {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/PostAbsenPraktikan", ReplyAction="http://tempuri.org/Iadm/PostAbsenPraktikanResponse")]
         int PostAbsenPraktikan(client.lab.AbsensiPraktikan data);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/GetAbsensiPraktikans", ReplyAction="http://tempuri.org/Iadm/GetAbsensiPraktikansResponse")]
+        client.lab.praktikan[] GetAbsensiPraktikans(client.lab.AbsensiPraktikan data);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1481,6 +1484,10 @@ namespace client.lab {
         
         public int PostAbsenPraktikan(client.lab.AbsensiPraktikan data) {
             return base.Channel.PostAbsenPraktikan(data);
+        }
+        
+        public client.lab.praktikan[] GetAbsensiPraktikans(client.lab.AbsensiPraktikan data) {
+            return base.Channel.GetAbsensiPraktikans(data);
         }
     }
 }

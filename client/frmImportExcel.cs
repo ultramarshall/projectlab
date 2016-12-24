@@ -1,52 +1,52 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using static client.Library.convertFromTo;
+using static client.Library.ConvertFromTo;
 using static client.Library.border;
 using System.Linq;
-using System.Data;
 using DevExpress.XtraEditors;
 using client.lab;
+using static System.String;
 
 namespace client
 {
-    public partial class frmImportExcel : XtraForm
+    public partial class FrmImportExcel : XtraForm
     {
 
-        public frmImportExcel()
+        public FrmImportExcel()
         {
             InitializeComponent();
-            this.FormBorderStyle = FormBorderStyle.None;
+            FormBorderStyle = FormBorderStyle.None;
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 15, 15));
         }
         private void simpleButton2_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
-        OpenFileDialog dialog = new OpenFileDialog();
+
+        readonly OpenFileDialog _dialog = new OpenFileDialog();
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            dialog.Filter = "Excel Files (*.xlsx)|*.xlsx";
-            if (dialog.ShowDialog() == DialogResult.OK)
+            _dialog.Filter = @"Excel Files (*.xlsx)|*.xlsx";
+            if (_dialog.ShowDialog() != DialogResult.OK) return;
+            listBoxControl1.Items.Clear();
+            var list = ExcelSheetList(_dialog.FileName);
+            foreach (var t in list)
             {
-                listBoxControl1.Items.Clear();
-                var list = ExcelSheetList(dialog.FileName);
-                for (int i = 0; i < list.Count(); i++)
-                {
-                    listBoxControl1.Items.Add(list[i].Replace("'", string.Empty));
-                }
+                listBoxControl1.Items.Add(t.Replace("'", Empty));
             }
         }
         private void listBoxControl1_SelectedValueChanged(object sender, EventArgs e)
         {
             try
             {
-                string sheet = listBoxControl1.SelectedItem.ToString().Replace("'", string.Empty);
-                DataTable data = ExcelToDataTable(dialog.FileName, sheet);
+                var sheet = listBoxControl1.SelectedItem.ToString().Replace("'", Empty);
+                var data = ExcelToDataTable(_dialog.FileName, sheet);
                 listBoxControl2.Items.Clear();
-                for (int i = 0; i < data.Rows.Count; i++)
+                for (var i = 0; i < data.Rows.Count; i++)
                 {
-                    listBoxControl2.Items.Add(string.Format("{0:000}           {1,-20}         {2,-20}", i + 1, data.Rows[i][0], data.Rows[i][1]));
+                    listBoxControl2.Items.Add(
+                        $"{i + 1:000}           {data.Rows[i][0],-20}         {data.Rows[i][1],-20}");
                 }
                 if (data.Rows.Count <= 0)
                 {
@@ -62,40 +62,39 @@ namespace client
             catch (Exception)
             {
                 //XtraMessageBox.Show(error.ToString());
-                return;
             }
         }
         private void simpleButton3_Click(object sender, EventArgs e)
         {
-            string sheet = listBoxControl1.SelectedItem.ToString().Replace("'", string.Empty);
-            DataTable data = ExcelToDataTable(dialog.FileName, sheet);
-            praktikan[] praktikan = new praktikan[data.Rows.Count];
-            string jur = String.Empty;
-            string angk = String.Empty;
-            for (int i = 0; i < data.Rows.Count; i++)
+            var sheet = listBoxControl1.SelectedItem.ToString().Replace("'", Empty);
+            var data = ExcelToDataTable(_dialog.FileName, sheet);
+            var praktikan = new praktikan[data.Rows.Count];
+            var jur = Empty;
+            var angk = Empty;
+            for (var i = 0; i < data.Rows.Count; i++)
             {
                 
-                string nrpmhs = data.Rows[i][0].ToString();
-                praktikan biodata = new praktikan()
+                var nrpmhs = data.Rows[i][0].ToString();
+                var biodata = new praktikan()
                 {
                     NRP = data.Rows[i][0].ToString(),
                     Nama = data.Rows[i][1].ToString(),
-                    jurusan = new jurusan() { KodeJurusan = String.Concat(nrpmhs[0], nrpmhs[1], nrpmhs[2]) },
-                    angkatan = new angkatan() { KodeAngkatan = String.Concat(nrpmhs[3], nrpmhs[4]) },
-                    Foto = imageToByteArray(pictureEdit1.Image)
+                    jurusan = new jurusan() { KodeJurusan = Concat(nrpmhs[0], nrpmhs[1], nrpmhs[2]) },
+                    angkatan = new angkatan() { KodeAngkatan = Concat(nrpmhs[3], nrpmhs[4]) },
+                    Foto = ImageToByteArray(pictureEdit1.Image)
                 };
                 praktikan[i] = biodata;
-                jur = String.Concat(nrpmhs[0], nrpmhs[1], nrpmhs[2]);
-                angk = String.Concat(nrpmhs[3], nrpmhs[4]);
+                jur = Concat(nrpmhs[0], nrpmhs[1], nrpmhs[2]);
+                angk = Concat(nrpmhs[3], nrpmhs[4]);
 
             }
             try
             {
-                IadmClient service = new IadmClient();
+                var service = new IadmClient();
                 var jurusan = service.GetJurusan().FirstOrDefault(q => q.KodeJurusan == jur);
                 var angkatan = service.GetAngkatan().FirstOrDefault(q => q.KodeAngkatan == angk);
-                string j = jurusan.KodeJurusan;
-                string a = angkatan.KodeAngkatan;
+                var j = jurusan?.KodeJurusan;
+                var a = angkatan?.KodeAngkatan;
                 if (j == jur && a == angk)
                 {
                     service.InsertMultiplePraktikan(praktikan);

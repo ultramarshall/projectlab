@@ -127,4 +127,10 @@
   <data name="oy0v8Y" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\oy0v8Y.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="FrmMain_LoginButton_Click_Praktikum_" xml:space="preserve">
+    <value>Praktikum </value>
+  </data>
+  <data name="Form6_Check__false" xml:space="preserve">
+    <value>false</value>
+  </data>
 </root>

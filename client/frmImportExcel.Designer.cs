@@ -1,6 +1,6 @@
 ﻿namespace client
 {
-    partial class frmImportExcel
+    partial class FrmImportExcel
     {
         /// <summary>
         /// Required designer variable.
@@ -320,7 +320,7 @@
             this.emptySpaceItem10.Size = new System.Drawing.Size(87, 247);
             this.emptySpaceItem10.TextSize = new System.Drawing.Size(0, 0);
             // 
-            // frmImportExcel
+            // FrmImportExcel
             // 
             this.Appearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.Appearance.Options.UseBorderColor = true;
@@ -330,7 +330,7 @@
             this.Controls.Add(this.layoutControl1);
             this.FormBorderEffect = DevExpress.XtraEditors.FormBorderEffect.Shadow;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "frmImportExcel";
+            this.Name = "FrmImportExcel";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form2";
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();

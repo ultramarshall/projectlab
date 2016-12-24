@@ -4,9 +4,9 @@ using DevExpress.XtraEditors;
 using static client.Library.border;
 namespace client
 {
-    public partial class frmExitApp : DevExpress.XtraEditors.XtraForm
+    public partial class FrmExitApp : XtraForm
     {
-        public frmExitApp()
+        public FrmExitApp()
         {
             InitializeComponent();
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 15, 15));
@@ -15,7 +15,7 @@ namespace client
         private void simpleButton1_Click(object sender, EventArgs e)
         {
             var year = int.Parse("2014");
-            DateTime dateTime = new DateTime(year, 1, 1);
+            var dateTime = new DateTime(year, 1, 1);
             XtraMessageBox.Show(dateTime.ToString("yyyy"));
         }
     }

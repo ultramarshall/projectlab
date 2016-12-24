@@ -61,6 +61,24 @@ namespace client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to false.
+        /// </summary>
+        internal static string Form6_Check__false {
+            get {
+                return ResourceManager.GetString("Form6_Check__false", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Praktikum .
+        /// </summary>
+        internal static string FrmMain_LoginButton_Click_Praktikum_ {
+            get {
+                return ResourceManager.GetString("FrmMain_LoginButton_Click_Praktikum_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap oy0v8Y {

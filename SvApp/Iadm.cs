@@ -80,5 +80,8 @@ namespace SvApp
 
         [OperationContract]
         int PostAbsenPraktikan(AbsensiPraktikan data);
+
+        [OperationContract]
+        List<praktikan> GetAbsensiPraktikans(AbsensiPraktikan data);
     }
 }

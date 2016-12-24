@@ -1,6 +1,6 @@
 ﻿namespace client
 {
-    partial class frmTambahJadwalUmum
+    partial class FrmTambahJadwalUmum
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTambahJadwalUmum));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmTambahJadwalUmum));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.comboBoxEdit2 = new DevExpress.XtraEditors.ComboBoxEdit();
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
@@ -116,8 +116,8 @@
             this.simpleButton2.Size = new System.Drawing.Size(61, 22);
             this.simpleButton2.StyleController = this.layoutControl1;
             this.simpleButton2.TabIndex = 16;
-            this.simpleButton2.Text = "batal";
-            this.simpleButton2.Click += new System.EventHandler(this.batal);
+            this.simpleButton2.Text = "Batal";
+            this.simpleButton2.Click += new System.EventHandler(this.Batal);
             // 
             // simpleButton1
             // 
@@ -127,8 +127,8 @@
             this.simpleButton1.Size = new System.Drawing.Size(61, 22);
             this.simpleButton1.StyleController = this.layoutControl1;
             this.simpleButton1.TabIndex = 15;
-            this.simpleButton1.Text = "simpan";
-            this.simpleButton1.Click += new System.EventHandler(this.simpan);
+            this.simpleButton1.Text = "Simpan";
+            this.simpleButton1.Click += new System.EventHandler(this.Simpan);
             // 
             // labelControl3
             // 
@@ -362,7 +362,7 @@
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
-            // frmTambahJadwalUmum
+            // FrmTambahJadwalUmum
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -370,7 +370,7 @@
             this.Controls.Add(this.layoutControl1);
             this.FormBorderEffect = DevExpress.XtraEditors.FormBorderEffect.Shadow;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "frmTambahJadwalUmum";
+            this.Name = "FrmTambahJadwalUmum";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form3";
             this.Load += new System.EventHandler(this.Form3_Load);

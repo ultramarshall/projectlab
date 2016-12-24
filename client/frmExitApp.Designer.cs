@@ -1,6 +1,6 @@
 ﻿namespace client
 {
-    partial class frmExitApp
+    partial class FrmExitApp
     {
         /// <summary>
         /// Required designer variable.
@@ -116,7 +116,7 @@
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
-            // frmExitApp
+            // FrmExitApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -124,7 +124,7 @@
             this.Controls.Add(this.layoutControl1);
             this.FormBorderEffect = DevExpress.XtraEditors.FormBorderEffect.Shadow;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "frmExitApp";
+            this.Name = "FrmExitApp";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form5";
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();

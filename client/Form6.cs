@@ -1,14 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
-using System.Linq;
-using System.Windows.Forms;
 using DevExpress.XtraEditors;
-using System.Text.RegularExpressions;
-using DevExpress.Utils;
 using static client.Library.Method;
 namespace client
 {
@@ -39,13 +31,12 @@ namespace client
 
         }
 
-        bool check(string souceString, string stringLike)
+        private bool Check(string souceString, string stringLike)
         {
-            bool a = false;
+            var a = false;
 
             try
             {
-                bool result = false;
                 int y = souceString.Length;
                 int x = stringLike.Length;
 
@@ -56,22 +47,20 @@ namespace client
                         x = x - 1;
                     }
 
-                    result = souceString.Substring(i, x).Like(stringLike);
+                    var result = souceString.Substring(i, x).Like(stringLike);
 
-                    if (result == true)
+                    if (result)
                     {
                         a = true;
                         continue;
                     }
-                    ;
-                    Console.WriteLine(result);
                 }
 
             }
             catch (Exception)
             {
-                this.labelControl1.Text = "false";
-                this.labelControl1.ForeColor = Color.Red;
+                labelControl1.Text = @"false";
+                labelControl1.ForeColor = Color.Red;
             }
             return a;
         }

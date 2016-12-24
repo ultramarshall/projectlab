@@ -8,9 +8,9 @@ using System.Linq;
 
 namespace client
 {
-    public partial class frmPeriode : DevExpress.XtraEditors.XtraForm
+    public partial class FrmPeriode : XtraForm
     {
-        public frmPeriode()
+        public FrmPeriode()
         {
             InitializeComponent();
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 15, 15));
@@ -27,10 +27,8 @@ namespace client
             //
             gridControl1.DataSource = service.viewPeriode().Select(x => new
                                                             {
-                                                                semester = string.Format("{0} {1}/{2}", 
-                                                                               x.semester, 
-                                                                               x.awalSemester.ToString("yyyy"), 
-                                                                               x.akhirSemester.ToString("yyyy")),
+                                                                semester =
+                                                                    $"{x.semester} {x.awalSemester.ToString("yyyy")}/{x.akhirSemester.ToString("yyyy")}",
                                                                 awalSemester = x.awalSemester.ToString("dd MMMM yyyy", new CultureInfo("id-ID")),
                                                                 akhirSemester = x.akhirSemester.ToString("dd MMMM yyyy", new CultureInfo("id-ID")),
                                                             }).ToList();
@@ -38,17 +36,17 @@ namespace client
             service.Close();
         }
       
-        private void DateFormatCultureInfo(DateEdit Control1, DateEdit Control2)
+        private void DateFormatCultureInfo(DateEdit control1, DateEdit control2)
         {
-            CultureInfo(Control1);
-            CultureInfo(Control2);
+            CultureInfo(control1);
+            CultureInfo(control2);
         }
 
-        private void CultureInfo(DateEdit Control)
+        private void CultureInfo(DateEdit control)
         {
-            Control.Properties.Mask.Culture = new CultureInfo("id-ID");
-            Control.Properties.Mask.EditMask = "dd MMMM yyyy";
-            Control.Properties.Mask.UseMaskAsDisplayFormat = true;
+            control.Properties.Mask.Culture = new CultureInfo("id-ID");
+            control.Properties.Mask.EditMask = @"dd MMMM yyyy";
+            control.Properties.Mask.UseMaskAsDisplayFormat = true;
             //dateEdit1.Properties.CharacterCasing = CharacterCasing.Upper;
         }
 
@@ -67,10 +65,7 @@ namespace client
             service.addPeriode(data);
             gridControl1.DataSource = service.viewPeriode().Select(x => new
             {
-                semester = string.Format("{0} {1}/{2}",
-                                                                               x.semester,
-                                                                               x.awalSemester.ToString("yyyy"),
-                                                                               x.akhirSemester.ToString("yyyy")),
+                semester = $"{x.semester} {x.awalSemester.ToString("yyyy")}/{x.akhirSemester.ToString("yyyy")}",
                 awalSemester = x.awalSemester.ToString("dd MMMM yyyy", new CultureInfo("id-ID")),
                 akhirSemester = x.akhirSemester.ToString("dd MMMM yyyy", new CultureInfo("id-ID"))
             }).ToList();
