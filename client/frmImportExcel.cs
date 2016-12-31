@@ -12,19 +12,20 @@ namespace client
 {
     public partial class FrmImportExcel : XtraForm
     {
-
         public FrmImportExcel()
         {
             InitializeComponent();
             FormBorderStyle = FormBorderStyle.None;
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 15, 15));
         }
+
         private void simpleButton2_Click(object sender, EventArgs e)
         {
             Close();
         }
 
         readonly OpenFileDialog _dialog = new OpenFileDialog();
+
         private void simpleButton1_Click(object sender, EventArgs e)
         {
             _dialog.Filter = @"Excel Files (*.xlsx)|*.xlsx";
@@ -36,6 +37,7 @@ namespace client
                 listBoxControl1.Items.Add(t.Replace("'", Empty));
             }
         }
+
         private void listBoxControl1_SelectedValueChanged(object sender, EventArgs e)
         {
             try
@@ -64,6 +66,7 @@ namespace client
                 //XtraMessageBox.Show(error.ToString());
             }
         }
+
         private void simpleButton3_Click(object sender, EventArgs e)
         {
             var sheet = listBoxControl1.SelectedItem.ToString().Replace("'", Empty);
@@ -73,20 +76,18 @@ namespace client
             var angk = Empty;
             for (var i = 0; i < data.Rows.Count; i++)
             {
-                
                 var nrpmhs = data.Rows[i][0].ToString();
                 var biodata = new praktikan()
                 {
                     NRP = data.Rows[i][0].ToString(),
                     Nama = data.Rows[i][1].ToString(),
-                    jurusan = new jurusan() { KodeJurusan = Concat(nrpmhs[0], nrpmhs[1], nrpmhs[2]) },
-                    angkatan = new angkatan() { KodeAngkatan = Concat(nrpmhs[3], nrpmhs[4]) },
+                    jurusan = new jurusan() {KodeJurusan = Concat(nrpmhs[0], nrpmhs[1], nrpmhs[2])},
+                    angkatan = new angkatan() {KodeAngkatan = Concat(nrpmhs[3], nrpmhs[4])},
                     Foto = ImageToByteArray(pictureEdit1.Image)
                 };
                 praktikan[i] = biodata;
                 jur = Concat(nrpmhs[0], nrpmhs[1], nrpmhs[2]);
                 angk = Concat(nrpmhs[3], nrpmhs[4]);
-
             }
             try
             {
@@ -100,12 +101,11 @@ namespace client
                     service.InsertMultiplePraktikan(praktikan);
                 }
                 service.Close();
-
-            } catch (Exception)
+            }
+            catch (Exception)
             {
                 XtraMessageBox.Show("Gagal import data mahasiswa.");
             }
-           
         }
     }
 }

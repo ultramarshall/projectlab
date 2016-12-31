@@ -10,6 +10,7 @@ using DevExpress.XtraEditors.Controls;
 using client.lab;
 using static client.Library.border;
 using static client.Library.Method;
+
 namespace client
 {
     public partial class FrmTambahJadwalUmum : XtraForm
@@ -28,16 +29,16 @@ namespace client
             var jadwal = new DataTable();
 
 
-            jadwal.Columns.Add("Hari", typeof(string));
-            jadwal.Columns.Add("Shit", typeof(string));
-            jadwal.Columns.Add("jam", typeof(string));
-            jadwal.Columns.Add("Praktikum", typeof(string));
-            jadwal.Columns.Add("Kelas", typeof(string));
+            jadwal.Columns.Add("Hari", typeof (string));
+            jadwal.Columns.Add("Shit", typeof (string));
+            jadwal.Columns.Add("jam", typeof (string));
+            jadwal.Columns.Add("Praktikum", typeof (string));
+            jadwal.Columns.Add("Kelas", typeof (string));
 
 
-            string[] hari = { "Senin", "Selasa", "Rabu", "Kamis", "Jumat" };
-            string[] shift = { "I", "II", "III", "IV" };
-            string[] jam = { "08:00 - 09:40", "09:50 - 11:30", "11:40 - 13:20", "13:30 - 15:10" };
+            string[] hari = {"Senin", "Selasa", "Rabu", "Kamis", "Jumat"};
+            string[] shift = {"I", "II", "III", "IV"};
+            string[] jam = {"08:00 - 09:40", "09:50 - 11:30", "11:40 - 13:20", "13:30 - 15:10"};
             foreach (string t in hari)
             {
                 for (var s = 0; s < shift.Length; s++)
@@ -84,7 +85,6 @@ namespace client
 
             gridView1.Columns["Praktikum"].ColumnEdit = cmbbxPraktikum;
             gridView1.Columns["Kelas"].ColumnEdit = cmbbxMk;
-            
         }
 
         private void Batal(object sender, EventArgs e)
@@ -97,12 +97,11 @@ namespace client
             var service = new IadmClient();
             var jadwal = new List<jadwal_umum>();
 
-            
 
             var idPeriode = service.viewPeriode().FirstOrDefault(
                 q => q.awalSemester.ToString("yyyy") == comboBoxEdit2.SelectedItem.ToString().Substring(0, 4)
-                && q.akhirSemester.ToString("yyyy") == comboBoxEdit2.SelectedItem.ToString().Substring(5, 4)
-                && q.semester == comboBoxEdit1.SelectedItem.ToString());
+                     && q.akhirSemester.ToString("yyyy") == comboBoxEdit2.SelectedItem.ToString().Substring(5, 4)
+                     && q.semester == comboBoxEdit1.SelectedItem.ToString());
 
             if (idPeriode == null)
             {
@@ -151,15 +150,13 @@ namespace client
                 try
                 {
                     service.InsertJadwal(jadd);
-                } catch(Exception)
+                }
+                catch (Exception)
                 {
                     //XtraMessageBox.Show(error.ToString());
                     XtraMessageBox.Show("Tidak ada jadwal yg ditambahkan");
                 }
             }
-
-
-
         }
     }
 }

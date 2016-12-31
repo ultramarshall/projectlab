@@ -26,16 +26,16 @@ namespace client
 
             //
             gridControl1.DataSource = service.viewPeriode().Select(x => new
-                                                            {
-                                                                semester =
-                                                                    $"{x.semester} {x.awalSemester.ToString("yyyy")}/{x.akhirSemester.ToString("yyyy")}",
-                                                                awalSemester = x.awalSemester.ToString("dd MMMM yyyy", new CultureInfo("id-ID")),
-                                                                akhirSemester = x.akhirSemester.ToString("dd MMMM yyyy", new CultureInfo("id-ID")),
-                                                            }).ToList();
+            {
+                semester =
+                    $"{x.semester} {x.awalSemester.ToString("yyyy")}/{x.akhirSemester.ToString("yyyy")}",
+                awalSemester = x.awalSemester.ToString("dd MMMM yyyy", new CultureInfo("id-ID")),
+                akhirSemester = x.akhirSemester.ToString("dd MMMM yyyy", new CultureInfo("id-ID")),
+            }).ToList();
 
             service.Close();
         }
-      
+
         private void DateFormatCultureInfo(DateEdit control1, DateEdit control2)
         {
             CultureInfo(control1);

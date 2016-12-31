@@ -4,15 +4,14 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace SvApp
-{
-    [DataContract]
-    public class kelas
-    {
-        [DataMember]
-        public int id_kelas { get; set; }
+namespace SvApp {
 
-        [DataMember]
-        public string Kelas { get; set; }
+    [DataContract] public class kelas {
+
+        [DataMember] public int id_kelas { get; set; }
+
+        [DataMember] public string Kelas { get; set; }
+
     }
+
 }

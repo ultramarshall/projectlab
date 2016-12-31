@@ -4,19 +4,15 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace SvApp
-{
-    [DataContract]
-    public class jadwalStaff
-    {
-        [DataMember]
-        public int id_jadwal_staff { get; set; }
+namespace SvApp {
 
-        [DataMember]
-        public Staff staff { get; set; }
+    [DataContract] public class jadwalStaff {
 
-        [DataMember]
-        public jadwal_umum jadwal_umum { get; set; }
+        [DataMember] public int id_jadwal_staff { get; set; }
+
+        [DataMember] public Staff staff { get; set; }
+
+        [DataMember] public jadwal_umum jadwal_umum { get; set; }
 
         //[DataMember]
         //public string hari { get; set; }
@@ -33,4 +29,5 @@ namespace SvApp
         //[DataMember]
         //public string waktu { get; set; }
     }
+
 }

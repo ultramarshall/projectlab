@@ -12,6 +12,7 @@ namespace client.Library
     public static class Method
     {
         public static List<jurusan> ListJurusan = new List<jurusan>();
+
         public static string PostLogin(string username, string password)
         {
             try
@@ -27,14 +28,14 @@ namespace client.Library
                 string roles = service.GetLogin(user).TrimEnd();
                 service.Close();
                 return roles;
-            } 
+            }
             catch (Exception)
             {
                 throw;
             }
         }
 
-        public static void ComboBoxEditAdd(string option ,ComboBoxEdit comboBoxEdit)
+        public static void ComboBoxEditAdd(string option, ComboBoxEdit comboBoxEdit)
         {
             var service = new IadmClient();
             comboBoxEdit.Properties.Items.Clear();
@@ -56,7 +57,13 @@ namespace client.Library
             }
             if (option == "Periode")
             {
-                var periode = service.viewPeriode().Select(z => new { start = z.awalSemester.ToString("yyyy"), finish = z.akhirSemester.ToString("yyyy") }).Distinct().ToList();
+                var periode =
+                    service.viewPeriode()
+                        .Select(
+                            z =>
+                                new {start = z.awalSemester.ToString("yyyy"), finish = z.akhirSemester.ToString("yyyy")})
+                        .Distinct()
+                        .ToList();
                 for (int i = 0; i < periode.Count(); i++)
                 {
                     comboBoxEdit.Properties.Items.Add($"{periode[i].start:yyyy}/{periode[i].finish:yyyy}");
@@ -75,7 +82,8 @@ namespace client.Library
             service.Close();
         }
 
-        public static void CariPraktikan(ComboBoxEdit comboBoxEdit1, ComboBoxEdit comboBoxEdit2, GridControl gridcontrol, GridView gridview)
+        public static void CariPraktikan(ComboBoxEdit comboBoxEdit1, ComboBoxEdit comboBoxEdit2, GridControl gridcontrol,
+            GridView gridview)
         {
             try
             {
@@ -89,14 +97,26 @@ namespace client.Library
 
                 praktikan data = new praktikan()
                 {
-                    angkatan= new angkatan() { KodeAngkatan = angkatan?.KodeAngkatan },
-                    jurusan = new jurusan() { KodeJurusan = jurusan?.KodeJurusan }
+                    angkatan = new angkatan() {KodeAngkatan = angkatan?.KodeAngkatan},
+                    jurusan = new jurusan() {KodeJurusan = jurusan?.KodeJurusan}
                 };
-                gridcontrol.DataSource = service.GetPraktikan(data).Select(x => new { x.Foto, x.NRP, x.Nama, KodeAngkatan = x.angkatan.KodeAngkatan, KodeJurusan = x.jurusan.KodeJurusan}).ToList();
+                gridcontrol.DataSource =
+                    service.GetPraktikan(data)
+                        .Select(
+                            x =>
+                                new
+                                {
+                                    x.Foto,
+                                    x.NRP,
+                                    x.Nama,
+                                    KodeAngkatan = x.angkatan.KodeAngkatan,
+                                    KodeJurusan = x.jurusan.KodeJurusan
+                                })
+                        .ToList();
                 gridview.RowHeight = 60;
                 gridview.Columns["Foto"].Width = 70;
                 gridview.Columns["NRP"].Width = 150;
-               
+
                 gridview.Columns["NRP"].Caption = @"NO MAHASISWA";
                 gridview.Columns["Foto"].Caption = @"FOTO";
                 gridview.Columns["Nama"].Caption = @"NAMA";
@@ -107,21 +127,62 @@ namespace client.Library
                 {
                     gridview.Columns[i].AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
                 }
-                    
+
                 service.Close();
             }
-            catch(Exception)
+            catch (Exception)
             {
                 //XtraMessageBox.Show(err.ToString());
                 //XtraMessageBox.Show("data pencarian tidak lengkap");
                 throw;
             }
-
         }
 
         public static bool Like(this string toSearch, string toFind)
         {
-            return new Regex(@"\A" + new Regex(@"\.|\$|\^|\{|\[|\(|\||\)|\*|\+|\?|\\").Replace(toFind, ch => @"\" + ch).Replace('_', '.').Replace("%", ".*") + @"\z", RegexOptions.Singleline).IsMatch(toSearch);
+            return
+                new Regex(
+                    @"\A" +
+                    new Regex(@"\.|\$|\^|\{|\[|\(|\||\)|\*|\+|\?|\\").Replace(toFind, ch => @"\" + ch)
+                        .Replace('_', '.')
+                        .Replace("%", ".*") + @"\z", RegexOptions.Singleline).IsMatch(toSearch);
+        }
+
+        public static void AddPeriode(ComboBoxEdit comboBoxEdits)
+        {
+            comboBoxEdits.Properties.Items.Clear();
+            var service = new IadmClient();
+            comboBoxEdits.Properties.Items.AddRange(service.viewPeriode().Select(x => x.semester + " " +
+                                                                                      x.awalSemester.ToString("yyyy") +
+                                                                                      "/" +
+                                                                                      x.akhirSemester.ToString("yyyy"))
+                .ToList());
+            comboBoxEdits.SelectedIndex = 0;
+            service.Close();
+        }
+
+        public static int PeriodeId(ComboBoxEdit comboBoxEdits)
+        {
+            var service = new IadmClient();
+
+            var s = new string[3];
+            var combobox = comboBoxEdits.SelectedItem.ToString();
+            if (combobox[5] != ' ')
+            {
+                s[0] = "Ganjil";
+                s[1] = combobox.Substring(7, 4);
+                s[2] = combobox.Substring(12, 4);
+            }
+            else
+            {
+                s[0] = "Genap";
+                s[1] = combobox.Substring(6, 4);
+                s[2] = combobox.Substring(11, 4);
+            }
+            var p = service.viewPeriode().FirstOrDefault(x => x.semester == s[0] &&
+                                                              x.awalSemester.ToString("yyyy") == s[1] &&
+                                                              x.akhirSemester.ToString("yyyy") == s[2]);
+            return p.id_periode;
         }
     }
 }

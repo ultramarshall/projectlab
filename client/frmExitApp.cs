@@ -2,6 +2,7 @@
 using System.Drawing;
 using DevExpress.XtraEditors;
 using static client.Library.border;
+
 namespace client
 {
     public partial class FrmExitApp : XtraForm
