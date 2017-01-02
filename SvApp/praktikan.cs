@@ -4,25 +4,33 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace SvApp {
+namespace SvApp
+{
+    [DataContract]
+    public class praktikan
+    {
+        [DataMember]
+        public string NRP { get; set; }
 
-    [DataContract] public class praktikan {
+        [DataMember]
+        public string Nama { get; set; }
 
-        [DataMember] public string NRP { get; set; }
+        [DataMember]
+        public jurusan jurusan { get; set; }
 
-        [DataMember] public string Nama { get; set; }
+        [DataMember]
+        public angkatan angkatan { get; set; }
 
-        [DataMember] public jurusan jurusan { get; set; }
+        [DataMember]
+        public Byte[] Foto { get; set; }
 
-        [DataMember] public angkatan angkatan { get; set; }
+        [DataMember]
+        public string Notes { get; set; }
 
-        [DataMember] public Byte[] Foto { get; set; }
+        [DataMember]
+        public Users Users { get; set; }
 
-        [DataMember] public string Notes { get; set; }
-
-        [DataMember] public Users Users { get; set; }
-
-        [DataMember] public AbsensiPraktikan absen { get; set; }
+        [DataMember]
+        public AbsensiPraktikan absen { get; set; }
     }
-
 }

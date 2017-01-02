@@ -335,6 +335,8 @@
             this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.navBarControl1 = new DevExpress.XtraNavBar.NavBarControl();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.simpleButton10 = new DevExpress.XtraEditors.SimpleButton();
+            this.layoutControlItem28 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.Interface)).BeginInit();
             this.Interface.SuspendLayout();
             this.InterfaceLogin.SuspendLayout();
@@ -608,6 +610,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem31)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.accordionControl3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem28)).BeginInit();
             this.SuspendLayout();
             // 
             // Interface
@@ -675,6 +678,7 @@
             // 
             // layoutControl3
             // 
+            this.layoutControl3.Controls.Add(this.simpleButton10);
             this.layoutControl3.Controls.Add(this.simpleButton2);
             this.layoutControl3.Controls.Add(this.listBoxControl1);
             this.layoutControl3.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -687,9 +691,9 @@
             // 
             // simpleButton2
             // 
-            this.simpleButton2.Location = new System.Drawing.Point(165, 116);
+            this.simpleButton2.Location = new System.Drawing.Point(103, 116);
             this.simpleButton2.Name = "simpleButton2";
-            this.simpleButton2.Size = new System.Drawing.Size(104, 22);
+            this.simpleButton2.Size = new System.Drawing.Size(80, 22);
             this.simpleButton2.StyleController = this.layoutControl3;
             this.simpleButton2.TabIndex = 5;
             this.simpleButton2.Text = "mulai";
@@ -711,7 +715,8 @@
             this.layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem6,
             this.layoutControlItem7,
-            this.emptySpaceItem9});
+            this.emptySpaceItem9,
+            this.layoutControlItem28});
             this.layoutControlGroup3.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup3.Name = "layoutControlGroup3";
             this.layoutControlGroup3.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
@@ -731,9 +736,9 @@
             // layoutControlItem7
             // 
             this.layoutControlItem7.Control = this.simpleButton2;
-            this.layoutControlItem7.Location = new System.Drawing.Point(163, 114);
+            this.layoutControlItem7.Location = new System.Drawing.Point(101, 114);
             this.layoutControlItem7.Name = "layoutControlItem7";
-            this.layoutControlItem7.Size = new System.Drawing.Size(108, 26);
+            this.layoutControlItem7.Size = new System.Drawing.Size(84, 26);
             this.layoutControlItem7.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem7.TextVisible = false;
             // 
@@ -742,12 +747,11 @@
             this.emptySpaceItem9.AllowHotTrack = false;
             this.emptySpaceItem9.Location = new System.Drawing.Point(0, 114);
             this.emptySpaceItem9.Name = "emptySpaceItem9";
-            this.emptySpaceItem9.Size = new System.Drawing.Size(163, 26);
+            this.emptySpaceItem9.Size = new System.Drawing.Size(101, 26);
             this.emptySpaceItem9.TextSize = new System.Drawing.Size(0, 0);
             // 
             // Jadwal_Blank
             // 
-            this.Jadwal_Blank.Caption = "Jadwal_Blank";
             this.Jadwal_Blank.Name = "Jadwal_Blank";
             this.Jadwal_Blank.Size = new System.Drawing.Size(271, 140);
             // 
@@ -2281,7 +2285,6 @@
             this.textEdit4.Size = new System.Drawing.Size(286, 20);
             this.textEdit4.StyleController = this.layoutControl15;
             this.textEdit4.TabIndex = 5;
-            this.textEdit4.EditValueChanging += new DevExpress.XtraEditors.Controls.ChangingEventHandler(this.textEdit4_EditValueChanging);
             // 
             // pictureEdit5
             // 
@@ -3477,7 +3480,6 @@
             this.accordionControlElement26.Name = "accordionControlElement26";
             this.accordionControlElement26.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
             this.accordionControlElement26.Text = "absensi Praktikan";
-            this.accordionControlElement26.Click += new System.EventHandler(this.accordionControlElement26_Click);
             // 
             // accordionControlElement25
             // 
@@ -3815,6 +3817,27 @@
             this.navBarControl1.TabIndex = 5;
             this.navBarControl1.Text = "navBarControl1";
             // 
+            // simpleButton10
+            // 
+            this.simpleButton10.Location = new System.Drawing.Point(187, 116);
+            this.simpleButton10.Name = "simpleButton10";
+            this.simpleButton10.Size = new System.Drawing.Size(82, 22);
+            this.simpleButton10.StyleController = this.layoutControl3;
+            this.simpleButton10.TabIndex = 6;
+            this.simpleButton10.Text = "tutup";
+            this.simpleButton10.Click += new System.EventHandler(this.CloseLogin);
+            // 
+            // layoutControlItem28
+            // 
+            this.layoutControlItem28.Control = this.simpleButton10;
+            this.layoutControlItem28.Location = new System.Drawing.Point(185, 114);
+            this.layoutControlItem28.MinSize = new System.Drawing.Size(86, 26);
+            this.layoutControlItem28.Name = "layoutControlItem28";
+            this.layoutControlItem28.Size = new System.Drawing.Size(86, 26);
+            this.layoutControlItem28.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem28.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem28.TextVisible = false;
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4099,6 +4122,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem31)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.accordionControl3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem28)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -4410,6 +4434,8 @@
         private DevExpress.XtraEditors.SimpleButton simpleButton20;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem62;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem27;
+        private DevExpress.XtraEditors.SimpleButton simpleButton10;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem28;
     }
 }
 

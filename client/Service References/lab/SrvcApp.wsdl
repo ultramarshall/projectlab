@@ -1,24 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-
-<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy"
-                  xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/"
-                  xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract"
-                  xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
-                  xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex"
-                  xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
-                  xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata"
-                  xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
-                  xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
-                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-                  xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
-                  xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
-                  xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="SrvcApp" targetNamespace="http://tempuri.org/"
-                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="SrvcApp" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsp:Policy wsu:Id="WSHttpBinding_Iadm_policy">
     <wsp:ExactlyOne>
       <wsp:All>
-        <wsoma:OptimizedMimeSerialization
-          xmlns:wsoma="http://schemas.xmlsoap.org/ws/2004/09/policy/optimizedmimeserialization" />
+        <wsoma:OptimizedMimeSerialization xmlns:wsoma="http://schemas.xmlsoap.org/ws/2004/09/policy/optimizedmimeserialization" />
         <wsaw:UsingAddressing />
       </wsp:All>
     </wsp:ExactlyOne>
@@ -26,10 +11,8 @@
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://desktop-3rkcn07/lab/svlab.svc?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://desktop-3rkcn07/lab/svlab.svc?xsd=xsd1"
-                  namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://desktop-3rkcn07/lab/svlab.svc?xsd=xsd2"
-                  namespace="http://schemas.datacontract.org/2004/07/SvApp" />
+      <xsd:import schemaLocation="http://desktop-3rkcn07/lab/svlab.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://desktop-3rkcn07/lab/svlab.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/SvApp" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="Iadm_GetLogin_InputMessage">
@@ -212,6 +195,12 @@
   <wsdl:message name="Iadm_KonfirmasiAbsensi_OutputMessage">
     <wsdl:part name="parameters" element="tns:KonfirmasiAbsensiResponse" />
   </wsdl:message>
+  <wsdl:message name="Iadm_HapusAbsensi_InputMessage">
+    <wsdl:part name="parameters" element="tns:HapusAbsensi" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_HapusAbsensi_OutputMessage">
+    <wsdl:part name="parameters" element="tns:HapusAbsensiResponse" />
+  </wsdl:message>
   <wsdl:portType name="Iadm">
     <wsdl:operation name="GetLogin">
       <wsdl:input wsaw:Action="http://tempuri.org/Iadm/GetLogin" message="tns:Iadm_GetLogin_InputMessage" />
@@ -219,30 +208,23 @@
     </wsdl:operation>
     <wsdl:operation name="getTimeLogin">
       <wsdl:input wsaw:Action="http://tempuri.org/Iadm/getTimeLogin" message="tns:Iadm_getTimeLogin_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/getTimeLoginResponse"
-                   message="tns:Iadm_getTimeLogin_OutputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/getTimeLoginResponse" message="tns:Iadm_getTimeLogin_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="getPraktikanPraktikum">
-      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/getPraktikanPraktikum"
-                  message="tns:Iadm_getPraktikanPraktikum_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/getPraktikanPraktikumResponse"
-                   message="tns:Iadm_getPraktikanPraktikum_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/getPraktikanPraktikum" message="tns:Iadm_getPraktikanPraktikum_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/getPraktikanPraktikumResponse" message="tns:Iadm_getPraktikanPraktikum_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="getProfilePraktikan">
-      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/getProfilePraktikan"
-                  message="tns:Iadm_getProfilePraktikan_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/getProfilePraktikanResponse"
-                   message="tns:Iadm_getProfilePraktikan_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/getProfilePraktikan" message="tns:Iadm_getProfilePraktikan_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/getProfilePraktikanResponse" message="tns:Iadm_getProfilePraktikan_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="AddPraktikan">
       <wsdl:input wsaw:Action="http://tempuri.org/Iadm/AddPraktikan" message="tns:Iadm_AddPraktikan_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/AddPraktikanResponse"
-                   message="tns:Iadm_AddPraktikan_OutputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/AddPraktikanResponse" message="tns:Iadm_AddPraktikan_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="EditPraktikan">
       <wsdl:input wsaw:Action="http://tempuri.org/Iadm/EditPraktikan" message="tns:Iadm_EditPraktikan_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/EditPraktikanResponse"
-                   message="tns:Iadm_EditPraktikan_OutputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/EditPraktikanResponse" message="tns:Iadm_EditPraktikan_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetJurusan">
       <wsdl:input wsaw:Action="http://tempuri.org/Iadm/GetJurusan" message="tns:Iadm_GetJurusan_InputMessage" />
@@ -250,24 +232,19 @@
     </wsdl:operation>
     <wsdl:operation name="GetAngkatan">
       <wsdl:input wsaw:Action="http://tempuri.org/Iadm/GetAngkatan" message="tns:Iadm_GetAngkatan_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/GetAngkatanResponse"
-                   message="tns:Iadm_GetAngkatan_OutputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/GetAngkatanResponse" message="tns:Iadm_GetAngkatan_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetPraktikan">
       <wsdl:input wsaw:Action="http://tempuri.org/Iadm/GetPraktikan" message="tns:Iadm_GetPraktikan_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/GetPraktikanResponse"
-                   message="tns:Iadm_GetPraktikan_OutputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/GetPraktikanResponse" message="tns:Iadm_GetPraktikan_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="InsertMultiplePraktikan">
-      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/InsertMultiplePraktikan"
-                  message="tns:Iadm_InsertMultiplePraktikan_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/InsertMultiplePraktikanResponse"
-                   message="tns:Iadm_InsertMultiplePraktikan_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/InsertMultiplePraktikan" message="tns:Iadm_InsertMultiplePraktikan_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/InsertMultiplePraktikanResponse" message="tns:Iadm_InsertMultiplePraktikan_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ViewJadwalUmum">
       <wsdl:input wsaw:Action="http://tempuri.org/Iadm/ViewJadwalUmum" message="tns:Iadm_ViewJadwalUmum_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/ViewJadwalUmumResponse"
-                   message="tns:Iadm_ViewJadwalUmum_OutputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/ViewJadwalUmumResponse" message="tns:Iadm_ViewJadwalUmum_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetMatKul">
       <wsdl:input wsaw:Action="http://tempuri.org/Iadm/GetMatKul" message="tns:Iadm_GetMatKul_InputMessage" />
@@ -283,13 +260,11 @@
     </wsdl:operation>
     <wsdl:operation name="InsertJadwal">
       <wsdl:input wsaw:Action="http://tempuri.org/Iadm/InsertJadwal" message="tns:Iadm_InsertJadwal_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/InsertJadwalResponse"
-                   message="tns:Iadm_InsertJadwal_OutputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/InsertJadwalResponse" message="tns:Iadm_InsertJadwal_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="DeleteJadwal">
       <wsdl:input wsaw:Action="http://tempuri.org/Iadm/DeleteJadwal" message="tns:Iadm_DeleteJadwal_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/DeleteJadwalResponse"
-                   message="tns:Iadm_DeleteJadwal_OutputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/DeleteJadwalResponse" message="tns:Iadm_DeleteJadwal_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="getStaffID">
       <wsdl:input wsaw:Action="http://tempuri.org/Iadm/getStaffID" message="tns:Iadm_getStaffID_InputMessage" />
@@ -297,24 +272,19 @@
     </wsdl:operation>
     <wsdl:operation name="getProfileStaff">
       <wsdl:input wsaw:Action="http://tempuri.org/Iadm/getProfileStaff" message="tns:Iadm_getProfileStaff_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/getProfileStaffResponse"
-                   message="tns:Iadm_getProfileStaff_OutputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/getProfileStaffResponse" message="tns:Iadm_getProfileStaff_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetStaffJadwal">
       <wsdl:input wsaw:Action="http://tempuri.org/Iadm/GetStaffJadwal" message="tns:Iadm_GetStaffJadwal_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/GetStaffJadwalResponse"
-                   message="tns:Iadm_GetStaffJadwal_OutputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/GetStaffJadwalResponse" message="tns:Iadm_GetStaffJadwal_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="jadwalUmumStaff">
       <wsdl:input wsaw:Action="http://tempuri.org/Iadm/jadwalUmumStaff" message="tns:Iadm_jadwalUmumStaff_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/jadwalUmumStaffResponse"
-                   message="tns:Iadm_jadwalUmumStaff_OutputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/jadwalUmumStaffResponse" message="tns:Iadm_jadwalUmumStaff_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="updateJadwalStaff">
-      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/updateJadwalStaff"
-                  message="tns:Iadm_updateJadwalStaff_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/updateJadwalStaffResponse"
-                   message="tns:Iadm_updateJadwalStaff_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/updateJadwalStaff" message="tns:Iadm_updateJadwalStaff_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/updateJadwalStaffResponse" message="tns:Iadm_updateJadwalStaff_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="addPeriode">
       <wsdl:input wsaw:Action="http://tempuri.org/Iadm/addPeriode" message="tns:Iadm_addPeriode_InputMessage" />
@@ -322,30 +292,23 @@
     </wsdl:operation>
     <wsdl:operation name="viewPeriode">
       <wsdl:input wsaw:Action="http://tempuri.org/Iadm/viewPeriode" message="tns:Iadm_viewPeriode_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/viewPeriodeResponse"
-                   message="tns:Iadm_viewPeriode_OutputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/viewPeriodeResponse" message="tns:Iadm_viewPeriode_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetPertemuan">
       <wsdl:input wsaw:Action="http://tempuri.org/Iadm/GetPertemuan" message="tns:Iadm_GetPertemuan_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/GetPertemuanResponse"
-                   message="tns:Iadm_GetPertemuan_OutputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/GetPertemuanResponse" message="tns:Iadm_GetPertemuan_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ListPertemuan">
       <wsdl:input wsaw:Action="http://tempuri.org/Iadm/ListPertemuan" message="tns:Iadm_ListPertemuan_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/ListPertemuanResponse"
-                   message="tns:Iadm_ListPertemuan_OutputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/ListPertemuanResponse" message="tns:Iadm_ListPertemuan_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="PostAbsenPraktikan">
-      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/PostAbsenPraktikan"
-                  message="tns:Iadm_PostAbsenPraktikan_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/PostAbsenPraktikanResponse"
-                   message="tns:Iadm_PostAbsenPraktikan_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/PostAbsenPraktikan" message="tns:Iadm_PostAbsenPraktikan_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/PostAbsenPraktikanResponse" message="tns:Iadm_PostAbsenPraktikan_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetAbsensiPraktikans">
-      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/GetAbsensiPraktikans"
-                  message="tns:Iadm_GetAbsensiPraktikans_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/GetAbsensiPraktikansResponse"
-                   message="tns:Iadm_GetAbsensiPraktikans_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/GetAbsensiPraktikans" message="tns:Iadm_GetAbsensiPraktikans_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/GetAbsensiPraktikansResponse" message="tns:Iadm_GetAbsensiPraktikans_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="AddStaff">
       <wsdl:input wsaw:Action="http://tempuri.org/Iadm/AddStaff" message="tns:Iadm_AddStaff_InputMessage" />
@@ -356,10 +319,12 @@
       <wsdl:output wsaw:Action="http://tempuri.org/Iadm/EditStaffResponse" message="tns:Iadm_EditStaff_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="KonfirmasiAbsensi">
-      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/KonfirmasiAbsensi"
-                  message="tns:Iadm_KonfirmasiAbsensi_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/KonfirmasiAbsensiResponse"
-                   message="tns:Iadm_KonfirmasiAbsensi_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/KonfirmasiAbsensi" message="tns:Iadm_KonfirmasiAbsensi_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/KonfirmasiAbsensiResponse" message="tns:Iadm_KonfirmasiAbsensi_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="HapusAbsensi">
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/HapusAbsensi" message="tns:Iadm_HapusAbsensi_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/HapusAbsensiResponse" message="tns:Iadm_HapusAbsensi_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSHttpBinding_Iadm" type="tns:Iadm">
@@ -628,6 +593,15 @@
     </wsdl:operation>
     <wsdl:operation name="KonfirmasiAbsensi">
       <soap12:operation soapAction="http://tempuri.org/Iadm/KonfirmasiAbsensi" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HapusAbsensi">
+      <soap12:operation soapAction="http://tempuri.org/Iadm/HapusAbsensi" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

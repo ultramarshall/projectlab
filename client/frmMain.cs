@@ -110,6 +110,7 @@ namespace client
                                     };
                                     var praktikumTersedia = service.GetPertemuan(data).Select(x => x.id_jenis_pertemuan);
                                     listBoxControl1.Items.AddRange(praktikumTersedia.ToArray());
+                                    Login_Button.Enabled = false;
                                     Jadwal.SelectedPage = Jadwal_Tersedia;
                                 }
                             }
@@ -169,7 +170,13 @@ namespace client
                 XtraMessageBox.Show(err.ToString());
             }
         }
-
+        private void CloseLogin (object sender, EventArgs e)
+        {
+            username.Text = "";
+            password.Text = "";
+            Login_Button.Enabled = true;
+            Jadwal.SelectedPage = Jadwal_Blank;
+        }
         private void gridView6_RowCellClick(object sender, RowCellClickEventArgs e)
         {
             if (e.Clicks == 2)
@@ -350,8 +357,9 @@ namespace client
                 HARI = x.hari,
                 SHIFT = x.fk_jadwalUmum_Shift.id_shift,
                 WAKTU =
-                    x.fk_jadwalUmum_Shift.mulai.ToString("HH:mm") + " - " +
-                    x.fk_jadwalUmum_Shift.selesai.ToString("HH:mm"),
+                    string.Format( "{0:HH:mm} - {1:HH:mm}", 
+                    x.fk_jadwalUmum_Shift.mulai, 
+                    x.fk_jadwalUmum_Shift.selesai ),
                 PRAKTIKUM = x.fk_jadwalUmum_matakuliah.mata_kuliah,
                 KELAS = x.fk_jadwalUmum_kelas.Kelas
             }).ToList());
@@ -372,8 +380,9 @@ namespace client
                 HARI = x.hari,
                 SHIFT = x.fk_jadwalUmum_Shift.id_shift,
                 WAKTU =
-                    x.fk_jadwalUmum_Shift.mulai.ToString("HH:mm") + " - " +
-                    x.fk_jadwalUmum_Shift.selesai.ToString("HH:mm"),
+                    string.Format( "{0:HH:mm} - {1:HH:mm}", 
+                    x.fk_jadwalUmum_Shift.mulai, 
+                    x.fk_jadwalUmum_Shift.selesai ),
                 PRAKTIKUM = x.fk_jadwalUmum_matakuliah.mata_kuliah,
                 KELAS = x.fk_jadwalUmum_kelas.Kelas
             }).ToList());
@@ -396,7 +405,7 @@ namespace client
             }
             catch (Exception)
             {
-                XtraMessageBox.Show("Jadwal tidak dapat dihapus !" + Environment.NewLine + "Periode sudah berlangsung");
+                XtraMessageBox.Show( string.Format( "Jadwal tidak dapat dihapus !{0}Periode sudah berlangsung", Environment.NewLine ) );
             }
             lihat_jadwal(sender, e);
         }
@@ -438,22 +447,24 @@ namespace client
                             x.jadwal_umum.hari,
                             shift = x.jadwal_umum.fk_jadwalUmum_Shift.id_shift,
                             waktu =
-                                x.jadwal_umum.fk_jadwalUmum_Shift.mulai.TimeOfDay + " - " +
-                                x.jadwal_umum.fk_jadwalUmum_Shift.selesai.TimeOfDay,
+                                string.Format( "{0} - {1}", 
+                                x.jadwal_umum.fk_jadwalUmum_Shift.mulai.TimeOfDay, 
+                                x.jadwal_umum.fk_jadwalUmum_Shift.selesai.TimeOfDay ),
                             praktikum = x.jadwal_umum.fk_jadwalUmum_matakuliah.mata_kuliah,
                             kelas = x.jadwal_umum.fk_jadwalUmum_kelas.Kelas
                         }).ToList());
                 SettingGridView(gridView6);
                 service.Close();
             }
-            catch (Exception)
+            catch (Exception )
             {
-                // ignored
             }
         }
 
         private void P_Logout(object sender, EventArgs e)
         {
+            _dataPraktikan.Clear( );
+            CloseLogin( sender, e );
             Interface.SelectedPage = InterfaceLogin;
         }
 
@@ -493,8 +504,9 @@ namespace client
                     r.jadwal_umum.hari,
                     shift = r.jadwal_umum.fk_jadwalUmum_Shift.id_shift,
                     waktu =
-                        r.jadwal_umum.fk_jadwalUmum_Shift.mulai.TimeOfDay + " - " +
-                        r.jadwal_umum.fk_jadwalUmum_Shift.selesai.TimeOfDay,
+                        string.Format( "{0} - {1}", 
+                        r.jadwal_umum.fk_jadwalUmum_Shift.mulai.TimeOfDay, 
+                        r.jadwal_umum.fk_jadwalUmum_Shift.selesai.TimeOfDay ),
                     praktikum = r.jadwal_umum.fk_jadwalUmum_matakuliah.mata_kuliah,
                     r.staff.nama
                 }).ToList());
@@ -588,8 +600,9 @@ namespace client
                     r.jadwal_umum.hari,
                     shift = r.jadwal_umum.fk_jadwalUmum_Shift.id_shift,
                     waktu =
-                        r.jadwal_umum.fk_jadwalUmum_Shift.mulai.TimeOfDay + " - " +
-                        r.jadwal_umum.fk_jadwalUmum_Shift.selesai.TimeOfDay,
+                        string.Format( "{0} - {1}", 
+                        r.jadwal_umum.fk_jadwalUmum_Shift.mulai.TimeOfDay, 
+                        r.jadwal_umum.fk_jadwalUmum_Shift.selesai.TimeOfDay ),
                     praktikum = r.jadwal_umum.fk_jadwalUmum_matakuliah.mata_kuliah,
                     r.staff.nama
                 }).ToList());
@@ -603,10 +616,6 @@ namespace client
             catch (Exception)
             {
             }
-        }
-
-        private void accordionControlElement26_Click(object sender, EventArgs e)
-        {
         }
 
         private void AbsensiPraktikanClick(object sender, EventArgs e)
@@ -655,8 +664,9 @@ namespace client
                 foto = x.Foto,
                 nrp = x.NRP,
                 nama = x.Nama,
-                nilai = x.absen.Nilai
-            }).ToList());
+                nilai = x.absen.Nilai,
+                hapus = new RepositoryItemButtonEdit( )
+            } ).ToList());
             gridView5.Columns["foto"].OptionsColumn.AllowEdit = false;
             gridView5.Columns["nrp"].OptionsColumn.AllowEdit = false;
             gridView5.Columns["nama"].OptionsColumn.AllowEdit = false;
@@ -666,16 +676,51 @@ namespace client
             gridView5.Appearance.FocusedRow.BackColor = Color.Aqua;
             var nilai = new RepositoryItemTextEdit();
             var photo = new RepositoryItemPictureEdit();
-
+            var cancel = new RepositoryItemButtonEdit( )
+            {
+                TextEditStyle = TextEditStyles.HideTextEditor
+            };
             nilai.EditValueChanged += new EventHandler(nilai_EditValueChanged);
+            cancel.Click += new EventHandler( cancel_ButtonClick );
             gridControl5.RepositoryItems.Add(nilai);
             gridControl5.RepositoryItems.Add(photo);
+            gridControl5.RepositoryItems.Add(cancel);
 
             gridView5.Columns["foto"].ColumnEdit = photo;
             gridView5.Columns["nilai"].ColumnEdit = nilai;
+            gridView5.Columns["hapus"].ColumnEdit = cancel;
             gridView5.Columns["nilai"].OptionsColumn.ReadOnly = false;
             gridView5.RowHeight = 60;
             gridControl5.ForceInitialize();
+        }
+
+        private void cancel_ButtonClick (object sender, EventArgs e)
+        {
+            var service = new IadmClient( );
+            var nil = sender as TextEdit;
+            string a = nil.Text;
+            var row = gridView5.GetDataRow( gridView5.FocusedRowHandle );
+            var nrp = row[1].ToString( );
+            var shift = gridView6.GetRowCellDisplayText( gridView6.FocusedRowHandle, gridView6.Columns[1] );
+            var periode = service.viewPeriode( ).FirstOrDefault(
+                x => x.awalSemester < DateTime.Now &&
+                     x.akhirSemester > DateTime.Now
+                );
+            var data = new AbsensiPraktikan( )
+            {
+                Pertemuan = new pertemuan( ) { id_jenis_pertemuan = comboBoxEdit9.SelectedItem.ToString( ) },
+                JadwalPraktikan = new jadwalPraktikan( )
+                {
+                    nrp = nrp,
+                    id_jadwal_umum = new jadwal_umum( )
+                    {
+                        id_shift = shift,
+                        id_periode = periode.id_periode
+                    },
+                },
+            };
+            service.HapusAbsensi( data );
+            AbsensiPraktikanSearch( sender, e );
         }
 
         private void nilai_EditValueChanged(object sender, EventArgs e)
@@ -690,8 +735,7 @@ namespace client
                 x => x.awalSemester < DateTime.Now &&
                      x.akhirSemester > DateTime.Now
                 );
-
-            if (nil.Text == "")
+            if(nil.Text == "" )
             {
                 a = "0";
             }
@@ -715,7 +759,6 @@ namespace client
             service.KonfirmasiAbsensi(data);
         }
 
-
         private void JadwalAsistenClick(object sender, EventArgs e)
         {
             a_.SelectedPage = a_jadwal_staff_asisten;
@@ -732,8 +775,9 @@ namespace client
                 HARI = x.jadwal_umum.hari,
                 SHIFT = x.jadwal_umum.fk_jadwalUmum_Shift.id_shift,
                 WAKTU =
-                    x.jadwal_umum.fk_jadwalUmum_Shift.mulai.ToString("HH:mm") + " - " +
-                    x.jadwal_umum.fk_jadwalUmum_Shift.selesai.ToString("HH:mm"),
+                    string.Format( "{0:HH:mm} - {1:HH:mm}", 
+                    x.jadwal_umum.fk_jadwalUmum_Shift.mulai, 
+                    x.jadwal_umum.fk_jadwalUmum_Shift.selesai ),
                 PRAKTIKUM = x.jadwal_umum.fk_jadwalUmum_matakuliah.mata_kuliah,
                 PENGAJAR = x.staff.nama
             }).ToList());
@@ -762,11 +806,6 @@ namespace client
             pictureEdit5.Image = Image.FromStream(foto);
             comboBoxEdit11.Text = staff.users.status;
             a_.SelectedPage = a_staff_profile;
-        }
-
-        private void textEdit4_EditValueChanging(object sender, ChangingEventArgs e)
-        {
-            textEdit5.Text = textEdit4.Text;
         }
 
         private void TambahStaffClick(object sender, EventArgs e)
@@ -823,5 +862,7 @@ namespace client
         {
             gridView3.ShowPrintPreview();
         }
+
+        
     }
 }

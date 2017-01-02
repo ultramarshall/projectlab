@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
+﻿using System.Runtime.Serialization;
 
-namespace SvApp {
+namespace SvApp
+{
+    [DataContract]
+    public class jurusan
+    {
+        [DataMember]
+        public string KodeJurusan { get; set; }
 
-    [DataContract] public class jurusan {
-
-        [DataMember] public string KodeJurusan { get; set; }
-
-        [DataMember] public string NamaJurusan { get; set; }
-
+        [DataMember]
+        public string NamaJurusan { get; set; }
     }
-
 }

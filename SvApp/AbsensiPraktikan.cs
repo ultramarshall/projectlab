@@ -4,11 +4,11 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace SvApp {
-
+namespace SvApp
+{
     [DataContract]
-    public class AbsensiPraktikan {
-
+    public class AbsensiPraktikan
+    {
         [DataMember]
         public int id_absensi { get; set; }
 
@@ -26,7 +26,5 @@ namespace SvApp {
 
         [DataMember]
         public DateTime waktu_absensi { get; set; }
-
     }
-
 }

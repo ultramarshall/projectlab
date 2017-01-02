@@ -4,70 +4,102 @@ using System.Data;
 using System.Linq;
 using System.ServiceModel;
 
-namespace SvApp {
+namespace SvApp
+{
+    [ServiceContract]
+    public interface Iadm
+    {
+        [OperationContract]
+        string GetLogin(akun data);
 
-    [ServiceContract] public interface Iadm {
+        [OperationContract]
+        List<jadwalPraktikan> getTimeLogin(jadwalPraktikan data);
 
-        [OperationContract] string GetLogin(akun data);
+        [OperationContract]
+        List<jadwalPraktikan> getPraktikanPraktikum(string nrp, string shift, int periode);
 
-        [OperationContract] List<jadwalPraktikan> getTimeLogin(jadwalPraktikan data);
+        [OperationContract]
+        praktikan getProfilePraktikan(praktikan data);
 
-        [OperationContract] List<jadwalPraktikan> getPraktikanPraktikum(string nrp, string shift, int periode);
+        [OperationContract]
+        int AddPraktikan(praktikan data);
 
-        [OperationContract] praktikan getProfilePraktikan(praktikan data);
+        [OperationContract]
+        int EditPraktikan(string nrp, praktikan data);
 
-        [OperationContract] int AddPraktikan(praktikan data);
+        [OperationContract]
+        List<jurusan> GetJurusan();
 
-        [OperationContract] int EditPraktikan(string nrp, praktikan data);
+        [OperationContract]
+        List<angkatan> GetAngkatan();
 
-        [OperationContract] List<jurusan> GetJurusan();
+        [OperationContract]
+        List<praktikan> GetPraktikan(praktikan data);
 
-        [OperationContract] List<angkatan> GetAngkatan();
+        [OperationContract]
+        int InsertMultiplePraktikan(List<praktikan> data);
 
-        [OperationContract] List<praktikan> GetPraktikan(praktikan data);
+        [OperationContract]
+        List<jadwal_umum> ViewJadwalUmum(jadwal_umum data);
 
-        [OperationContract] int InsertMultiplePraktikan(List<praktikan> data);
+        [OperationContract]
+        List<matkul> GetMatKul();
 
-        [OperationContract] List<jadwal_umum> ViewJadwalUmum(jadwal_umum data);
+        [OperationContract]
+        List<kelas> GetKelas();
 
-        [OperationContract] List<matkul> GetMatKul();
+        [OperationContract]
+        List<Shift> GetShift();
 
-        [OperationContract] List<kelas> GetKelas();
+        [OperationContract]
+        int InsertJadwal(List<jadwal_umum> data);
 
-        [OperationContract] List<Shift> GetShift();
+        [OperationContract]
+        int DeleteJadwal(jadwal_umum data);
 
-        [OperationContract] int InsertJadwal(List<jadwal_umum> data);
+        [OperationContract]
+        List<Staff> getStaffID();
 
-        [OperationContract] int DeleteJadwal(jadwal_umum data);
+        [OperationContract]
+        Staff getProfileStaff(Staff data);
 
-        [OperationContract] List<Staff> getStaffID();
+        [OperationContract]
+        List<jadwalStaff> GetStaffJadwal(jadwalStaff data);
 
-        [OperationContract] Staff getProfileStaff(Staff data);
+        [OperationContract]
+        List<jadwalStaff> jadwalUmumStaff(periode data);
 
-        [OperationContract] List<jadwalStaff> GetStaffJadwal(jadwalStaff data);
+        [OperationContract]
+        int updateJadwalStaff(string id, jadwalStaff data);
 
-        [OperationContract] List<jadwalStaff> jadwalUmumStaff(periode data);
+        [OperationContract]
+        int addPeriode(periode data);
 
-        [OperationContract] int updateJadwalStaff(string id, jadwalStaff data);
+        [OperationContract]
+        List<periode> viewPeriode();
 
-        [OperationContract] int addPeriode(periode data);
+        [OperationContract]
+        List<pertemuan> GetPertemuan(jadwalPraktikan data);
 
-        [OperationContract] List<periode> viewPeriode();
+        [OperationContract]
+        List<pertemuan> ListPertemuan();
 
-        [OperationContract] List<pertemuan> GetPertemuan(jadwalPraktikan data);
+        [OperationContract]
+        int PostAbsenPraktikan(AbsensiPraktikan data);
 
-        [OperationContract] List<pertemuan> ListPertemuan();
+        [OperationContract]
+        List<praktikan> GetAbsensiPraktikans(AbsensiPraktikan data);
 
-        [OperationContract] int PostAbsenPraktikan(AbsensiPraktikan data);
+        [OperationContract]
+        int AddStaff(Staff data);
 
-        [OperationContract] List<praktikan> GetAbsensiPraktikans(AbsensiPraktikan data);
+        [OperationContract]
+        int EditStaff(string id_staff, Staff data);
 
-        [OperationContract] int AddStaff(Staff data);
+        [OperationContract]
+        int KonfirmasiAbsensi(AbsensiPraktikan data);
 
-        [OperationContract] int EditStaff(string id_staff, Staff data);
-
-        [OperationContract] int KonfirmasiAbsensi(AbsensiPraktikan data);
-
+        [OperationContract]
+        int HapusAbsensi (AbsensiPraktikan data);
     }
-
 }
