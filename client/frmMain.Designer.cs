@@ -36,12 +36,14 @@
             this.Jadwal = new DevExpress.XtraBars.Navigation.NavigationFrame();
             this.Jadwal_Tersedia = new DevExpress.XtraBars.Navigation.NavigationPage();
             this.layoutControl3 = new DevExpress.XtraLayout.LayoutControl();
+            this.simpleButton10 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.listBoxControl1 = new DevExpress.XtraEditors.ListBoxControl();
             this.layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem9 = new DevExpress.XtraLayout.EmptySpaceItem();
+            this.layoutControlItem28 = new DevExpress.XtraLayout.LayoutControlItem();
             this.Jadwal_Blank = new DevExpress.XtraBars.Navigation.NavigationPage();
             this.LoginBox = new DevExpress.XtraEditors.GroupControl();
             this.layoutControl2 = new DevExpress.XtraLayout.LayoutControl();
@@ -335,8 +337,6 @@
             this.defaultLookAndFeel1 = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.navBarControl1 = new DevExpress.XtraNavBar.NavBarControl();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.simpleButton10 = new DevExpress.XtraEditors.SimpleButton();
-            this.layoutControlItem28 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.Interface)).BeginInit();
             this.Interface.SuspendLayout();
             this.InterfaceLogin.SuspendLayout();
@@ -352,6 +352,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem28)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LoginBox)).BeginInit();
             this.LoginBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl2)).BeginInit();
@@ -610,7 +611,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem31)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.accordionControl3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem28)).BeginInit();
             this.SuspendLayout();
             // 
             // Interface
@@ -689,6 +689,16 @@
             this.layoutControl3.TabIndex = 0;
             this.layoutControl3.Text = "layoutControl3";
             // 
+            // simpleButton10
+            // 
+            this.simpleButton10.Location = new System.Drawing.Point(187, 116);
+            this.simpleButton10.Name = "simpleButton10";
+            this.simpleButton10.Size = new System.Drawing.Size(82, 22);
+            this.simpleButton10.StyleController = this.layoutControl3;
+            this.simpleButton10.TabIndex = 6;
+            this.simpleButton10.Text = "tutup";
+            this.simpleButton10.Click += new System.EventHandler(this.CloseLogin);
+            // 
             // simpleButton2
             // 
             this.simpleButton2.Location = new System.Drawing.Point(103, 116);
@@ -750,8 +760,20 @@
             this.emptySpaceItem9.Size = new System.Drawing.Size(101, 26);
             this.emptySpaceItem9.TextSize = new System.Drawing.Size(0, 0);
             // 
+            // layoutControlItem28
+            // 
+            this.layoutControlItem28.Control = this.simpleButton10;
+            this.layoutControlItem28.Location = new System.Drawing.Point(185, 114);
+            this.layoutControlItem28.MinSize = new System.Drawing.Size(86, 26);
+            this.layoutControlItem28.Name = "layoutControlItem28";
+            this.layoutControlItem28.Size = new System.Drawing.Size(86, 26);
+            this.layoutControlItem28.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            this.layoutControlItem28.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem28.TextVisible = false;
+            // 
             // Jadwal_Blank
             // 
+            this.Jadwal_Blank.Caption = "Jadwal_Blank";
             this.Jadwal_Blank.Name = "Jadwal_Blank";
             this.Jadwal_Blank.Size = new System.Drawing.Size(271, 140);
             // 
@@ -3817,27 +3839,6 @@
             this.navBarControl1.TabIndex = 5;
             this.navBarControl1.Text = "navBarControl1";
             // 
-            // simpleButton10
-            // 
-            this.simpleButton10.Location = new System.Drawing.Point(187, 116);
-            this.simpleButton10.Name = "simpleButton10";
-            this.simpleButton10.Size = new System.Drawing.Size(82, 22);
-            this.simpleButton10.StyleController = this.layoutControl3;
-            this.simpleButton10.TabIndex = 6;
-            this.simpleButton10.Text = "tutup";
-            this.simpleButton10.Click += new System.EventHandler(this.CloseLogin);
-            // 
-            // layoutControlItem28
-            // 
-            this.layoutControlItem28.Control = this.simpleButton10;
-            this.layoutControlItem28.Location = new System.Drawing.Point(185, 114);
-            this.layoutControlItem28.MinSize = new System.Drawing.Size(86, 26);
-            this.layoutControlItem28.Name = "layoutControlItem28";
-            this.layoutControlItem28.Size = new System.Drawing.Size(86, 26);
-            this.layoutControlItem28.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.layoutControlItem28.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem28.TextVisible = false;
-            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3864,6 +3865,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem28)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.LoginBox)).EndInit();
             this.LoginBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl2)).EndInit();
@@ -4122,7 +4124,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem31)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.accordionControl3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem28)).EndInit();
             this.ResumeLayout(false);
 
         }
