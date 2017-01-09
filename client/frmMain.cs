@@ -30,7 +30,6 @@ namespace client
         {
             InitializeComponent();
             Disablelayoutcontrolmenu();
-            Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 15, 15));
         }
 
         private void Disablelayoutcontrolmenu()
@@ -59,6 +58,31 @@ namespace client
             {
                 gridView.Columns[i].OptionsColumn.AllowFocus = false;
                 gridView.Columns[i].OptionsColumn.AllowMove = false;
+            }
+        }
+
+        private void CekJadwal ()
+        {
+            var service = new IadmClient( );
+            var periode = service.viewPeriode( ).FirstOrDefault( x => DateTime.Now >= x.awalSemester &&
+                                                                      DateTime.Now <= x.akhirSemester );
+            var data = new jadwalStaff( )
+            {
+                staff = new Staff( ) { id_staff = _dataStaff[0].id_staff },
+                jadwal_umum = new jadwal_umum( )
+                {
+                    id_periode = periode.id_periode
+                }
+            };
+            var jadwal = service.GetJadwalAsisten( data );
+
+            if ( jadwal.Count( ) > 0 )
+            {
+                accordionControlElement17.Enabled = false;
+            }
+            else
+            {
+                accordionControlElement17.Enabled = true;
             }
         }
 
@@ -140,6 +164,7 @@ namespace client
                         var foto = new MemoryStream(_dataStaff[0].foto);
                         pictureEdit2.Image = Image.FromStream(foto);
                         ViewJadwalProfile(sender, e);
+                        CekJadwal( );
                     }
                     service.Close();
                 }
@@ -290,20 +315,27 @@ namespace client
 
         private void EditPraktikanClick(object sender, EventArgs e)
         {
-            ComboBoxEditAdd("Angkatan", AngkatanPraktikan);
-            ComboBoxEditAdd("Jurusan", JurusanPraktikan);
-            var service = new IadmClient();
-            var data = new praktikan
+            try
             {
-                NRP = gridView1.GetRowCellDisplayText(gridView1.FocusedRowHandle, gridView1.Columns[1])
-            };
-            var p = service.getProfilePraktikan(data);
-            NrpPraktikan.Text = p.NRP;
-            PasswordPraktikan.Text = p.Users.password;
-            NamaPraktikan.Text = p.Nama;
-            a_.SelectedPage = a_praktikan_profile;
-            AngkatanPraktikan.Text = p.angkatan.TahunAngkatan;
-            JurusanPraktikan.Text = p.jurusan.NamaJurusan;
+                ComboBoxEditAdd( "Angkatan", AngkatanPraktikan );
+                ComboBoxEditAdd( "Jurusan", JurusanPraktikan );
+                var service = new IadmClient( );
+                var data = new praktikan
+                {
+                    NRP = gridView1.GetRowCellDisplayText( gridView1.FocusedRowHandle, gridView1.Columns[1] )
+                };
+                var p = service.getProfilePraktikan( data );
+                NrpPraktikan.Text = p.NRP;
+                PasswordPraktikan.Text = p.Users.password;
+                NamaPraktikan.Text = p.Nama;
+                a_.SelectedPage = a_praktikan_profile;
+                AngkatanPraktikan.Text = p.angkatan.TahunAngkatan;
+                JurusanPraktikan.Text = p.jurusan.NamaJurusan;
+            }
+            catch ( Exception )
+            {
+                XtraMessageBox.Show( "belum pilih praktikan" );
+            }
         }
 
         private void SaveProfilPraktikanClick(object sender, EventArgs e)
@@ -389,7 +421,7 @@ namespace client
             SettingGridView(gridView5);
         }
 
-        private void simpleButton6_Click(object sender, EventArgs e)
+        private void BuatJadwalUmum(object sender, EventArgs e)
         {
             var frm = new FrmTambahJadwalUmum();
             frm.ShowDialog();
@@ -468,6 +500,7 @@ namespace client
             _dataPraktikan.Clear( );
             CloseLogin( sender, e );
             Interface.SelectedPage = InterfaceLogin;
+            P_.SelectedPage = P_Info;
         }
 
         private void P_Info_Click(object sender, EventArgs e)
@@ -478,6 +511,22 @@ namespace client
         private void P_Modul_Click(object sender, EventArgs e)
         {
             P_.SelectedPage = P_Modul;
+            comboBoxEdit3.Properties.Items.Clear( );
+            var service = new IadmClient( );
+            var kodemk = service.GetMatKul( ).FirstOrDefault( x => x.mata_kuliah == layoutControlItem6.Text.Replace("Praktikum ", String.Empty) );
+            var data = new modul( )
+            {
+                matkul = new matkul( )
+                {
+                    kode_mk = kodemk.kode_mk
+                }
+            };
+            var b = service.GetListModul( data ).Select( x => x.file_modul ).ToList( );
+            for(var i = 0; i < b.Count; i++ )
+            {
+                comboBoxEdit3.Properties.Items.Add(b[i]);
+            }
+            
         }
 
         private void K_Info_Click(object sender, EventArgs e)
@@ -849,7 +898,9 @@ namespace client
             };
             var source = service.GetModul( data ).lokasi_modul;
             var file = new MemoryStream( source );
+            pdfViewer1.NavigationPaneInitialVisibility = DevExpress.XtraPdfViewer.PdfNavigationPaneVisibility.Hidden;
             pdfViewer1.LoadDocument( file );
+
         }
 
         private string _Dir; 
@@ -919,11 +970,223 @@ namespace client
                 lokasi_file = FileLocation,
                 data_file = File.ReadAllBytes( @sourceFileName.Text )
             };
-            //service.GetUpLoadFile( f );
-            try { service.GetUpLoadFile( f ); }
-            catch(Exception error ) { XtraMessageBox.Show( error.ToString( ) ); }
+            var ex = false;
+            try
+            {
+                service.GetUpLoadFile( f );
+            }
+            catch(Exception)
+            {
+                ex = true;
+                LogFileUpload.Items.Add( "Maksimal upload file 10 MB" );
+            }
 
-            LogFileUpload.Items.Add( string.Format( "'{0}' upload file berhasil", _Dir) ) ;
+            if ( ex == false )
+            {
+                LogFileUpload.Items.Add( string.Format( "'{0}' upload file berhasil", _Dir ) );
+            }
+        }
+
+        private void Upload_Click (object sender, EventArgs e)
+        {
+            P_.SelectedPage = P_Upload;
+        }
+
+        private void PraktikanUbahPassword (object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            XtraMessageBox.Show( "ganti password" );
+        }
+
+        
+
+        private void AmbilJadwal (object sender, EventArgs e)
+        {
+            viewStaff.SelectedPage = viewStaffJadwal;
+            var service = new IadmClient( );
+
+            var periode = service.viewPeriode( ).FirstOrDefault(
+                x =>
+                DateTime.Now >= x.awalSemester &&
+                DateTime.Now <= x.akhirSemester );
+
+            var data = new jadwal_umum( ) { id_periode = periode.id_periode };
+            gridControl7.DataSource = service.ViewJadwalUmum( data ).Select( x => new {
+                HARI = x.hari,
+                SHIFT = x.fk_jadwalUmum_Shift.id_shift,
+                WAKTU =
+                     string.Format( "{0:HH:mm} - {1:HH:mm}",
+                     x.fk_jadwalUmum_Shift.mulai,
+                     x.fk_jadwalUmum_Shift.selesai ),
+                PRAKTIKUM = x.fk_jadwalUmum_matakuliah.mata_kuliah,
+                KELAS = x.fk_jadwalUmum_kelas.Kelas
+            } );
+
+            // add checkbox and enable multi select rows
+            gridView7.OptionsSelection.MultiSelect = true;
+            gridView7.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect; ;
+            // disable focused row and move column
+            for ( var i = 0; i < gridView7.Columns.Count; i++ )
+            {
+                gridView7.Columns[i].OptionsColumn.AllowFocus = false;
+                gridView7.Columns[i].OptionsColumn.AllowMove = false;
+            }
+        }
+
+        private void SaveJadwalAsisten (object sender, EventArgs e)
+        {
+            var service = new IadmClient( );
+            var jadwal = new List<jadwalStaff>( );
+            var values = gridView7.GetSelectedRows( );
+            var periode = service.viewPeriode( ).FirstOrDefault(
+                x =>
+                DateTime.Now >= x.awalSemester &&
+                DateTime.Now <= x.akhirSemester );
+            var data = new jadwal_umum( ) { id_periode = periode.id_periode };
+
+            var listjadwal = new List<jadwalStaff>( );
+            for ( var i = 0; i < values.Count( ); i++ )
+            {
+                var shift = gridView7.GetRowCellValue( values[i], gridView7.Columns[1] ).ToString( );
+                var hari = gridView7.GetRowCellValue( values[i], gridView7.Columns[0] ).ToString( );
+                var matkul = gridView7.GetRowCellValue( values[i], gridView7.Columns[3] ).ToString( );
+                var id = service.ViewJadwalUmum( data ).FirstOrDefault( x =>
+                (x.fk_jadwalUmum_Shift.id_shift == shift && x.hari == hari) &&
+                 x.fk_jadwalUmum_matakuliah.mata_kuliah == matkul );
+
+
+                var jadwalstaff = new jadwalStaff( )
+                {
+                    staff       = new Staff( ) { id_staff = _dataStaff[0].id_staff },
+                    jadwal_umum = new jadwal_umum( ) { id_jadwal_umum = id.id_jadwal_umum }
+                };
+                listjadwal.Add( jadwalstaff );
+            }
+
+            var xception = false;
+            try
+            {
+                service.AddJadwalStaffAsisten( listjadwal.ToArray( ) );
+            }
+            catch ( Exception )
+            {
+                xception = true;
+                XtraMessageBox.Show( "Tidak ada jadwal di pilih" );
+            }
+            
+            if(xception == false )
+            {
+                CekJadwal( );
+                ViewJadwalProfile( sender, e );
+                viewStaff.SelectedPage = viewStaffAccount;
+            }
+        }
+
+        private void Modul_click (object sender, EventArgs e)
+        {
+            layoutControlGroup30.Expanded = false;
+            a_.SelectedPage = a_modul;
+            var service = new IadmClient( );
+            var matkul = service.GetMatKul( ).Select(x=>x.mata_kuliah ).ToList();
+            comboBoxEdit4.Properties.Items.AddRange( matkul );
+            comboBoxEdit4.SelectedIndex = 0; 
+            service.Close( );
+        }
+
+        private void Praktikum_SelectedValueChanged (object sender, EventArgs e)
+        {
+            listBoxControl2.Items.Clear( );
+            var service = new IadmClient( );
+            var kodemk = service.GetMatKul( ).FirstOrDefault( x => x.mata_kuliah == comboBoxEdit4.SelectedItem.ToString() );
+            var data = new modul( )
+            {
+                matkul = new matkul( )
+                {
+                    kode_mk = kodemk.kode_mk
+                }
+            };
+            listBoxControl2.Items.AddRange( service.GetListModul( data ).Select(x=> x.file_modul).ToArray( ) );
+            comboBoxEdit6.Properties.Items.Clear( );
+            for ( var i = 0; i < 16; i++ )
+            {
+                
+                comboBoxEdit6.Properties.Items.Add( string.Format("BAB {0:D2}", i+1) );
+            }
+                
+            try
+            {
+                var modul = listBoxControl2.Items ;
+                for(var i = 0; i < modul.Count; i++ )
+                {
+                    comboBoxEdit6.Properties.Items.Remove( modul[i].ToString( ) );
+                }
+            }
+            catch (Exception)
+            {
+                return;
+            }
+            service.Close( );
+        }
+        public void fileModule(modul data)
+        {
+            listBoxControl2.Items.Add( data.file_modul );
+        }
+        string filesName = String.Empty;
+        private void simpleButton28_Click (object sender, EventArgs e)
+        {
+            var open = new OpenFileDialog( )
+            {
+                Title = "Browse Files",
+                InitialDirectory = @"C:\",
+                CheckFileExists = true,
+                CheckPathExists = true,
+                DefaultExt = "txt",
+                Filter = "Files PDF|*.pdf",
+                FilterIndex = 2,
+                RestoreDirectory = true,
+                ReadOnlyChecked = true,
+                ShowReadOnly = true
+            };
+
+            if ( open.ShowDialog( ) == DialogResult.OK )
+            {
+                var info = new FileInfo( open.FileName );
+                textEdit1.Text = open.FileName;
+                filesName = info.Name;
+            }
+        }
+
+        private void addFileModul (object sender, EventArgs e)
+        {
+            layoutControlGroup30.Expanded = true;
+            textEdit1.Text = "";
+            comboBoxEdit6.SelectedIndex = -1;
+        }
+
+        private void SaveModul (object sender, EventArgs e)
+        {
+            layoutControlGroup30.Expanded = false;
+            var service = new IadmClient( );
+            var kdmk = service.GetMatKul( ).FirstOrDefault(x=> x.mata_kuliah == comboBoxEdit4.SelectedItem.ToString() );
+            var data = new modul( )
+            {
+                matkul = new matkul( ) { kode_mk = kdmk.kode_mk },
+                file_modul = comboBoxEdit6.SelectedItem.ToString( ),
+                lokasi_modul = File.ReadAllBytes( @textEdit1.Text ),
+                modul_file = filesName
+            };
+            try { service.UploadModul( data ); } catch (Exception ee ) { XtraMessageBox.Show( ee.ToString( ));  }
+            Modul_click( sender, e );
+            service.Close( );
+        }
+
+        private void CloseAddFileModul (object sender, EventArgs e)
+        {
+            layoutControlGroup30.Expanded = false;
+        }
+
+        private void accordionControlElement26_Click (object sender, EventArgs e)
+        {
+
         }
     }
 }

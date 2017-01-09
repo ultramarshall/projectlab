@@ -106,7 +106,13 @@ namespace SvApp
         List<jadwalPraktikan> GetJadwalPraktikan (jadwalPraktikan data);
 
         [OperationContract]
+        List<jadwalStaff> GetJadwalAsisten (jadwalStaff data);
+
+        [OperationContract]
         int AddJadwalPraktikan (List<jadwalPraktikan> data);
+
+        [OperationContract]
+        int AddJadwalStaffAsisten (List<jadwalStaff> data);
 
         [OperationContract]
         int DeleteJadwalPraktikan (jadwalPraktikan data);
@@ -116,6 +122,12 @@ namespace SvApp
 
         [OperationContract]
         modul GetModul (modul data);
+
+        [OperationContract]
+        List<modul> GetListModul (modul data);
+
+        [OperationContract]
+        int UploadModul (modul data);
 
         [OperationContract]
         int GetIDAbsensiPraktikan (AbsensiPraktikan data);

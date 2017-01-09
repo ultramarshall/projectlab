@@ -438,10 +438,24 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetJadwalAsisten">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q43="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q43:jadwalStaff" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetJadwalAsistenResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q44="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="GetJadwalAsistenResult" nillable="true" type="q44:ArrayOfjadwalStaff" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="AddJadwalPraktikan">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q43="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q43:ArrayOfjadwalPraktikan" />
+        <xs:element xmlns:q45="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q45:ArrayOfjadwalPraktikan" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -452,10 +466,24 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="AddJadwalStaffAsisten">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q46="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q46:ArrayOfjadwalStaff" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddJadwalStaffAsistenResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="AddJadwalStaffAsistenResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="DeleteJadwalPraktikan">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q44="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q44:jadwalPraktikan" />
+        <xs:element xmlns:q47="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q47:jadwalPraktikan" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -469,7 +497,7 @@
   <xs:element name="TambahAngaktan">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q45="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q45:angkatan" />
+        <xs:element xmlns:q48="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q48:angkatan" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -483,21 +511,49 @@
   <xs:element name="GetModul">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q46="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q46:modul" />
+        <xs:element xmlns:q49="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q49:modul" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetModulResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q47="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="GetModulResult" nillable="true" type="q47:modul" />
+        <xs:element xmlns:q50="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="GetModulResult" nillable="true" type="q50:modul" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetListModul">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q51="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q51:modul" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetListModulResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q52="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="GetListModulResult" nillable="true" type="q52:ArrayOfmodul" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UploadModul">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q53="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q53:modul" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UploadModulResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UploadModulResult" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetIDAbsensiPraktikan">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q48="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q48:AbsensiPraktikan" />
+        <xs:element xmlns:q54="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q54:AbsensiPraktikan" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -511,7 +567,7 @@
   <xs:element name="GetUpLoadFile">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q49="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q49:upload_file" />
+        <xs:element xmlns:q55="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q55:upload_file" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

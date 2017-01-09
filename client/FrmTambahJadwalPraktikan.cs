@@ -81,7 +81,7 @@ namespace client
                 };
                 listjadwal.Add( jadwalpraktikan );
             }
-            service.AddJadwalPraktikan( listjadwal.ToArray() );
+            try { service.AddJadwalPraktikan( listjadwal.ToArray( ) ); } catch ( Exception ) { XtraMessageBox.Show( "Tidak ada jadwal" ); }
             Close( );
         }
 

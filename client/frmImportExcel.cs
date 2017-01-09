@@ -102,8 +102,9 @@ namespace client
                 }
                 service.Close();
             }
-            catch (Exception)
+            catch (Exception error)
             {
+                XtraMessageBox.Show(error.ToString());
                 XtraMessageBox.Show("Gagal import data mahasiswa.");
             }
         }

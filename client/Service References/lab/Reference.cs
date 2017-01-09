@@ -1429,6 +1429,9 @@ namespace client.lab {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private client.lab.matkul matkulField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string modul_fileField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -1487,6 +1490,19 @@ namespace client.lab {
                 if ((object.ReferenceEquals(this.matkulField, value) != true)) {
                     this.matkulField = value;
                     this.RaisePropertyChanged("matkul");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string modul_file {
+            get {
+                return this.modul_fileField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.modul_fileField, value) != true)) {
+                    this.modul_fileField = value;
+                    this.RaisePropertyChanged("modul_file");
                 }
             }
         }
@@ -1710,8 +1726,14 @@ namespace client.lab {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/GetJadwalPraktikan", ReplyAction="http://tempuri.org/Iadm/GetJadwalPraktikanResponse")]
         client.lab.jadwalPraktikan[] GetJadwalPraktikan(client.lab.jadwalPraktikan data);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/GetJadwalAsisten", ReplyAction="http://tempuri.org/Iadm/GetJadwalAsistenResponse")]
+        client.lab.jadwalStaff[] GetJadwalAsisten(client.lab.jadwalStaff data);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/AddJadwalPraktikan", ReplyAction="http://tempuri.org/Iadm/AddJadwalPraktikanResponse")]
         int AddJadwalPraktikan(client.lab.jadwalPraktikan[] data);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/AddJadwalStaffAsisten", ReplyAction="http://tempuri.org/Iadm/AddJadwalStaffAsistenResponse")]
+        int AddJadwalStaffAsisten(client.lab.jadwalStaff[] data);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/DeleteJadwalPraktikan", ReplyAction="http://tempuri.org/Iadm/DeleteJadwalPraktikanResponse")]
         int DeleteJadwalPraktikan(client.lab.jadwalPraktikan data);
@@ -1721,6 +1743,12 @@ namespace client.lab {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/GetModul", ReplyAction="http://tempuri.org/Iadm/GetModulResponse")]
         client.lab.modul GetModul(client.lab.modul data);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/GetListModul", ReplyAction="http://tempuri.org/Iadm/GetListModulResponse")]
+        client.lab.modul[] GetListModul(client.lab.modul data);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/UploadModul", ReplyAction="http://tempuri.org/Iadm/UploadModulResponse")]
+        int UploadModul(client.lab.modul data);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/GetIDAbsensiPraktikan", ReplyAction="http://tempuri.org/Iadm/GetIDAbsensiPraktikanResponse")]
         int GetIDAbsensiPraktikan(client.lab.AbsensiPraktikan data);
@@ -1884,8 +1912,16 @@ namespace client.lab {
             return base.Channel.GetJadwalPraktikan(data);
         }
         
+        public client.lab.jadwalStaff[] GetJadwalAsisten(client.lab.jadwalStaff data) {
+            return base.Channel.GetJadwalAsisten(data);
+        }
+        
         public int AddJadwalPraktikan(client.lab.jadwalPraktikan[] data) {
             return base.Channel.AddJadwalPraktikan(data);
+        }
+        
+        public int AddJadwalStaffAsisten(client.lab.jadwalStaff[] data) {
+            return base.Channel.AddJadwalStaffAsisten(data);
         }
         
         public int DeleteJadwalPraktikan(client.lab.jadwalPraktikan data) {
@@ -1898,6 +1934,14 @@ namespace client.lab {
         
         public client.lab.modul GetModul(client.lab.modul data) {
             return base.Channel.GetModul(data);
+        }
+        
+        public client.lab.modul[] GetListModul(client.lab.modul data) {
+            return base.Channel.GetListModul(data);
+        }
+        
+        public int UploadModul(client.lab.modul data) {
+            return base.Channel.UploadModul(data);
         }
         
         public int GetIDAbsensiPraktikan(client.lab.AbsensiPraktikan data) {

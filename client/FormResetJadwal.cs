@@ -32,7 +32,14 @@ namespace client
                     id_periode = periode.id_periode
                 }
             };
-            service.DeleteJadwalPraktikan( data );
+            try
+            {
+                service.DeleteJadwalPraktikan( data );
+            }
+            catch ( Exception )
+            {
+                XtraMessageBox.Show( "Error" );
+            }
             Close( );
         }
     }

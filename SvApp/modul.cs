@@ -19,6 +19,9 @@ namespace SvApp
         public string file_modul { get; set; }
 
         [DataMember]
+        public string modul_file { get; set; }
+
+        [DataMember]
         public byte[] lokasi_modul { get; set; }
     }
 }

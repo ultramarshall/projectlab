@@ -229,7 +229,7 @@ namespace SvApp
                 _comm.Parameters.AddWithValue("password", data.Users.password);
                 _comm.Parameters.AddWithValue("status", data.Users.status);
                 _comm.Parameters.AddWithValue("nama", data.Nama);
-                _comm.Parameters.AddWithValue("foto", @"C:\LIK\STAFF\" + data.NRP + @"\" + data.Nama + ".png");
+                _comm.Parameters.AddWithValue("foto", @"C:\LIK\USER\" + data.NRP + @"\" + data.Nama + ".png");
                 _comm.Parameters.AddWithValue("kode_angkatan", data.angkatan.KodeAngkatan);
                 _comm.Parameters.AddWithValue("kode_jurusan", data.jurusan.KodeJurusan);
                 _comm.CommandType = CommandType.Text;
@@ -489,12 +489,11 @@ namespace SvApp
                 for (int x = 0; x < data.Count; x++)
                 {
                     akun[x] = $"('{data[x].NRP}', '{data[x].NRP}', 'Praktikan')";
-                    praktikan[x] =
-                        $"('{data[x].NRP}', '{data[x].Nama}', '{data[x].jurusan.KodeJurusan}', '{data[x].angkatan.KodeAngkatan}', '{$"{dir}{data[x].NRP}\\{data[x].Nama}{format}"}')";
+                    praktikan[x] = $"('{data[x].NRP}', '{data[x].Nama}', '{data[x].jurusan.KodeJurusan}', '{data[x].angkatan.KodeAngkatan}', '{$"{dir}{data[x].NRP}\\{data[x].Nama}{format}"}')";
                 }
-                Array.Clear(akun, 0, akun.Length);
-                Array.Clear(praktikan, 0, praktikan.Length);
-                string query = $"INSERT INTO users (Username, Password, status) VALUES {Join(",", akun)} " +
+                //Array.Clear(akun, 0, akun.Length);
+                //Array.Clear(praktikan, 0, praktikan.Length);
+                string query = $"INSERT INTO users (Username, Password, status) VALUES {Join(",", akun)}" +
                                $"INSERT INTO praktikan (NRP, Nama, kode_jurusan, kode_angkatan, Foto) VALUES {Join(",", praktikan)}";
                 _comm.CommandText = query;
                 _comm.CommandType = CommandType.Text;
@@ -1185,7 +1184,41 @@ namespace SvApp
                 _conn?.Close( );
             }
         }
-        
+
+        public List<jadwalStaff> GetJadwalAsisten (jadwalStaff data)
+        {
+            try
+            {
+                var jadwal = new List<jadwalStaff>( );
+                _comm.CommandText = @"SELECT	id_jadwal_staff, id_staff , id_jadwal_umum
+                                      FROM	    jadwal_staff
+                                      WHERE	    (id_jadwal_umum IN
+		                                            (SELECT    id_jadwal_umum
+		                                             FROM      jadwal_umum
+		                                             WHERE     (id_periode = @id_periode))) AND (id_staff = @id_staff)";
+                _comm.Parameters.AddWithValue( "id_staff", data.staff.id_staff );
+                _comm.Parameters.AddWithValue( "id_periode", data.jadwal_umum.id_periode );
+                _comm.CommandType = CommandType.Text;
+                _conn.Open( );
+                SqlDataReader reader = _comm.ExecuteReader( );
+                while ( reader.Read( ) )
+                {
+                    var list = new jadwalStaff( )
+                    {
+                        id_jadwal_staff = Convert.ToInt16( reader[0] ),
+                        staff = new Staff( ) { id_staff = reader[1].ToString( ).TrimEnd( ) },
+                        jadwal_umum = new jadwal_umum( ) { id_jadwal_umum = Convert.ToInt16( reader[2] ) }
+                    };
+                    jadwal.Add( list );
+                }
+                return jadwal;
+            }
+            finally
+            {
+                _conn?.Close( );
+            }
+        }
+
         public int AddJadwalPraktikan(List<jadwalPraktikan> data)
         {
             try
@@ -1208,6 +1241,31 @@ namespace SvApp
             finally
             {
                 _conn?.Close();
+            }
+        }
+
+        public int AddJadwalStaffAsisten (List<jadwalStaff> data)
+        {
+            try
+            {
+                var v = new string[data.Count];
+                for ( var i = 0; i < data.Count; i++ )
+                {
+                    v[i] = string.Format( "('{0}', {1})",
+                        data[i].staff.id_staff,
+                        data[i].jadwal_umum.id_jadwal_umum );
+                }
+                var val = string.Join( ",", v );
+                _comm.CommandText = "INSERT INTO jadwal_staff (id_staff, id_jadwal_umum) " +
+                                    "VALUES " + val;
+
+                _comm.CommandType = CommandType.Text;
+                _conn.Open( );
+                return _comm.ExecuteNonQuery( );
+            }
+            finally
+            {
+                _conn?.Close( );
             }
         }
 
@@ -1271,6 +1329,67 @@ namespace SvApp
                     modul.lokasi_modul = File.ReadAllBytes( reader[0].ToString().TrimEnd() );
                 }
                 return modul;
+            }
+            finally
+            {
+                _conn?.Close( );
+            }
+        }
+
+        public List<modul> GetListModul (modul data)
+        {
+            try
+            {
+                _comm.CommandText = @"SELECT file_modul
+                                      FROM   modul
+                                      WHERE  kode_mk = @kode_mk";
+                _comm.Parameters.AddWithValue( "kode_mk", data.matkul.kode_mk );
+                _comm.CommandType = CommandType.Text;
+                _conn.Open( );
+                SqlDataReader reader = _comm.ExecuteReader( );
+
+                var modul = new List<modul>( );
+                while ( reader.Read( ) )
+                {
+                    var list = new modul( )
+                    {
+                        file_modul = reader[0].ToString( ).TrimEnd( )
+                    };
+                    modul.Add( list );
+                }
+                return modul;
+            }
+            finally
+            {
+                _conn?.Close( );
+            }
+        }
+
+        public int UploadModul (modul data)
+        {
+            const string dir = @"C:\LIK\MODUL\";
+            try
+            {
+                var loc = dir+data.matkul.kode_mk+"\\";
+                var filedir = loc + data.file_modul + " - " + data.modul_file;
+                _comm.CommandText = @"INSERT INTO modul 
+                                      VALUES (@kode_mk, @file_modul, @lokasi_modul)";
+                _comm.Parameters.AddWithValue( "kode_mk", data.matkul.kode_mk );
+                _comm.Parameters.AddWithValue( "file_modul", data.file_modul );
+                _comm.Parameters.AddWithValue( "lokasi_modul", filedir );
+
+                _comm.CommandType = CommandType.Text;
+                _conn.Open( );
+
+                if ( Exists( loc ) ) //kalau folder sudah ada
+                    File.WriteAllBytes( filedir, data.lokasi_modul );
+                else
+                {
+                    CreateDirectory( loc );
+                    File.WriteAllBytes( filedir, data.lokasi_modul );
+                }
+
+                return _comm.ExecuteNonQuery( );
             }
             finally
             {
