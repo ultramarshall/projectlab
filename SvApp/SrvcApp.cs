@@ -5,6 +5,7 @@ using System.Data;
 using System.IO;
 using static System.IO.Directory;
 using static System.String;
+using static SvApp.BCrypt;
 
 namespace SvApp
 {
@@ -58,7 +59,7 @@ namespace SvApp
                                     "FROM users " +
                                     "WHERE username = @username AND password = @password";
                 _comm.Parameters.AddWithValue("username", data.Username.TrimEnd());
-                _comm.Parameters.AddWithValue("password", data.Password.TrimEnd());
+                _comm.Parameters.AddWithValue("password",data.Password.TrimEnd() ) ;
                 _comm.CommandType = CommandType.Text;
                 _conn.Open();
                 SqlDataReader reader = _comm.ExecuteReader();
@@ -512,7 +513,7 @@ namespace SvApp
             {
                 List<jadwal_umum> jadwalUmum = new List<jadwal_umum>();
                 _comm.CommandText =
-                    @"SELECT jadwal_umum.hari, shift.id_shift, shift.mulai, shift.selesai, mata_kuliah.mata_kuliah, kelas.kelas " +
+                    @"SELECT jadwal_umum.hari, shift.id_shift, shift.mulai, shift.selesai, mata_kuliah.mata_kuliah, kelas.kelas, jadwal_umum.id_jadwal_umum " +
                     "FROM jadwal_umum " +
                     "INNER JOIN periode ON jadwal_umum.id_periode = periode.id_periode " +
                     "INNER JOIN mata_kuliah ON jadwal_umum.kode_mk = mata_kuliah.kode_mk " +
@@ -543,7 +544,8 @@ namespace SvApp
                         fk_jadwalUmum_kelas = new kelas()
                         {
                             Kelas = reader[5].ToString().TrimEnd(),
-                        }
+                        },
+                        id_jadwal_umum = Convert.ToInt16( reader[6] )
                     };
                     jadwalUmum.Add(list);
                 }
@@ -1112,7 +1114,6 @@ namespace SvApp
             }
         }
 
-
         public int HapusAbsensi (AbsensiPraktikan data)
         {
             try
@@ -1140,6 +1141,106 @@ namespace SvApp
                 _comm.Parameters.AddWithValue( "nrp", data.JadwalPraktikan.nrp );
                 _comm.Parameters.AddWithValue( "id_shift", data.JadwalPraktikan.id_jadwal_umum.id_shift );
                 _comm.Parameters.AddWithValue( "id_periode", data.JadwalPraktikan.id_jadwal_umum.id_periode );
+
+                _comm.CommandType = CommandType.Text;
+                _conn.Open( );
+                return _comm.ExecuteNonQuery( );
+            }
+            finally
+            {
+                _conn?.Close( );
+            }
+        }
+
+        public List<jadwalPraktikan> GetJadwalPraktikan (jadwalPraktikan data)
+        {
+            try
+            {
+                var jadwal = new List<jadwalPraktikan>( );
+                _comm.CommandText = @"SELECT	id_jadwal_praktikan, nrp, id_jadwal_umum
+                                      FROM	    jadwal_praktikan
+                                      WHERE	    (id_jadwal_umum IN
+		                                            (SELECT    id_jadwal_umum
+		                                             FROM      jadwal_umum
+		                                             WHERE     (id_periode = @id_periode))) AND (nrp = @nrp)";
+                _comm.Parameters.AddWithValue( "nrp", data.nrp );
+                _comm.Parameters.AddWithValue( "id_periode", data.id_jadwal_umum.id_periode );
+                _comm.CommandType = CommandType.Text;
+                _conn.Open( );
+                SqlDataReader reader = _comm.ExecuteReader( );
+                while ( reader.Read( ) )
+                {
+                    var list = new jadwalPraktikan( )
+                    {
+                        id_jadwal_praktikan = Convert.ToInt16( reader[0] ),
+                        nrp = reader[1].ToString().TrimEnd(),
+                        id_jadwal_umum = new jadwal_umum( ) { id_jadwal_umum = Convert.ToInt16(reader[2])}
+                    };
+                    jadwal.Add( list );
+                }
+                return jadwal;
+            }
+            finally
+            {
+                _conn?.Close( );
+            }
+        }
+        
+        public int AddJadwalPraktikan(List<jadwalPraktikan> data)
+        {
+            try
+            {
+                var v = new string[data.Count];
+                for ( var i = 0; i < data.Count; i++ )
+                {
+                    v[i] = string.Format("('{0}', {1})", 
+                        data[i].nrp, 
+                        data[i].id_jadwal_umum.id_jadwal_umum );
+                }
+                var val = string.Join( ",", v );
+                _comm.CommandText = "INSERT INTO jadwal_praktikan (nrp, id_jadwal_umum) " +
+                                    "VALUES " + val;
+
+                _comm.CommandType = CommandType.Text;
+                _conn.Open();
+                return _comm.ExecuteNonQuery();
+            }
+            finally
+            {
+                _conn?.Close();
+            }
+        }
+
+        public int DeleteJadwalPraktikan (jadwalPraktikan data)
+        {
+            try
+            {
+                _comm.CommandText = @"DELETE 
+                                      FROM   jadwal_praktikan
+                                      WHERE  nrp = @nrp AND id_jadwal_umum IN(SELECT    id_jadwal_umum
+		                                                       FROM      jadwal_umum
+		                                                       WHERE     id_periode = @id_periode)";
+                _comm.Parameters.AddWithValue( "nrp", data.nrp );
+                _comm.Parameters.AddWithValue( "id_periode", data.id_jadwal_umum.id_periode);
+
+                _comm.CommandType = CommandType.Text;
+                _conn.Open( );
+                return _comm.ExecuteNonQuery( );
+            }
+            finally
+            {
+                _conn?.Close( );
+            }
+        }
+
+        public int TambahAngaktan (angkatan data)
+        {
+            try
+            {
+                _comm.CommandText = @"INSERT INTO angkatan 
+                                      VALUES (@kode_angkatan, @tahun_angkatan)";
+                _comm.Parameters.AddWithValue( "kode_angkatan", data.KodeAngkatan );
+                _comm.Parameters.AddWithValue( "tahun_angkatan", data.TahunAngkatan );
 
                 _comm.CommandType = CommandType.Text;
                 _conn.Open( );

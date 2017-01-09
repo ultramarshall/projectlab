@@ -201,6 +201,30 @@
   <wsdl:message name="Iadm_HapusAbsensi_OutputMessage">
     <wsdl:part name="parameters" element="tns:HapusAbsensiResponse" />
   </wsdl:message>
+  <wsdl:message name="Iadm_GetJadwalPraktikan_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetJadwalPraktikan" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_GetJadwalPraktikan_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetJadwalPraktikanResponse" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_AddJadwalPraktikan_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddJadwalPraktikan" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_AddJadwalPraktikan_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddJadwalPraktikanResponse" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_DeleteJadwalPraktikan_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteJadwalPraktikan" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_DeleteJadwalPraktikan_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteJadwalPraktikanResponse" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_TambahAngaktan_InputMessage">
+    <wsdl:part name="parameters" element="tns:TambahAngaktan" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_TambahAngaktan_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TambahAngaktanResponse" />
+  </wsdl:message>
   <wsdl:portType name="Iadm">
     <wsdl:operation name="GetLogin">
       <wsdl:input wsaw:Action="http://tempuri.org/Iadm/GetLogin" message="tns:Iadm_GetLogin_InputMessage" />
@@ -325,6 +349,22 @@
     <wsdl:operation name="HapusAbsensi">
       <wsdl:input wsaw:Action="http://tempuri.org/Iadm/HapusAbsensi" message="tns:Iadm_HapusAbsensi_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/Iadm/HapusAbsensiResponse" message="tns:Iadm_HapusAbsensi_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetJadwalPraktikan">
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/GetJadwalPraktikan" message="tns:Iadm_GetJadwalPraktikan_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/GetJadwalPraktikanResponse" message="tns:Iadm_GetJadwalPraktikan_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddJadwalPraktikan">
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/AddJadwalPraktikan" message="tns:Iadm_AddJadwalPraktikan_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/AddJadwalPraktikanResponse" message="tns:Iadm_AddJadwalPraktikan_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteJadwalPraktikan">
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/DeleteJadwalPraktikan" message="tns:Iadm_DeleteJadwalPraktikan_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/DeleteJadwalPraktikanResponse" message="tns:Iadm_DeleteJadwalPraktikan_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TambahAngaktan">
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/TambahAngaktan" message="tns:Iadm_TambahAngaktan_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/TambahAngaktanResponse" message="tns:Iadm_TambahAngaktan_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSHttpBinding_Iadm" type="tns:Iadm">
@@ -602,6 +642,42 @@
     </wsdl:operation>
     <wsdl:operation name="HapusAbsensi">
       <soap12:operation soapAction="http://tempuri.org/Iadm/HapusAbsensi" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetJadwalPraktikan">
+      <soap12:operation soapAction="http://tempuri.org/Iadm/GetJadwalPraktikan" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddJadwalPraktikan">
+      <soap12:operation soapAction="http://tempuri.org/Iadm/AddJadwalPraktikan" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteJadwalPraktikan">
+      <soap12:operation soapAction="http://tempuri.org/Iadm/DeleteJadwalPraktikan" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TambahAngaktan">
+      <soap12:operation soapAction="http://tempuri.org/Iadm/TambahAngaktan" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

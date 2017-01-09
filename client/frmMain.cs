@@ -45,7 +45,7 @@ namespace client
             layoutControl9.AllowCustomization = false;
         }
 
-        private static void SettingGridView(GridView gridView)
+        private void SettingGridView(GridView gridView)
         {
             gridView.OptionsCustomization.AllowFilter = false;
             gridView.OptionsBehavior.Editable = false;
@@ -170,6 +170,7 @@ namespace client
                 XtraMessageBox.Show(err.ToString());
             }
         }
+
         private void CloseLogin (object sender, EventArgs e)
         {
             username.Text = "";
@@ -177,6 +178,7 @@ namespace client
             Login_Button.Enabled = true;
             Jadwal.SelectedPage = Jadwal_Blank;
         }
+
         private void gridView6_RowCellClick(object sender, RowCellClickEventArgs e)
         {
             if (e.Clicks == 2)
@@ -260,6 +262,8 @@ namespace client
         private void Admin_Logout_Button(object sender, EventArgs e)
         {
             Interface.SelectedPage = InterfaceLogin;
+            username.Text = "";
+            password.Text = "";
         }
 
         private void Praktikan(object sender, EventArgs e)
@@ -366,11 +370,6 @@ namespace client
             SettingGridView(gridView5);
         }
 
-        private void jadwal_praktikan(object sender, EventArgs e)
-        {
-            a_.SelectedPage = a_jadwal_praktikan;
-        }
-
         private void lihat_jadwal(object sender, EventArgs e)
         {
             var service = new IadmClient();
@@ -416,10 +415,12 @@ namespace client
             frm.ShowDialog();
         }
 
-        private void StaffLofout_ButtonClick(object sender, EventArgs e)
+        private void StaffLogout_ButtonClick(object sender, EventArgs e)
         {
             Interface.SelectedPage = InterfaceLogin;
             _dataStaff.Clear();
+            username.Text = "";
+            password.Text = "";
         }
 
         private void ViewJadwalProfile(object sender, EventArgs e)
@@ -486,149 +487,41 @@ namespace client
         private void JadwalStaffKPraktikumClick(object sender, EventArgs e)
         {
             K_.SelectedPage = K_Praktikum;
-            var service = new IadmClient();
-            ComboBoxEditAdd("Periode", comboBoxEdit7);
-            ComboBoxEditAdd("Semester", comboBoxEdit8);
-            var awalSemester = int.Parse(comboBoxEdit7.SelectedItem.ToString().Substring(0, 4));
-            var akhirSemester = int.Parse(comboBoxEdit7.SelectedItem.ToString().Substring(5, 4));
-            try
-            {
-                var data = new periode
-                {
-                    semester = comboBoxEdit8.SelectedItem.ToString(),
-                    awalSemester = new DateTime(awalSemester, 1, 1, 1, 1, 1),
-                    akhirSemester = new DateTime(akhirSemester, 1, 1, 1, 1, 1)
-                };
-                gridControl8.DataSource = ToDataTable(service.jadwalUmumStaff(data).Select(r => new
-                {
-                    r.jadwal_umum.hari,
-                    shift = r.jadwal_umum.fk_jadwalUmum_Shift.id_shift,
-                    waktu =
-                        string.Format( "{0} - {1}", 
-                        r.jadwal_umum.fk_jadwalUmum_Shift.mulai.TimeOfDay, 
-                        r.jadwal_umum.fk_jadwalUmum_Shift.selesai.TimeOfDay ),
-                    praktikum = r.jadwal_umum.fk_jadwalUmum_matakuliah.mata_kuliah,
-                    r.staff.nama
-                }).ToList());
-                SettingGridView(gridView8);
-                /*
-                 *  seting column merge
-                 */
-                gridView8.OptionsView.AllowCellMerge = true;
-                gridView8.Columns["nama"].OptionsColumn.AllowMerge = DefaultBoolean.False;
-                /* add manual RepositoryItemComboBox 
-                RepositoryItemComboBox nama = new RepositoryItemComboBox( )
-                {
-                    //config RepositoryItemComboBox nama
-                    TextEditStyle = TextEditStyles.DisableTextEditor,
-                    AllowDropDownWhenReadOnly = DevExpress.Utils.DefaultBoolean.True,
-                };
-                //add manual EventHandler SelectedIndexChanged
-                nama.SelectedIndexChanged += new EventHandler( nama_SelectedIndexChanged );
-                var a = service.getStaffID( ).Select( n => n.nama ).ToList( );
-                //add listArray to RepositoryItemComboBox from a
-                nama.Items.AddRange( a );
-                gridControl8.RepositoryItems.Add( nama );
-                //config column nama
-                gridView8.Columns["nama"].ColumnEdit = nama;
-                gridView8.Columns["nama"].OptionsColumn.AllowEdit = true;
-                gridView8.Columns["nama"].OptionsColumn.ReadOnly = false;
-                gridControl8.ForceInitialize( );
-                */
-            }
-            catch (Exception ex)
-            {
-                XtraMessageBox.Show(ex.ToString());
-            }
+            AddPeriode( comboBoxEdit8 );
+            LihatJadwalStaff( sender, e );
         }
-
-        //private void nama_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    ComboBoxEdit editor = sender as ComboBoxEdit;
-        //    IadmClient service = new IadmClient();
-        //    //get id_staff by name, to show s.id_staff
-        //    var s = service.getStaffID().FirstOrDefault(id => id.nama == editor.SelectedItem.ToString());
-        //    //XtraMessageBox.Show(s.id_staff);
-        //    //periode.id_periode
-        //    var periode = service.viewPeriode().FirstOrDefault(
-        //        x => x.awalSemester < DateTime.Now &&
-        //             x.akhirSemester > DateTime.Now
-        //        );
-        //    //XtraMessageBox.Show(periode.id_periode.ToString());
-        //    // get value all column in selected rows
-        //    DataRow row = gridView8.GetDataRow(gridView8.FocusedRowHandle);
-        //    //get id_staff by name, to show s.id_staff
-        //    var ss = service.getStaffID().FirstOrDefault(id => id.nama == row[4].ToString());
-        //    //XtraMessageBox.Show(ss.id_staff);
-        //    jadwalStaff data = new jadwalStaff()
-        //    {
-        //        staff = new Staff()
-        //        {
-        //            id_staff = ss.id_staff
-        //        },
-        //        jadwal_umum = new jadwal_umum()
-        //        {
-        //            fk_jadwalUmum_Shift = new Shift() { id_shift = row[1].ToString() },
-        //            fk_jadwalUmum_periode = new periode() { id_periode = periode.id_periode },
-        //            fk_jadwalUmum_matakuliah = new matkul() { mata_kuliah = row[3].ToString() }
-        //        }
-        //    };
-        //    service.updateJadwalStaff(s.id_staff, data);
-        //    service.Close();
-        //}
 
         private void K_Logout_Click(object sender, EventArgs e)
         {
             Interface.SelectedPage = InterfaceLogin;
         }
 
-        private void simpleButton12_Click(object sender, EventArgs e)
+        private void LihatJadwalStaff(object sender, EventArgs e)
         {
-            var service = new IadmClient();
-            var awalSemester = int.Parse(comboBoxEdit7.SelectedItem.ToString().Substring(0, 4));
-            var akhirSemester = int.Parse(comboBoxEdit7.SelectedItem.ToString().Substring(5, 4));
-            try
+            var service = new IadmClient( );
+            var jadwal = new periode { id_periode = PeriodeId( comboBoxEdit8 ) };
+            gridControl8.DataSource = ToDataTable( service.jadwalUmumStaff( jadwal ).Select( x => new
             {
-                var data = new periode
-                {
-                    semester = comboBoxEdit8.SelectedItem.ToString(),
-                    awalSemester = new DateTime(awalSemester, 1, 1, 1, 1, 1),
-                    akhirSemester = new DateTime(akhirSemester, 1, 1, 1, 1, 1)
-                };
-                gridControl8.DataSource = ToDataTable(service.jadwalUmumStaff(data).Select(r => new
-                {
-                    r.jadwal_umum.hari,
-                    shift = r.jadwal_umum.fk_jadwalUmum_Shift.id_shift,
-                    waktu =
-                        string.Format( "{0} - {1}", 
-                        r.jadwal_umum.fk_jadwalUmum_Shift.mulai.TimeOfDay, 
-                        r.jadwal_umum.fk_jadwalUmum_Shift.selesai.TimeOfDay ),
-                    praktikum = r.jadwal_umum.fk_jadwalUmum_matakuliah.mata_kuliah,
-                    r.staff.nama
-                }).ToList());
-                SettingGridView(gridView8);
-                /*
-                 *  seting column merge
-                 */
-                gridView8.OptionsView.AllowCellMerge = true;
-                gridView8.Columns["nama"].OptionsColumn.AllowMerge = DefaultBoolean.False;
-            }
-            catch (Exception)
-            {
-            }
-        }
-
-        private void AbsensiPraktikanClick(object sender, EventArgs e)
-        {
-            viewStaff.SelectedPage = viewStaffJadwal;
-            AbsensiPraktikanSearch(sender, e);
+                HARI = x.jadwal_umum.hari,
+                SHIFT = x.jadwal_umum.fk_jadwalUmum_Shift.id_shift,
+                WAKTU =
+                        string.Format( "{0:HH:mm} - {1:HH:mm}",
+                        x.jadwal_umum.fk_jadwalUmum_Shift.mulai,
+                        x.jadwal_umum.fk_jadwalUmum_Shift.selesai ),
+                PRAKTIKUM = x.jadwal_umum.fk_jadwalUmum_matakuliah.mata_kuliah,
+                PENGAJAR = x.staff.nama
+            } ).ToList( ) );
+            SettingGridView( gridView8 );
+            gridView8.OptionsView.AllowCellMerge = true;
+            gridView8.Columns["PENGAJAR"].OptionsColumn.AllowMerge = DefaultBoolean.False;
+            
         }
 
         private void AbsensiPraktikanSearch(object sender, EventArgs e)
         {
             var shift = gridView6.GetRowCellDisplayText(gridView6.FocusedRowHandle, gridView6.Columns[1]);
             var mk = gridView6.GetRowCellDisplayText(gridView6.FocusedRowHandle, gridView6.Columns[3]);
-            viewStaff.SelectedPage = viewStaffJadwal;
+            viewStaff.SelectedPage = viewStaffAbsensi;
             var service = new IadmClient();
             var periode = service.viewPeriode().FirstOrDefault(
                 x => x.awalSemester < DateTime.Now &&
@@ -673,6 +566,7 @@ namespace client
             gridView5.Columns["foto"].OptionsColumn.AllowFocus = false;
             gridView5.Columns["nrp"].OptionsColumn.AllowFocus = false;
             gridView5.Columns["nama"].OptionsColumn.AllowFocus = false;
+            gridView5.Columns["nilai"].OptionsColumn.AllowEdit = true;
             gridView5.Appearance.FocusedRow.BackColor = Color.Aqua;
             var nilai = new RepositoryItemTextEdit();
             var photo = new RepositoryItemPictureEdit();
@@ -689,7 +583,7 @@ namespace client
             gridView5.Columns["foto"].ColumnEdit = photo;
             gridView5.Columns["nilai"].ColumnEdit = nilai;
             gridView5.Columns["hapus"].ColumnEdit = cancel;
-            gridView5.Columns["nilai"].OptionsColumn.ReadOnly = false;
+            //gridView5.Columns["nilai"].OptionsColumn.ReadOnly = false;
             gridView5.RowHeight = 60;
             gridControl5.ForceInitialize();
         }
@@ -863,6 +757,83 @@ namespace client
             gridView3.ShowPrintPreview();
         }
 
-        
+        private void simpleButton21_Click (object sender, EventArgs e)
+        {
+            viewStaff.SelectedPage = viewStaffAccount;
+        }
+
+        private void EditProfileStaff (object sender, System.Windows.Forms.LinkLabelLinkClickedEventArgs e)
+        {
+            viewStaff.SelectedPage = viewStaffEditProfile;
+            staffUsername.Text = _dataStaff[0].id_staff;
+            staffPassword.Text = _dataStaff[0].users.password;
+            staffNama.Text = _dataStaff[0].nama;
+            staffAlamat.Text = _dataStaff[0].alamat;
+            staffNoHp.Text = _dataStaff[0].no_hp;
+            staffFoto.Image = Image.FromStream( new MemoryStream( _dataStaff[0].foto) );
+        }
+
+        private void EditDataProfileAsisten (object sender, EventArgs e)
+        {
+            var service = new IadmClient();
+            var datastaff = new Staff
+            {
+                id_staff = staffUsername.Text,
+                nama = staffNama.Text,
+                alamat = staffAlamat.Text,
+                no_hp = staffNoHp.Text,
+                foto = ImageToByteArray( staffFoto.Image ),
+                users = new Users
+                {
+                    password = staffPassword.Text,
+                    status = "Asisten"
+                }
+            };
+            service.EditStaff( staffUsername.Text, datastaff );
+            service.Close( );
+
+            _dataStaff[0].foto = datastaff.foto;
+            _dataStaff[0].nama = datastaff.nama;
+            _dataStaff[0].users.password = datastaff.users.password;
+            _dataStaff[0].no_hp = datastaff.no_hp;
+            _dataStaff[0].alamat = datastaff.alamat;
+
+            pictureEdit2.Image = Image.FromStream( new MemoryStream( _dataStaff[0].foto ) );
+            simpleLabelItem12.Text = _dataStaff[0].nama;
+            simpleLabelItem13.Text = _dataStaff[0].no_hp;
+            simpleLabelItem14.Text = _dataStaff[0].alamat;
+            viewStaff.SelectedPage = viewStaffAccount;
+        }
+
+        private void JadwalPraktikan_DoubleClick (object sender, RowCellClickEventArgs e)
+        {
+            if ( e.Clicks == 2 )
+            {
+                var service = new IadmClient( );
+                var nrp = gridView1.GetRowCellDisplayText( gridView1.FocusedRowHandle, gridView1.Columns[1] );
+                var nama = gridView1.GetRowCellDisplayText( gridView1.FocusedRowHandle, gridView1.Columns[2] );
+                var periode = service.viewPeriode( ).FirstOrDefault( x => DateTime.Now >= x.awalSemester &&
+                                                                          DateTime.Now <= x.akhirSemester );
+                var data = new jadwalPraktikan( ) { nrp = nrp, id_jadwal_umum = new jadwal_umum( ) { id_periode = periode.id_periode } };
+                var jadwal = service.GetJadwalPraktikan( data );
+
+                if ( jadwal.Count( ) > 0 )
+                {
+                    var form = new FormResetJadwal(nrp);
+                    form.ShowDialog( );
+                }
+                else
+                {
+                    var form = new FrmTambahJadwalPraktikan( nrp, nama );
+                    form.ShowDialog( );
+                }
+            }
+        }
+
+        private void accordionControlElement7_Click (object sender, EventArgs e)
+        {
+            var Form = new FormAngkatan( );
+            Form.ShowDialog( );
+        }
     }
 }

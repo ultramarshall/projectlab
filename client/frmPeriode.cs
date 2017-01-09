@@ -71,5 +71,10 @@ namespace client
             }).ToList();
             service.Close();
         }
+
+        private void simpleButton2_Click (object sender, EventArgs e)
+        {
+            this.Close( );
+        }
     }
 }

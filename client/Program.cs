@@ -20,7 +20,7 @@ namespace client
             BonusSkins.Register();
             SkinManager.EnableFormSkins();
             UserLookAndFeel.Default.SetSkinStyle("DevExpress Style");
-            Application.Run(new FrmMain());
+            Application.Run(new FormAngkatan());
         }
     }
 }

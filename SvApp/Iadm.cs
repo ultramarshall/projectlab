@@ -101,5 +101,17 @@ namespace SvApp
 
         [OperationContract]
         int HapusAbsensi (AbsensiPraktikan data);
+
+        [OperationContract]
+        List<jadwalPraktikan> GetJadwalPraktikan (jadwalPraktikan data);
+
+        [OperationContract]
+        int AddJadwalPraktikan (List<jadwalPraktikan> data);
+
+        [OperationContract]
+        int DeleteJadwalPraktikan (jadwalPraktikan data);
+
+        [OperationContract]
+        int TambahAngaktan (angkatan data);
     }
 }

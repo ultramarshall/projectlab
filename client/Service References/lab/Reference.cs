@@ -1504,6 +1504,18 @@ namespace client.lab {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/HapusAbsensi", ReplyAction="http://tempuri.org/Iadm/HapusAbsensiResponse")]
         int HapusAbsensi(client.lab.AbsensiPraktikan data);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/GetJadwalPraktikan", ReplyAction="http://tempuri.org/Iadm/GetJadwalPraktikanResponse")]
+        client.lab.jadwalPraktikan[] GetJadwalPraktikan(client.lab.jadwalPraktikan data);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/AddJadwalPraktikan", ReplyAction="http://tempuri.org/Iadm/AddJadwalPraktikanResponse")]
+        int AddJadwalPraktikan(client.lab.jadwalPraktikan[] data);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/DeleteJadwalPraktikan", ReplyAction="http://tempuri.org/Iadm/DeleteJadwalPraktikanResponse")]
+        int DeleteJadwalPraktikan(client.lab.jadwalPraktikan data);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/TambahAngaktan", ReplyAction="http://tempuri.org/Iadm/TambahAngaktanResponse")]
+        int TambahAngaktan(client.lab.angkatan data);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1655,6 +1667,22 @@ namespace client.lab {
         
         public int HapusAbsensi(client.lab.AbsensiPraktikan data) {
             return base.Channel.HapusAbsensi(data);
+        }
+        
+        public client.lab.jadwalPraktikan[] GetJadwalPraktikan(client.lab.jadwalPraktikan data) {
+            return base.Channel.GetJadwalPraktikan(data);
+        }
+        
+        public int AddJadwalPraktikan(client.lab.jadwalPraktikan[] data) {
+            return base.Channel.AddJadwalPraktikan(data);
+        }
+        
+        public int DeleteJadwalPraktikan(client.lab.jadwalPraktikan data) {
+            return base.Channel.DeleteJadwalPraktikan(data);
+        }
+        
+        public int TambahAngaktan(client.lab.angkatan data) {
+            return base.Channel.TambahAngaktan(data);
         }
     }
 }
