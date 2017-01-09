@@ -113,5 +113,14 @@ namespace SvApp
 
         [OperationContract]
         int TambahAngaktan (angkatan data);
+
+        [OperationContract]
+        modul GetModul (modul data);
+
+        [OperationContract]
+        int GetIDAbsensiPraktikan (AbsensiPraktikan data);
+
+        [OperationContract]
+        int GetUpLoadFile (upload_file data);
     }
 }

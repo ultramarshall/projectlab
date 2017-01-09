@@ -1408,6 +1408,208 @@ namespace client.lab {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="modul", Namespace="http://schemas.datacontract.org/2004/07/SvApp")]
+    [System.SerializableAttribute()]
+    public partial class modul : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string file_modulField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int id_modulField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private byte[] lokasi_modulField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private client.lab.matkul matkulField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string file_modul {
+            get {
+                return this.file_modulField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.file_modulField, value) != true)) {
+                    this.file_modulField = value;
+                    this.RaisePropertyChanged("file_modul");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id_modul {
+            get {
+                return this.id_modulField;
+            }
+            set {
+                if ((this.id_modulField.Equals(value) != true)) {
+                    this.id_modulField = value;
+                    this.RaisePropertyChanged("id_modul");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] lokasi_modul {
+            get {
+                return this.lokasi_modulField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.lokasi_modulField, value) != true)) {
+                    this.lokasi_modulField = value;
+                    this.RaisePropertyChanged("lokasi_modul");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public client.lab.matkul matkul {
+            get {
+                return this.matkulField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.matkulField, value) != true)) {
+                    this.matkulField = value;
+                    this.RaisePropertyChanged("matkul");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="upload_file", Namespace="http://schemas.datacontract.org/2004/07/SvApp")]
+    [System.SerializableAttribute()]
+    public partial class upload_file : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private byte[] data_fileField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int id_absensiField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int id_fileField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string lokasi_fileField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string nama_fileField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] data_file {
+            get {
+                return this.data_fileField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.data_fileField, value) != true)) {
+                    this.data_fileField = value;
+                    this.RaisePropertyChanged("data_file");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id_absensi {
+            get {
+                return this.id_absensiField;
+            }
+            set {
+                if ((this.id_absensiField.Equals(value) != true)) {
+                    this.id_absensiField = value;
+                    this.RaisePropertyChanged("id_absensi");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id_file {
+            get {
+                return this.id_fileField;
+            }
+            set {
+                if ((this.id_fileField.Equals(value) != true)) {
+                    this.id_fileField = value;
+                    this.RaisePropertyChanged("id_file");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string lokasi_file {
+            get {
+                return this.lokasi_fileField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.lokasi_fileField, value) != true)) {
+                    this.lokasi_fileField = value;
+                    this.RaisePropertyChanged("lokasi_file");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string nama_file {
+            get {
+                return this.nama_fileField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.nama_fileField, value) != true)) {
+                    this.nama_fileField = value;
+                    this.RaisePropertyChanged("nama_file");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="lab.Iadm")]
     public interface Iadm {
@@ -1516,6 +1718,15 @@ namespace client.lab {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/TambahAngaktan", ReplyAction="http://tempuri.org/Iadm/TambahAngaktanResponse")]
         int TambahAngaktan(client.lab.angkatan data);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/GetModul", ReplyAction="http://tempuri.org/Iadm/GetModulResponse")]
+        client.lab.modul GetModul(client.lab.modul data);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/GetIDAbsensiPraktikan", ReplyAction="http://tempuri.org/Iadm/GetIDAbsensiPraktikanResponse")]
+        int GetIDAbsensiPraktikan(client.lab.AbsensiPraktikan data);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/GetUpLoadFile", ReplyAction="http://tempuri.org/Iadm/GetUpLoadFileResponse")]
+        int GetUpLoadFile(client.lab.upload_file data);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1683,6 +1894,18 @@ namespace client.lab {
         
         public int TambahAngaktan(client.lab.angkatan data) {
             return base.Channel.TambahAngaktan(data);
+        }
+        
+        public client.lab.modul GetModul(client.lab.modul data) {
+            return base.Channel.GetModul(data);
+        }
+        
+        public int GetIDAbsensiPraktikan(client.lab.AbsensiPraktikan data) {
+            return base.Channel.GetIDAbsensiPraktikan(data);
+        }
+        
+        public int GetUpLoadFile(client.lab.upload_file data) {
+            return base.Channel.GetUpLoadFile(data);
         }
     }
 }

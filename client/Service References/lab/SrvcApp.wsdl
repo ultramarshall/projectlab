@@ -225,6 +225,24 @@
   <wsdl:message name="Iadm_TambahAngaktan_OutputMessage">
     <wsdl:part name="parameters" element="tns:TambahAngaktanResponse" />
   </wsdl:message>
+  <wsdl:message name="Iadm_GetModul_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetModul" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_GetModul_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetModulResponse" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_GetIDAbsensiPraktikan_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetIDAbsensiPraktikan" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_GetIDAbsensiPraktikan_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetIDAbsensiPraktikanResponse" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_GetUpLoadFile_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUpLoadFile" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_GetUpLoadFile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUpLoadFileResponse" />
+  </wsdl:message>
   <wsdl:portType name="Iadm">
     <wsdl:operation name="GetLogin">
       <wsdl:input wsaw:Action="http://tempuri.org/Iadm/GetLogin" message="tns:Iadm_GetLogin_InputMessage" />
@@ -365,6 +383,18 @@
     <wsdl:operation name="TambahAngaktan">
       <wsdl:input wsaw:Action="http://tempuri.org/Iadm/TambahAngaktan" message="tns:Iadm_TambahAngaktan_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/Iadm/TambahAngaktanResponse" message="tns:Iadm_TambahAngaktan_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetModul">
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/GetModul" message="tns:Iadm_GetModul_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/GetModulResponse" message="tns:Iadm_GetModul_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIDAbsensiPraktikan">
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/GetIDAbsensiPraktikan" message="tns:Iadm_GetIDAbsensiPraktikan_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/GetIDAbsensiPraktikanResponse" message="tns:Iadm_GetIDAbsensiPraktikan_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUpLoadFile">
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/GetUpLoadFile" message="tns:Iadm_GetUpLoadFile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/GetUpLoadFileResponse" message="tns:Iadm_GetUpLoadFile_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSHttpBinding_Iadm" type="tns:Iadm">
@@ -678,6 +708,33 @@
     </wsdl:operation>
     <wsdl:operation name="TambahAngaktan">
       <soap12:operation soapAction="http://tempuri.org/Iadm/TambahAngaktan" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetModul">
+      <soap12:operation soapAction="http://tempuri.org/Iadm/GetModul" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIDAbsensiPraktikan">
+      <soap12:operation soapAction="http://tempuri.org/Iadm/GetIDAbsensiPraktikan" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUpLoadFile">
+      <soap12:operation soapAction="http://tempuri.org/Iadm/GetUpLoadFile" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

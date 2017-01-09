@@ -207,4 +207,23 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfpertemuan" nillable="true" type="tns:ArrayOfpertemuan" />
+  <xs:complexType name="modul">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="file_modul" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="id_modul" type="xs:int" />
+      <xs:element minOccurs="0" name="lokasi_modul" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="matkul" nillable="true" type="tns:matkul" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="modul" nillable="true" type="tns:modul" />
+  <xs:complexType name="upload_file">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="data_file" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="id_absensi" type="xs:int" />
+      <xs:element minOccurs="0" name="id_file" type="xs:int" />
+      <xs:element minOccurs="0" name="lokasi_file" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="nama_file" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="upload_file" nillable="true" type="tns:upload_file" />
 </xs:schema>

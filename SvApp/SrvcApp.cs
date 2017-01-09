@@ -1251,5 +1251,114 @@ namespace SvApp
                 _conn?.Close( );
             }
         }
+
+        public modul GetModul(modul data)
+        {
+            try
+            {
+                _comm.CommandText = @"SELECT lokasi_modul
+                                      FROM   modul
+                                      WHERE  file_modul = @file AND kode_mk = @kode_mk";
+                _comm.Parameters.AddWithValue( "file", data.file_modul );
+                _comm.Parameters.AddWithValue( "kode_mk", data.matkul.kode_mk );
+                _comm.CommandType = CommandType.Text;
+                _conn.Open( );
+                SqlDataReader reader = _comm.ExecuteReader( );
+
+                var modul = new modul();
+                while ( reader.Read() )
+                {
+                    modul.lokasi_modul = File.ReadAllBytes( reader[0].ToString().TrimEnd() );
+                }
+                return modul;
+            }
+            finally
+            {
+                _conn?.Close( );
+            }
+        }
+
+        public int GetIDAbsensiPraktikan (AbsensiPraktikan data)
+        {
+            try
+            {
+                _comm.CommandText = @"SELECT	absensi_praktikan.id_absensi
+                                      FROM      absensi_praktikan 
+		                                        INNER JOIN 	jadwal_praktikan 
+			                                        ON	absensi_praktikan.id_jadwal_praktikan = jadwal_praktikan.id_jadwal_praktikan 
+			                                        AND jadwal_praktikan.nrp = @nrp 
+		                                        INNER JOIN 	jadwal_umum 
+			                                        ON 	jadwal_praktikan.id_jadwal_umum = jadwal_umum.id_jadwal_umum 
+		                                        INNER JOIN periode 
+			                                        ON 	jadwal_umum.id_periode = periode.id_periode 
+			                                        AND periode.id_periode = @id_periode 
+		                                        INNER JOIN shift 
+			                                        ON 	jadwal_umum.id_shift = shift.id_shift 
+			                                        AND	shift.id_shift = @id_shift 
+		                                        INNER JOIN mata_kuliah 
+			                                        ON 	jadwal_umum.kode_mk = mata_kuliah.kode_mk 
+			                                        AND mata_kuliah.kode_mk = @kode_mk 
+		                                        INNER JOIN pertemuan 
+			                                        ON 	absensi_praktikan.id_pertemuan = pertemuan.id_pertemuan 
+			                                        AND pertemuan.id_jenis_pertemuan = @pertemuan";
+                _comm.Parameters.AddWithValue("nrp",data.JadwalPraktikan.nrp);
+                _comm.Parameters.AddWithValue("id_periode",data.JadwalPraktikan.id_jadwal_umum.id_periode);
+                _comm.Parameters.AddWithValue("id_shift",data.JadwalPraktikan.id_jadwal_umum.id_shift);
+                _comm.Parameters.AddWithValue("kode_mk",data.JadwalPraktikan.id_jadwal_umum.kode_mk);
+                _comm.Parameters.AddWithValue("pertemuan",data.Pertemuan.id_jenis_pertemuan);
+                _comm.CommandType = CommandType.Text;
+                _conn.Open( );
+                SqlDataReader reader = _comm.ExecuteReader( );
+
+                var id = new int( );
+                while ( reader.Read( ) )
+                {
+                    id = Convert.ToInt16( reader[0] );
+                }
+                return id;
+            }
+            finally
+            {
+                _conn?.Close( );
+            }
+        }
+
+        public int GetUpLoadFile (upload_file data)
+        {
+            const string dir = @"C:\LIK\USER\";
+            string foo = $"{dir}/{data.lokasi_file}/";
+            //cek folder user di server
+            if ( Exists( foo ) ) //kalau folder sudah ada
+                File.WriteAllBytes( Format( "{0}{1}", foo, data.nama_file ), data.data_file );
+            else
+            {
+                CreateDirectory( foo );
+                File.WriteAllBytes( Format( "{0}{1}", foo, data.nama_file ), data.data_file );
+            }
+            return new int();
+            //try
+            //{
+
+                
+            //    _comm.CommandText = @"INSERT INTO upload_file (id_absensi, lokasi_file)
+            //                          VALUES (@id_absensi, @lokasi_file)";
+
+            //    _comm.Parameters.AddWithValue( "id_absensi", data.id_absensi );
+            //    _comm.Parameters.AddWithValue( "lokasi_file", "x" );
+
+            //    _comm.CommandType = CommandType.Text;
+            //    _conn.Open( );
+            //    return _comm.ExecuteNonQuery( );
+            //}
+            //catch (Exception)
+            //{
+            //    throw;
+            //}
+            //finally
+            //{
+            //    _conn?.Close( );
+            //}
+        }
+
     }
 }

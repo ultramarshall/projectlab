@@ -16,6 +16,7 @@ using DevExpress.XtraGrid.Views.Grid;
 using static client.Library.Method;
 using static client.Library.border;
 using static client.Library.ConvertFromTo;
+using System.Windows.Forms;
 
 namespace client
 {
@@ -830,10 +831,99 @@ namespace client
             }
         }
 
-        private void accordionControlElement7_Click (object sender, EventArgs e)
+        private void TambahTahunAngkatan (object sender, EventArgs e)
         {
             var Form = new FormAngkatan( );
             Form.ShowDialog( );
+        }
+
+        private void LoadModulPraktikum (object sender, EventArgs e)
+        {
+            var praktikum = layoutControlItem6.Text.Replace( "Praktikum ", String.Empty );
+            var service = new IadmClient( );
+            var p = service.GetMatKul( ).FirstOrDefault( x => x.mata_kuliah == praktikum );
+            var data = new modul( )
+            {
+                matkul = new matkul( ) { kode_mk = p.kode_mk },
+                file_modul = comboBoxEdit3.SelectedItem.ToString( )
+            };
+            var source = service.GetModul( data ).lokasi_modul;
+            var file = new MemoryStream( source );
+            pdfViewer1.LoadDocument( file );
+        }
+
+        private string _Dir; 
+        private void LoadFile (object sender, EventArgs e)
+        {
+            var open = new OpenFileDialog( )
+            {
+                Title = "Browse Files",
+                InitialDirectory = @"C:\",
+                CheckFileExists = true,
+                CheckPathExists = true,
+                DefaultExt = "txt",
+                Filter = "Files (*.txt)|*.txt|All files (*.*)|*.*",
+                FilterIndex = 2,
+                RestoreDirectory = true,
+                ReadOnlyChecked = true,
+                ShowReadOnly = true
+            };
+
+            if ( open.ShowDialog( ) == DialogResult.OK )
+            {
+                var Info = new FileInfo( open.FileName );
+                _Dir = Info.Name;
+                sourceFileName.Text = open.FileName;
+                LogFileUpload.Items.Add("File yang di pilih " + _Dir);
+            }
+        }
+
+        private void UploadFile (object sender, EventArgs e)
+        {
+            var service = new IadmClient( );
+            var periode = service.viewPeriode( )
+                .FirstOrDefault( x => DateTime.Now >= x.awalSemester &&
+                                      DateTime.Now <= x.akhirSemester );
+            var shift   = service.GetShift( )
+                .FirstOrDefault( x => DateTime.Now.TimeOfDay >= x.mulai.TimeOfDay &&
+                                      DateTime.Now.TimeOfDay <= x.selesai.TimeOfDay );
+
+            var praktikum   = layoutControlItem6.Text.Replace( "Praktikum ", String.Empty );
+            var p           = service.GetMatKul( ).FirstOrDefault( x => x.mata_kuliah == praktikum );
+            var pertemuan   = listBoxControl1.SelectedItem.ToString( );
+            var data    = new AbsensiPraktikan( )
+            {
+                JadwalPraktikan = new jadwalPraktikan {
+                    nrp = _dataPraktikan[0].NRP,
+                    id_jadwal_umum = new jadwal_umum( )
+                    {
+                        id_periode  = periode.id_periode,
+                        id_shift    = shift.id_shift,
+                        kode_mk     = p.kode_mk
+                    },
+                },
+                Pertemuan = new pertemuan( ) { id_jenis_pertemuan = pertemuan }
+            };
+
+            var absenID         = service.GetIDAbsensiPraktikan( data );
+            var FileLocation    = string.Format( @"{0}\{1} {2:yyyy} - {3:yyyy}\{4}", 
+                                      _dataPraktikan[0].NRP, 
+                                      periode.semester, 
+                                      periode.awalSemester, 
+                                      periode.akhirSemester, 
+                                      listBoxControl1.SelectedItem );
+            var f = new upload_file( )
+            {
+                id_absensi = absenID,
+                nama_file = _Dir,
+                lokasi_file = FileLocation,
+                data_file = File.ReadAllBytes( @sourceFileName.Text )
+            };
+            //service.GetUpLoadFile( f );
+            try { service.GetUpLoadFile( f ); }
+            catch(Exception error ) { XtraMessageBox.Show( error.ToString( ) ); }
+
+            LogFileUpload.Items.Add( string.Format( "'{0}' upload file berhasil", _Dir) ) ;
         }
     }
 }
