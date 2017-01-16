@@ -1607,5 +1607,54 @@ namespace SvApp
                 _conn.Close();
             }
         }
+
+        public int InputMatkul(matkul data)
+        {
+            try
+            {
+                _comm.CommandText = @"INSERT INTO mata_kuliah (kode_mk, mata_kuliah)
+                                      VALUES (@kode_mk, @mata_kuliah)";
+
+                _comm.Parameters.AddWithValue("kode_mk", data.kode_mk);
+                _comm.Parameters.AddWithValue("mata_kuliah", data.mata_kuliah);
+
+                _comm.CommandType = CommandType.Text;
+                _conn.Open();
+
+                return _comm.ExecuteNonQuery();
+            }
+            catch ( Exception )
+            {
+                throw;
+            }
+            finally
+            {
+                _conn?.Close();
+            }
+        }
+
+        public int InputKelas(kelas data)
+        {
+            try
+            {
+                _comm.CommandText = @"INSERT INTO kelas (kelas)
+                                      VALUES (@kelas)";
+
+                _comm.Parameters.AddWithValue("kelas", data.Kelas);
+
+                _comm.CommandType = CommandType.Text;
+                _conn.Open();
+
+                return _comm.ExecuteNonQuery();
+            }
+            catch ( Exception )
+            {
+                throw;
+            }
+            finally
+            {
+                _conn?.Close();
+            }
+        }
     }
 }

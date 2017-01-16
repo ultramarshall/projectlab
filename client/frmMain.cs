@@ -1842,11 +1842,13 @@ namespace client
         private void accordionControlElement31_Click(object sender, EventArgs e)
         {
             a_.SelectedPage = a_praktikum;
+            ViewMatkul();
         }
 
         private void accordionControlElement32_Click(object sender, EventArgs e)
         {
             a_.SelectedPage = a_kelas;
+            ViewKelas();
         }
 
         private void simpleButton33_Click(object sender, EventArgs e)
@@ -1925,6 +1927,51 @@ namespace client
                 x.jadwal.JadwalPraktikan.praktikan.Nama
             }).ToList();
             service.Close();
+        }
+        private void ViewMatkul()
+        {
+            var service = new IadmClient();
+            gridControl11.DataSource = service.GetMatKul().ToList();
+            service.Close();
+        }
+        private void simpleButton34_Click(object sender, EventArgs e)
+        {
+            var kode_mk = textEdit3.Text;
+            var matkul = textEdit9.Text;
+            var service = new IadmClient();
+
+            var data = new matkul()
+            {
+                kode_mk = kode_mk,
+                mata_kuliah = matkul,
+            };
+            service.InputMatkul(data);
+            ViewMatkul();
+            service.Close();
+        }
+
+
+        private void ViewKelas()
+        {
+            var service = new IadmClient();
+            listBoxControl3.Items.AddRange(service.GetKelas().Select(x => x.Kelas).ToArray());
+            service.Close();
+        }
+        private void simpleButton36_Click(object sender, EventArgs e)
+        {
+            var kelas = textEdit10.Text;
+            var service = new IadmClient();
+            try
+            {
+                var data = new kelas() { Kelas = kelas };
+                service.InputKelas(data);
+            }
+            catch (Exception)
+            {
+                XtraMessageBox.Show("tidak ada kelas yang di tambahkan");
+            }
+            service.Close();
+            ViewKelas();
         }
     }
 }

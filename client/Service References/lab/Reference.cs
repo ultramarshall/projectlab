@@ -1812,6 +1812,12 @@ namespace client.lab {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/GetFileUjian", ReplyAction="http://tempuri.org/Iadm/GetFileUjianResponse")]
         client.lab.upload_file[] GetFileUjian(client.lab.jadwalPraktikan data);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/InputMatkul", ReplyAction="http://tempuri.org/Iadm/InputMatkulResponse")]
+        int InputMatkul(client.lab.matkul data);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/InputKelas", ReplyAction="http://tempuri.org/Iadm/InputKelasResponse")]
+        int InputKelas(client.lab.kelas data);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2019,6 +2025,14 @@ namespace client.lab {
         
         public client.lab.upload_file[] GetFileUjian(client.lab.jadwalPraktikan data) {
             return base.Channel.GetFileUjian(data);
+        }
+        
+        public int InputMatkul(client.lab.matkul data) {
+            return base.Channel.InputMatkul(data);
+        }
+        
+        public int InputKelas(client.lab.kelas data) {
+            return base.Channel.InputKelas(data);
         }
     }
 }

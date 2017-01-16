@@ -285,6 +285,18 @@
   <wsdl:message name="Iadm_GetFileUjian_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetFileUjianResponse" />
   </wsdl:message>
+  <wsdl:message name="Iadm_InputMatkul_InputMessage">
+    <wsdl:part name="parameters" element="tns:InputMatkul" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_InputMatkul_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InputMatkulResponse" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_InputKelas_InputMessage">
+    <wsdl:part name="parameters" element="tns:InputKelas" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_InputKelas_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InputKelasResponse" />
+  </wsdl:message>
   <wsdl:portType name="Iadm">
     <wsdl:operation name="GetLogin">
       <wsdl:input wsaw:Action="http://tempuri.org/Iadm/GetLogin" message="tns:Iadm_GetLogin_InputMessage" />
@@ -465,6 +477,14 @@
     <wsdl:operation name="GetFileUjian">
       <wsdl:input wsaw:Action="http://tempuri.org/Iadm/GetFileUjian" message="tns:Iadm_GetFileUjian_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/Iadm/GetFileUjianResponse" message="tns:Iadm_GetFileUjian_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InputMatkul">
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/InputMatkul" message="tns:Iadm_InputMatkul_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/InputMatkulResponse" message="tns:Iadm_InputMatkul_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InputKelas">
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/InputKelas" message="tns:Iadm_InputKelas_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/InputKelasResponse" message="tns:Iadm_InputKelas_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSHttpBinding_Iadm" type="tns:Iadm">
@@ -868,6 +888,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetFileUjian">
       <soap12:operation soapAction="http://tempuri.org/Iadm/GetFileUjian" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InputMatkul">
+      <soap12:operation soapAction="http://tempuri.org/Iadm/InputMatkul" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InputKelas">
+      <soap12:operation soapAction="http://tempuri.org/Iadm/InputKelas" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
