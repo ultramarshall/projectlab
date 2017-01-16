@@ -4388,6 +4388,7 @@
             // 
             // P_Info
             // 
+            this.P_Info.Caption = "P_Info";
             this.P_Info.Controls.Add(this.layoutControl12);
             this.P_Info.Name = "P_Info";
             this.P_Info.Size = new System.Drawing.Size(625, 551);

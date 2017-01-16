@@ -1175,7 +1175,7 @@ namespace client
                 modul_file = filesName
             };
             try { service.UploadModul( data ); } catch (Exception ee ) { XtraMessageBox.Show( ee.ToString( ));  }
-            Modul_click( sender, e );
+            Praktikum_SelectedValueChanged(sender,e);
             service.Close( );
         }
 
