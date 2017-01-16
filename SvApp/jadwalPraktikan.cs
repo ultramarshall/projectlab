@@ -16,6 +16,12 @@ namespace SvApp
         public string nrp { get; set; }
 
         [DataMember]
+        public praktikan praktikan { get; set; }
+
+        [DataMember]
         public jadwal_umum id_jadwal_umum { get; set; }
+
+        [DataMember]
+        public AbsensiPraktikan absen { get; set; }
     }
 }

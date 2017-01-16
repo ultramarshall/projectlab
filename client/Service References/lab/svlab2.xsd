@@ -10,12 +10,51 @@
   <xs:element name="akun" nillable="true" type="tns:akun" />
   <xs:complexType name="jadwalPraktikan">
     <xs:sequence>
+      <xs:element minOccurs="0" name="absen" nillable="true" type="tns:AbsensiPraktikan" />
       <xs:element minOccurs="0" name="id_jadwal_praktikan" type="xs:int" />
       <xs:element minOccurs="0" name="id_jadwal_umum" nillable="true" type="tns:jadwal_umum" />
       <xs:element minOccurs="0" name="nrp" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="praktikan" nillable="true" type="tns:praktikan" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="jadwalPraktikan" nillable="true" type="tns:jadwalPraktikan" />
+  <xs:complexType name="AbsensiPraktikan">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="JadwalPraktikan" nillable="true" type="tns:jadwalPraktikan" />
+      <xs:element minOccurs="0" name="Nilai" type="xs:int" />
+      <xs:element minOccurs="0" name="Pertemuan" nillable="true" type="tns:pertemuan" />
+      <xs:element minOccurs="0" name="id_absensi" type="xs:int" />
+      <xs:element minOccurs="0" name="staff" nillable="true" type="tns:Staff" />
+      <xs:element minOccurs="0" name="waktu_absensi" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AbsensiPraktikan" nillable="true" type="tns:AbsensiPraktikan" />
+  <xs:complexType name="pertemuan">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="id_jenis_pertemuan" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="id_pertemuan" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="pertemuan" nillable="true" type="tns:pertemuan" />
+  <xs:complexType name="Staff">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="alamat" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="foto" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="id_staff" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="nama" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="no_hp" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="users" nillable="true" type="tns:Users" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Staff" nillable="true" type="tns:Staff" />
+  <xs:complexType name="Users">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="status" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Users" nillable="true" type="tns:Users" />
   <xs:complexType name="jadwal_umum">
     <xs:sequence>
       <xs:element minOccurs="0" name="fk_jadwalUmum_Shift" nillable="true" type="tns:Shift" />
@@ -63,12 +102,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="periode" nillable="true" type="tns:periode" />
-  <xs:complexType name="ArrayOfjadwalPraktikan">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="jadwalPraktikan" nillable="true" type="tns:jadwalPraktikan" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfjadwalPraktikan" nillable="true" type="tns:ArrayOfjadwalPraktikan" />
   <xs:complexType name="praktikan">
     <xs:sequence>
       <xs:element minOccurs="0" name="Foto" nillable="true" type="xs:base64Binary" />
@@ -82,43 +115,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="praktikan" nillable="true" type="tns:praktikan" />
-  <xs:complexType name="Users">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="status" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Users" nillable="true" type="tns:Users" />
-  <xs:complexType name="AbsensiPraktikan">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="JadwalPraktikan" nillable="true" type="tns:jadwalPraktikan" />
-      <xs:element minOccurs="0" name="Nilai" type="xs:int" />
-      <xs:element minOccurs="0" name="Pertemuan" nillable="true" type="tns:pertemuan" />
-      <xs:element minOccurs="0" name="id_absensi" type="xs:int" />
-      <xs:element minOccurs="0" name="staff" nillable="true" type="tns:Staff" />
-      <xs:element minOccurs="0" name="waktu_absensi" type="xs:dateTime" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="AbsensiPraktikan" nillable="true" type="tns:AbsensiPraktikan" />
-  <xs:complexType name="pertemuan">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="id_jenis_pertemuan" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="id_pertemuan" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="pertemuan" nillable="true" type="tns:pertemuan" />
-  <xs:complexType name="Staff">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="alamat" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="foto" nillable="true" type="xs:base64Binary" />
-      <xs:element minOccurs="0" name="id_staff" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="nama" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="no_hp" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="users" nillable="true" type="tns:Users" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Staff" nillable="true" type="tns:Staff" />
   <xs:complexType name="angkatan">
     <xs:sequence>
       <xs:element minOccurs="0" name="KodeAngkatan" nillable="true" type="xs:string" />
@@ -133,6 +129,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="jurusan" nillable="true" type="tns:jurusan" />
+  <xs:complexType name="ArrayOfjadwalPraktikan">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="jadwalPraktikan" nillable="true" type="tns:jadwalPraktikan" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfjadwalPraktikan" nillable="true" type="tns:ArrayOfjadwalPraktikan" />
   <xs:complexType name="ArrayOfjurusan">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="jurusan" nillable="true" type="tns:jurusan" />
@@ -228,9 +230,22 @@
       <xs:element minOccurs="0" name="data_file" nillable="true" type="xs:base64Binary" />
       <xs:element minOccurs="0" name="id_absensi" type="xs:int" />
       <xs:element minOccurs="0" name="id_file" type="xs:int" />
+      <xs:element minOccurs="0" name="jadwal" nillable="true" type="tns:AbsensiPraktikan" />
       <xs:element minOccurs="0" name="lokasi_file" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="nama_file" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="upload_file" nillable="true" type="tns:upload_file" />
+  <xs:complexType name="ArrayOfAbsensiPraktikan">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AbsensiPraktikan" nillable="true" type="tns:AbsensiPraktikan" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAbsensiPraktikan" nillable="true" type="tns:ArrayOfAbsensiPraktikan" />
+  <xs:complexType name="ArrayOfupload_file">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="upload_file" nillable="true" type="tns:upload_file" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfupload_file" nillable="true" type="tns:ArrayOfupload_file" />
 </xs:schema>

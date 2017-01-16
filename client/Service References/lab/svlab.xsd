@@ -578,4 +578,46 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="Nilai">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q56="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q56:jadwal_umum" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NilaiResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q57="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="NilaiResult" nillable="true" type="q57:ArrayOfAbsensiPraktikan" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListPraktikanPraktikum">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q58="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q58:jadwal_umum" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListPraktikanPraktikumResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q59="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="ListPraktikanPraktikumResult" nillable="true" type="q59:ArrayOfpraktikan" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFileUjian">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q60="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="data" nillable="true" type="q60:jadwalPraktikan" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFileUjianResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q61="http://schemas.datacontract.org/2004/07/SvApp" minOccurs="0" name="GetFileUjianResult" nillable="true" type="q61:ArrayOfupload_file" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

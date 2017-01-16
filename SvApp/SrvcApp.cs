@@ -5,7 +5,6 @@ using System.Data;
 using System.IO;
 using static System.IO.Directory;
 using static System.String;
-using static SvApp.BCrypt;
 
 namespace SvApp
 {
@@ -1445,39 +1444,168 @@ namespace SvApp
         public int GetUpLoadFile (upload_file data)
         {
             const string dir = @"C:\LIK\USER\";
-            string foo = $"{dir}/{data.lokasi_file}/";
-            //cek folder user di server
-            if ( Exists( foo ) ) //kalau folder sudah ada
-                File.WriteAllBytes( Format( "{0}{1}", foo, data.nama_file ), data.data_file );
-            else
+            string foo = dir + data.lokasi_file + @"\";
+            string locationfile = foo + @"\" + data.nama_file;
+
+            try
             {
-                CreateDirectory( foo );
-                File.WriteAllBytes( Format( "{0}{1}", foo, data.nama_file ), data.data_file );
+                _comm.CommandText = @"INSERT INTO upload_file (id_absensi, lokasi_file)
+                                      VALUES (@id_absensi, @lokasi_file)";
+
+                _comm.Parameters.AddWithValue( "id_absensi", data.id_absensi );
+                _comm.Parameters.AddWithValue( "lokasi_file", Format( "{0}{1}", foo, data.nama_file ) );
+
+                _comm.CommandType = CommandType.Text;
+                _conn.Open( );
+
+                //cek folder user di server
+                if ( Exists( foo ) ) //kalau folder sudah ada
+                    File.WriteAllBytes( Format( "{0}{1}", foo, data.nama_file ), data.data_file );
+                else
+                {
+                    CreateDirectory( foo );
+                    File.WriteAllBytes( Format( "{0}{1}", foo, data.nama_file ), data.data_file );
+                }
+
+                return _comm.ExecuteNonQuery( );
             }
-            return new int();
-            //try
-            //{
-
-                
-            //    _comm.CommandText = @"INSERT INTO upload_file (id_absensi, lokasi_file)
-            //                          VALUES (@id_absensi, @lokasi_file)";
-
-            //    _comm.Parameters.AddWithValue( "id_absensi", data.id_absensi );
-            //    _comm.Parameters.AddWithValue( "lokasi_file", "x" );
-
-            //    _comm.CommandType = CommandType.Text;
-            //    _conn.Open( );
-            //    return _comm.ExecuteNonQuery( );
-            //}
-            //catch (Exception)
-            //{
-            //    throw;
-            //}
-            //finally
-            //{
-            //    _conn?.Close( );
-            //}
+            catch ( Exception )
+            {
+                throw;
+            }
+            finally
+            {
+                _conn?.Close( );
+            }
         }
 
+        public List<AbsensiPraktikan> Nilai(jadwal_umum data)
+        {
+            try
+            {
+                var nilai = new List<AbsensiPraktikan>();
+                _comm.CommandText = @"SELECT    jadwal_praktikan.nrp, absensi_praktikan.nilai, absensi_praktikan.id_pertemuan
+                                      FROM      absensi_praktikan INNER JOIN
+		                                        jadwal_praktikan ON absensi_praktikan.id_jadwal_praktikan = jadwal_praktikan.id_jadwal_praktikan
+                                      WHERE	    jadwal_praktikan.id_jadwal_umum = @id_jadwal_umum";
+                _comm.Parameters.AddWithValue("id_jadwal_umum", data.id_jadwal_umum);
+                _comm.CommandType = CommandType.Text;
+                _conn.Open();
+                SqlDataReader reader = _comm.ExecuteReader();
+
+                while ( reader.Read() )
+                {
+                    var list = new AbsensiPraktikan()
+                    {
+                        JadwalPraktikan = new jadwalPraktikan() { nrp = reader[0].ToString() },
+                        Nilai = Convert.ToInt16(reader[1]),
+                        Pertemuan = new pertemuan() { id_pertemuan = Convert.ToInt16(reader[2]) }
+                    };
+                    nilai.Add(list);
+                }
+                return nilai;
+            }
+            finally
+            {
+                _conn.Close();
+            }
+        }
+
+        public List<praktikan> ListPraktikanPraktikum(jadwal_umum data)
+        {
+            try
+            {
+                var praktikan = new List<praktikan>();
+                _comm.CommandText = @"SELECT	praktikan.nrp, praktikan.nama
+                                      FROM	    jadwal_umum 
+		                                        INNER JOIN 	jadwal_praktikan 
+			                                        ON 		jadwal_umum.id_jadwal_umum = jadwal_praktikan.id_jadwal_umum 
+			                                        AND 	jadwal_umum.id_periode = @id_periode 
+		                                        INNER JOIN 	praktikan 
+			                                        ON 		jadwal_praktikan.nrp = praktikan.nrp 
+		                                        INNER JOIN 	mata_kuliah 
+			                                        ON 		jadwal_umum.kode_mk = mata_kuliah.kode_mk 
+			                                        AND 	mata_kuliah.mata_kuliah = @mata_kuliah";
+                _comm.Parameters.AddWithValue("id_periode", data.id_periode);
+                _comm.Parameters.AddWithValue("mata_kuliah", data.fk_jadwalUmum_matakuliah.mata_kuliah);
+                _comm.CommandType = CommandType.Text;
+                _conn.Open();
+                SqlDataReader reader = _comm.ExecuteReader();
+
+                while ( reader.Read() )
+                {
+                    var list = new praktikan()
+                    {
+                        NRP = reader[0].ToString().TrimEnd(),
+                        Nama = reader[1].ToString().TrimEnd()
+                    };
+                    praktikan.Add(list);
+                }
+                return praktikan;
+            }
+            finally
+            {
+                _conn.Close();
+            }
+        }
+
+        public List<upload_file> GetFileUjian(jadwalPraktikan data)
+        {
+            try
+            {
+                var file = new List<upload_file>();
+                _comm.CommandText = @"SELECT	praktikan.nrp, praktikan.nama, upload_file.lokasi_file
+                                      FROM  	upload_file 
+		                                        INNER JOIN absensi_praktikan 
+			                                        ON upload_file.id_absensi = absensi_praktikan.id_absensi 
+		                                        INNER JOIN jadwal_praktikan 
+			                                        ON absensi_praktikan.id_jadwal_praktikan = jadwal_praktikan.id_jadwal_praktikan 
+		                                        INNER JOIN jadwal_umum 
+			                                        ON jadwal_praktikan.id_jadwal_umum = jadwal_umum.id_jadwal_umum 
+			                                        AND jadwal_umum.id_periode = @id_periode 
+		                                        INNER JOIN pertemuan 
+			                                        ON absensi_praktikan.id_pertemuan = pertemuan.id_pertemuan 
+		                                        INNER JOIN mata_kuliah 
+			                                        ON jadwal_umum.kode_mk = mata_kuliah.kode_mk 
+			                                        AND mata_kuliah.mata_kuliah = @mata_kuliah 
+		                                        INNER JOIN praktikan 
+			                                        ON jadwal_praktikan.nrp = praktikan.nrp
+                                      WHERE  	pertemuan.id_jenis_pertemuan = @jenis_pertemuan";
+                _comm.Parameters.AddWithValue("id_periode", data.id_jadwal_umum.id_periode);
+                _comm.Parameters.AddWithValue("mata_kuliah", data.id_jadwal_umum.fk_jadwalUmum_matakuliah.mata_kuliah);
+                _comm.Parameters.AddWithValue("jenis_pertemuan", data.absen.Pertemuan.id_jenis_pertemuan);
+                _comm.CommandType = CommandType.Text;
+                _conn.Open();
+                SqlDataReader reader = _comm.ExecuteReader();
+                
+                while ( reader.Read() )
+                {
+                    var info = new FileInfo(reader[2].ToString().TrimEnd());
+                    var list = new upload_file()
+                    {
+                        jadwal = new AbsensiPraktikan()
+                        {
+                            JadwalPraktikan = new jadwalPraktikan()
+                            {
+                                praktikan = new praktikan()
+                                {
+                                    NRP = reader[0].ToString().TrimEnd(),
+                                    Nama = reader[1].ToString().TrimEnd()
+                                }
+                            }
+                        },
+                        data_file = File.ReadAllBytes(reader[2].ToString().TrimEnd()),
+                        nama_file = info.Name
+                    };
+
+                    file.Add(list);
+                }
+                return file;
+            }
+            finally
+            {
+                _conn.Close();
+            }
+        }
     }
 }

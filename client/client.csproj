@@ -242,6 +242,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Service References\lab\client.lab.AbsensiPraktikan.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\lab\client.lab.angkatan.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -279,6 +282,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\lab\client.lab.Staff.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\lab\client.lab.upload_file.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\lab\SrvcApp.wsdl" />

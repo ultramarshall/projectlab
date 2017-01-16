@@ -134,5 +134,14 @@ namespace SvApp
 
         [OperationContract]
         int GetUpLoadFile (upload_file data);
+
+        [OperationContract]
+        List<AbsensiPraktikan> Nilai(jadwal_umum data);
+
+        [OperationContract]
+        List<praktikan> ListPraktikanPraktikum(jadwal_umum data);
+
+        [OperationContract]
+        List<upload_file> GetFileUjian(jadwalPraktikan data);
     }
 }

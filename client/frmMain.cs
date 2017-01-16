@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using static System.IO.Directory;
 using System.Linq;
 using client.lab;
 using client.Properties;
@@ -17,6 +18,7 @@ using static client.Library.Method;
 using static client.Library.border;
 using static client.Library.ConvertFromTo;
 using System.Windows.Forms;
+using DevExpress.XtraPrinting;
 
 namespace client
 {
@@ -54,29 +56,29 @@ namespace client
             gridView.OptionsMenu.EnableColumnMenu = false;
             gridView.OptionsView.ShowIndicator = false;
             gridView.Appearance.HeaderPanel.TextOptions.HAlignment = HorzAlignment.Center;
-            for (var i = 0; i < gridView.Columns.Count; i++)
+            for ( var i = 0; i < gridView.Columns.Count; i++ )
             {
                 gridView.Columns[i].OptionsColumn.AllowFocus = false;
                 gridView.Columns[i].OptionsColumn.AllowMove = false;
             }
         }
 
-        private void CekJadwal ()
+        private void CekJadwal()
         {
-            var service = new IadmClient( );
-            var periode = service.viewPeriode( ).FirstOrDefault( x => DateTime.Now >= x.awalSemester &&
-                                                                      DateTime.Now <= x.akhirSemester );
-            var data = new jadwalStaff( )
+            var service = new IadmClient();
+            var periode = service.viewPeriode().FirstOrDefault(x => DateTime.Now >= x.awalSemester &&
+                                                                    DateTime.Now <= x.akhirSemester);
+            var data = new jadwalStaff()
             {
-                staff = new Staff( ) { id_staff = _dataStaff[0].id_staff },
-                jadwal_umum = new jadwal_umum( )
+                staff = new Staff() { id_staff = _dataStaff[0].id_staff },
+                jadwal_umum = new jadwal_umum()
                 {
                     id_periode = periode.id_periode
                 }
             };
-            var jadwal = service.GetJadwalAsisten( data );
+            var jadwal = service.GetJadwalAsisten(data);
 
-            if ( jadwal.Count( ) > 0 )
+            if ( jadwal.Count() > 0 )
             {
                 accordionControlElement17.Enabled = false;
             }
@@ -98,7 +100,7 @@ namespace client
 
                 //menampilkan hari ini/ ex: Senin, Selasa, Rabu, Kamis, Jumat, Sabtu
                 var now = DateTime.Now;
-                if (roles == "Praktikan")
+                if ( roles == "Praktikan" )
                 {
                     try
                     {
@@ -114,15 +116,15 @@ namespace client
                             );
                         var jadwal = service.getPraktikanPraktikum(username.Text, shift.id_shift, periode.id_periode);
                         _jadwalPraktikan = jadwal[0];
-                        if (jadwal.Length != 1) return;
+                        if ( jadwal.Length != 1 ) return;
                         {
-                            if (day == jadwal[0].id_jadwal_umum.hari)
+                            if ( day == jadwal[0].id_jadwal_umum.hari )
                             {
                                 var timeStart = jadwal[0].id_jadwal_umum.fk_jadwalUmum_Shift.mulai.TimeOfDay;
                                 var timeEnd = jadwal[0].id_jadwal_umum.fk_jadwalUmum_Shift.selesai.TimeOfDay;
-                                if (now.TimeOfDay <= timeStart) // praktikum belum mulai
+                                if ( now.TimeOfDay <= timeStart ) // praktikum belum mulai
                                     XtraMessageBox.Show("tidak bisa login. praktikum belum di mulai");
-                                else if (now.TimeOfDay >= timeEnd) // praktikum sudah lewat
+                                else if ( now.TimeOfDay >= timeEnd ) // praktikum sudah lewat
                                     XtraMessageBox.Show("tidak bisa login. praktikum sudah selesai");
                                 else
                                 {
@@ -142,19 +144,19 @@ namespace client
                             else XtraMessageBox.Show("hari ini tidak ada jadwal praktikum");
                         }
                     }
-                    catch (Exception)
+                    catch ( Exception )
                     {
                         XtraMessageBox.Show("tidak ada praktikum saat ini");
                     }
                 }
-                else if (roles == "Asisten") //aslab
+                else if ( roles == "Asisten" ) //aslab
                 {
                     Interface.SelectedPage = InterfaceStaff;
                     var data = new Staff //kirim id_staff 
                     {
                         id_staff = username.Text
                     };
-                    if (_dataStaff != null)
+                    if ( _dataStaff != null )
                     {
                         _dataStaff.Add(service.getProfileStaff(data));
                         simpleLabelItem11.Text = _dataStaff[0].id_staff;
@@ -164,12 +166,12 @@ namespace client
                         var foto = new MemoryStream(_dataStaff[0].foto);
                         pictureEdit2.Image = Image.FromStream(foto);
                         ViewJadwalProfile(sender, e);
-                        CekJadwal( );
+                        CekJadwal();
                     }
                     service.Close();
                 }
-                else if (roles == "Admin") Interface.SelectedPage = InterfaceAdmin;
-                else if (roles == "Koordinator") //kordinator
+                else if ( roles == "Admin" ) Interface.SelectedPage = InterfaceAdmin;
+                else if ( roles == "Koordinator" ) //kordinator
                 {
                     Interface.SelectedPage = InterfaceKoordinator;
                     var data = new Staff //kirim id_staff 
@@ -191,13 +193,13 @@ namespace client
                 else //username ga ada
                     XtraMessageBox.Show("username tidak terdaftar");
             }
-            catch (Exception err)
+            catch ( Exception err )
             {
                 XtraMessageBox.Show(err.ToString());
             }
         }
 
-        private void CloseLogin (object sender, EventArgs e)
+        private void CloseLogin(object sender, EventArgs e)
         {
             username.Text = "";
             password.Text = "";
@@ -207,7 +209,7 @@ namespace client
 
         private void gridView6_RowCellClick(object sender, RowCellClickEventArgs e)
         {
-            if (e.Clicks == 2)
+            if ( e.Clicks == 2 )
             {
                 AbsensiPraktikanSearch(sender, e);
             }
@@ -232,7 +234,7 @@ namespace client
                 }
             };
             service.PostAbsenPraktikan(key);
-            var data = new praktikan {NRP = username.Text};
+            var data = new praktikan { NRP = username.Text };
             _dataPraktikan.Add(service.getProfilePraktikan(data));
             simpleLabelItem22.Text = _dataPraktikan[0].NRP;
             simpleLabelItem19.Text = _dataPraktikan[0].Nama;
@@ -268,10 +270,10 @@ namespace client
                 var jurusan = service.GetJurusan().FirstOrDefault(q => q.NamaJurusan == nmJurusan);
                 var data = new praktikan
                 {
-                    angkatan = new angkatan {KodeAngkatan = angkatan.KodeAngkatan},
-                    jurusan = new jurusan {KodeJurusan = jurusan.KodeJurusan}
+                    angkatan = new angkatan { KodeAngkatan = angkatan.KodeAngkatan },
+                    jurusan = new jurusan { KodeJurusan = jurusan.KodeJurusan }
                 };
-                gridControl1.DataSource = service.GetPraktikan(data).Select(x => new {x.Foto, x.NRP, x.Nama}).ToList();
+                gridControl1.DataSource = service.GetPraktikan(data).Select(x => new { x.Foto, x.NRP, x.Nama }).ToList();
                 SettingGridView(gridView1);
                 gridView1.Columns[0].OptionsColumn.AllowMerge = DefaultBoolean.False;
                 gridView1.RowHeight = 60;
@@ -279,7 +281,7 @@ namespace client
                 gridView1.Columns["NRP"].Width = 150;
                 service.Close();
             }
-            catch (Exception err)
+            catch ( Exception err )
             {
                 XtraMessageBox.Show(err.ToString());
             }
@@ -317,14 +319,14 @@ namespace client
         {
             try
             {
-                ComboBoxEditAdd( "Angkatan", AngkatanPraktikan );
-                ComboBoxEditAdd( "Jurusan", JurusanPraktikan );
-                var service = new IadmClient( );
+                ComboBoxEditAdd("Angkatan", AngkatanPraktikan);
+                ComboBoxEditAdd("Jurusan", JurusanPraktikan);
+                var service = new IadmClient();
                 var data = new praktikan
                 {
-                    NRP = gridView1.GetRowCellDisplayText( gridView1.FocusedRowHandle, gridView1.Columns[1] )
+                    NRP = gridView1.GetRowCellDisplayText(gridView1.FocusedRowHandle, gridView1.Columns[1])
                 };
-                var p = service.getProfilePraktikan( data );
+                var p = service.getProfilePraktikan(data);
                 NrpPraktikan.Text = p.NRP;
                 PasswordPraktikan.Text = p.Users.password;
                 NamaPraktikan.Text = p.Nama;
@@ -334,7 +336,7 @@ namespace client
             }
             catch ( Exception )
             {
-                XtraMessageBox.Show( "belum pilih praktikan" );
+                XtraMessageBox.Show("belum pilih praktikan");
             }
         }
 
@@ -343,7 +345,7 @@ namespace client
             try
             {
                 var service = new IadmClient();
-                var data = new praktikan {NRP = NrpPraktikan.Text};
+                var data = new praktikan { NRP = NrpPraktikan.Text };
                 var profilepraktikan = service.getProfilePraktikan(data);
                 var jurusan =
                     service.GetJurusan().FirstOrDefault(x => x.NamaJurusan == JurusanPraktikan.SelectedItem.ToString());
@@ -356,22 +358,22 @@ namespace client
                     NRP = NrpPraktikan.Text,
                     Nama = NamaPraktikan.Text,
                     Foto = ImageToByteArray(pictureEdit1.Image),
-                    jurusan = new jurusan {KodeJurusan = jurusan.KodeJurusan},
-                    angkatan = new angkatan {KodeAngkatan = angkatan.KodeAngkatan},
+                    jurusan = new jurusan { KodeJurusan = jurusan.KodeJurusan },
+                    angkatan = new angkatan { KodeAngkatan = angkatan.KodeAngkatan },
                     Users = new Users
                     {
                         password = PasswordPraktikan.Text,
                         status = "Praktikan"
                     }
                 };
-                if (profilepraktikan.NRP == null) //simpan
+                if ( profilepraktikan.NRP == null ) //simpan
                     service.AddPraktikan(datapraktikan);
                 else //edit
                     service.EditPraktikan(nrp, datapraktikan);
                 a_.SelectedPage = a_praktikan;
                 Cari_Praktikan_Button(sender, e);
             }
-            catch (Exception error)
+            catch ( Exception error )
             {
                 XtraMessageBox.Show(error.ToString());
             }
@@ -388,15 +390,15 @@ namespace client
             a_.SelectedPage = a_jadwal_umum;
             var service = new IadmClient();
             AddPeriode(comboBoxEdit5);
-            var jadwal = new jadwal_umum {id_periode = PeriodeId(comboBoxEdit5)};
+            var jadwal = new jadwal_umum { id_periode = PeriodeId(comboBoxEdit5) };
             gridControl3.DataSource = ToDataTable(service.ViewJadwalUmum(jadwal).Select(x => new
             {
                 HARI = x.hari,
                 SHIFT = x.fk_jadwalUmum_Shift.id_shift,
                 WAKTU =
-                    string.Format( "{0:HH:mm} - {1:HH:mm}", 
-                    x.fk_jadwalUmum_Shift.mulai, 
-                    x.fk_jadwalUmum_Shift.selesai ),
+                    string.Format("{0:HH:mm} - {1:HH:mm}",
+                    x.fk_jadwalUmum_Shift.mulai,
+                    x.fk_jadwalUmum_Shift.selesai),
                 PRAKTIKUM = x.fk_jadwalUmum_matakuliah.mata_kuliah,
                 KELAS = x.fk_jadwalUmum_kelas.Kelas
             }).ToList());
@@ -406,15 +408,15 @@ namespace client
         private void lihat_jadwal(object sender, EventArgs e)
         {
             var service = new IadmClient();
-            var jadwal = new jadwal_umum {id_periode = PeriodeId(comboBoxEdit5)};
+            var jadwal = new jadwal_umum { id_periode = PeriodeId(comboBoxEdit5) };
             gridControl3.DataSource = ToDataTable(service.ViewJadwalUmum(jadwal).Select(x => new
             {
                 HARI = x.hari,
                 SHIFT = x.fk_jadwalUmum_Shift.id_shift,
                 WAKTU =
-                    string.Format( "{0:HH:mm} - {1:HH:mm}", 
-                    x.fk_jadwalUmum_Shift.mulai, 
-                    x.fk_jadwalUmum_Shift.selesai ),
+                    string.Format("{0:HH:mm} - {1:HH:mm}",
+                    x.fk_jadwalUmum_Shift.mulai,
+                    x.fk_jadwalUmum_Shift.selesai),
                 PRAKTIKUM = x.fk_jadwalUmum_matakuliah.mata_kuliah,
                 KELAS = x.fk_jadwalUmum_kelas.Kelas
             }).ToList());
@@ -432,12 +434,12 @@ namespace client
             var service = new IadmClient();
             try
             {
-                var jadwal = new jadwal_umum {id_periode = PeriodeId(comboBoxEdit5)};
+                var jadwal = new jadwal_umum { id_periode = PeriodeId(comboBoxEdit5) };
                 service.DeleteJadwal(jadwal);
             }
-            catch (Exception)
+            catch ( Exception )
             {
-                XtraMessageBox.Show( string.Format( "Jadwal tidak dapat dihapus !{0}Periode sudah berlangsung", Environment.NewLine ) );
+                XtraMessageBox.Show(string.Format("Jadwal tidak dapat dihapus !{0}Periode sudah berlangsung", Environment.NewLine));
             }
             lihat_jadwal(sender, e);
         }
@@ -471,8 +473,8 @@ namespace client
                 Debug.Assert(periode != null, "periode != null");
                 var jadwal = new jadwalStaff
                 {
-                    staff = new Staff {id_staff = _dataStaff[0].id_staff},
-                    jadwal_umum = new jadwal_umum {id_periode = periode.id_periode}
+                    staff = new Staff { id_staff = _dataStaff[0].id_staff },
+                    jadwal_umum = new jadwal_umum { id_periode = periode.id_periode }
                 };
                 gridControl6.DataSource =
                     ToDataTable(service.GetStaffJadwal(jadwal).Select(
@@ -481,24 +483,24 @@ namespace client
                             x.jadwal_umum.hari,
                             shift = x.jadwal_umum.fk_jadwalUmum_Shift.id_shift,
                             waktu =
-                                string.Format( "{0} - {1}", 
-                                x.jadwal_umum.fk_jadwalUmum_Shift.mulai.TimeOfDay, 
-                                x.jadwal_umum.fk_jadwalUmum_Shift.selesai.TimeOfDay ),
+                                string.Format("{0} - {1}",
+                                x.jadwal_umum.fk_jadwalUmum_Shift.mulai.TimeOfDay,
+                                x.jadwal_umum.fk_jadwalUmum_Shift.selesai.TimeOfDay),
                             praktikum = x.jadwal_umum.fk_jadwalUmum_matakuliah.mata_kuliah,
                             kelas = x.jadwal_umum.fk_jadwalUmum_kelas.Kelas
                         }).ToList());
                 SettingGridView(gridView6);
                 service.Close();
             }
-            catch (Exception )
+            catch ( Exception )
             {
             }
         }
 
         private void P_Logout(object sender, EventArgs e)
         {
-            _dataPraktikan.Clear( );
-            CloseLogin( sender, e );
+            _dataPraktikan.Clear();
+            CloseLogin(sender, e);
             Interface.SelectedPage = InterfaceLogin;
             P_.SelectedPage = P_Info;
         }
@@ -511,22 +513,22 @@ namespace client
         private void P_Modul_Click(object sender, EventArgs e)
         {
             P_.SelectedPage = P_Modul;
-            comboBoxEdit3.Properties.Items.Clear( );
-            var service = new IadmClient( );
-            var kodemk = service.GetMatKul( ).FirstOrDefault( x => x.mata_kuliah == layoutControlItem6.Text.Replace("Praktikum ", String.Empty) );
-            var data = new modul( )
+            comboBoxEdit3.Properties.Items.Clear();
+            var service = new IadmClient();
+            var kodemk = service.GetMatKul().FirstOrDefault(x => x.mata_kuliah == layoutControlItem6.Text.Replace("Praktikum ", String.Empty));
+            var data = new modul()
             {
-                matkul = new matkul( )
+                matkul = new matkul()
                 {
                     kode_mk = kodemk.kode_mk
                 }
             };
-            var b = service.GetListModul( data ).Select( x => x.file_modul ).ToList( );
-            for(var i = 0; i < b.Count; i++ )
+            var b = service.GetListModul(data).Select(x => x.file_modul).ToList();
+            for ( var i = 0; i < b.Count; i++ )
             {
                 comboBoxEdit3.Properties.Items.Add(b[i]);
             }
-            
+
         }
 
         private void K_Info_Click(object sender, EventArgs e)
@@ -537,8 +539,8 @@ namespace client
         private void JadwalStaffKPraktikumClick(object sender, EventArgs e)
         {
             K_.SelectedPage = K_Praktikum;
-            AddPeriode( comboBoxEdit8 );
-            LihatJadwalStaff( sender, e );
+            AddPeriode(comboBoxEdit8);
+            LihatJadwalStaff(sender, e);
         }
 
         private void K_Logout_Click(object sender, EventArgs e)
@@ -548,23 +550,23 @@ namespace client
 
         private void LihatJadwalStaff(object sender, EventArgs e)
         {
-            var service = new IadmClient( );
-            var jadwal = new periode { id_periode = PeriodeId( comboBoxEdit8 ) };
-            gridControl8.DataSource = ToDataTable( service.jadwalUmumStaff( jadwal ).Select( x => new
+            var service = new IadmClient();
+            var jadwal = new periode { id_periode = PeriodeId(comboBoxEdit8) };
+            gridControl8.DataSource = ToDataTable(service.jadwalUmumStaff(jadwal).Select(x => new
             {
                 HARI = x.jadwal_umum.hari,
                 SHIFT = x.jadwal_umum.fk_jadwalUmum_Shift.id_shift,
                 WAKTU =
-                        string.Format( "{0:HH:mm} - {1:HH:mm}",
-                        x.jadwal_umum.fk_jadwalUmum_Shift.mulai,
-                        x.jadwal_umum.fk_jadwalUmum_Shift.selesai ),
+                    string.Format("{0:HH:mm} - {1:HH:mm}",
+                    x.jadwal_umum.fk_jadwalUmum_Shift.mulai,
+                    x.jadwal_umum.fk_jadwalUmum_Shift.selesai),
                 PRAKTIKUM = x.jadwal_umum.fk_jadwalUmum_matakuliah.mata_kuliah,
                 PENGAJAR = x.staff.nama
-            } ).ToList( ) );
-            SettingGridView( gridView8 );
+            }).ToList());
+            SettingGridView(gridView8);
             gridView8.OptionsView.AllowCellMerge = true;
             gridView8.Columns["PENGAJAR"].OptionsColumn.AllowMerge = DefaultBoolean.False;
-            
+
         }
 
         private void AbsensiPraktikanSearch(object sender, EventArgs e)
@@ -608,8 +610,8 @@ namespace client
                 nrp = x.NRP,
                 nama = x.Nama,
                 nilai = x.absen.Nilai,
-                hapus = new RepositoryItemButtonEdit( )
-            } ).ToList());
+                hapus = new RepositoryItemButtonEdit()
+            }).ToList());
             gridView5.Columns["foto"].OptionsColumn.AllowEdit = false;
             gridView5.Columns["nrp"].OptionsColumn.AllowEdit = false;
             gridView5.Columns["nama"].OptionsColumn.AllowEdit = false;
@@ -620,12 +622,12 @@ namespace client
             gridView5.Appearance.FocusedRow.BackColor = Color.Aqua;
             var nilai = new RepositoryItemTextEdit();
             var photo = new RepositoryItemPictureEdit();
-            var cancel = new RepositoryItemButtonEdit( )
+            var cancel = new RepositoryItemButtonEdit()
             {
                 TextEditStyle = TextEditStyles.HideTextEditor
             };
             nilai.EditValueChanged += new EventHandler(nilai_EditValueChanged);
-            cancel.Click += new EventHandler( cancel_ButtonClick );
+            cancel.Click += new EventHandler(cancel_ButtonClick);
             gridControl5.RepositoryItems.Add(nilai);
             gridControl5.RepositoryItems.Add(photo);
             gridControl5.RepositoryItems.Add(cancel);
@@ -638,33 +640,33 @@ namespace client
             gridControl5.ForceInitialize();
         }
 
-        private void cancel_ButtonClick (object sender, EventArgs e)
+        private void cancel_ButtonClick(object sender, EventArgs e)
         {
-            var service = new IadmClient( );
+            var service = new IadmClient();
             var nil = sender as TextEdit;
             string a = nil.Text;
-            var row = gridView5.GetDataRow( gridView5.FocusedRowHandle );
-            var nrp = row[1].ToString( );
-            var shift = gridView6.GetRowCellDisplayText( gridView6.FocusedRowHandle, gridView6.Columns[1] );
-            var periode = service.viewPeriode( ).FirstOrDefault(
+            var row = gridView5.GetDataRow(gridView5.FocusedRowHandle);
+            var nrp = row[1].ToString();
+            var shift = gridView6.GetRowCellDisplayText(gridView6.FocusedRowHandle, gridView6.Columns[1]);
+            var periode = service.viewPeriode().FirstOrDefault(
                 x => x.awalSemester < DateTime.Now &&
                      x.akhirSemester > DateTime.Now
                 );
-            var data = new AbsensiPraktikan( )
+            var data = new AbsensiPraktikan()
             {
-                Pertemuan = new pertemuan( ) { id_jenis_pertemuan = comboBoxEdit9.SelectedItem.ToString( ) },
-                JadwalPraktikan = new jadwalPraktikan( )
+                Pertemuan = new pertemuan() { id_jenis_pertemuan = comboBoxEdit9.SelectedItem.ToString() },
+                JadwalPraktikan = new jadwalPraktikan()
                 {
                     nrp = nrp,
-                    id_jadwal_umum = new jadwal_umum( )
+                    id_jadwal_umum = new jadwal_umum()
                     {
                         id_shift = shift,
                         id_periode = periode.id_periode
                     },
                 },
             };
-            service.HapusAbsensi( data );
-            AbsensiPraktikanSearch( sender, e );
+            service.HapusAbsensi(data);
+            AbsensiPraktikanSearch(sender, e);
         }
 
         private void nilai_EditValueChanged(object sender, EventArgs e)
@@ -679,7 +681,7 @@ namespace client
                 x => x.awalSemester < DateTime.Now &&
                      x.akhirSemester > DateTime.Now
                 );
-            if(nil.Text == "" )
+            if ( nil.Text == "" )
             {
                 a = "0";
             }
@@ -687,8 +689,8 @@ namespace client
             var data = new AbsensiPraktikan()
             {
                 Nilai = int.Parse(a),
-                staff = new Staff() {id_staff = _dataStaff[0].id_staff},
-                Pertemuan = new pertemuan() {id_jenis_pertemuan = comboBoxEdit9.SelectedItem.ToString()},
+                staff = new Staff() { id_staff = _dataStaff[0].id_staff },
+                Pertemuan = new pertemuan() { id_jenis_pertemuan = comboBoxEdit9.SelectedItem.ToString() },
                 JadwalPraktikan = new jadwalPraktikan()
                 {
                     nrp = nrp,
@@ -713,15 +715,15 @@ namespace client
         private void ViewJadwallStaffClick(object sender, EventArgs e)
         {
             var service = new IadmClient();
-            var jadwal = new periode {id_periode = PeriodeId(comboBoxEdit10)};
+            var jadwal = new periode { id_periode = PeriodeId(comboBoxEdit10) };
             gridControl4.DataSource = ToDataTable(service.jadwalUmumStaff(jadwal).Select(x => new
             {
                 HARI = x.jadwal_umum.hari,
                 SHIFT = x.jadwal_umum.fk_jadwalUmum_Shift.id_shift,
                 WAKTU =
-                    string.Format( "{0:HH:mm} - {1:HH:mm}", 
-                    x.jadwal_umum.fk_jadwalUmum_Shift.mulai, 
-                    x.jadwal_umum.fk_jadwalUmum_Shift.selesai ),
+                    string.Format("{0:HH:mm} - {1:HH:mm}",
+                    x.jadwal_umum.fk_jadwalUmum_Shift.mulai,
+                    x.jadwal_umum.fk_jadwalUmum_Shift.selesai),
                 PRAKTIKUM = x.jadwal_umum.fk_jadwalUmum_matakuliah.mata_kuliah,
                 PENGAJAR = x.staff.nama
             }).ToList());
@@ -739,7 +741,7 @@ namespace client
         {
             var service = new IadmClient();
             var idStaff = gridView2.GetRowCellDisplayText(gridView2.FocusedRowHandle, gridView2.Columns[0]);
-            var data = new Staff {id_staff = idStaff};
+            var data = new Staff { id_staff = idStaff };
             var staff = service.getProfileStaff(data);
             textEdit4.Text = staff.id_staff;
             textEdit5.Text = staff.users.password;
@@ -766,7 +768,7 @@ namespace client
         private void SaveProfilStaffClick(object sender, EventArgs e)
         {
             var service = new IadmClient();
-            var data = new Staff {id_staff = textEdit4.Text};
+            var data = new Staff { id_staff = textEdit4.Text };
             var profileStaff = service.getProfileStaff(data);
             try
             {
@@ -784,7 +786,7 @@ namespace client
                         status = comboBoxEdit11.SelectedItem.ToString()
                     }
                 };
-                if (profileStaff.id_staff == null) //simpan
+                if ( profileStaff.id_staff == null ) //simpan
                     service.AddStaff(datastaff);
                 else //edit
                     service.EditStaff(idStaff, datastaff);
@@ -807,12 +809,12 @@ namespace client
             gridView3.ShowPrintPreview();
         }
 
-        private void simpleButton21_Click (object sender, EventArgs e)
+        private void simpleButton21_Click(object sender, EventArgs e)
         {
             viewStaff.SelectedPage = viewStaffAccount;
         }
 
-        private void EditProfileStaff (object sender, System.Windows.Forms.LinkLabelLinkClickedEventArgs e)
+        private void EditProfileStaff(object sender, System.Windows.Forms.LinkLabelLinkClickedEventArgs e)
         {
             viewStaff.SelectedPage = viewStaffEditProfile;
             staffUsername.Text = _dataStaff[0].id_staff;
@@ -820,10 +822,10 @@ namespace client
             staffNama.Text = _dataStaff[0].nama;
             staffAlamat.Text = _dataStaff[0].alamat;
             staffNoHp.Text = _dataStaff[0].no_hp;
-            staffFoto.Image = Image.FromStream( new MemoryStream( _dataStaff[0].foto) );
+            staffFoto.Image = Image.FromStream(new MemoryStream(_dataStaff[0].foto));
         }
 
-        private void EditDataProfileAsisten (object sender, EventArgs e)
+        private void EditDataProfileAsisten(object sender, EventArgs e)
         {
             var service = new IadmClient();
             var datastaff = new Staff
@@ -832,15 +834,15 @@ namespace client
                 nama = staffNama.Text,
                 alamat = staffAlamat.Text,
                 no_hp = staffNoHp.Text,
-                foto = ImageToByteArray( staffFoto.Image ),
+                foto = ImageToByteArray(staffFoto.Image),
                 users = new Users
                 {
                     password = staffPassword.Text,
                     status = "Asisten"
                 }
             };
-            service.EditStaff( staffUsername.Text, datastaff );
-            service.Close( );
+            service.EditStaff(staffUsername.Text, datastaff);
+            service.Close();
 
             _dataStaff[0].foto = datastaff.foto;
             _dataStaff[0].nama = datastaff.nama;
@@ -848,65 +850,66 @@ namespace client
             _dataStaff[0].no_hp = datastaff.no_hp;
             _dataStaff[0].alamat = datastaff.alamat;
 
-            pictureEdit2.Image = Image.FromStream( new MemoryStream( _dataStaff[0].foto ) );
+            pictureEdit2.Image = Image.FromStream(new MemoryStream(_dataStaff[0].foto));
             simpleLabelItem12.Text = _dataStaff[0].nama;
             simpleLabelItem13.Text = _dataStaff[0].no_hp;
             simpleLabelItem14.Text = _dataStaff[0].alamat;
             viewStaff.SelectedPage = viewStaffAccount;
         }
 
-        private void JadwalPraktikan_DoubleClick (object sender, RowCellClickEventArgs e)
+        private void JadwalPraktikan_DoubleClick(object sender, RowCellClickEventArgs e)
         {
             if ( e.Clicks == 2 )
             {
-                var service = new IadmClient( );
-                var nrp = gridView1.GetRowCellDisplayText( gridView1.FocusedRowHandle, gridView1.Columns[1] );
-                var nama = gridView1.GetRowCellDisplayText( gridView1.FocusedRowHandle, gridView1.Columns[2] );
-                var periode = service.viewPeriode( ).FirstOrDefault( x => DateTime.Now >= x.awalSemester &&
-                                                                          DateTime.Now <= x.akhirSemester );
-                var data = new jadwalPraktikan( ) { nrp = nrp, id_jadwal_umum = new jadwal_umum( ) { id_periode = periode.id_periode } };
-                var jadwal = service.GetJadwalPraktikan( data );
+                var service = new IadmClient();
+                var nrp = gridView1.GetRowCellDisplayText(gridView1.FocusedRowHandle, gridView1.Columns[1]);
+                var nama = gridView1.GetRowCellDisplayText(gridView1.FocusedRowHandle, gridView1.Columns[2]);
+                var periode = service.viewPeriode().FirstOrDefault(x => DateTime.Now >= x.awalSemester &&
+                                                                        DateTime.Now <= x.akhirSemester);
+                var data = new jadwalPraktikan() { nrp = nrp, id_jadwal_umum = new jadwal_umum() { id_periode = periode.id_periode } };
+                var jadwal = service.GetJadwalPraktikan(data);
 
-                if ( jadwal.Count( ) > 0 )
+                if ( jadwal.Count() > 0 )
                 {
                     var form = new FormResetJadwal(nrp);
-                    form.ShowDialog( );
+                    form.ShowDialog();
                 }
                 else
                 {
-                    var form = new FrmTambahJadwalPraktikan( nrp, nama );
-                    form.ShowDialog( );
+                    var form = new FrmTambahJadwalPraktikan(nrp, nama);
+                    form.ShowDialog();
                 }
+                service.Close();
             }
         }
 
-        private void TambahTahunAngkatan (object sender, EventArgs e)
+        private void TambahTahunAngkatan(object sender, EventArgs e)
         {
-            var Form = new FormAngkatan( );
-            Form.ShowDialog( );
+            var Form = new FormAngkatan();
+            Form.ShowDialog();
         }
 
-        private void LoadModulPraktikum (object sender, EventArgs e)
+        private void LoadModulPraktikum(object sender, EventArgs e)
         {
-            var praktikum = layoutControlItem6.Text.Replace( "Praktikum ", String.Empty );
-            var service = new IadmClient( );
-            var p = service.GetMatKul( ).FirstOrDefault( x => x.mata_kuliah == praktikum );
-            var data = new modul( )
+            var praktikum = layoutControlItem6.Text.Replace("Praktikum ", String.Empty);
+            var service = new IadmClient();
+            var p = service.GetMatKul().FirstOrDefault(x => x.mata_kuliah == praktikum);
+            var data = new modul()
             {
-                matkul = new matkul( ) { kode_mk = p.kode_mk },
-                file_modul = comboBoxEdit3.SelectedItem.ToString( )
+                matkul = new matkul() { kode_mk = p.kode_mk },
+                file_modul = comboBoxEdit3.SelectedItem.ToString()
             };
-            var source = service.GetModul( data ).lokasi_modul;
-            var file = new MemoryStream( source );
+            var source = service.GetModul(data).lokasi_modul;
+            var file = new MemoryStream(source);
             pdfViewer1.NavigationPaneInitialVisibility = DevExpress.XtraPdfViewer.PdfNavigationPaneVisibility.Hidden;
-            pdfViewer1.LoadDocument( file );
-
+            pdfViewer1.LoadDocument(file);
+            service.Close();
         }
 
-        private string _Dir; 
-        private void LoadFile (object sender, EventArgs e)
+        private string _Dir;
+        private void LoadFile(object sender, EventArgs e)
         {
-            var open = new OpenFileDialog( )
+            var open = new OpenFileDialog()
             {
                 Title = "Browse Files",
                 InitialDirectory = @"C:\",
@@ -920,106 +923,102 @@ namespace client
                 ShowReadOnly = true
             };
 
-            if ( open.ShowDialog( ) == DialogResult.OK )
+            if ( open.ShowDialog() == DialogResult.OK )
             {
-                var Info = new FileInfo( open.FileName );
+                var Info = new FileInfo(open.FileName);
                 _Dir = Info.Name;
                 sourceFileName.Text = open.FileName;
                 LogFileUpload.Items.Add("File yang di pilih " + _Dir);
             }
         }
 
-        private void UploadFile (object sender, EventArgs e)
+        private void UploadFile(object sender, EventArgs e)
         {
-            var service = new IadmClient( );
-            var periode = service.viewPeriode( )
-                .FirstOrDefault( x => DateTime.Now >= x.awalSemester &&
-                                      DateTime.Now <= x.akhirSemester );
-            var shift   = service.GetShift( )
-                .FirstOrDefault( x => DateTime.Now.TimeOfDay >= x.mulai.TimeOfDay &&
-                                      DateTime.Now.TimeOfDay <= x.selesai.TimeOfDay );
+            var service = new IadmClient();
+            var periode = service.viewPeriode()
+                .FirstOrDefault(x => DateTime.Now >= x.awalSemester &&
+                                     DateTime.Now <= x.akhirSemester);
+            var shift = service.GetShift()
+                .FirstOrDefault(x => DateTime.Now.TimeOfDay >= x.mulai.TimeOfDay &&
+                                     DateTime.Now.TimeOfDay <= x.selesai.TimeOfDay);
 
-            var praktikum   = layoutControlItem6.Text.Replace( "Praktikum ", String.Empty );
-            var p           = service.GetMatKul( ).FirstOrDefault( x => x.mata_kuliah == praktikum );
-            var pertemuan   = listBoxControl1.SelectedItem.ToString( );
-            var data    = new AbsensiPraktikan( )
+            var praktikum = layoutControlItem6.Text.Replace("Praktikum ", String.Empty);
+            var p = service.GetMatKul().FirstOrDefault(x => x.mata_kuliah == praktikum);
+            var pertemuan = listBoxControl1.SelectedItem.ToString();
+            var data = new AbsensiPraktikan()
             {
                 JadwalPraktikan = new jadwalPraktikan {
                     nrp = _dataPraktikan[0].NRP,
-                    id_jadwal_umum = new jadwal_umum( )
+                    id_jadwal_umum = new jadwal_umum()
                     {
-                        id_periode  = periode.id_periode,
-                        id_shift    = shift.id_shift,
-                        kode_mk     = p.kode_mk
+                        id_periode = periode.id_periode,
+                        id_shift = shift.id_shift,
+                        kode_mk = p.kode_mk
                     },
                 },
-                Pertemuan = new pertemuan( ) { id_jenis_pertemuan = pertemuan }
+                Pertemuan = new pertemuan() { id_jenis_pertemuan = pertemuan }
             };
 
-            var absenID         = service.GetIDAbsensiPraktikan( data );
-            var FileLocation    = string.Format( @"{0}\{1} {2:yyyy} - {3:yyyy}\{4}", 
-                                      _dataPraktikan[0].NRP, 
-                                      periode.semester, 
-                                      periode.awalSemester, 
-                                      periode.akhirSemester, 
-                                      listBoxControl1.SelectedItem );
-            var f = new upload_file( )
+            var absenID = service.GetIDAbsensiPraktikan(data);
+            var FileLocation = _dataPraktikan[0].NRP + "\\" + periode.semester + " " + periode.awalSemester.ToString("yyyy") + " - " + periode.akhirSemester.ToString("yyyy") + "\\" + listBoxControl1.SelectedItem.ToString();
+            var f = new upload_file()
             {
                 id_absensi = absenID,
                 nama_file = _Dir,
                 lokasi_file = FileLocation,
-                data_file = File.ReadAllBytes( @sourceFileName.Text )
+                data_file = File.ReadAllBytes(@sourceFileName.Text)
             };
             var ex = false;
             try
             {
-                service.GetUpLoadFile( f );
+                service.GetUpLoadFile(f);
             }
-            catch(Exception)
+            catch ( Exception error )
             {
                 ex = true;
-                LogFileUpload.Items.Add( "Maksimal upload file 10 MB" );
+                LogFileUpload.Items.Add("Maksimal upload file 10 MB");
+                XtraMessageBox.Show(error.ToString());
             }
+            //XtraMessageBox.Show( absenID.ToString( ) );
 
             if ( ex == false )
             {
-                LogFileUpload.Items.Add( string.Format( "'{0}' upload file berhasil", _Dir ) );
+                LogFileUpload.Items.Add(string.Format("'{0}' upload file berhasil", _Dir));
             }
+            service.Close();
         }
 
-        private void Upload_Click (object sender, EventArgs e)
+        private void Upload_Click(object sender, EventArgs e)
         {
             P_.SelectedPage = P_Upload;
         }
 
-        private void PraktikanUbahPassword (object sender, LinkLabelLinkClickedEventArgs e)
+        private void PraktikanUbahPassword(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            XtraMessageBox.Show( "ganti password" );
+            XtraMessageBox.Show("ganti password");
         }
 
-        
-
-        private void AmbilJadwal (object sender, EventArgs e)
+        private void AmbilJadwal(object sender, EventArgs e)
         {
             viewStaff.SelectedPage = viewStaffJadwal;
-            var service = new IadmClient( );
+            var service = new IadmClient();
 
-            var periode = service.viewPeriode( ).FirstOrDefault(
+            var periode = service.viewPeriode().FirstOrDefault(
                 x =>
                 DateTime.Now >= x.awalSemester &&
-                DateTime.Now <= x.akhirSemester );
+                DateTime.Now <= x.akhirSemester);
 
-            var data = new jadwal_umum( ) { id_periode = periode.id_periode };
-            gridControl7.DataSource = service.ViewJadwalUmum( data ).Select( x => new {
+            var data = new jadwal_umum() { id_periode = periode.id_periode };
+            gridControl7.DataSource = service.ViewJadwalUmum(data).Select(x => new {
                 HARI = x.hari,
                 SHIFT = x.fk_jadwalUmum_Shift.id_shift,
                 WAKTU =
-                     string.Format( "{0:HH:mm} - {1:HH:mm}",
-                     x.fk_jadwalUmum_Shift.mulai,
-                     x.fk_jadwalUmum_Shift.selesai ),
+                  string.Format("{0:HH:mm} - {1:HH:mm}",
+                  x.fk_jadwalUmum_Shift.mulai,
+                  x.fk_jadwalUmum_Shift.selesai),
                 PRAKTIKUM = x.fk_jadwalUmum_matakuliah.mata_kuliah,
                 KELAS = x.fk_jadwalUmum_kelas.Kelas
-            } );
+            });
 
             // add checkbox and enable multi select rows
             gridView7.OptionsSelection.MultiSelect = true;
@@ -1030,110 +1029,112 @@ namespace client
                 gridView7.Columns[i].OptionsColumn.AllowFocus = false;
                 gridView7.Columns[i].OptionsColumn.AllowMove = false;
             }
+            service.Close();
         }
 
-        private void SaveJadwalAsisten (object sender, EventArgs e)
+        private void SaveJadwalAsisten(object sender, EventArgs e)
         {
-            var service = new IadmClient( );
-            var jadwal = new List<jadwalStaff>( );
-            var values = gridView7.GetSelectedRows( );
-            var periode = service.viewPeriode( ).FirstOrDefault(
+            var service = new IadmClient();
+            var jadwal = new List<jadwalStaff>();
+            var values = gridView7.GetSelectedRows();
+            var periode = service.viewPeriode().FirstOrDefault(
                 x =>
                 DateTime.Now >= x.awalSemester &&
-                DateTime.Now <= x.akhirSemester );
-            var data = new jadwal_umum( ) { id_periode = periode.id_periode };
+                DateTime.Now <= x.akhirSemester);
+            var data = new jadwal_umum() { id_periode = periode.id_periode };
 
-            var listjadwal = new List<jadwalStaff>( );
-            for ( var i = 0; i < values.Count( ); i++ )
+            var listjadwal = new List<jadwalStaff>();
+            for ( var i = 0; i < values.Count(); i++ )
             {
-                var shift = gridView7.GetRowCellValue( values[i], gridView7.Columns[1] ).ToString( );
-                var hari = gridView7.GetRowCellValue( values[i], gridView7.Columns[0] ).ToString( );
-                var matkul = gridView7.GetRowCellValue( values[i], gridView7.Columns[3] ).ToString( );
-                var id = service.ViewJadwalUmum( data ).FirstOrDefault( x =>
-                (x.fk_jadwalUmum_Shift.id_shift == shift && x.hari == hari) &&
-                 x.fk_jadwalUmum_matakuliah.mata_kuliah == matkul );
+                var shift = gridView7.GetRowCellValue(values[i], gridView7.Columns[1]).ToString();
+                var hari = gridView7.GetRowCellValue(values[i], gridView7.Columns[0]).ToString();
+                var matkul = gridView7.GetRowCellValue(values[i], gridView7.Columns[3]).ToString();
+                var id = service.ViewJadwalUmum(data).FirstOrDefault(x =>
+             (x.fk_jadwalUmum_Shift.id_shift == shift && x.hari == hari) &&
+              x.fk_jadwalUmum_matakuliah.mata_kuliah == matkul);
 
 
-                var jadwalstaff = new jadwalStaff( )
+                var jadwalstaff = new jadwalStaff()
                 {
-                    staff       = new Staff( ) { id_staff = _dataStaff[0].id_staff },
-                    jadwal_umum = new jadwal_umum( ) { id_jadwal_umum = id.id_jadwal_umum }
+                    staff = new Staff() { id_staff = _dataStaff[0].id_staff },
+                    jadwal_umum = new jadwal_umum() { id_jadwal_umum = id.id_jadwal_umum }
                 };
-                listjadwal.Add( jadwalstaff );
+                listjadwal.Add(jadwalstaff);
             }
 
             var xception = false;
             try
             {
-                service.AddJadwalStaffAsisten( listjadwal.ToArray( ) );
+                service.AddJadwalStaffAsisten(listjadwal.ToArray());
             }
             catch ( Exception )
             {
                 xception = true;
-                XtraMessageBox.Show( "Tidak ada jadwal di pilih" );
+                XtraMessageBox.Show("Tidak ada jadwal di pilih");
             }
-            
-            if(xception == false )
+
+            if ( xception == false )
             {
-                CekJadwal( );
-                ViewJadwalProfile( sender, e );
+                CekJadwal();
+                ViewJadwalProfile(sender, e);
                 viewStaff.SelectedPage = viewStaffAccount;
             }
+            service.Close();
         }
 
-        private void Modul_click (object sender, EventArgs e)
+        private void Modul_click(object sender, EventArgs e)
         {
             layoutControlGroup30.Expanded = false;
             a_.SelectedPage = a_modul;
-            var service = new IadmClient( );
-            var matkul = service.GetMatKul( ).Select(x=>x.mata_kuliah ).ToList();
-            comboBoxEdit4.Properties.Items.AddRange( matkul );
-            comboBoxEdit4.SelectedIndex = 0; 
-            service.Close( );
+            var service = new IadmClient();
+            var matkul = service.GetMatKul().Select(x => x.mata_kuliah).ToList();
+            comboBoxEdit4.Properties.Items.AddRange(matkul);
+            comboBoxEdit4.SelectedIndex = 0;
+            service.Close();
         }
 
-        private void Praktikum_SelectedValueChanged (object sender, EventArgs e)
+        private void Praktikum_SelectedValueChanged(object sender, EventArgs e)
         {
-            listBoxControl2.Items.Clear( );
-            var service = new IadmClient( );
-            var kodemk = service.GetMatKul( ).FirstOrDefault( x => x.mata_kuliah == comboBoxEdit4.SelectedItem.ToString() );
-            var data = new modul( )
+            listBoxControl2.Items.Clear();
+            var service = new IadmClient();
+            var kodemk = service.GetMatKul().FirstOrDefault(x => x.mata_kuliah == comboBoxEdit4.SelectedItem.ToString());
+            var data = new modul()
             {
-                matkul = new matkul( )
+                matkul = new matkul()
                 {
                     kode_mk = kodemk.kode_mk
                 }
             };
-            listBoxControl2.Items.AddRange( service.GetListModul( data ).Select(x=> x.file_modul).ToArray( ) );
-            comboBoxEdit6.Properties.Items.Clear( );
+            listBoxControl2.Items.AddRange(service.GetListModul(data).Select(x => x.file_modul).ToArray());
+            comboBoxEdit6.Properties.Items.Clear();
             for ( var i = 0; i < 16; i++ )
             {
-                
-                comboBoxEdit6.Properties.Items.Add( string.Format("BAB {0:D2}", i+1) );
+
+                comboBoxEdit6.Properties.Items.Add(string.Format("BAB {0:D2}", i + 1));
             }
-                
+
             try
             {
-                var modul = listBoxControl2.Items ;
-                for(var i = 0; i < modul.Count; i++ )
+                var modul = listBoxControl2.Items;
+                for ( var i = 0; i < modul.Count; i++ )
                 {
-                    comboBoxEdit6.Properties.Items.Remove( modul[i].ToString( ) );
+                    comboBoxEdit6.Properties.Items.Remove(modul[i].ToString());
                 }
             }
-            catch (Exception)
+            catch ( Exception )
             {
                 return;
             }
-            service.Close( );
+            service.Close();
         }
         public void fileModule(modul data)
         {
-            listBoxControl2.Items.Add( data.file_modul );
+            listBoxControl2.Items.Add(data.file_modul);
         }
         string filesName = String.Empty;
-        private void simpleButton28_Click (object sender, EventArgs e)
+        private void simpleButton28_Click(object sender, EventArgs e)
         {
-            var open = new OpenFileDialog( )
+            var open = new OpenFileDialog()
             {
                 Title = "Browse Files",
                 InitialDirectory = @"C:\",
@@ -1147,46 +1148,783 @@ namespace client
                 ShowReadOnly = true
             };
 
-            if ( open.ShowDialog( ) == DialogResult.OK )
+            if ( open.ShowDialog() == DialogResult.OK )
             {
-                var info = new FileInfo( open.FileName );
+                var info = new FileInfo(open.FileName);
                 textEdit1.Text = open.FileName;
                 filesName = info.Name;
             }
         }
 
-        private void addFileModul (object sender, EventArgs e)
+        private void addFileModul(object sender, EventArgs e)
         {
             layoutControlGroup30.Expanded = true;
             textEdit1.Text = "";
             comboBoxEdit6.SelectedIndex = -1;
         }
 
-        private void SaveModul (object sender, EventArgs e)
+        private void SaveModul(object sender, EventArgs e)
         {
             layoutControlGroup30.Expanded = false;
-            var service = new IadmClient( );
-            var kdmk = service.GetMatKul( ).FirstOrDefault(x=> x.mata_kuliah == comboBoxEdit4.SelectedItem.ToString() );
-            var data = new modul( )
+            var service = new IadmClient();
+            var kdmk = service.GetMatKul().FirstOrDefault(x => x.mata_kuliah == comboBoxEdit4.SelectedItem.ToString());
+            var data = new modul()
             {
-                matkul = new matkul( ) { kode_mk = kdmk.kode_mk },
-                file_modul = comboBoxEdit6.SelectedItem.ToString( ),
-                lokasi_modul = File.ReadAllBytes( @textEdit1.Text ),
+                matkul = new matkul() { kode_mk = kdmk.kode_mk },
+                file_modul = comboBoxEdit6.SelectedItem.ToString(),
+                lokasi_modul = File.ReadAllBytes(@textEdit1.Text),
                 modul_file = filesName
             };
-            try { service.UploadModul( data ); } catch (Exception ee ) { XtraMessageBox.Show( ee.ToString( ));  }
-            Praktikum_SelectedValueChanged(sender,e);
-            service.Close( );
+            try { service.UploadModul(data); } catch ( Exception ee ) { XtraMessageBox.Show(ee.ToString()); }
+            Praktikum_SelectedValueChanged(sender, e);
+            service.Close();
         }
 
-        private void CloseAddFileModul (object sender, EventArgs e)
+        private void CloseAddFileModul(object sender, EventArgs e)
         {
             layoutControlGroup30.Expanded = false;
         }
 
-        private void accordionControlElement26_Click (object sender, EventArgs e)
+        private void Nilai_click(object sender, EventArgs e)
         {
+            a_.SelectedPage = a_nilai;
+            comboBoxEdit7.Properties.Items.Clear();
+            var service = new IadmClient();
+            AddPeriode(comboBoxEdit7);
+            comboBoxEdit13.Properties.Items.AddRange(service.GetMatKul().Select(x => x.mata_kuliah).ToArray());
+            comboBoxEdit13.SelectedIndex = 0;
+            service.Close();
+        }
+        private class nilaimhs
+        {
+            public string nrp { get; set; }
+            public int nilai { get; set; }
+            public int pertemuan { get; set; }
+        }
+        private class listNilaimhs
+        {
+            public string nrp { get; set; }
+            public string Nama { get; set; }
+            public int P01 { get;set; }
+            public int P02 { get;set; }
+            public int P03 { get;set; }
+            public int P04 { get;set; }
+            public int P05 { get;set; }
+            public int P06 { get;set; }
+            public int P07 { get;set; }
+            public int P08 { get;set; }
+            public int P09 { get;set; }
+            public int P10 { get;set; }
+            public int P11 { get;set; }
+            public int P12 { get;set; }
+            public int P13 { get;set; }
+            public int P14 { get;set; }
+            public int P15 { get;set; }
+            public int P16 { get;set; }
+        }
+        
+        List<listNilaimhs> listNilaiMahasiswa = new List<listNilaimhs>();
+        List<nilaimhs> NilaiMahasiswa = new List<nilaimhs>();
+        private void ViewNilaiPraktikan(object sender, EventArgs e)
+        {
+            listNilaiMahasiswa.Clear();
+            NilaiMahasiswa.Clear();
 
+            var service = new IadmClient();
+            var p_data = new jadwal_umum()
+            {
+                id_periode = PeriodeId(comboBoxEdit7),
+                fk_jadwalUmum_matakuliah = new matkul()
+                {
+                    mata_kuliah = comboBoxEdit13.SelectedItem.ToString()
+                }
+            };
+            var p = service.ListPraktikanPraktikum(p_data).ToList();
+            for ( int i = 0; i < p.Count; i++ )
+            {
+                listNilaiMahasiswa.Add(new listNilaimhs() { nrp = p[i].NRP, Nama = p[i].Nama });
+            }
+            var data = new jadwal_umum()
+            {
+                id_periode = PeriodeId(comboBoxEdit7)
+            };
+            var jadwal = service.ViewJadwalUmum(data)
+                .Where(x => x.fk_jadwalUmum_matakuliah.mata_kuliah == comboBoxEdit13.SelectedItem.ToString()).ToList();
+            for(var i=0; i < jadwal.Count; i++ )
+            {
+                var count = i + 1;
+                for ( int j = 0; j < i; j++ )
+                {
+                    var id = new jadwal_umum() { id_jadwal_umum = jadwal[i].id_jadwal_umum };
+                    var nilai = service.Nilai(id).ToList();
+                    for(var k = 0; k < nilai.Count; k++ )
+                    {
+                        var n = new nilaimhs()
+                        {
+                            nrp = nilai[k].JadwalPraktikan.nrp.TrimEnd(),
+                            nilai = nilai[k].Nilai,
+                            pertemuan = nilai[k].Pertemuan.id_pertemuan
+                        };
+                        NilaiMahasiswa.Add(n);
+                    }
+                }
+            }
+            for ( int i = 0; i < NilaiMahasiswa.Count; i++ )
+            {
+                var index = NilaiMahasiswa.FindIndex(x => x.nrp == NilaiMahasiswa[i].nrp);
+                
+                var nn = listNilaiMahasiswa.FindIndex(x => x.nrp == NilaiMahasiswa[i].nrp);
+
+                if( nn == -1 )
+                {
+                    //XtraMessageBox.Show("ga ada");
+                    listNilaiMahasiswa.Add(new listNilaimhs() { nrp = NilaiMahasiswa[i].nrp });
+                    if ( NilaiMahasiswa[i].pertemuan == 1 )
+                    {
+                        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                        {
+                            items.P01 = NilaiMahasiswa[i].nilai;
+                        }
+                    }
+                    else if ( NilaiMahasiswa[i].pertemuan == 2 )
+                    {
+                        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                        {
+                            items.P02 = NilaiMahasiswa[i].nilai;
+                        }
+                    }
+                    else if ( NilaiMahasiswa[i].pertemuan == 3 )
+                    {
+                        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                        {
+                            items.P03 = NilaiMahasiswa[i].nilai;
+                        }
+                    }
+                    else if ( NilaiMahasiswa[i].pertemuan == 4 )
+                    {
+                        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                        {
+                            items.P04 = NilaiMahasiswa[i].nilai;
+                        }
+                    }
+                    else if ( NilaiMahasiswa[i].pertemuan == 5 )
+                    {
+                        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                        {
+                            items.P05 = NilaiMahasiswa[i].nilai;
+                        }
+                    }
+                    else if ( NilaiMahasiswa[i].pertemuan == 6 )
+                    {
+                        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                        {
+                            items.P06 = NilaiMahasiswa[i].nilai;
+                        }
+                    }
+                    else if ( NilaiMahasiswa[i].pertemuan == 7 )
+                    {
+                        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                        {
+                            items.P07 = NilaiMahasiswa[i].nilai;
+                        }
+                    }
+                    else if ( NilaiMahasiswa[i].pertemuan == 8 )
+                    {
+                        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                        {
+                            items.P08 = NilaiMahasiswa[i].nilai;
+                        }
+                    }
+                    else if ( NilaiMahasiswa[i].pertemuan == 9 )
+                    {
+                        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                        {
+                            items.P09 = NilaiMahasiswa[i].nilai;
+                        }
+                    }
+                    else if ( NilaiMahasiswa[i].pertemuan == 10 )
+                    {
+                        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                        {
+                            items.P10 = NilaiMahasiswa[i].nilai;
+                        }
+                    }
+                    else if ( NilaiMahasiswa[i].pertemuan == 11 )
+                    {
+                        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                        {
+                            items.P11 = NilaiMahasiswa[i].nilai;
+                        }
+                    }
+                    else if ( NilaiMahasiswa[i].pertemuan == 12 )
+                    {
+                        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                        {
+                            items.P12 = NilaiMahasiswa[i].nilai;
+                        }
+                    }
+                    else if ( NilaiMahasiswa[i].pertemuan == 13 )
+                    {
+                        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                        {
+                            items.P13 = NilaiMahasiswa[i].nilai;
+                        }
+                    }
+                    else if ( NilaiMahasiswa[i].pertemuan == 14 )
+                    {
+                        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                        {
+                            items.P14 = NilaiMahasiswa[i].nilai;
+                        }
+                    }
+                    else if ( NilaiMahasiswa[i].pertemuan == 15 )
+                    {
+                        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                        {
+                            items.P15 = NilaiMahasiswa[i].nilai;
+                        }
+                    }
+                    else if ( NilaiMahasiswa[i].pertemuan == 16 )
+                    {
+                        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                        {
+                            items.P16 = NilaiMahasiswa[i].nilai;
+                        }
+                    }
+                } else
+                {
+                    if ( NilaiMahasiswa[i].pertemuan == 1 )
+                    {
+                        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                        {
+                            items.P01 = NilaiMahasiswa[i].nilai;
+                        }
+                    }
+                    else if ( NilaiMahasiswa[i].pertemuan == 2 )
+                    {
+                        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                        {
+                            items.P02 = NilaiMahasiswa[i].nilai;
+                        }
+                    }
+                    else if ( NilaiMahasiswa[i].pertemuan == 3 )
+                    {
+                        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                        {
+                            items.P03 = NilaiMahasiswa[i].nilai;
+                        }
+                    }
+                    else if ( NilaiMahasiswa[i].pertemuan == 4 )
+                    {
+                        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                        {
+                            items.P04 = NilaiMahasiswa[i].nilai;
+                        }
+                    }
+                    else if ( NilaiMahasiswa[i].pertemuan == 5 )
+                    {
+                        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                        {
+                            items.P05 = NilaiMahasiswa[i].nilai;
+                        }
+                    }
+                    else if ( NilaiMahasiswa[i].pertemuan == 6 )
+                    {
+                        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                        {
+                            items.P06 = NilaiMahasiswa[i].nilai;
+                        }
+                    }
+                    else if ( NilaiMahasiswa[i].pertemuan == 7 )
+                    {
+                        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                        {
+                            items.P07 = NilaiMahasiswa[i].nilai;
+                        }
+                    }
+                    else if ( NilaiMahasiswa[i].pertemuan == 8 )
+                    {
+                        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                        {
+                            items.P08 = NilaiMahasiswa[i].nilai;
+                        }
+                    }
+                    else if ( NilaiMahasiswa[i].pertemuan == 9 )
+                    {
+                        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                        {
+                            items.P09 = NilaiMahasiswa[i].nilai;
+                        }
+                    }
+                    else if ( NilaiMahasiswa[i].pertemuan == 10 )
+                    {
+                        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                        {
+                            items.P10 = NilaiMahasiswa[i].nilai;
+                        }
+                    }
+                    else if ( NilaiMahasiswa[i].pertemuan == 11 )
+                    {
+                        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                        {
+                            items.P11 = NilaiMahasiswa[i].nilai;
+                        }
+                    }
+                    else if ( NilaiMahasiswa[i].pertemuan == 12 )
+                    {
+                        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                        {
+                            items.P12 = NilaiMahasiswa[i].nilai;
+                        }
+                    }
+                    else if ( NilaiMahasiswa[i].pertemuan == 13 )
+                    {
+                        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                        {
+                            items.P13 = NilaiMahasiswa[i].nilai;
+                        }
+                    }
+                    else if ( NilaiMahasiswa[i].pertemuan == 14 )
+                    {
+                        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                        {
+                            items.P14 = NilaiMahasiswa[i].nilai;
+                        }
+                    }
+                    else if ( NilaiMahasiswa[i].pertemuan == 15 )
+                    {
+                        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                        {
+                            items.P15 = NilaiMahasiswa[i].nilai;
+                        }
+                    }
+                    else if ( NilaiMahasiswa[i].pertemuan == 16 )
+                    {
+                        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                        {
+                            items.P16 = NilaiMahasiswa[i].nilai;
+                        }
+                    }
+                }
+                
+                //XtraMessageBox.Show(listNilaiMahasiswa[0].nrp + Environment.NewLine +
+                //                    listNilaiMahasiswa[0].P01 + Environment.NewLine +
+                //                    listNilaiMahasiswa[0].P02 + Environment.NewLine +
+                //                    listNilaiMahasiswa[0].P03 + Environment.NewLine +
+                //                    listNilaiMahasiswa[0].P04 );
+
+                //if ( index == -1 )
+                //{
+                //    var n = listNilaiMahasiswa.FindIndex(x => x.nrp == NilaiMahasiswa[i].nrp);
+                //    XtraMessageBox.Show(n.ToString());
+                //    if ( NilaiMahasiswa[i].pertemuan == 1 )
+                //    {
+                //        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                //        {
+                //            items.P01 = NilaiMahasiswa[i].nilai;
+                //        }
+                //    }
+                //    else if ( NilaiMahasiswa[i].pertemuan == 2 )
+                //    {
+                //        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                //        {
+                //            items.P02 = NilaiMahasiswa[i].nilai;
+                //        }
+                //    }
+                //    else if ( NilaiMahasiswa[i].pertemuan == 3 )
+                //    {
+                //        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                //        {
+                //            items.P03 = NilaiMahasiswa[i].nilai;
+                //        }
+                //    }
+                //    else if ( NilaiMahasiswa[i].pertemuan == 4 )
+                //    {
+                //        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                //        {
+                //            items.P04 = NilaiMahasiswa[i].nilai;
+                //        }
+                //    }
+                //    else if ( NilaiMahasiswa[i].pertemuan == 5 )
+                //    {
+                //        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                //        {
+                //            items.P05 = NilaiMahasiswa[i].nilai;
+                //        }
+                //    }
+                //    else if ( NilaiMahasiswa[i].pertemuan == 6 )
+                //    {
+                //        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                //        {
+                //            items.P06 = NilaiMahasiswa[i].nilai;
+                //        }
+                //    }
+                //    else if ( NilaiMahasiswa[i].pertemuan == 7 )
+                //    {
+                //        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                //        {
+                //            items.P07 = NilaiMahasiswa[i].nilai;
+                //        }
+                //    }
+                //    else if ( NilaiMahasiswa[i].pertemuan == 8 )
+                //    {
+                //        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                //        {
+                //            items.P08 = NilaiMahasiswa[i].nilai;
+                //        }
+                //    }
+                //    else if ( NilaiMahasiswa[i].pertemuan == 9 )
+                //    {
+                //        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                //        {
+                //            items.P09 = NilaiMahasiswa[i].nilai;
+                //        }
+                //    }
+                //    else if ( NilaiMahasiswa[i].pertemuan == 10 )
+                //    {
+                //        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                //        {
+                //            items.P10 = NilaiMahasiswa[i].nilai;
+                //        }
+                //    }
+                //    else if ( NilaiMahasiswa[i].pertemuan == 11 )
+                //    {
+                //        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                //        {
+                //            items.P11 = NilaiMahasiswa[i].nilai;
+                //        }
+                //    }
+                //    else if ( NilaiMahasiswa[i].pertemuan == 12 )
+                //    {
+                //        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                //        {
+                //            items.P12 = NilaiMahasiswa[i].nilai;
+                //        }
+                //    }
+                //    else if ( NilaiMahasiswa[i].pertemuan == 13 )
+                //    {
+                //        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                //        {
+                //            items.P13 = NilaiMahasiswa[i].nilai;
+                //        }
+                //    }
+                //    else if ( NilaiMahasiswa[i].pertemuan == 14 )
+                //    {
+                //        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                //        {
+                //            items.P14 = NilaiMahasiswa[i].nilai;
+                //        }
+                //    }
+                //    else if ( NilaiMahasiswa[i].pertemuan == 15 )
+                //    {
+                //        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                //        {
+                //            items.P15 = NilaiMahasiswa[i].nilai;
+                //        }
+                //    }
+                //    else if ( NilaiMahasiswa[i].pertemuan == 16 )
+                //    {
+                //        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                //        {
+                //            items.P16 = NilaiMahasiswa[i].nilai;
+                //        }
+                //    }
+                //    break;
+                //}
+                //else
+                //{
+                //    if ( NilaiMahasiswa[i].pertemuan == 1 )
+                //    {
+                //        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                //        {
+                //            items.P01 = NilaiMahasiswa[i].nilai;
+                //        }
+                //    }
+                //    else if ( NilaiMahasiswa[i].pertemuan == 2 )
+                //    {
+                //        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                //        {
+                //            items.P02 = NilaiMahasiswa[i].nilai;
+                //        }
+                //    }
+                //    else if ( NilaiMahasiswa[i].pertemuan == 3 )
+                //    {
+                //        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                //        {
+                //            items.P03 = NilaiMahasiswa[i].nilai;
+                //        }
+                //    }
+                //    else if ( NilaiMahasiswa[i].pertemuan == 4 )
+                //    {
+                //        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                //        {
+                //            items.P04 = NilaiMahasiswa[i].nilai;
+                //        }
+                //    }
+                //    else if ( NilaiMahasiswa[i].pertemuan == 5 )
+                //    {
+                //        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                //        {
+                //            items.P05 = NilaiMahasiswa[i].nilai;
+                //        }
+                //    }
+                //    else if ( NilaiMahasiswa[i].pertemuan == 6 )
+                //    {
+                //        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                //        {
+                //            items.P06 = NilaiMahasiswa[i].nilai;
+                //        }
+                //    }
+                //    else if ( NilaiMahasiswa[i].pertemuan == 7 )
+                //    {
+                //        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                //        {
+                //            items.P07 = NilaiMahasiswa[i].nilai;
+                //        }
+                //    }
+                //    else if ( NilaiMahasiswa[i].pertemuan == 8 )
+                //    {
+                //        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                //        {
+                //            items.P08 = NilaiMahasiswa[i].nilai;
+                //        }
+                //    }
+                //    else if ( NilaiMahasiswa[i].pertemuan == 9 )
+                //    {
+                //        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                //        {
+                //            items.P09 = NilaiMahasiswa[i].nilai;
+                //        }
+                //    }
+                //    else if ( NilaiMahasiswa[i].pertemuan == 10 )
+                //    {
+                //        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                //        {
+                //            items.P10 = NilaiMahasiswa[i].nilai;
+                //        }
+                //    }
+                //    else if ( NilaiMahasiswa[i].pertemuan == 11 )
+                //    {
+                //        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                //        {
+                //            items.P11 = NilaiMahasiswa[i].nilai;
+                //        }
+                //    }
+                //    else if ( NilaiMahasiswa[i].pertemuan == 12 )
+                //    {
+                //        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                //        {
+                //            items.P12 = NilaiMahasiswa[i].nilai;
+                //        }
+                //    }
+                //    else if ( NilaiMahasiswa[i].pertemuan == 13 )
+                //    {
+                //        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                //        {
+                //            items.P13 = NilaiMahasiswa[i].nilai;
+                //        }
+                //    }
+                //    else if ( NilaiMahasiswa[i].pertemuan == 14 )
+                //    {
+                //        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                //        {
+                //            items.P14 = NilaiMahasiswa[i].nilai;
+                //        }
+                //    }
+                //    else if ( NilaiMahasiswa[i].pertemuan == 15 )
+                //    {
+                //        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                //        {
+                //            items.P15 = NilaiMahasiswa[i].nilai;
+                //        }
+                //    }
+                //    else if ( NilaiMahasiswa[i].pertemuan == 16 )
+                //    {
+                //        foreach ( var items in listNilaiMahasiswa.Where(w => w.nrp == NilaiMahasiswa[i].nrp) )
+                //        {
+                //            items.P16 = NilaiMahasiswa[i].nilai;
+                //        }
+                //    }
+                //    break;
+                //}
+            }
+
+            gridControl9.DataSource = listNilaiMahasiswa.Select(x => new {
+                NRP     = x.nrp,
+                NAMA    = x.Nama,
+                x.P01,
+                x.P02,
+                x.P03,
+                x.P04,
+                x.P05,
+                x.P06,
+                x.P07,
+                x.P08,
+                x.P09,
+                x.P10,
+                x.P11,
+                x.P12,
+                x.P13,
+                x.P14,
+                x.P15,
+                x.P16
+            });
+            
+            gridView9.Columns[0].Width = 120;
+            gridView9.Columns[1].Width = 180;
+            gridView9.Columns[2].Width = 50;
+            gridView9.Columns[3].Width = 50;
+            gridView9.Columns[4].Width = 50;
+            gridView9.Columns[5].Width = 50;
+            gridView9.Columns[6].Width = 50;
+            gridView9.Columns[7].Width = 50;
+            gridView9.Columns[8].Width = 50;
+            gridView9.Columns[9].Width = 50;
+            gridView9.Columns[10].Width = 50;
+            gridView9.Columns[11].Width = 50;
+            gridView9.Columns[12].Width = 50;
+            gridView9.Columns[13].Width = 50;
+            gridView9.Columns[14].Width = 50;
+            gridView9.Columns[15].Width = 50;
+            gridView9.Columns[16].Width = 50;
+            gridView9.Columns[17].Width = 50;
+
+            gridView9.Columns[2].AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
+            gridView9.Columns[3].AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
+            gridView9.Columns[4].AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
+            gridView9.Columns[5].AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
+            gridView9.Columns[6].AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
+            gridView9.Columns[7].AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
+            gridView9.Columns[8].AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
+            gridView9.Columns[9].AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
+            gridView9.Columns[10].AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
+            gridView9.Columns[11].AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
+            gridView9.Columns[12].AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
+            gridView9.Columns[13].AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
+            gridView9.Columns[14].AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
+            gridView9.Columns[15].AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
+            gridView9.Columns[16].AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
+            gridView9.Columns[17].AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
+
+            SettingGridView(gridView9);
+            gridControl9.RefreshDataSource();
+            service.Close();
+        }
+
+        private void simpleButton31_Click(object sender, EventArgs e)
+        {
+            gridView9.ShowPrintPreview();
+        }
+
+        private void gridView9_PrintInitialize(object sender, DevExpress.XtraGrid.Views.Base.PrintInitializeEventArgs e)
+        {
+            var pb = e.PrintingSystem as PrintingSystemBase;
+            pb.PageSettings.Landscape = true;
+        }
+
+        private void accordionControlElement30_Click(object sender, EventArgs e)
+        {
+            comboBoxEdit12.Properties.Items.Clear();
+            a_.SelectedPage = a_file;
+            var service = new IadmClient();
+
+            AddPeriode(comboBoxEdit15);
+            var mk = service.GetMatKul().ToList();
+            for ( int i = 0; i < mk.Count; i++ )
+            {
+                comboBoxEdit12.Properties.Items.Add(mk[i].mata_kuliah);
+            }
+            comboBoxEdit12.SelectedIndex = 0;
+            comboBoxEdit14.SelectedIndex = 0;
+            service.Close();
+        }
+
+        private void accordionControlElement31_Click(object sender, EventArgs e)
+        {
+            a_.SelectedPage = a_praktikum;
+        }
+
+        private void accordionControlElement32_Click(object sender, EventArgs e)
+        {
+            a_.SelectedPage = a_kelas;
+        }
+
+        private void simpleButton33_Click(object sender, EventArgs e)
+        {
+            var fbd = new FolderBrowserDialog();
+            if(fbd.ShowDialog() == DialogResult.OK )
+            {
+                var savePath = fbd.SelectedPath;
+                var service = new IadmClient();
+                var data = new jadwalPraktikan()
+                {
+                    id_jadwal_umum = new jadwal_umum()
+                    {
+                        id_periode = PeriodeId(comboBoxEdit15),
+                        fk_jadwalUmum_matakuliah = new matkul()
+                        {
+                            mata_kuliah = comboBoxEdit12.SelectedItem.ToString()
+                        }
+                    },
+                    absen = new AbsensiPraktikan()
+                    {
+                        Pertemuan = new pertemuan()
+                        {
+                            id_jenis_pertemuan = comboBoxEdit14.SelectedItem.ToString()
+                        }
+                    }
+                };
+                var files = service.GetFileUjian(data).Select(x => new
+                {
+                    x.jadwal.JadwalPraktikan.praktikan.NRP,
+                    x.jadwal.JadwalPraktikan.praktikan.Nama,
+                    x.data_file,
+                    x.nama_file
+                }).ToList();
+                var ujian = comboBoxEdit14.SelectedItem.ToString();
+                var praktikum = comboBoxEdit12.SelectedItem.ToString();
+                var periode = comboBoxEdit15.SelectedItem.ToString();
+                for ( int i = 0; i < files.Count; i++ )
+                {
+                    var dir = savePath + ujian + " " + praktikum + "//" + files[i].NRP + " - " + files[i].Nama;
+                    if ( Exists(dir) )
+                        File.WriteAllBytes(dir + "//" + files[i].nama_file, files[i].data_file);
+                    else
+                    {
+                        CreateDirectory(dir);
+                        File.WriteAllBytes(dir + "//" + files[i].nama_file, files[i].data_file);
+                    }
+                }
+                service.Close();
+            }
+        }
+
+        private void simpleButton35_Click(object sender, EventArgs e)
+        {
+            var service = new IadmClient();
+            var data = new jadwalPraktikan()
+            {
+                id_jadwal_umum = new jadwal_umum()
+                {
+                    id_periode = PeriodeId(comboBoxEdit15),
+                    fk_jadwalUmum_matakuliah = new matkul()
+                    {
+                        mata_kuliah = comboBoxEdit12.SelectedItem.ToString()
+                    }
+                },
+                absen = new AbsensiPraktikan()
+                {
+                    Pertemuan = new pertemuan()
+                    {
+                        id_jenis_pertemuan = comboBoxEdit14.SelectedItem.ToString()
+                    }
+                }
+            };
+            gridControl10.DataSource = service.GetFileUjian(data).Select(x => new {
+                x.jadwal.JadwalPraktikan.praktikan.NRP,
+                x.jadwal.JadwalPraktikan.praktikan.Nama
+            }).ToList();
+            service.Close();
         }
     }
 }

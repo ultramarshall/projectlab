@@ -111,9 +111,9 @@
             // simpleButton2
             // 
             this.simpleButton2.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton2.Image")));
-            this.simpleButton2.Location = new System.Drawing.Point(646, 549);
+            this.simpleButton2.Location = new System.Drawing.Point(647, 549);
             this.simpleButton2.Name = "simpleButton2";
-            this.simpleButton2.Size = new System.Drawing.Size(61, 22);
+            this.simpleButton2.Size = new System.Drawing.Size(60, 22);
             this.simpleButton2.StyleController = this.layoutControl1;
             this.simpleButton2.TabIndex = 16;
             this.simpleButton2.Text = "Batal";
@@ -124,7 +124,7 @@
             this.simpleButton1.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.Image")));
             this.simpleButton1.Location = new System.Drawing.Point(565, 549);
             this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(61, 22);
+            this.simpleButton1.Size = new System.Drawing.Size(62, 22);
             this.simpleButton1.StyleController = this.layoutControl1;
             this.simpleButton1.TabIndex = 15;
             this.simpleButton1.Text = "Simpan";
@@ -314,14 +314,14 @@
             this.layoutControlItem8.Control = this.simpleButton1;
             this.layoutControlItem8.Location = new System.Drawing.Point(523, 507);
             this.layoutControlItem8.Name = "layoutControlItem8";
-            this.layoutControlItem8.Size = new System.Drawing.Size(65, 26);
+            this.layoutControlItem8.Size = new System.Drawing.Size(66, 26);
             this.layoutControlItem8.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem8.TextVisible = false;
             // 
             // emptySpaceItem9
             // 
             this.emptySpaceItem9.AllowHotTrack = false;
-            this.emptySpaceItem9.Location = new System.Drawing.Point(588, 507);
+            this.emptySpaceItem9.Location = new System.Drawing.Point(589, 507);
             this.emptySpaceItem9.Name = "emptySpaceItem9";
             this.emptySpaceItem9.Size = new System.Drawing.Size(16, 26);
             this.emptySpaceItem9.TextSize = new System.Drawing.Size(0, 0);
@@ -329,9 +329,9 @@
             // layoutControlItem9
             // 
             this.layoutControlItem9.Control = this.simpleButton2;
-            this.layoutControlItem9.Location = new System.Drawing.Point(604, 507);
+            this.layoutControlItem9.Location = new System.Drawing.Point(605, 507);
             this.layoutControlItem9.Name = "layoutControlItem9";
-            this.layoutControlItem9.Size = new System.Drawing.Size(65, 26);
+            this.layoutControlItem9.Size = new System.Drawing.Size(64, 26);
             this.layoutControlItem9.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem9.TextVisible = false;
             // 

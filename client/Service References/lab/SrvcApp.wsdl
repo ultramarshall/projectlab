@@ -267,6 +267,24 @@
   <wsdl:message name="Iadm_GetUpLoadFile_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetUpLoadFileResponse" />
   </wsdl:message>
+  <wsdl:message name="Iadm_Nilai_InputMessage">
+    <wsdl:part name="parameters" element="tns:Nilai" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_Nilai_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NilaiResponse" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_ListPraktikanPraktikum_InputMessage">
+    <wsdl:part name="parameters" element="tns:ListPraktikanPraktikum" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_ListPraktikanPraktikum_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ListPraktikanPraktikumResponse" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_GetFileUjian_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFileUjian" />
+  </wsdl:message>
+  <wsdl:message name="Iadm_GetFileUjian_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFileUjianResponse" />
+  </wsdl:message>
   <wsdl:portType name="Iadm">
     <wsdl:operation name="GetLogin">
       <wsdl:input wsaw:Action="http://tempuri.org/Iadm/GetLogin" message="tns:Iadm_GetLogin_InputMessage" />
@@ -435,6 +453,18 @@
     <wsdl:operation name="GetUpLoadFile">
       <wsdl:input wsaw:Action="http://tempuri.org/Iadm/GetUpLoadFile" message="tns:Iadm_GetUpLoadFile_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/Iadm/GetUpLoadFileResponse" message="tns:Iadm_GetUpLoadFile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Nilai">
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/Nilai" message="tns:Iadm_Nilai_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/NilaiResponse" message="tns:Iadm_Nilai_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ListPraktikanPraktikum">
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/ListPraktikanPraktikum" message="tns:Iadm_ListPraktikanPraktikum_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/ListPraktikanPraktikumResponse" message="tns:Iadm_ListPraktikanPraktikum_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFileUjian">
+      <wsdl:input wsaw:Action="http://tempuri.org/Iadm/GetFileUjian" message="tns:Iadm_GetFileUjian_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/Iadm/GetFileUjianResponse" message="tns:Iadm_GetFileUjian_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSHttpBinding_Iadm" type="tns:Iadm">
@@ -811,6 +841,33 @@
     </wsdl:operation>
     <wsdl:operation name="GetUpLoadFile">
       <soap12:operation soapAction="http://tempuri.org/Iadm/GetUpLoadFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Nilai">
+      <soap12:operation soapAction="http://tempuri.org/Iadm/Nilai" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListPraktikanPraktikum">
+      <soap12:operation soapAction="http://tempuri.org/Iadm/ListPraktikanPraktikum" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFileUjian">
+      <soap12:operation soapAction="http://tempuri.org/Iadm/GetFileUjian" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

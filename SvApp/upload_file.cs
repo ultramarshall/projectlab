@@ -23,5 +23,8 @@ namespace SvApp
 
         [DataMember]
         public byte[] data_file { get; set; }
+
+        [DataMember]
+        public AbsensiPraktikan jadwal { get; set; }
     }
 }
