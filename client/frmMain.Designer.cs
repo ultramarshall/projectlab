@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.Interface = new DevExpress.XtraBars.Navigation.NavigationFrame();
             this.InterfaceLogin = new DevExpress.XtraBars.Navigation.NavigationPage();

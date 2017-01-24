@@ -18,7 +18,7 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost/lab/svlab.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://192.168.99.3/lab/svlab.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
     <MetadataFile FileName="svlab.xsd" MetadataType="Schema" ID="4c40d78e-ac77-4da4-bdbb-129300ed2f55" SourceId="1" SourceUrl="http://desktop-3rkcn07/lab/svlab.svc?xsd=xsd0" />

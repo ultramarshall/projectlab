@@ -1495,10 +1495,20 @@ namespace SvApp
 
                 while ( reader.Read() )
                 {
+                    var n = 0;
+                    if ( DBNull.Value.Equals(reader[1]) )
+                    {
+                        n = 0;
+                    }
+                    else
+                    {
+                        n = Convert.ToInt32(reader[1]);
+                    }
+
                     var list = new AbsensiPraktikan()
                     {
                         JadwalPraktikan = new jadwalPraktikan() { nrp = reader[0].ToString() },
-                        Nilai = Convert.ToInt16(reader[1]),
+                        Nilai = n,
                         Pertemuan = new pertemuan() { id_pertemuan = Convert.ToInt16(reader[2]) }
                     };
                     nilai.Add(list);
