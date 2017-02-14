@@ -14,12 +14,17 @@ namespace client
 
         private void FormAngkatan_Load (object sender, EventArgs e)
         {
-            var service = new IadmClient( );
-            var angkatan = service.GetAngkatan().Select( x => x.TahunAngkatan ).ToList();
-            listBoxControl1.Items.AddRange( angkatan.ToArray() );
-            service.Close();
+            GetTahunAngkatan();
         }
 
+        private void GetTahunAngkatan()
+        {
+            listBoxControl1.Items.Clear();
+            var service = new IadmClient();
+            var angkatan = service.GetAngkatan().Select(x => x.TahunAngkatan).ToList();
+            listBoxControl1.Items.AddRange(angkatan.ToArray());
+            service.Close();
+        }
         private void simpleButton1_Click (object sender, EventArgs e)
         {
             try
@@ -38,12 +43,27 @@ namespace client
                     };
                     service.TambahAngaktan( data );
                     listBoxControl1.Items.Add( textEdit1.Text );
+                    service.Close();
                 }
             }
             catch (Exception)
             {
                 XtraMessageBox.Show( "Format Tahun Salah !" );
             }
+        }
+
+        private void simpleButton2_Click(object sender, EventArgs e)
+        {
+            var service = new IadmClient();
+            var data = new angkatan() { TahunAngkatan = listBoxControl1.SelectedItem.ToString() };
+            service.HapusAngkatan(data);
+            service.Close();
+            GetTahunAngkatan();
+        }
+
+        private void simpleButton3_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

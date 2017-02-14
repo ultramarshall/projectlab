@@ -1818,6 +1818,30 @@ namespace client.lab {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/InputKelas", ReplyAction="http://tempuri.org/Iadm/InputKelasResponse")]
         int InputKelas(client.lab.kelas data);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/HapusPraktikan", ReplyAction="http://tempuri.org/Iadm/HapusPraktikanResponse")]
+        int HapusPraktikan(client.lab.Users data);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/HapusPJadwalAsisten", ReplyAction="http://tempuri.org/Iadm/HapusPJadwalAsistenResponse")]
+        int HapusPJadwalAsisten(client.lab.jadwalStaff data);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/HapusAngkatan", ReplyAction="http://tempuri.org/Iadm/HapusAngkatanResponse")]
+        int HapusAngkatan(client.lab.angkatan data);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/HapusMataKuliah", ReplyAction="http://tempuri.org/Iadm/HapusMataKuliahResponse")]
+        int HapusMataKuliah(client.lab.matkul data);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/HapusKelas", ReplyAction="http://tempuri.org/Iadm/HapusKelasResponse")]
+        int HapusKelas(client.lab.kelas data);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/ServerTime", ReplyAction="http://tempuri.org/Iadm/ServerTimeResponse")]
+        System.DateTime ServerTime();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/jumPraktikum", ReplyAction="http://tempuri.org/Iadm/jumPraktikumResponse")]
+        int jumPraktikum(client.lab.modul data);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Iadm/ambilNilaiPraktikan", ReplyAction="http://tempuri.org/Iadm/ambilNilaiPraktikanResponse")]
+        client.lab.AbsensiPraktikan[] ambilNilaiPraktikan(client.lab.AbsensiPraktikan data);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2033,6 +2057,38 @@ namespace client.lab {
         
         public int InputKelas(client.lab.kelas data) {
             return base.Channel.InputKelas(data);
+        }
+        
+        public int HapusPraktikan(client.lab.Users data) {
+            return base.Channel.HapusPraktikan(data);
+        }
+        
+        public int HapusPJadwalAsisten(client.lab.jadwalStaff data) {
+            return base.Channel.HapusPJadwalAsisten(data);
+        }
+        
+        public int HapusAngkatan(client.lab.angkatan data) {
+            return base.Channel.HapusAngkatan(data);
+        }
+        
+        public int HapusMataKuliah(client.lab.matkul data) {
+            return base.Channel.HapusMataKuliah(data);
+        }
+        
+        public int HapusKelas(client.lab.kelas data) {
+            return base.Channel.HapusKelas(data);
+        }
+        
+        public System.DateTime ServerTime() {
+            return base.Channel.ServerTime();
+        }
+        
+        public int jumPraktikum(client.lab.modul data) {
+            return base.Channel.jumPraktikum(data);
+        }
+        
+        public client.lab.AbsensiPraktikan[] ambilNilaiPraktikan(client.lab.AbsensiPraktikan data) {
+            return base.Channel.ambilNilaiPraktikan(data);
         }
     }
 }

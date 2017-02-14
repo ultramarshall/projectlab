@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="03925074-0ae0-44f4-a8ca-39fc0eba8475" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="784e4d73-9f7e-4a8f-837d-5da2b153f029" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <EnableDataBinding>true</EnableDataBinding>
@@ -18,14 +18,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://192.168.99.3/lab/svlab.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost/lab/svlab.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="svlab.xsd" MetadataType="Schema" ID="4c40d78e-ac77-4da4-bdbb-129300ed2f55" SourceId="1" SourceUrl="http://desktop-3rkcn07/lab/svlab.svc?xsd=xsd0" />
-    <MetadataFile FileName="svlab1.xsd" MetadataType="Schema" ID="51378101-6326-4d3e-836f-2337681041ab" SourceId="1" SourceUrl="http://desktop-3rkcn07/lab/svlab.svc?xsd=xsd1" />
-    <MetadataFile FileName="svlab2.xsd" MetadataType="Schema" ID="f2f19ad3-8ddc-495a-b03c-f9974b710053" SourceId="1" SourceUrl="http://desktop-3rkcn07/lab/svlab.svc?xsd=xsd2" />
-    <MetadataFile FileName="SrvcApp.wsdl" MetadataType="Wsdl" ID="27894530-a229-402a-a78a-21ff72a9dc14" SourceId="1" SourceUrl="http://desktop-3rkcn07/lab/svlab.svc?wsdl" />
-    <MetadataFile FileName="svlab.disco" MetadataType="Disco" ID="2d09735e-6600-4ae0-8048-772581d6f61a" SourceId="1" SourceUrl="http://desktop-3rkcn07/lab/svlab.svc?disco" />
+    <MetadataFile FileName="svlab.xsd" MetadataType="Schema" ID="d24f374f-3b3b-412d-8dc0-a8b8d2d94aa8" SourceId="1" SourceUrl="http://desktop-q65mmh5/lab/svlab.svc?xsd=xsd2" />
+    <MetadataFile FileName="svlab.disco" MetadataType="Disco" ID="925841e0-69e3-4594-9287-078cf6c32fc0" SourceId="1" SourceUrl="http://desktop-q65mmh5/lab/svlab.svc?disco" />
+    <MetadataFile FileName="svlab1.xsd" MetadataType="Schema" ID="99327a67-b91e-452f-a16b-ea057c2e142f" SourceId="1" SourceUrl="http://desktop-q65mmh5/lab/svlab.svc?xsd=xsd0" />
+    <MetadataFile FileName="SrvcApp.wsdl" MetadataType="Wsdl" ID="ec31d407-ae44-40ae-86f1-96e2ff820f05" SourceId="1" SourceUrl="http://desktop-q65mmh5/lab/svlab.svc?wsdl" />
+    <MetadataFile FileName="svlab2.xsd" MetadataType="Schema" ID="7e549e8d-7fac-4af2-8157-253ccd09f529" SourceId="1" SourceUrl="http://desktop-q65mmh5/lab/svlab.svc?xsd=xsd1" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

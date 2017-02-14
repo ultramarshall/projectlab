@@ -35,8 +35,7 @@ namespace SvApp
         {
             _connStringBuilder = new SqlConnectionStringBuilder()
             {
-                //DataSource = "DESKTOP-0SI1HN9\\SQLSERVER",
-                DataSource = "DESKTOP-3RKCN07",
+                DataSource = "DESKTOP-Q65MMH5",
                 InitialCatalog = "labdb",
                 Encrypt = true,
                 TrustServerCertificate = true,
@@ -1666,5 +1665,231 @@ namespace SvApp
                 _conn?.Close();
             }
         }
+
+        public int HapusPraktikan(Users data)
+        {
+            try
+            {
+                
+
+                _comm.CommandText = @"DELETE FROM upload_file
+                                      WHERE id_absensi IN(SELECT id_absensi
+					                                    FROM absensi_praktikan
+						                                    INNER JOIN jadwal_praktikan
+						                                    ON jadwal_praktikan.id_jadwal_praktikan = absensi_praktikan.id_jadwal_praktikan
+					                                    WHERE jadwal_praktikan.nrp = @username);
+                                      DELETE FROM absensi_praktikan
+                                      WHERE id_jadwal_praktikan IN( SELECT id_jadwal_praktikan
+                                                                  FROM jadwal_praktikan
+							                                      WHERE nrp =@username);
+                                      DELETE FROM jadwal_praktikan WHERE nrp = @username;
+                                      DELETE FROM praktikan WHERE nrp = @username;
+                                      DELETE FROM users WHERE username = @username";
+                _comm.Parameters.AddWithValue("username", data.username);
+
+                _comm.CommandType = CommandType.Text;
+                _conn.Open();
+
+                var path = @"C:\LIK\USER\" + data.username;
+                var dir = new DirectoryInfo(path);
+                dir.Attributes = dir.Attributes & ~FileAttributes.ReadOnly;
+                dir.Delete(true);
+
+                return _comm.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                _conn?.Close();
+            }
+        }
+
+        public int HapusPJadwalAsisten(jadwalStaff data)
+        {
+            try
+            {
+
+
+                _comm.CommandText = @"DELETE FROM  jadwal_staff
+                                      WHERE id_staff = @id_staff AND id_jadwal_umum = @id_jadwal_umum";
+                _comm.Parameters.AddWithValue("id_staff", data.staff.id_staff);
+                _comm.Parameters.AddWithValue("id_jadwal_umum", data.jadwal_umum.id_jadwal_umum);
+
+                _comm.CommandType = CommandType.Text;
+                _conn.Open();
+
+                return _comm.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                _conn?.Close();
+            }
+        }
+
+        public int HapusAngkatan(angkatan data)
+        {
+            try
+            {
+
+
+                _comm.CommandText = @"DELETE FROM angkatan
+                                      WHERE tahun_angkatan = @tahun_angkatan";
+                _comm.Parameters.AddWithValue("tahun_angkatan", data.TahunAngkatan);
+                _comm.CommandType = CommandType.Text;
+                _conn.Open();
+
+                return _comm.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                _conn?.Close();
+            }
+        }
+
+        public int HapusMataKuliah(matkul data)
+        {
+            try
+            {
+
+
+                _comm.CommandText = @"DELETE FROM mata_kuliah
+                                      WHERE kode_mk = @kode_mk AND mata_kuliah = @mata_kuliah";
+                _comm.Parameters.AddWithValue("kode_mk", data.kode_mk);
+                _comm.Parameters.AddWithValue("mata_kuliah", data.mata_kuliah);
+                _comm.CommandType = CommandType.Text;
+                _conn.Open();
+
+                return _comm.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                _conn?.Close();
+            }
+        }
+
+        public int HapusKelas(kelas data)
+        {
+            try
+            {
+                _comm.CommandText = @"DELETE FROM kelas
+                                      WHERE kelas = @kelas";
+                _comm.Parameters.AddWithValue("kelas", data.Kelas);
+                _comm.CommandType = CommandType.Text;
+                _conn.Open();
+
+                return _comm.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                _conn?.Close();
+            }
+        }
+
+        
+
+        public int jumPraktikum(modul data)
+        {
+            try
+            {
+                _comm.CommandText = @"SELECT    COUNT(kode_mk)
+                                      FROM      modul
+                                      WHERE     (kode_mk = @kode_mk)";
+                _comm.Parameters.AddWithValue("kode_mk", data.matkul.kode_mk);
+                _comm.CommandType = CommandType.Text;
+                _conn.Open();
+                SqlDataReader reader = _comm.ExecuteReader();
+
+                var n = 0;
+                while (reader.Read())
+                {
+                    n = Convert.ToInt16(reader[0]);
+                }
+                return n;
+            }
+            finally
+            {
+                _conn?.Close();
+            }
+        }
+
+        public DateTime ServerTime()
+        {
+            var time_now = DateTime.Now;
+            return time_now;
+        }
+
+        public List<AbsensiPraktikan> ambilNilaiPraktikan(AbsensiPraktikan data)
+        {
+            try
+            {
+                _comm.CommandText = @"SELECT        jadwal_praktikan.nrp, absensi_praktikan.nilai, pertemuan.id_pertemuan
+                                    FROM            absensi_praktikan INNER JOIN
+                                                             jadwal_praktikan ON absensi_praktikan.id_jadwal_praktikan = jadwal_praktikan.id_jadwal_praktikan INNER JOIN
+                                                             jadwal_umum ON jadwal_praktikan.id_jadwal_umum = jadwal_umum.id_jadwal_umum AND jadwal_umum.id_periode = @id_periode INNER JOIN
+                                                             pertemuan ON absensi_praktikan.id_pertemuan = pertemuan.id_pertemuan INNER JOIN
+                                                             mata_kuliah ON jadwal_umum.kode_mk = mata_kuliah.kode_mk AND mata_kuliah.mata_kuliah = @mata_kuliah";
+                _comm.Parameters.AddWithValue("id_periode", data.JadwalPraktikan.id_jadwal_umum.id_periode);
+                _comm.Parameters.AddWithValue("mata_kuliah", data.JadwalPraktikan.id_jadwal_umum.fk_jadwalUmum_matakuliah.mata_kuliah);
+                _comm.CommandType = CommandType.Text;
+                _conn.Open();
+                SqlDataReader reader = _comm.ExecuteReader();
+
+                var row = new List<AbsensiPraktikan>();
+                while (reader.Read())
+                {
+                    var n = 0;
+                    if (DBNull.Value.Equals(reader[1]))
+                    {
+                        n = 0;
+                    }
+                    else
+                    {
+                        n = Convert.ToInt32(reader[1]);
+                    }
+                    var read = new AbsensiPraktikan()
+                    {
+                        JadwalPraktikan = new jadwalPraktikan()
+                        {
+                            nrp = reader[0].ToString().TrimEnd()
+                        },
+                        Nilai = n,
+                        Pertemuan = new pertemuan()
+                        {
+                            id_pertemuan = Convert.ToInt16(reader[2])
+                        }
+                    };
+                    row.Add(read);
+                }
+                return row;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                _conn.Close();
+            }
+        }
+
     }
 }

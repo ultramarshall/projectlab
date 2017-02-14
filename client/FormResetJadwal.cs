@@ -42,5 +42,10 @@ namespace client
             }
             Close( );
         }
+
+        private void FormResetJadwal_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

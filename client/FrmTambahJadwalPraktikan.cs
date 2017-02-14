@@ -43,7 +43,7 @@ namespace client
 
             // add checkbox and enable multi select rows
             gridView1.OptionsSelection.MultiSelect = true;
-            gridView1.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect; ;
+            gridView1.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
             // disable focused row and move column
             for ( var i = 0; i < gridView1.Columns.Count; i++ )
             {

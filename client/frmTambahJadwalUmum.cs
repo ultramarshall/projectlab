@@ -146,15 +146,21 @@ namespace client
                     };
                     jadd[i] = jadum;
                 }
-
+                var errorMessage = false;
                 try
                 {
                     service.InsertJadwal(jadd);
+                    
                 }
                 catch (Exception)
                 {
+                    errorMessage = true;
                     //XtraMessageBox.Show(error.ToString());
                     XtraMessageBox.Show("Tidak ada jadwal yg ditambahkan");
+                }
+                if (errorMessage == false)
+                {
+                    Close();
                 }
             }
         }

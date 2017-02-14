@@ -101,12 +101,18 @@ namespace client
                     service.InsertMultiplePraktikan(praktikan);
                 }
                 service.Close();
+                Close();
             }
             catch (Exception error)
             {
                 XtraMessageBox.Show(error.ToString());
                 XtraMessageBox.Show("Gagal import data mahasiswa.");
             }
+        }
+
+        private void listBoxControl2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -82,8 +82,7 @@ namespace client.Library
             service.Close();
         }
 
-        public static void CariPraktikan(ComboBoxEdit comboBoxEdit1, ComboBoxEdit comboBoxEdit2, GridControl gridcontrol,
-            GridView gridview)
+        public static void CariPraktikan(ComboBoxEdit comboBoxEdit1, ComboBoxEdit comboBoxEdit2, GridControl gridcontrol, GridView gridview)
         {
             try
             {

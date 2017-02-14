@@ -149,5 +149,29 @@ namespace SvApp
 
         [OperationContract]
         int InputKelas(kelas data);
+
+        [OperationContract]
+        int HapusPraktikan(Users data);
+
+        [OperationContract]
+        int HapusPJadwalAsisten(jadwalStaff data);
+
+        [OperationContract]
+        int HapusAngkatan(angkatan data);
+
+        [OperationContract]
+        int HapusMataKuliah(matkul data);
+
+        [OperationContract]
+        int HapusKelas(kelas data);
+
+        [OperationContract]
+        DateTime ServerTime();
+
+        [OperationContract]
+        int jumPraktikum(modul data);
+
+        [OperationContract]
+        List<AbsensiPraktikan> ambilNilaiPraktikan(AbsensiPraktikan data);
     }
 }

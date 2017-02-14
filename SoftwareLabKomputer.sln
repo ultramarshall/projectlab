@@ -30,6 +30,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "host", "host\", "{309B7228-
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "client", "client\client.csproj", "{416CF45E-1A0C-469D-9B6C-AB4A2D04D6D9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApplication1", "WpfApplication1\WpfApplication1.csproj", "{B17927CA-76DB-4AA7-8A0B-D1BFB669D304}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -76,6 +78,18 @@ Global
 		{416CF45E-1A0C-469D-9B6C-AB4A2D04D6D9}.Release|x64.Build.0 = Release|x64
 		{416CF45E-1A0C-469D-9B6C-AB4A2D04D6D9}.Release|x86.ActiveCfg = Release|x86
 		{416CF45E-1A0C-469D-9B6C-AB4A2D04D6D9}.Release|x86.Build.0 = Release|x86
+		{B17927CA-76DB-4AA7-8A0B-D1BFB669D304}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B17927CA-76DB-4AA7-8A0B-D1BFB669D304}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B17927CA-76DB-4AA7-8A0B-D1BFB669D304}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B17927CA-76DB-4AA7-8A0B-D1BFB669D304}.Debug|x64.Build.0 = Debug|Any CPU
+		{B17927CA-76DB-4AA7-8A0B-D1BFB669D304}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B17927CA-76DB-4AA7-8A0B-D1BFB669D304}.Debug|x86.Build.0 = Debug|Any CPU
+		{B17927CA-76DB-4AA7-8A0B-D1BFB669D304}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B17927CA-76DB-4AA7-8A0B-D1BFB669D304}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B17927CA-76DB-4AA7-8A0B-D1BFB669D304}.Release|x64.ActiveCfg = Release|Any CPU
+		{B17927CA-76DB-4AA7-8A0B-D1BFB669D304}.Release|x64.Build.0 = Release|Any CPU
+		{B17927CA-76DB-4AA7-8A0B-D1BFB669D304}.Release|x86.ActiveCfg = Release|Any CPU
+		{B17927CA-76DB-4AA7-8A0B-D1BFB669D304}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
