@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using client.lab;
+using client.lik;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
@@ -162,26 +162,28 @@ namespace client.Library
 
         public static int PeriodeId(ComboBoxEdit comboBoxEdits)
         {
-            var service = new IadmClient();
+ 
+                var service = new IadmClient();
 
-            var s = new string[3];
-            var combobox = comboBoxEdits.SelectedItem.ToString();
-            if (combobox[5] != ' ')
-            {
-                s[0] = "Ganjil";
-                s[1] = combobox.Substring(7, 4);
-                s[2] = combobox.Substring(12, 4);
-            }
-            else
-            {
-                s[0] = "Genap";
-                s[1] = combobox.Substring(6, 4);
-                s[2] = combobox.Substring(11, 4);
-            }
-            var p = service.viewPeriode().FirstOrDefault(x => x.semester == s[0] &&
-                                                              x.awalSemester.ToString("yyyy") == s[1] &&
-                                                              x.akhirSemester.ToString("yyyy") == s[2]);
-            return p.id_periode;
+                var s = new string[3];
+                var combobox = comboBoxEdits.SelectedItem.ToString();
+                if (combobox[5] != ' ')
+                {
+                    s[0] = "Ganjil";
+                    s[1] = combobox.Substring(7, 4);
+                    s[2] = combobox.Substring(12, 4);
+                }
+                else
+                {
+                    s[0] = "Genap";
+                    s[1] = combobox.Substring(6, 4);
+                    s[2] = combobox.Substring(11, 4);
+                }
+                var p = service.viewPeriode().FirstOrDefault(x => x.semester == s[0] &&
+                                                                  x.awalSemester.ToString("yyyy") == s[1] &&
+                                                                  x.akhirSemester.ToString("yyyy") == s[2]);
+                return p.id_periode;
+
         }
     }
 }

@@ -5,7 +5,7 @@ using static client.Library.ConvertFromTo;
 using static client.Library.border;
 using System.Linq;
 using DevExpress.XtraEditors;
-using client.lab;
+using client.lik;
 using static System.String;
 
 namespace client

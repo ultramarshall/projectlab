@@ -7,7 +7,7 @@ using System.Text;
 using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
-using client.lab;
+using client.lik;
 
 namespace client
 {
@@ -25,9 +25,9 @@ namespace client
             var service = new IadmClient( );
 
             var periode = service.viewPeriode().FirstOrDefault(
-                x => 
-                DateTime.Now >= x.awalSemester && 
-                DateTime.Now <= x.akhirSemester);
+                x =>
+               service.ServerTime() >= x.awalSemester &&
+                service.ServerTime() <= x.akhirSemester);
 
             var data = new jadwal_umum( ) { id_periode = periode.id_periode };
             gridControl1.DataSource = service.ViewJadwalUmum( data ).Select(x=> new {
@@ -59,8 +59,8 @@ namespace client
             var values = gridView1.GetSelectedRows( );
             var periode = service.viewPeriode( ).FirstOrDefault(
                 x =>
-                DateTime.Now >= x.awalSemester &&
-                DateTime.Now <= x.akhirSemester );
+                service.ServerTime() >= x.awalSemester &&
+                service.ServerTime() <= x.akhirSemester );
             var data = new jadwal_umum( ) { id_periode = periode.id_periode };
 
             var listjadwal = new List<jadwalPraktikan>( );

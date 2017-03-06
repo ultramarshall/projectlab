@@ -1,6 +1,6 @@
 ﻿using System;
 using DevExpress.XtraEditors;
-using client.lab;
+using client.lik;
 using System.Linq;
 
 namespace client
@@ -22,8 +22,8 @@ namespace client
         private void simpleButton2_Click (object sender, EventArgs e)
         {
             var service = new IadmClient( );
-            var periode = service.viewPeriode( ).FirstOrDefault( x => DateTime.Now >= x.awalSemester &&
-                                                                          DateTime.Now <= x.akhirSemester );
+            var periode = service.viewPeriode( ).FirstOrDefault( x => service.ServerTime() >= x.awalSemester &&
+                                                                          service.ServerTime() <= x.akhirSemester );
             var data = new jadwalPraktikan( )
             {
                 nrp = nrppraktikan,

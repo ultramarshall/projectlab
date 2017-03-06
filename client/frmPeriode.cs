@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using DevExpress.XtraEditors;
-using client.lab;
+using client.lik;
 using static client.Library.border;
 using System.Globalization;
 using System.Linq;

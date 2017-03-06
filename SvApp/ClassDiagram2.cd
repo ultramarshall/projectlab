@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SvApp.AbsensiPraktikan" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAABAAAAIAAAAEAAAAAACAAAAAAABAA=</HashCode>
+      <FileName>AbsensiPraktikan.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SvApp.akun" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAQAAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>akun.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SvApp.angkatan" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAEA=</HashCode>
+      <FileName>angkatan.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SvApp.jadwal_umum" Collapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAEEAAMABAAAAAAAAAACIAAACAIAAAAAAAAA=</HashCode>
+      <FileName>jadwal_umum.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SvApp.jadwalPraktikan">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAEAAAAAAAAAAAAABEAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>jadwalPraktikan.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SvApp.jadwalStaff" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAAAAAIAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>jadwalStaff.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SvApp.jurusan" Collapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>jurusan.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SvApp.kelas" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>kelas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SvApp.matkul" Collapsed="true">
+    <Position X="5.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>matkul.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SvApp.modul">
+    <Position X="6" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAEAAAAAAAAAAAAAAEAAAAAAAACAAAAAAAE=</HashCode>
+      <FileName>modul.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SvApp.periode" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAQCAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>periode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SvApp.pertemuan" Collapsed="true">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>pertemuan.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SvApp.praktikan" Collapsed="true">
+    <Position X="4" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgACAAAAAAAAAABAAAQAAABAAEAAAACAAAQAAAAAA=</HashCode>
+      <FileName>praktikan.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SvApp.Shift" Collapsed="true">
+    <Position X="5.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAAABAAAAIAAAAAgAAAAA=</HashCode>
+      <FileName>Shift.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SvApp.SrvcApp" BaseTypeListCollapsed="true">
+    <Position X="7.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AHMUAoCIxWRAABEAgGUEBIiCBgBAYBEGyCAGEYAAKCE=</HashCode>
+      <FileName>SrvcApp.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="SvApp.Staff" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAEAAAAAIAAAAAAAAEAAAAAAAAACAAAAAEA=</HashCode>
+      <FileName>Staff.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SvApp.upload_file" Collapsed="true">
+    <Position X="2.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAgAAAAACAAAAAEAAAAAAAAAAAAAAQBA=</HashCode>
+      <FileName>upload_file.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SvApp.Users" Collapsed="true">
+    <Position X="4" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Users.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="SvApp.Iadm" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ADMUAoCIxWRAABEAAGUEBIiCBgBAYAEGyCAGAYAAKCE=</HashCode>
+      <FileName>Iadm.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

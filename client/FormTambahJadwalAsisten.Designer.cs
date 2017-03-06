@@ -89,11 +89,11 @@
             this.layoutControl1.Controls.Add(this.comboBoxEdit2);
             this.layoutControl1.Controls.Add(this.comboBoxEdit1);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.layoutControl1.Location = new System.Drawing.Point(2, 20);
+            this.layoutControl1.Location = new System.Drawing.Point(2, 22);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(692, 158, 250, 350);
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(354, 177);
+            this.layoutControl1.Size = new System.Drawing.Size(354, 175);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -137,7 +137,7 @@
             this.comboBoxEdit3.Properties.Items.AddRange(new object[] {
             "I",
             "II",
-            "I",
+            "III",
             "IV"});
             this.comboBoxEdit3.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.comboBoxEdit3.Size = new System.Drawing.Size(207, 20);
@@ -192,7 +192,7 @@
             this.layoutControlItem6});
             this.layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup1.Name = "Root";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(354, 177);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(354, 175);
             this.layoutControlGroup1.TextVisible = false;
             // 
             // emptySpaceItem1
@@ -200,7 +200,7 @@
             this.emptySpaceItem1.AllowHotTrack = false;
             this.emptySpaceItem1.Location = new System.Drawing.Point(0, 120);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(117, 37);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(117, 35);
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // layoutControlItem1
@@ -289,7 +289,7 @@
             this.layoutControlItem5.Location = new System.Drawing.Point(117, 120);
             this.layoutControlItem5.Name = "layoutControlItem5";
             this.layoutControlItem5.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 5, 5);
-            this.layoutControlItem5.Size = new System.Drawing.Size(111, 37);
+            this.layoutControlItem5.Size = new System.Drawing.Size(111, 35);
             this.layoutControlItem5.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem5.TextVisible = false;
             // 
@@ -299,7 +299,7 @@
             this.layoutControlItem6.Location = new System.Drawing.Point(228, 120);
             this.layoutControlItem6.Name = "layoutControlItem6";
             this.layoutControlItem6.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 5, 5);
-            this.layoutControlItem6.Size = new System.Drawing.Size(106, 37);
+            this.layoutControlItem6.Size = new System.Drawing.Size(106, 35);
             this.layoutControlItem6.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem6.TextVisible = false;
             // 

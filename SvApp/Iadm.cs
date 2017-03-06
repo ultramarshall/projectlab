@@ -173,5 +173,8 @@ namespace SvApp
 
         [OperationContract]
         List<AbsensiPraktikan> ambilNilaiPraktikan(AbsensiPraktikan data);
+
+        [OperationContract]
+        int EditPassword(Users data);
     }
 }

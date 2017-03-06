@@ -1,5 +1,5 @@
 ﻿using System;
-using client.lab;
+using client.lik;
 using DevExpress.XtraEditors;
 using System.Linq;
 using System.Collections.Generic;
@@ -32,8 +32,8 @@ namespace client
         {
             var service = new IadmClient();
             var periode = service.viewPeriode().ToList()
-                .FirstOrDefault(x=> x.awalSemester < DateTime.Now && 
-                                    x.akhirSemester > DateTime.Now);
+                .FirstOrDefault(x=> x.awalSemester < service.ServerTime() && 
+                                    x.akhirSemester > service.ServerTime());
             var praktikum = comboBoxEdit4.SelectedItem.ToString();
             var shift = comboBoxEdit3.SelectedItem.ToString();
             var periodeID = new jadwal_umum() { id_periode = periode.id_periode };

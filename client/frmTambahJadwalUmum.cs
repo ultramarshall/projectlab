@@ -7,7 +7,7 @@ using System.Linq;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraEditors.Controls;
-using client.lab;
+using client.lik;
 using static client.Library.border;
 using static client.Library.Method;
 

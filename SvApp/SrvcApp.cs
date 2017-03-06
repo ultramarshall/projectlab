@@ -884,6 +884,8 @@ namespace SvApp
             }
         }
 
+        
+
         public int PostAbsenPraktikan(AbsensiPraktikan data)
         {
             try
@@ -934,7 +936,7 @@ namespace SvApp
             try
             {
                 var praktikan = new List<praktikan>();
-                _comm.CommandText = @"SELECT	praktikan.foto, praktikan.nrp, praktikan.nama, absensi_praktikan.nilai
+                _comm.CommandText = @"SELECT	praktikan.foto, praktikan.nrp, praktikan.nama, absensi_praktikan.nilai, kelas.kelas
                                       FROM      absensi_praktikan 
 		                                        INNER JOIN pertemuan 
 		                                        ON absensi_praktikan.id_pertemuan = pertemuan.id_pertemuan 
@@ -953,7 +955,9 @@ namespace SvApp
 		                                        ON jadwal_umum.kode_mk = mata_kuliah.kode_mk 
 		                                        AND mata_kuliah.mata_kuliah = @mk 
 		                                        INNER JOIN praktikan 
-		                                        ON jadwal_praktikan.nrp = praktikan.nrp";
+		                                        ON jadwal_praktikan.nrp = praktikan.nrp
+                                                INNER JOIN kelas
+                                                ON kelas.id_kelas= jadwal_umum.id_kelas";
                 _comm.Parameters.AddWithValue("jenis_pertemuan", data.Pertemuan.id_jenis_pertemuan);
                 _comm.Parameters.AddWithValue("id_periode",
                     data.JadwalPraktikan.id_jadwal_umum.fk_jadwalUmum_periode.id_periode);
@@ -980,7 +984,20 @@ namespace SvApp
                         Foto = File.ReadAllBytes(reader[0].ToString()),
                         NRP = reader[1].ToString().TrimEnd(),
                         Nama = reader[2].ToString().TrimEnd(),
-                        absen = new AbsensiPraktikan() {Nilai = nilai}
+                        absen = new AbsensiPraktikan() {
+                            Nilai = nilai,
+                            JadwalPraktikan = new jadwalPraktikan()
+                            {
+                                id_jadwal_umum = new jadwal_umum()
+                                {
+                                    fk_jadwalUmum_kelas = new kelas()
+                                    {
+                                        Kelas = reader[4].ToString().TrimEnd()
+                                    }
+                                }
+                            }
+                        },
+                        
                     };
                     praktikan.Add(list);
                 }
@@ -1534,9 +1551,13 @@ namespace SvApp
 			                                        ON 		jadwal_praktikan.nrp = praktikan.nrp 
 		                                        INNER JOIN 	mata_kuliah 
 			                                        ON 		jadwal_umum.kode_mk = mata_kuliah.kode_mk 
-			                                        AND 	mata_kuliah.mata_kuliah = @mata_kuliah";
+			                                        AND 	mata_kuliah.mata_kuliah = @mata_kuliah
+                                                INNER JOIN  kelas
+                                                    ON      jadwal_umum.id_kelas = kelas.id_kelas
+                                      WHERE     (kelas.kelas = @kelas)";
                 _comm.Parameters.AddWithValue("id_periode", data.id_periode);
                 _comm.Parameters.AddWithValue("mata_kuliah", data.fk_jadwalUmum_matakuliah.mata_kuliah);
+                _comm.Parameters.AddWithValue("kelas", data.fk_jadwalUmum_kelas.Kelas);
                 _comm.CommandType = CommandType.Text;
                 _conn.Open();
                 SqlDataReader reader = _comm.ExecuteReader();
@@ -1579,9 +1600,13 @@ namespace SvApp
 			                                        AND mata_kuliah.mata_kuliah = @mata_kuliah 
 		                                        INNER JOIN praktikan 
 			                                        ON jadwal_praktikan.nrp = praktikan.nrp
+                                                INNER JOIN kelas
+                                                    ON jadwal_umum.id_kelas = kelas.id_kelas
+                                                    AND kelas.kelas = @kelas
                                       WHERE  	pertemuan.id_jenis_pertemuan = @jenis_pertemuan";
                 _comm.Parameters.AddWithValue("id_periode", data.id_jadwal_umum.id_periode);
                 _comm.Parameters.AddWithValue("mata_kuliah", data.id_jadwal_umum.fk_jadwalUmum_matakuliah.mata_kuliah);
+                _comm.Parameters.AddWithValue("kelas", data.id_jadwal_umum.fk_jadwalUmum_kelas.Kelas);
                 _comm.Parameters.AddWithValue("jenis_pertemuan", data.absen.Pertemuan.id_jenis_pertemuan);
                 _comm.CommandType = CommandType.Text;
                 _conn.Open();
@@ -1804,7 +1829,29 @@ namespace SvApp
             }
         }
 
-        
+        public int EditPassword(Users data)
+        {
+            try
+            {
+                _comm.CommandText = @"UPDATE    users 
+                                      SET       password = @password
+                                      WHERE     username = @username";
+                _comm.Parameters.AddWithValue("password", data.password);
+                _comm.Parameters.AddWithValue("username", data.username);
+                _comm.CommandType = CommandType.Text;
+                _conn.Open();
+
+                return _comm.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                _conn?.Close();
+            }
+        }
 
         public int jumPraktikum(modul data)
         {
@@ -1842,13 +1889,16 @@ namespace SvApp
             try
             {
                 _comm.CommandText = @"SELECT        jadwal_praktikan.nrp, absensi_praktikan.nilai, pertemuan.id_pertemuan
-                                    FROM            absensi_praktikan INNER JOIN
+                                      FROM          absensi_praktikan INNER JOIN
                                                              jadwal_praktikan ON absensi_praktikan.id_jadwal_praktikan = jadwal_praktikan.id_jadwal_praktikan INNER JOIN
                                                              jadwal_umum ON jadwal_praktikan.id_jadwal_umum = jadwal_umum.id_jadwal_umum AND jadwal_umum.id_periode = @id_periode INNER JOIN
                                                              pertemuan ON absensi_praktikan.id_pertemuan = pertemuan.id_pertemuan INNER JOIN
-                                                             mata_kuliah ON jadwal_umum.kode_mk = mata_kuliah.kode_mk AND mata_kuliah.mata_kuliah = @mata_kuliah";
+                                                             mata_kuliah ON jadwal_umum.kode_mk = mata_kuliah.kode_mk AND mata_kuliah.mata_kuliah = @mata_kuliah INNER JOIN
+                                                             kelas ON jadwal_umum.id_kelas = kelas.id_kelas AND kelas.kelas = @kelas";
                 _comm.Parameters.AddWithValue("id_periode", data.JadwalPraktikan.id_jadwal_umum.id_periode);
                 _comm.Parameters.AddWithValue("mata_kuliah", data.JadwalPraktikan.id_jadwal_umum.fk_jadwalUmum_matakuliah.mata_kuliah);
+                _comm.Parameters.AddWithValue("kelas", data.JadwalPraktikan.id_jadwal_umum.fk_jadwalUmum_kelas.Kelas);
+       
                 _comm.CommandType = CommandType.Text;
                 _conn.Open();
                 SqlDataReader reader = _comm.ExecuteReader();

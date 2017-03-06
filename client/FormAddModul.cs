@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.IO;
-using client.lab;
+using client.lik;
 
 namespace client
 {

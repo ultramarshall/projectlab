@@ -71,6 +71,9 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>1488225234_rooster-chicken-chinese-new-year-luck.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
     <Reference Include="DevExpress.BonusSkins.v16.1" />
@@ -177,11 +180,11 @@
     <Compile Include="frmPeriode.Designer.cs">
       <DependentUpon>frmPeriode.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmExitApp.cs">
+    <Compile Include="gantiPassword.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmExitApp.Designer.cs">
-      <DependentUpon>frmExitApp.cs</DependentUpon>
+    <Compile Include="gantiPassword.Designer.cs">
+      <DependentUpon>gantiPassword.cs</DependentUpon>
     </Compile>
     <Compile Include="Library\border.cs" />
     <Compile Include="Library\convertFromTo.cs" />
@@ -194,7 +197,7 @@
     <Compile Include="FormTambahJadwalAsisten.Designer.cs">
       <DependentUpon>FormTambahJadwalAsisten.cs</DependentUpon>
     </Compile>
-    <Compile Include="Service References\lab\Reference.cs">
+    <Compile Include="Service References\lik\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -223,8 +226,8 @@
     <EmbeddedResource Include="frmPeriode.resx">
       <DependentUpon>frmPeriode.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmExitApp.resx">
-      <DependentUpon>frmExitApp.cs</DependentUpon>
+    <EmbeddedResource Include="gantiPassword.resx">
+      <DependentUpon>gantiPassword.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -243,8 +246,6 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="ClassDiagram1.cd" />
-    <None Include="ClassDiagram2.cd" />
     <None Include="Properties\DataSources\System.Data.DataTable.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -255,59 +256,59 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Service References\lab\client.lab.AbsensiPraktikan.datasource">
+    <None Include="Service References\lik\client.lik.AbsensiPraktikan.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\lab\client.lab.angkatan.datasource">
+    <None Include="Service References\lik\client.lik.angkatan.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\lab\client.lab.jadwalPraktikan.datasource">
+    <None Include="Service References\lik\client.lik.jadwalPraktikan.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\lab\client.lab.jadwalStaff.datasource">
+    <None Include="Service References\lik\client.lik.jadwalStaff.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\lab\client.lab.jadwal_umum.datasource">
+    <None Include="Service References\lik\client.lik.jadwal_umum.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\lab\client.lab.jurusan.datasource">
+    <None Include="Service References\lik\client.lik.jurusan.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\lab\client.lab.kelas.datasource">
+    <None Include="Service References\lik\client.lik.kelas.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\lab\client.lab.matkul.datasource">
+    <None Include="Service References\lik\client.lik.matkul.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\lab\client.lab.modul.datasource">
+    <None Include="Service References\lik\client.lik.modul.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\lab\client.lab.periode.datasource">
+    <None Include="Service References\lik\client.lik.periode.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\lab\client.lab.pertemuan.datasource">
+    <None Include="Service References\lik\client.lik.pertemuan.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\lab\client.lab.praktikan.datasource">
+    <None Include="Service References\lik\client.lik.praktikan.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\lab\client.lab.Shift.datasource">
+    <None Include="Service References\lik\client.lik.Shift.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\lab\client.lab.Staff.datasource">
+    <None Include="Service References\lik\client.lik.Staff.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\lab\client.lab.upload_file.datasource">
+    <None Include="Service References\lik\client.lik.upload_file.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\lab\SrvcApp.wsdl" />
-    <None Include="Service References\lab\svlab.xsd">
+    <None Include="Service References\lik\SrvcApp.wsdl" />
+    <None Include="Service References\lik\svlab.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\lab\svlab1.xsd">
+    <None Include="Service References\lik\svlab1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\lab\svlab2.xsd">
+    <None Include="Service References\lik\svlab2.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
@@ -324,22 +325,25 @@
     <None Include="Resources\oy0v8Y.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\lab\" />
+    <WCFMetadataStorage Include="Service References\lik\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\lab\svlab.disco" />
+    <None Include="Service References\lik\svlab.disco" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\lab\configuration91.svcinfo" />
+    <None Include="Service References\lik\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\lab\configuration.svcinfo" />
+    <None Include="Service References\lik\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\lab\Reference.svcmap">
+    <None Include="Service References\lik\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="1488225234_rooster-chicken-chinese-new-year-luck.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
